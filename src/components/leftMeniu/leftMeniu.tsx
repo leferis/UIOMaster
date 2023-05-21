@@ -50,7 +50,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                 let result = SortActorsByY();
                 if (!props.SwimlineMode) {
 
-                        return { y: result[0].y, height: result[result.length - 1].y + result[result.length - 1].height, width: result[0].width };
+                        return { y: result[0].y, height: result[result.length - 1].y + result[result.length - 1].height, width: result[0].width +200 };
                 }
                 else {
                         let communicationOrderByY = props.circles.sort((x, y) => {

@@ -44,16 +44,23 @@ function Questionary(props: QuestionaryProps) {
 
   }
   function reassignActors() {
-    props.setActors(tempActors);
+    const updatetActors = tempActors.map((actor:Actors, index:number) => {
+      actor.y = (index + 1) * 200;
+      return actor;
+    });
+    console.log(tempActors);
+    console.log(updatetActors)
+    props.setActors(updatetActors);
+
     let touch = TouchPointsTemp;
     for (let i = 0; i < touch.length; i++) {
-      for (let j = 0; j < tempActors.length; j++) {
-        if (touch[i].initiator.id == tempActors[j].id) {
-          touch[i].initiator = tempActors[j];
+      for (let j = 0; j < updatetActors.length; j++) {
+        if (touch[i].initiator.id == updatetActors[j].id) {
+          touch[i].initiator = updatetActors[j];
         }
         if (touch[i].receiver != undefined) {
-          if (touch[i].receiver.id == tempActors[j].id) {
-            touch[i].receiver = tempActors[j];
+          if (touch[i].receiver.id == updatetActors[j].id) {
+            touch[i].receiver = updatetActors[j];
           }
         }
       }

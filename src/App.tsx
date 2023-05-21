@@ -250,7 +250,6 @@ function App() {
   }
 
   function deleteElement(e: any) {
-    console.log(Journey)
     if (e.code == 'Delete' /*|| e.code == 'Backspace'*/) {
       remove();
     }
