@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="0.6283105in"
+   height="0.81789887in"
+   viewBox="0 0 45.253237 58.880619"
+   class="st3"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="touchpoint.svg"
+   style="font-size:12px;overflow:visible;color-interpolation-filters:sRGB;fill:none;fill-rule:evenodd;stroke-linecap:square;stroke-miterlimit:3">
+  <metadata
+     id="metadata29">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1698"
+     inkscape:window-height="812"
+     id="namedview27"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.892654"
+     inkscape:cx="25.458736"
+     inkscape:cy="57.681044"
+     inkscape:window-x="796"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <v:documentProperties
+     v:langID="1033"
+     v:metric="true"
+     v:viewMarkup="false" />
+  <style
+     type="text/css"
+     id="style4"><![CDATA[
+		.st1 {fill:#ffffff;stroke:url(#grad3-4);stroke-linecap:butt;stroke-width:3}
+		.st2 {fill:#000000;font-family:Calibri;font-size:0.666664em}
+		.st3 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]></style>
+  <defs
+     id="Patterns_And_Gradients">
+    <radialGradient
+       id="grad3-4"
+       cx="42.52"
+       cy="71.029999"
+       r="0"
+       gradientTransform="matrix(0,0,0,0,1.3547385,-33.700146)"
+       fx="42.52"
+       fy="71.029999"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#7f7f7f"
+         id="stop8" />
+      <stop
+         offset=".56"
+         stop-color="#7f7f7f"
+         id="stop10" />
+      <stop
+         offset=".57"
+         stop-color="#595959"
+         id="stop12" />
+    </radialGradient>
+  </defs>
+  <path
+     d="M 43.874739,37.329854"
+     class="st1"
+     id="path23"
+     style="fill:#ffffff;stroke:url(#grad3-4);stroke-width:3;stroke-linecap:butt"
+     inkscape:connector-curvature="0" />
+  <text
+     x="4.8747382"
+     y="5.4198532"
+     class="st2"
+     v:langID="1036"
+     id="text25"
+     style="font-size:7.99996805px;font-family:Calibri;fill:#000000"><v:paragraph
+   v:horizAlign="1" />
+<v:tabList />
+&lt;describe&gt;</text>
+  <circle
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#595959;stroke-width:3.20105267;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path4183"
+     cx="22.626619"
+     cy="36.259937"
+     r="21.026093" />
+</svg>

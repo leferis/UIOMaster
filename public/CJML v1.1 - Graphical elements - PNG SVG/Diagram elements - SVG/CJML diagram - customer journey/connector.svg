@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="0.58946389in"
+   height="0.1081453in"
+   viewBox="0 0 42.444163 7.7688949"
+   class="st3"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="connector.svg"
+   style="font-size:12px;overflow:visible;color-interpolation-filters:sRGB;fill:none;fill-rule:evenodd;stroke-linecap:square;stroke-miterlimit:3">
+  <metadata
+     id="metadata22">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1297"
+     inkscape:window-height="540"
+     id="namedview20"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="10.576791"
+     inkscape:cx="22.189741"
+     inkscape:cy="7.0885776"
+     inkscape:window-x="806"
+     inkscape:window-y="211"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <v:documentProperties
+     v:langID="1033"
+     v:metric="true"
+     v:viewMarkup="false" />
+  <style
+     type="text/css"
+     id="style4"><![CDATA[
+		.st1 {marker-end:url(#mrkr4-6);stroke:#7f7f7f;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.75}
+		.st2 {fill:#7f7f7f;fill-opacity:1;stroke:#7f7f7f;stroke-opacity:1;stroke-width:0.49295774647887}
+		.st3 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]></style>
+  <defs
+     id="Markers">
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4500"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4502"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill:#7f7f7f;fill-opacity:1;fill-rule:evenodd;stroke:#7f7f7f;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.4,0.4)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutM"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4315"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#7f7f7f;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.4,0.4)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect4158"
+       is_visible="true" />
+    <path
+       d="M 2,1 0,0 2,-1 2,1"
+       id="lend4"
+       inkscape:connector-curvature="0" />
+    <marker
+       id="mrkr4-6"
+       class="st2"
+       v:arrowType="4"
+       v:arrowSize="1"
+       v:setback="4.057"
+       refX="-4.0570002"
+       orient="auto"
+       overflow="visible"
+       style="overflow:visible;fill:#7f7f7f;fill-opacity:1;stroke:#7f7f7f;stroke-width:0.49295774;stroke-opacity:1">
+      <use
+         xlink:href="#lend4"
+         transform="scale(-2.029,-2.029)"
+         id="use9"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
+    </marker>
+  </defs>
+  <path
+     style="fill:#7f7f7f;fill-opacity:1;fill-rule:evenodd;stroke:#7f7f7f;stroke-width:1.60010421;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4500)"
+     d="m 0.81144684,3.8844474 37.14033516,0"
+     id="path4156"
+     inkscape:path-effect="#path-effect4158"
+     inkscape:original-d="m 0.81144684,3.8844474 c 37.14033516,0 37.14033516,0 37.14033516,0"
+     inkscape:connector-curvature="0" />
+</svg>

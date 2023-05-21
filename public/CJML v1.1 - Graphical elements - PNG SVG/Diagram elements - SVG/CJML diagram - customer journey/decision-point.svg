@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="0.60695374in"
+   height="0.70743459in"
+   viewBox="0 0 43.692107 50.941737"
+   class="st3"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="decision-point.svg"
+   style="font-size:12px;overflow:visible;color-interpolation-filters:sRGB;fill:none;fill-rule:evenodd;stroke-linecap:square;stroke-miterlimit:3">
+  <metadata
+     id="metadata23">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs21" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1017"
+     inkscape:window-height="729"
+     id="namedview19"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.1146953"
+     inkscape:cx="27.287278"
+     inkscape:cy="43.762346"
+     inkscape:window-x="1191"
+     inkscape:window-y="194"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <v:documentProperties
+     v:langID="1033"
+     v:metric="true"
+     v:viewMarkup="false" />
+  <style
+     type="text/css"
+     id="style4"><![CDATA[
+		.st1 {fill:#ffffff;stroke:#595959;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
+		.st2 {fill:#00b0f0;font-family:Calibri;font-size:0.833336em}
+		.st3 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]></style>
+  <path
+     d="m 21.812513,49.941779 10.63,-10.63 -10.63,-10.63 -10.63,10.63 10.63,10.63 z"
+     class="st1"
+     id="path15"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff;stroke:#595959;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+  <text
+     x="-0.35748661"
+     y="6.8017797"
+     class="st2"
+     v:langID="1036"
+     id="text17"
+     style="font-size:10.00003242px;font-family:Calibri;fill:#00b0f0"><v:paragraph
+   v:horizAlign="1" />
+<v:tabList />
+&lt;describe&gt;</text>
+</svg>

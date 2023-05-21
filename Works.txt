@@ -1,0 +1,42 @@
+Ka padaryti siandien:
+Vaiksciojimas abiejuose formuose idealiai
+
+Legendos sufixinimas
+Bugai
+Action SwimLane mode
+
+
+
+
+Ryt: 
+Klausyminas
+General view -- jei turesiu laiko 
+Statistika
+Limitai judejimui
+
+
+--------------------------------------
+
+Sutvarkyti pilnai klausymina.
+
+
+Klausyminas: pakeisti vietom, validacijos tekstas
+
+
+arrows deletion
+
+Perdaryti isvaizda 
+
+Arrowsu fixinimas: Kai zemiau kad taikytu i virsu, Action suvarkyti ir jei atgal eitu per virsu
+
+Linija nupiesti po questionary, bei swimlane idejimu, pakeitimu tarp touchpointu kitoje formoje
+
+Devation pagal linija, jei nera reference. Forcinti zemiau linijos padeti
+
+XML parsinimas: laikus - pasiziureti timeCompleted ir ji ideti jei nera 
+
+eksporte ideti laika
+
+Legenda padaryti
+
+Pakeitus vietomis touchpoint per swimlane, reik sugalvoti kaip rodykles piesti gerai, nes maciau sudas gaunasi

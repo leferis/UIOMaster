@@ -1,0 +1,57 @@
+Pirmadienis, Antradienis?:
+	XML parsinimas
+		Journey duomenu suprasinimas
+	Statistika parsinant 
+
+Antradienis:
+	Kitos formos sutvarkymas, jos judejimas ir keitimas elementu tarp collumsu, bei useriu
+	Swimlane diagramos:
+		Padaryti kad rodytu arows kai devation mode tik
+	Image listas
+
+Treciadienis:
+	Klausyminas
+	
+Ketvirtadienis:
+	Loginiai limitai judejimui 
+	Pasirinkimo langas kokio journey norime: pllaned ar ne 
+	
+Penktadienis:
+	Bugai
+	Arrowsai turi eiti per virsu, jei kerta node ar action 
+
+
+Statistika
+Legenda normaliai sutvarkyti
+Arrowsu piesimas normalus
+
+XML parsinimo pataisymas, bei exporto sutvarkymas
+Image sutvarkymas
+Klausyminas 
+All window, kur rodomi visi basic form journey
+Spacingas pagal datas.
+Deletinimo error
+Padaryti checka Journey kai pridedam actual, comment in code
+Action padaryti swimlane normaliai
+-------------------------------------------------------------------------------------
+TouchPoint gali buti adhoc
+
+
+                    <xs:element name="touchpointExperience" type="EndUserExperience" minOccurs="0"/>
+                    <xs:element name="comment" type="xs:string" minOccurs="0"/>
+                    <xs:element name="touchpointLevelAnalysis" type="AnalyzerResults" minOccurs="0"/>   
+Fieldai actoriams
+
+companyName
+department
+position
+
+
+
+
+Pakurti Enumeratoriu ir susiparsinti. Paklausti userio klausymine. Actor type jei ne end useris
+
+Leisti journey duoti title
+Id turi prisiskirti is Image? 
+
+Susitvarkyti su XML eksport pilnai

@@ -1,0 +1,42 @@
+Klausyminas
+
+XML pilnas veikimas 
+
+Kita forma
+
+Intro langas
+
+Image export
+
+Kitas budas  
+
+Default image set
+
+
+Siandien:
+
+Aktoriai turi reference vienas su kitu 
+
+-------------------------------------------------------------------------------
+
+pasiziureti kodel padejus ant virsaus aktorius nepasididina arba neprisisnapina 
+
+Sufixinti arrows 
+
+Escape arrows 
+
+Reworkinti design ir padaryti, kad daiktai atsirastu pagal objekto tipa
+
+Aktor delete pasitrigerina kazkodel, pasiziureti tai 
+
+Group dragable padaryti 
+
+Plius input field aktyvus tik paspaudus ant node
+
+input ir image turetu neiseiti is stage 
+
+Devation mode, touchpointai turi eiti uz devation line tiktai 
+
+Sutvarkyti aktorius, kad nebutu reference i kitus journey 
+
+Padaryti kad rodytu tik reikiamas opcijas

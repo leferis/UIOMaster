@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1.202in"
+   height=".611in"
+   viewBox="0 0 86.5394 44.0197"
+   color-interpolation-filters="sRGB"
+   class="st3"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="action.svg">
+  <metadata
+     id="metadata23">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs21" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1058"
+     id="namedview19"
+     showgrid="false"
+     inkscape:zoom="2.5230469"
+     inkscape:cx="76.389859"
+     inkscape:cy="24.481721"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6" />
+  <v:documentProperties
+     v:langID="1033"
+     v:metric="true"
+     v:viewMarkup="false" />
+  <style
+     type="text/css"
+     id="style4"><![CDATA[
+		.st1 {fill:#ffffff;stroke:#595959;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
+		.st2 {fill:#000000;font-family:Calibri;font-size:0.666664em}
+		.st3 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]></style>
+  <g
+     v:mID="0"
+     v:index="1"
+     v:groupContext="foregroundPage"
+     id="g6">
+    <title
+       id="title8">Page-1</title>
+    <v:pageProperties
+       v:drawingScale=".039"
+       v:pageScale=".039"
+       v:drawingUnits="24"
+       v:shadowOffsetX="8.504"
+       v:shadowOffsetY="-8.504" />
+    <rect
+       style="fill:#ffffff;stroke:#595959;stroke-width:1.50014394;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none"
+       x="0.75"
+       id="rect15"
+       class="st1"
+       ry="5.6690001"
+       rx="5.6690001"
+       height="42.52"
+       width="85.039001"
+       y="0.75" />
+    <text
+       style="font-size:7.99996805px;font-family:Calibri;fill:#000000;text-anchor:middle;text-align:center;"
+       id="text17"
+       v:langID="1036"
+       class="st2"
+       y="24.41"
+       x="42.973618"><v:paragraph
+   v:horizAlign="1" />
+<v:tabList />
+
+&lt;action&gt;</text>
+  </g>
+</svg>

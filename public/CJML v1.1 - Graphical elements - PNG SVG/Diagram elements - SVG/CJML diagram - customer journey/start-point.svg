@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="0.60271865in"
+   height="0.1423403in"
+   viewBox="0 0 43.417687 10.240722"
+   class="st3"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="start-point.svg"
+   style="font-size:12px;overflow:visible;color-interpolation-filters:sRGB;fill:none;fill-rule:evenodd;stroke-linecap:square;stroke-miterlimit:3">
+  <metadata
+     id="metadata27">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs25" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1202"
+     inkscape:window-height="754"
+     id="namedview23"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="6.2747582"
+     inkscape:cx="50.523703"
+     inkscape:cy="-12.487404"
+     inkscape:window-x="955"
+     inkscape:window-y="262"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <v:documentProperties
+     v:langID="1033"
+     v:metric="true"
+     v:viewMarkup="false" />
+  <style
+     type="text/css"
+     id="style4"><![CDATA[
+		.st1 {fill:none;stroke:#7f7f7f;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.75}
+		.st2 {stroke:#7f7f7f;stroke-width:1.75}
+		.st3 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]></style>
+  <g
+     id="shape107-4"
+     v:mID="107"
+     v:groupContext="shape"
+     v:layerMember="0"
+     transform="translate(9.6628436,-30.333069)">
+    <title
+       id="title19">Dynamic connector</title>
+    <path
+       id="path21"
+       style="stroke:#7f7f7f;stroke-width:1.74968421;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"
+       d="m 0,35.43 32.88,0 M -0.2840003,35.433 A 4.2519999,4.2519999 0 0 1 -4.5360001,39.685001 4.2519999,4.2519999 0 0 1 -8.788,35.433002 a 4.2519999,4.2519999 0 0 1 4.2519999,-4.252 4.2519999,4.2519999 0 0 1 4.2519998,4.252 z"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

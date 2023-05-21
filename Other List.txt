@@ -1,0 +1,32 @@
+Allow user to select from multiple planned.
+
+XML import - try read 
+Febaury 20 - before the lunch 10 o'clock
+
+What remains to be done, problem statement and writing 
+
+-- late -- User testing, evaluation?
+
+Technology advancment?
+
+Check the documents
+
+Thing about user's requirements and system requirement's for tools use cases.
+
+Use requieremetns that i collected in the work
+
+15 - 20 minute demo, how it work's, what problems it solves, interaction of XML 
+
+Problem statment, steps for writing 
+
+Text needs to be rewritten for sure
+
+
+
+Makes agenda to discussion 
+
+Don't overestimate the user 
+
+The sentences should be short 
+
+Deadlines keep tracking 
