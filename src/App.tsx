@@ -38,6 +38,7 @@ import Home from './components/Home/Home';
 import JourneyBar from './components/JourneyBar/JourneyBar';
 import { onDragEnd, onDragMove } from './Functions/Movement';
 import { setCirlceAtEnd } from './Functions/creation';
+import { onActionDragEnd, onActionDragMove } from './Functions/actionMovement';
 
 
 function App() {
@@ -166,7 +167,7 @@ function App() {
               setActors={setActors} ChangeOpenActorStatus={ChangeOpenActorStatus} open={open} openActor={openActor} openColor={openColor} ChangeOpenColorStatus={ChangeOpenColorStatus} ChangeOpenExternalStatus={changeExternal} ChangeOpenStatus={ChangeOpenStatus}
               ChangeOpenSymbolStatus={ChangeOpenSymbolStatus} openExternal={openExternal} openSymbol={openSymbol} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode = {setSwimlineMode} SwimlineMode={SwimlineMode}
             ></Settings>
-            <LeftMeniu addNewAction={()=> console.log("Test")} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles= {setCircles} mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject} />
+            <LeftMeniu updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles= {setCircles} mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject} />
            { !openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType ={SwimlineMode}></Statistics>}
           </Layer>
         </Stage>
@@ -253,6 +254,12 @@ function App() {
     if (e.code == 'Delete' /*|| e.code == 'Backspace'*/) {
       remove();
     }
+  }
+
+
+  function addNewAction(){
+    let newAction = new CJMLAction(initialId,-9999,-9999,true, "Enter text", DevationMode, ActorsCJML[0],-99999, Date.now());
+    setActions((prevActions)=>[...prevActions, newAction]);
   }
 
   function addNewCircle(){
@@ -437,6 +444,31 @@ function App() {
       
       changeCircle(e);
     }
+    else if( mouseDownFunction == "DrawAction"){
+      changeAction(e);
+    }
+  }
+
+  function changeAction(e:any){
+    const actionToWork = actions.filter((x) => {
+      return x.id == initialId
+    })
+    const index = actions.indexOf(actionToWork[0]);
+    onActionDragMove(e,circles, actionToWork[0], setCircles, changeArrow, elementsAreFarFromBorder,index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned )
+    const newCircle = actions.map(x => {
+      if (x.id == initialId) {
+        const arrowNew = x;
+        x.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+        x.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+        x.swimlaneX = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+        return arrowNew
+      }
+      else {
+        return x;
+      }
+    });
+
+    setActions(JSON.parse(JSON.stringify(newCircle)));
   }
 
   function changeCircle(e:any){
@@ -681,6 +713,15 @@ function App() {
       const index = circles.indexOf(circleToWork[0]);
       onDragEnd(e, circleToWork[0],ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, Journey[currentJourney].isPlanned);
       setNewID(initialId+1)
+    }
+    break;
+    case "DrawAction":{
+      const actionToWork = actions.filter((x) => {
+        return x.id == initialId
+      })
+    const index = actions.indexOf(actionToWork[0]);
+    onActionDragEnd(e, actionToWork[0],ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned);
+    setNewID(initialId+1)
     }
   }
   setMouseDownFunction("")

@@ -24,6 +24,7 @@ interface LeftMeniuProps {
         addNewAction: any;
         setCircles: any;
         setCirlceAtEnd: any;
+        updateCurrentJourney:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -185,6 +186,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                         width={40}
                         image={download}
                         onClick={() => {
+                                props.updateCurrentJourney();
                                 XMLCreator(props.Journeys, props.getImages);
                         }}
 
