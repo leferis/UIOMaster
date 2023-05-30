@@ -4,6 +4,7 @@ import XMLCreator from '../../XMLParsing/V2/v2.XMLCreator';
 import { Actors } from '../../Classes/Actors';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import { CJMLAction } from '../../Classes/CJMLAction';
+import ImageSelection from '../ImageSelection/ImageSelection';
 
 interface LeftMeniuProps {
         setClickFunction: any;
@@ -25,10 +26,17 @@ interface LeftMeniuProps {
         setCircles: any;
         setCirlceAtEnd: any;
         updateCurrentJourney:any;
+        openSymbol:any;
+        Images:any;
+        setImage:any;
+        currentObject:any;
+        GetImageFullName:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
 
+        var imageForSymbol;
+        var imageText = "";
         var heighth = 0;
         try {
                 heighth = props.layerHeight.current.canvas.height;
@@ -36,6 +44,32 @@ function LeftMeniu(props: LeftMeniuProps) {
         catch (ex) {
                 heighth = 20;
         }
+        try {
+                if(props.currentObject.imageName != undefined){
+                imageText = props.GetImageFullName(props.currentObject.imageName, 'Other')
+                imageForSymbol = getImage(props.currentObject, 0);
+                }
+                else if(props.currentObject != -1){
+                imageText = props.GetImageFullName(props.currentObject.img, 'Actor')
+                imageForSymbol = getImageActor(props.currentObject, 0);
+                }
+              }
+              catch {
+                imageText = "Unknown channel";
+                imageForSymbol = '';
+              }
+
+              function getImage(x: any, index: any) {
+                let img = props.getImageObject(x.imageName)
+                console.log(x.imageName);
+                return (<Image x={10} y={245}  height={ 20} width={20} image={img} />)
+              }
+              function getImageActor(x: any, index: any) {
+                let img = props.getImageObject(x.img)
+                console.log(x);
+                return (<Image x={10} y={245}  height={ 20} width={20} image={img} /> )
+              }
+            
         let download = props.getImageObject("\\\HelpingImages\\Download.png");
         let upload = props.getImageObject("\\\HelpingImages\\form.png");
         let form = props.getImageObject("\\\HelpingImages\\upload.png");
@@ -93,10 +127,12 @@ function LeftMeniu(props: LeftMeniuProps) {
                 document.body.removeChild(link);
         }
 
+        
+
         return (<div><Rect
                 x={0}
                 y={0}
-                width={70}
+                width={230}
                 fill={"#e8eaed"}
                 height={window.innerHeight + 30}
                 stroke={'black'}
@@ -107,7 +143,7 @@ function LeftMeniu(props: LeftMeniuProps) {
 
         </Rect>
 
-                <Circle x={33}
+                <Circle x={63}
                         y={60}
                         stroke={'black'}
                         radius={20}
@@ -117,11 +153,11 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
                         }}
                 />
-                <Text x={0}
-                        y={90} text={"Communication\npoint"} align={"center"} fontSize={10} />
+                <Text x={10}
+                        y={90} text={"Communication\npoint"} align={"center"} fontSize={16} />
                 <Rect
-                        x={10}
-                        y={120}
+                        x={153}
+                        y={40}
                         height={40}
                         width={50}
                         cornerRadius={10}
@@ -129,20 +165,19 @@ function LeftMeniu(props: LeftMeniuProps) {
                         strokeWidth={3}
                         onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction() }}
                 />
-                <Text x={20}
-                        y={170} text={"Action"} align={"center"} fontSize={10} />
+                <Text x={156}
+                        y={90} text={"Action"} align={"center"} fontSize={16}  />
                 <Rect
-                        x={20}
-                        y={190}
-                        width={30}
-                        height={30}
+                        x={35}
+                        y={135}
+                        width={50}
+                        height={45}
                         onClick={() => props.setClickFunction('DrawArrow')}
 
                 >
-
                 </Rect>
                 <Arrow
-                        points={[20, 220, 60, 190]}
+                        points={[40, 180, 80, 140]}
                         stroke={'black'}
                         radius={20}
                         strokeWidth={3}
@@ -150,6 +185,15 @@ function LeftMeniu(props: LeftMeniuProps) {
                         onClick={() => props.setClickFunction('DrawArrow')}
 
                 />
+                <Text x={40}
+                        y={190} text={"Arrow"} align={"center"} fontSize={16} />
+
+                <Text text={"Symbol"} x={15} y={220}  fontSize={16}></Text>
+                <Rect x={5} y={240} height={200} width={224} cornerRadius={3} fill='white' ></Rect>
+                {imageForSymbol}
+          <Text text={imageText} x={35} y={250}  fontSize={14}></Text>
+                {props.openSymbol ? <ImageSelection images={props.Images} setImage={props.setImage} type={props.currentObject.img !=undefined?'Actors':'Communication Points'}></ImageSelection> : ""}
+               
                 <Image
                         image={screenshot}
                         x={15}
@@ -165,8 +209,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                 <Text x={10}
                         y={heighth - 220} text={"ScreenShot"} align={"center"} fontSize={10} />
 
-                <Text x={18}
-                        y={230} text={"Arrow"} align={"center"} fontSize={10} />
+          
 
                 <Image
                         x={15}

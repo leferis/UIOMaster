@@ -51,23 +51,8 @@ function Settings(props: SettingsProps) {
   var Options: any[] = [];
   var initialBoxX = 330;
   var initialBoxY = 55;
-  var imageText = "";
-  var imageForSymbol;
   let change = props.getImageObject("\\\HelpingImages\\change.png");
-  try {
-    if(props.currentObject.imageName != undefined){
-    imageText = props.GetImageFullName(props.currentObject.imageName, 'Other')
-    imageForSymbol = getImage(props.currentObject, 0);
-    }
-    else if(props.currentObject != -1){
-    imageText = props.GetImageFullName(props.currentObject.img, 'Actor')
-    imageForSymbol = getImageActor(props.currentObject, 0);
-    }
-  }
-  catch {
-    imageText = "Unknown channel";
-    imageForSymbol = '';
-  }
+ 
 
   Object.values(TouchPointStatus).forEach((x) => {
     if (typeof (x) == "string" && x != TouchPointStatus[props.currentObject.Status]) {
@@ -186,16 +171,6 @@ function Settings(props: SettingsProps) {
     }
   }
 
-  function getImage(x: any, index: any) {
-    let img = props.getImageObject(x.imageName)
-    console.log(x.imageName);
-    return (<Image x={670} y={30}  height={ 20} width={20} image={img} />)
-  }
-  function getImageActor(x: any, index: any) {
-    let img = props.getImageObject(x.img)
-    console.log(x);
-    return (<Image x={670} y={30}  height={ 20} width={20} image={img} />)
-  }
 
   return (
     <div>
@@ -251,12 +226,11 @@ function Settings(props: SettingsProps) {
             fill="white"
             width={200}
             height={props.openSymbol ? 190 : 30} ></Rect>
-          {imageForSymbol}
-          <Text text={imageText} x={695} y={35} ></Text>
+
           <Line points={props.openSymbol ? [830, 43, 840, 38, 850, 43] : [830, 38, 840, 43, 850, 38]}
             stroke={"black"}
             strokeWidth={1} ></Line>
-          {props.openSymbol ? <ImageSelection images={props.Images} setImage={props.setImage} type={props.currentObject.img !=undefined?'Actors':'Communication Points'}></ImageSelection> : ""}
+       
         </Group>
         <Group>
           <Text x={920} y={10} text={"Color"} />

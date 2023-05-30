@@ -42,16 +42,16 @@ function ImageSelection(props: ImageSelectionProps) {
       if( x.Name == props.type)
       {resultFinal.push(
         <div>
-          <a className={styles.unselectable}>{x.Name}</a> <br/>
           {result}
         </div>);
       result = [];}
     }))
   };
+
  makeList();
   return (
-    <Group x={655} y= {53}>
-    <Html ><div id="ImageSelections" style={{maxHeight:150, width:198, overflowY:"scroll", overflowX:"auto"}}>
+    <Group x={0} y= {270}>
+    <Html ><div id="ImageSelections" style={{maxHeight:170, width:228, overflowY:"scroll", overflowX:"auto"}}>
       {resultFinal} 
     </div>
     </Html>
