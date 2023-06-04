@@ -23,12 +23,28 @@ function fromSwimlaneToNetwork(circles:any[], actions:CJMLAction[],setActions:an
 }
 
 function fromNetworkToSwimlane(circles:any[], actions:CJMLAction[],setActions:any, updateCircles:any){
+    let devationx = 400;
+    let prevX = 350;
     let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
         return a.swimlaneX - b.swimlaneX
       });
       for (let j = 0; j < objects.length; j++) {
+         
+          if(objects[j].devation == true){
+            console.log(objects)
+            objects[j].x = prevX - 100;
+            objects[j].y = devationx;
+            devationx = 400 + 125;
+          }
+          else{
+          objects[j].x = prevX;
           objects[j].x = 350 + (100 * j);
+          objects[j].y = 275;
+          devationx=400;
+          prevX +=100;
+          }
+
         }
     sortOutAndAssign(objects,setActions,updateCircles)
     createArrows(objects);

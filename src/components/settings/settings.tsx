@@ -9,6 +9,7 @@ import { ExternalEnumerator } from '../../enumerator/ExternalEnumerator';
 import ImageSelection from '../ImageSelection/ImageSelection';
 import { Actors } from '../../Classes/Actors';
 import ActorSelect from '../ActorSelect/ActorSelect';
+import { switchBetweenDiagrams } from '../../Functions/Switching';
 
 interface SettingsProps {
   Images: any;
@@ -35,6 +36,8 @@ interface SettingsProps {
   Layer:any;
   setSwimlineMode:any;
   SwimlineMode:any;
+  actions:any;
+  setActions:any;
 }
 
 
@@ -221,7 +224,7 @@ function Settings(props: SettingsProps) {
           <Image image={change}
           x={width-70}
           y={10}
-          onClick={() => { props.setSwimlineMode(!props.SwimlineMode) }}
+          onClick={() => { props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles)  }}
           width={50}
           height={50}
           ></Image>
