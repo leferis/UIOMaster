@@ -176,49 +176,6 @@ function Settings(props: SettingsProps) {
 
 
   return (
-    <div>
-      <Group>
-        <Rect
-          x={0}
-          y={0}
-          width={window.innerWidth}
-          height={70}
-          stroke={'black'}
-          fill={"#e8eaed"}
-          strokeWidth={1}>
-        </Rect>
-        <Group>
-          <Text x={360} y={10} text={"Status"} />
-          <Rect onClick={() => { props.ChangeOpenStatus(!props.open); }} strokeWidth={3}
-            cornerRadius={10}
-            stroke={'black'}
-            x={330}
-            y={25}
-            fill={TouchPointStatus[props.currentObject.Status] ? 'white' : ''}
-            width={130}
-            height={props.open ? 90 : 30} ></Rect>
-          {getCurrentStatus(props.currentObject)}
-          <Line points={props.open ? [430, 43, 440, 38, 450, 43] : [430, 38, 440, 43, 450, 38]}
-            stroke={"black"}
-            strokeWidth={1} ></Line>
-          {props.open ? Options : ""}
-        </Group>
-      </Group>
-      <Group>
-        <Group>
-          <Text x={530} y={10} text={"Actor"} />
-          <Rect onClick={() => { props.ChangeOpenActorStatus(!props.openActor); }} strokeWidth={3}
-            cornerRadius={10}
-            stroke={'black'}
-            x={500}
-            y={25}
-            width={130}
-            height={props.openActor ? 120 : 30} ></Rect>
-          {props.openActor && <ActorSelect actors={props.Actors} touchPoints={props.circles} currentObject={props.currentObject} changeTouchPoints={props.setCircles} />}
-          <Line points={props.openActor ? [600, 43, 610, 38, 620, 43] : [600, 38, 610, 43, 620, 38]}
-            stroke={"black"}
-            strokeWidth={1} ></Line>
-        </Group>
 
         <Group>
           <Image image={change}
@@ -230,9 +187,7 @@ function Settings(props: SettingsProps) {
           ></Image>
           <Text x={width-80}  y={55} text={"Diagram type"}></Text>
         </Group>
-      </Group>
 
-    </div>
   );
 }
 export default Settings;
