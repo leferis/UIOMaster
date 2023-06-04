@@ -5,6 +5,8 @@ import { Actors } from '../../Classes/Actors';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import { CJMLAction } from '../../Classes/CJMLAction';
 import ImageSelection from '../ImageSelection/ImageSelection';
+import { getStatusJSX } from '../../Functions/CJMLStatusFunction';
+import ColorPicker from './ColorPicker/ColorPicker';
 
 interface LeftMeniuProps {
         setClickFunction: any;
@@ -25,12 +27,13 @@ interface LeftMeniuProps {
         addNewAction: any;
         setCircles: any;
         setCirlceAtEnd: any;
-        updateCurrentJourney:any;
-        openSymbol:any;
-        Images:any;
-        setImage:any;
-        currentObject:any;
-        GetImageFullName:any;
+        updateCurrentJourney: any;
+        openSymbol: any;
+        Images: any;
+        setImage: any;
+        currentObject: any;
+        GetImageFullName: any;
+        setCurrentObject: any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -38,6 +41,8 @@ function LeftMeniu(props: LeftMeniuProps) {
         var imageForSymbol;
         var imageText = "";
         var heighth = 0;
+        var initialBoxX = 330;
+        var initialBoxY = 55;
         try {
                 heighth = props.layerHeight.current.canvas.height;
         }
@@ -45,31 +50,31 @@ function LeftMeniu(props: LeftMeniuProps) {
                 heighth = 20;
         }
         try {
-                if(props.currentObject.imageName != undefined){
-                imageText = props.GetImageFullName(props.currentObject.imageName, 'Other')
-                imageForSymbol = getImage(props.currentObject, 0);
+                if (props.currentObject.imageName != undefined) {
+                        imageText = props.GetImageFullName(props.currentObject.imageName, 'Other')
+                        imageForSymbol = getImage(props.currentObject, 0);
                 }
-                else if(props.currentObject != -1){
-                imageText = props.GetImageFullName(props.currentObject.img, 'Actor')
-                imageForSymbol = getImageActor(props.currentObject, 0);
+                else if (props.currentObject != -1) {
+                        imageText = props.GetImageFullName(props.currentObject.img, 'Actor')
+                        imageForSymbol = getImageActor(props.currentObject, 0);
                 }
-              }
-              catch {
+        }
+        catch {
                 imageText = "Unknown channel";
                 imageForSymbol = '';
-              }
+        }
 
-              function getImage(x: any, index: any) {
+        function getImage(x: any, index: any) {
                 let img = props.getImageObject(x.imageName)
                 console.log(x.imageName);
-                return (<Image x={10} y={245}  height={ 20} width={20} image={img} />)
-              }
-              function getImageActor(x: any, index: any) {
+                return (<Image x={10} y={245} height={20} width={20} image={img} />)
+        }
+        function getImageActor(x: any, index: any) {
                 let img = props.getImageObject(x.img)
                 console.log(x);
-                return (<Image x={10} y={245}  height={ 20} width={20} image={img} /> )
-              }
-            
+                return (<Image x={10} y={245} height={20} width={20} image={img} />)
+        }
+
         let download = props.getImageObject("\\\HelpingImages\\Download.png");
         let upload = props.getImageObject("\\\HelpingImages\\form.png");
         let form = props.getImageObject("\\\HelpingImages\\upload.png");
@@ -84,7 +89,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                 let result = SortActorsByY();
                 if (!props.SwimlineMode) {
 
-                        return { y: result[0].y, height: result[result.length - 1].y + result[result.length - 1].height, width: result[0].width +200 };
+                        return { y: result[0].y, height: result[result.length - 1].y + result[result.length - 1].height, width: result[0].width + 200 };
                 }
                 else {
                         let communicationOrderByY = props.circles.sort((x, y) => {
@@ -127,7 +132,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                 document.body.removeChild(link);
         }
 
-        
+
 
         return (<div><Rect
                 x={0}
@@ -166,38 +171,48 @@ function LeftMeniu(props: LeftMeniuProps) {
                         onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction() }}
                 />
                 <Text x={156}
-                        y={90} text={"Action"} align={"center"} fontSize={16}  />
-                <Rect
-                        x={35}
-                        y={135}
-                        width={50}
-                        height={45}
-                        onClick={() => props.setClickFunction('DrawArrow')}
+                        y={90} text={"Action"} align={"center"} fontSize={16} />
+                {props.SwimlineMode == true && <>
+                        <Rect
+                                x={35}
+                                y={135}
+                                width={50}
+                                height={45}
+                                onClick={() => props.setClickFunction('DrawArrow')}
 
-                >
-                </Rect>
-                <Arrow
-                        points={[40, 180, 80, 140]}
-                        stroke={'black'}
-                        radius={20}
-                        strokeWidth={3}
-                        fill={'Black'}
-                        onClick={() => props.setClickFunction('DrawArrow')}
+                        >
+                        </Rect>
+                        <Arrow
+                                points={[40, 180, 80, 140]}
+                                stroke={'black'}
+                                radius={20}
+                                strokeWidth={3}
+                                fill={'Black'}
+                                onClick={() => props.setClickFunction('DrawArrow')}
 
-                />
-                <Text x={40}
-                        y={190} text={"Arrow"} align={"center"} fontSize={16} />
+                        />
+                        <Text x={40}
+                                y={190} text={"Arrow"} align={"center"} fontSize={16} />
+                </>
+                }
+                {props.currentObject != -1 && <>
+                        <Text text={"Symbol"} x={15} y={220} fontSize={16}></Text>
+                        <Rect x={5} y={240} height={200} width={224} cornerRadius={3} fill='white' ></Rect>
+                        {imageForSymbol}
+                        <Text text={imageText} x={35} y={250} fontSize={14}></Text>
+                        <ImageSelection images={props.Images} setImage={props.setImage} type={props.currentObject.img != undefined ? 'Actors' : 'Communication Points'}></ImageSelection></>}
 
-                <Text text={"Symbol"} x={15} y={220}  fontSize={16}></Text>
-                <Rect x={5} y={240} height={200} width={224} cornerRadius={3} fill='white' ></Rect>
-                {imageForSymbol}
-          <Text text={imageText} x={35} y={250}  fontSize={14}></Text>
-                {props.openSymbol ? <ImageSelection images={props.Images} setImage={props.setImage} type={props.currentObject.img !=undefined?'Actors':'Communication Points'}></ImageSelection> : ""}
-               
+                {props.currentObject != -1 && props.currentObject.isEndUser == undefined && <>
+                        <Text text={"Status"} x={15} y={460} fontSize={14}></Text>
+                        {getStatusJSX(props.currentObject, 5, 480, props.circles, props.setCurrentObject, props.setCircles)}
+
+                </>
+                }
+
                 <Image
                         image={screenshot}
-                        x={15}
-                        y={heighth - 260}
+                        x={150}
+                        y={heighth - 140}
                         height={40}
                         width={40}
                         onClick={() => {
@@ -206,25 +221,25 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 downloadImage(image);
                         }}
                 />
-                <Text x={10}
-                        y={heighth - 220} text={"ScreenShot"} align={"center"} fontSize={10} />
+                <Text x={140}
+                        y={heighth - 105} text={"ScreenShot"} align={"center"} fontSize={10} />
 
-          
+
 
                 <Image
                         x={15}
-                        y={heighth - 200}
+                        y={heighth - 140}
                         height={30}
                         width={40}
                         image={form}
                         onClick={() => { props.showModal(true); }}
 
                 />
-                <Text x={18}
-                        y={heighth - 165} text={"Import"} align={"center"} fontSize={10} />
+                <Text x={20}
+                        y={heighth - 105} text={"Import"} align={"center"} fontSize={10} />
                 <Image
                         x={15}
-                        y={heighth - 140}
+                        y={heighth - 80}
                         height={40}
                         width={40}
                         image={download}
@@ -235,18 +250,26 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                 />
                 <Text x={18}
-                        y={heighth - 95} text={"Export"} align={"center"} fontSize={10} />
+                        y={heighth - 35} text={"Export"} align={"center"} fontSize={10} />
                 <Image
                         image={upload}
-                        x={15}
+                        x={150}
                         y={heighth - 80}
                         height={40}
                         width={40}
                         onClick={() => { props.showQuestionary(true); }}
 
                 />
-                <Text x={18}
+                <Text x={154}
                         y={heighth - 35} text={"Form"} align={"center"} fontSize={10} />
+               
+           { props.currentObject != -1 && props.currentObject.isEndUser != undefined && <div>
+                <Text x={18}
+                        y={460} text={"Color"} align={"center"} fontSize={16} />
+                        <ColorPicker x={20} y={480} ></ColorPicker> 
+                        {/* change color code */}
+                        </div>}
+                       
 
         </div>
         );

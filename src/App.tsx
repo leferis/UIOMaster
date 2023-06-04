@@ -111,6 +111,9 @@ function App() {
            
             onReleaseDoes(e);
           }
+          else{
+            setCurrentObjectID(-1)
+          }
         }}
         onMouseMove={(e) => {
           onMouseMovement(e);
@@ -167,7 +170,7 @@ function App() {
               setActors={setActors} ChangeOpenActorStatus={ChangeOpenActorStatus} open={open} openActor={openActor} openColor={openColor} ChangeOpenColorStatus={ChangeOpenColorStatus} ChangeOpenExternalStatus={changeExternal} ChangeOpenStatus={ChangeOpenStatus}
               ChangeOpenSymbolStatus={ChangeOpenSymbolStatus} openExternal={openExternal} openSymbol={openSymbol} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode = {setSwimlineMode} SwimlineMode={SwimlineMode}
             ></Settings>
-            <LeftMeniu GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject} openSymbol={openSymbol} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles= {setCircles} mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject} />
+            <LeftMeniu setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject} openSymbol={openSymbol} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles= {setCircles} mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject} />
            { !openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType ={SwimlineMode}></Statistics>}
           </Layer>
         </Stage>
@@ -787,6 +790,7 @@ function App() {
         break;
       }
       case '': {
+     
       }
     }
   }

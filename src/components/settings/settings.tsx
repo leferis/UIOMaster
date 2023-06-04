@@ -216,41 +216,7 @@ function Settings(props: SettingsProps) {
             stroke={"black"}
             strokeWidth={1} ></Line>
         </Group>
-        <Group>
-          <Text x={690} y={10} text={"Symbol"} />
-          <Rect onClick={() => { props.ChangeOpenSymbolStatus(!props.openSymbol); }} strokeWidth={3}
-            cornerRadius={10}
-            stroke={'black'}
-            x={660}
-            y={25}
-            fill="white"
-            width={200}
-            height={props.openSymbol ? 190 : 30} ></Rect>
 
-          <Line points={props.openSymbol ? [830, 43, 840, 38, 850, 43] : [830, 38, 840, 43, 850, 38]}
-            stroke={"black"}
-            strokeWidth={1} ></Line>
-       
-        </Group>
-        <Group>
-          <Text x={920} y={10} text={"Color"} />
-          <Rect onClick={() => { props.ChangeOpenColorStatus(!props.openColor); }} strokeWidth={3}
-            cornerRadius={10}
-            stroke={'black'}
-            x={890}
-            y={25}
-            fill={props.currentObject.color != undefined? "white":''}
-            width={130}
-            height={props.openColor ? 120 : 30} ></Rect>
-          {props.openColor ? color : colorSquare}
-
-          <Text x={925}
-            y={35} text={props.currentObject.color ? props.currentObject.color : "#fff"} ></Text>
-          <Line points={[985, 38, 995, 43, 1005, 38]}
-            stroke={"black"}
-            strokeWidth={1} ></Line>
-
-        </Group>
         <Group>
           <Image image={change}
           x={width-70}

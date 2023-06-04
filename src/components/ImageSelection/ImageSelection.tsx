@@ -22,6 +22,7 @@ function ImageSelection(props: ImageSelectionProps) {
   }
 
   function makeList() {
+    if(props.images != undefined)
    return( props.images.Images.forEach((x: any) => {
       var images;
       images = x.Images.forEach((image: any) => {
@@ -46,6 +47,9 @@ function ImageSelection(props: ImageSelectionProps) {
         </div>);
       result = [];}
     }))
+    else{
+      return "";
+    }
   };
 
  makeList();
