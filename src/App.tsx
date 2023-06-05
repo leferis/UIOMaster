@@ -195,7 +195,7 @@ function App() {
       updateCurrentJourney();
     }
     if (addId != undefined || addId != null) {
-      setJouney((Journey) => [...Journey, { Toucpoint: Journey[addId].Toucpoint, Actions: Journey[addId].Actions, Actors: Journey[addId].Actors, JourneyName: "Journey2", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
+      setJouney((Journey) => [...Journey, { Toucpoint:  JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions:  JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors:  JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: "Journey2", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
     }
     else {
       setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: "JourneyActual", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
