@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Stage, Layer, Rect, Text, Circle, Line, Arrow, Image } from 'react-konva';
+import { Stage, Layer, Rect, Text, Circle, Line, Arrow, Image, Group } from 'react-konva';
 import XMLCreator from '../../XMLParsing/V2/v2.XMLCreator';
 import { Actors } from '../../Classes/Actors';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
@@ -148,7 +148,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                 }}>
 
         </Rect>
-
+                {props.SwimlineMode &&
                 <Circle x={63}
                         y={60}
                         stroke={'black'}
@@ -159,6 +159,26 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
                         }}
                 />
+}
+{!props.SwimlineMode && <Group  onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
+                        onMouseUp={() => {
+                                props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
+                        }}>
+                <Rect x={50}
+                        y={20} height={20} width={30} strokeWidth={3}
+                        cornerRadius={2}
+                        stroke={'black'}
+
+                        ></Rect>
+                        <Arrow points={[65,40,65,60]} dash={[2]} fill='black' stroke={"black"} strokeWidth={2} ></Arrow>
+                <Rect x={50}
+                        y={60} height={20} width={30} strokeWidth={3}
+                        cornerRadius={2}
+                        stroke={'black'}
+                        ></Rect>
+
+                </Group>
+}
                 <Text x={10}
                         y={90} text={"Communication\npoint"} align={"center"} fontSize={16} />
                 <Rect
