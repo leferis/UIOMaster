@@ -46,9 +46,9 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
           }>
             <Grid container spacing={2}>
               <Grid item xs={10}></Grid>
-              <Grid item xs={2}> <Button variant="outlined" onClick={() => props.removeActor(index)} startIcon={<DeleteIcon />}>
+              <Grid item xs={2}> {!props.tempActors[index].isEndUser && <Button variant="outlined" onClick={() => props.removeActor(index)} startIcon={<DeleteIcon />}>
                 Delete
-              </Button></Grid>
+              </Button>}</Grid>
               <Grid item xs={6}><TextField fullWidth label="Actors Name" defaultValue={x.Title} onInput={(e) => { changeName(e, index); }} />
               </Grid>
               <Grid item xs={6}>
