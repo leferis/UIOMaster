@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 export function getStatusJSX(currentObject :any,initialBoxX:any, initialBoxY:any, circles:any, setCurrentObjectID: any, setCircles:any){
     var Options: any[] = [];
     Object.values(TouchPointStatus).forEach((x) => {
-        if (typeof (x) == "string" && x != TouchPointStatus[currentObject.Status]) {
+        if (typeof (x) == "string" ) {
     
           Options.push(<div><Rect x={initialBoxX}
             y={initialBoxY}
@@ -15,7 +15,7 @@ export function getStatusJSX(currentObject :any,initialBoxX:any, initialBoxY:any
             strokeWidth={1}
             height={30}
             width={220}
-            fill={"White"}
+            fill={x != TouchPointStatus[currentObject.Status]?"White": "#e8eaed"}
             onClick={() => {
               if (currentObject != null ||currentObject != undefined) {
                 const circless = circles.map((circle: CJMLCircle) => {
@@ -30,7 +30,7 @@ export function getStatusJSX(currentObject :any,initialBoxX:any, initialBoxY:any
                 setCircles(circless);
               }
             }}
-            cornerRadius={Options.length == 2 ? [0, 0, 10, 10] : 0}
+            cornerRadius={Options.length == 3 ? [0, 0, 3, 3] : 0}
           />
             <Line points={[initialBoxX +5 , initialBoxY + 4, initialBoxX + 25, initialBoxY + 23]} stroke={'black'}
               strokeWidth={1} opacity={x == "Failing" ? 1 : 0}></Line>

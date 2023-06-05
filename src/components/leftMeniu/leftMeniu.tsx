@@ -28,12 +28,14 @@ interface LeftMeniuProps {
         setCircles: any;
         setCirlceAtEnd: any;
         updateCurrentJourney: any;
-        openSymbol: any;
         Images: any;
         setImage: any;
         currentObject: any;
         GetImageFullName: any;
         setCurrentObject: any;
+        setActors:any;
+        updateCirlces:any;
+
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -66,7 +68,6 @@ function LeftMeniu(props: LeftMeniuProps) {
 
         function getImage(x: any, index: any) {
                 let img = props.getImageObject(x.imageName)
-                console.log(x.imageName);
                 return (<Image x={10} y={245} height={20} width={20} image={img} />)
         }
         function getImageActor(x: any, index: any) {
@@ -266,8 +267,10 @@ function LeftMeniu(props: LeftMeniuProps) {
            { props.currentObject != -1 && props.currentObject.isEndUser != undefined && <div>
                 <Text x={18}
                         y={460} text={"Color"} align={"center"} fontSize={16} />
-                        <ColorPicker x={20} y={480} ></ColorPicker> 
-                        {/* change color code */}
+                        <ColorPicker x={20} y={480} Actors={props.actors} currentObject={props.currentObject}
+                         setActors={props.setActors} updateCirlces={props.updateCirlces}
+                        />
+                       
                         </div>}
                        
 

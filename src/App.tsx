@@ -15,7 +15,6 @@ import { CJMLAction } from './Classes/CJMLAction';
 import ActionPoints from './components/ActionPoints/ActionPoints';
 import { CJMLDescisionPoint } from './Classes/CJMLDescisionPoint';
 import { Connectable } from './Interface/Connectable';
-import DescisionPoint from './components/DescisionPoint/DescisionPoint';
 import ArrowComponent from './components/ArrowComponent/ArrowComponent';
 import { ExternalEnumerator } from './enumerator/ExternalEnumerator';
 import useImage from 'use-image';
@@ -65,11 +64,6 @@ function App() {
   const [SwimlineMode, setSwimlineMode] = useState<any>(false);
   const [swimlaneXInitial, setSwimlaneX] = useState<any>(400);
   const [journeyChange, setJourneyChange] = useState<any>(-1);
-  const [open, ChangeOpenStatus] = useState(false);
-  const [openActor, ChangeOpenActorStatus] = useState(false);
-  const [openSymbol, ChangeOpenSymbolStatus] = useState(false);
-  const [openColor, ChangeOpenColorStatus] = useState(false);
-  const [openExternal, ChangeOpenExternalStatus] = useState(false);
   const [openHome,ChangeOpenHome] = useState(false);
   const [mouseDownFunction,setMouseDownFunction] = useState("");
 
@@ -120,13 +114,8 @@ function App() {
         }} 
         >
           { !openHome && <Layer id='test' ref={layerEl} draggable x={500} y={0}
-            onDragStart={(e) => {
-              closeAllDropDowns();
-            }} onDragEnd={(e) => {
+            onDragEnd={(e) => {
               setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
-            }}
-            onClick={() => {
-              closeAllDropDowns();
             }}
           >
             
@@ -167,11 +156,16 @@ function App() {
           }
           <Layer id='Menu'>
             <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
-              setActors={setActors} ChangeOpenActorStatus={ChangeOpenActorStatus} open={open} openActor={openActor} openColor={openColor} ChangeOpenColorStatus={ChangeOpenColorStatus} ChangeOpenExternalStatus={changeExternal} ChangeOpenStatus={ChangeOpenStatus}
-              ChangeOpenSymbolStatus={ChangeOpenSymbolStatus} openExternal={openExternal} openSymbol={openSymbol} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode = {setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
+              setActors={setActors}  open={open} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode = {setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
+              initialArrowId = {initialArrowId} setInitialArrowID = {setNewArrowId} setArrows= {setArrows}
             ></Settings>
-            <LeftMeniu setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject} openSymbol={openSymbol} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles= {setCircles} mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject} />
-           { !openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType ={SwimlineMode}></Statistics>}
+            <LeftMeniu  setActors= {setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject} 
+            updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles= {setCircles} 
+            mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} 
+            SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} 
+            showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
+            updateCirlces = {updateTouchPointsForChange} />
+           { !openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType ={SwimlineMode} ></Statistics>}
           </Layer>
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
@@ -187,15 +181,6 @@ function App() {
     </div>
   );
 
-
-  function closeAllDropDowns() {
-    ChangeOpenExternalStatus(false);
-    ChangeOpenActorStatus(false);
-    ChangeOpenStatus(false);
-    ChangeOpenSymbolStatus(false);
-    ChangeOpenColorStatus(false);
-  }
-
   function updateCurrentJourney() {
     var journeys = Journey;
     journeys[currentJourney] = { Toucpoint: circles, JourneyName: journeys[currentJourney].JourneyName, Actions: actions, Actors: ActorsCJML, isPlanned: journeys[currentJourney].isPlanned, Arrow: Arrows, Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: journeys[currentJourney].JourneyID, Reference: journeys[currentJourney].Reference };
@@ -209,8 +194,8 @@ function App() {
     if (Journey.length == 1) {
       updateCurrentJourney();
     }
-    if (addId != undefined) {
-      setJouney((Journey) => [...Journey, { Toucpoint: Journey[addId].Toucpoint, Actions: Journey[addId].Actions, Actors: Journey[addId].Actors, JourneyName: "Journey2", isPlanned: false, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
+    if (addId != undefined || addId != null) {
+      setJouney((Journey) => [...Journey, { Toucpoint: Journey[addId].Toucpoint, Actions: Journey[addId].Actions, Actors: Journey[addId].Actors, JourneyName: "Journey2", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
     }
     else {
       setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: "JourneyActual", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
@@ -431,7 +416,7 @@ function App() {
     setPosY(200 + 150 * Journey[id].Actors.length);
     setCurrentJourney(id);
     setCurrentObjectReference(-1);
-    if (id == 0) {
+    if (Journey[id].isPlanned) {
       setDevationMode(false);
     } else {
       setDevationMode(true);
@@ -854,6 +839,21 @@ function App() {
     const image = new Image();
     image.src = imgName;
     return image;
+  }
+
+  function updateTouchPointsForChange(actor:any){
+    const circleNew = circles.map(circle =>{
+      if(circle.initiator.id == actor.id){
+        circle.initiator = actor;
+        return circle;
+      }
+      else if(circle.receiver.id == actor.id){
+        circle.receiver = actor;
+        return circle;
+      }
+      return circle;
+    })
+    setCircles(circleNew);
   }
 
 

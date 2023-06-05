@@ -22,15 +22,6 @@ interface SettingsProps {
   setActors: any;
   Actors: Actors[];
   open: any;
-  ChangeOpenStatus: any;
-  openActor: any;
-  ChangeOpenActorStatus: any;
-  openSymbol: any;
-  ChangeOpenSymbolStatus: any;
-  openColor: any;
-  ChangeOpenColorStatus: any;
-  openExternal: any;
-  ChangeOpenExternalStatus: any;
   GetImageFullName: any;
   getImageObject: any;
   Layer:any;
@@ -38,6 +29,9 @@ interface SettingsProps {
   SwimlineMode:any;
   actions:any;
   setActions:any;
+  initialArrowId:any; 
+  setInitialArrowID:any;
+  setArrows:any;
 }
 
 
@@ -80,7 +74,6 @@ function Settings(props: SettingsProps) {
             props.setCurrentObjectID(edited);
             props.setCircles(circles);
           }
-          props.ChangeOpenStatus(!props.open);
         }}
         cornerRadius={Options.length == 2 ? [0, 0, 10, 10] : 0}
       />
@@ -125,7 +118,6 @@ function Settings(props: SettingsProps) {
           props.setActors(update);
         }}
         onDoubleClick={(e) => {
-          props.ChangeOpenColorStatus(false);
         }}></HexColorPicker>
     </div></Html>;
 
@@ -181,7 +173,7 @@ function Settings(props: SettingsProps) {
           <Image image={change}
           x={width-70}
           y={10}
-          onClick={() => { props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles)  }}
+          onClick={() => { props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows)  }}
           width={50}
           height={50}
           ></Image>
