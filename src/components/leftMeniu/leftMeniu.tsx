@@ -160,10 +160,11 @@ function LeftMeniu(props: LeftMeniuProps) {
                         }}
                 />
 }
-{!props.SwimlineMode && <Group  onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
+{!props.SwimlineMode && <Group  onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }} 
                         onMouseUp={() => {
                                 props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
                         }}>
+                                <Rect x={40} y={ 16} height={75} width={45}  ></Rect>
                 <Rect x={50}
                         y={20} height={20} width={30} strokeWidth={3}
                         cornerRadius={2}
