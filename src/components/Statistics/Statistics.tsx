@@ -33,11 +33,8 @@ function Statistics(props: StatisticsProps) {
 
   function getText() {
     let text = "";
-    text += "Diagram type: "
-    text += props.diagramType? "Journey diagram\n":"Journey network diagram\n"
+   
     try {
-      text += "Journey Type: ";
-      text += props.Journeys[props.currentJourney].isPlanned?"Planned\n":"Actual\n";
       text += "Touchpoints: " + props.circles.length + '\n';
       text += "Actions: " + props.actions.length + '\n';
       if (props.Journeys[props.currentJourney].isPlanned) {
@@ -91,7 +88,7 @@ function Statistics(props: StatisticsProps) {
     return text;
   }
   return (<>
-    <Rect x={230} y={0} height={120} width={290}    fill={"#e8eaed"}
+    <Rect x={230} y={0} height={100} width={290}    fill={"#e8eaed"}
                 stroke={'black'} >
       
     </Rect>

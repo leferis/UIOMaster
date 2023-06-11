@@ -1,3 +1,4 @@
+import { Actors } from "../Classes/Actors";
 import { CJMLAction } from "../Classes/CJMLAction";
 import { CJMLArrow } from "../Classes/CJMLArrow";
 import { CJMLCircle } from "../Classes/CJMLCircle";
@@ -21,6 +22,33 @@ function fromSwimlaneToNetwork(circles: any[], actions: CJMLAction[], setActions
         objects[j].swimlaneX = 400 + (225 * j);
     }
     sortOutAndAssign(objects, setActions, updateCircles)
+}
+
+export function updateByActors(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any, actors:any) {
+    let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
+    let objects2 = objects.map((x:any)=>{
+        let initiator = actors.find((y:Actors)=> {
+            return y.id == x.initiator.id
+        })
+        let receiver = actors.find((y:Actors)=> {
+            return y.id == x.receiver.id
+        })
+        if(initiator != undefined){
+            if(x.receiver != undefined){
+                x.swimlaneY = initiator.y + 20
+            }
+            else{
+                x.swimlaneY = initiator.y + 20
+            }
+        }
+        if(receiver != undefined){
+             if(x.receiver != undefined){
+                x.swimlaneReceiverY = receiver.y + 20
+            }
+        }
+        return x;
+    })
+    sortOutAndAssign(objects2, setActions, updateCircles)
 }
 
 function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any, initialArrowId: any, setInitialArrowID: any, setArrows: any) {

@@ -7,6 +7,7 @@ import { CJMLAction } from '../../Classes/CJMLAction';
 import ImageSelection from '../ImageSelection/ImageSelection';
 import { getStatusJSX } from '../../Functions/CJMLStatusFunction';
 import ColorPicker from './ColorPicker/ColorPicker';
+import ActorPicker from './ActorPicker/leftMeniu/ActorPicker';
 
 interface LeftMeniuProps {
         setClickFunction: any;
@@ -33,9 +34,11 @@ interface LeftMeniuProps {
         currentObject: any;
         GetImageFullName: any;
         setCurrentObject: any;
-        setActors:any;
-        updateCirlces:any;
-
+        setActors: any;
+        updateCirlces: any;
+        currentJourney: any;
+        addNewActor:any;
+        setActions:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -68,12 +71,12 @@ function LeftMeniu(props: LeftMeniuProps) {
 
         function getImage(x: any, index: any) {
                 let img = props.getImageObject(x.imageName)
-                return (<Image x={10} y={245} height={20} width={20} image={img} />)
+                return (<Image x={10} y={525} height={20} width={20} image={img} />)
         }
         function getImageActor(x: any, index: any) {
                 let img = props.getImageObject(x.img)
                 console.log(x);
-                return (<Image x={10} y={245} height={20} width={20} image={img} />)
+                return (<Image x={10} y={525} height={20} width={20} image={img} />)
         }
 
         let download = props.getImageObject("\\\HelpingImages\\Download.png");
@@ -135,56 +138,63 @@ function LeftMeniu(props: LeftMeniuProps) {
 
 
 
-        return (<div><Rect
-                x={0}
-                y={0}
-                width={230}
-                fill={"#e8eaed"}
-                height={window.innerHeight + 30}
-                stroke={'black'}
-                strokeWidth={1}
-                onMouseUp={() => {
-                        props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
-                }}>
-
-        </Rect>
-                {props.SwimlineMode &&
-                <Circle x={63}
-                        y={60}
+        return (<div>
+                <Rect
+                        x={0}
+                        y={0}
+                        width={230}
+                        fill={"#e8eaed"}
+                        height={window.innerHeight + 30}
                         stroke={'black'}
-                        radius={20}
-                        strokeWidth={3}
-                        onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
+                        strokeWidth={1}
                         onMouseUp={() => {
                                 props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
                         }}
                 />
-}
-{!props.SwimlineMode && <Group  onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }} 
+                <Rect x={5} y={10} width={220} height={40} fill='#fff' />
+                <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
+                circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
+                ></ActorPicker>
+                <Text x={10} y={14} text={'Diagram type:' + (props.SwimlineMode ? "Journey diagram\n" : "Journey network diagram\n")} fontSize={12}></Text>
+                {!(props.Journeys[props.currentJourney] == undefined) && <Text x={10} y={34} text={'Journey type:' + (props.Journeys[props.currentJourney].isPlanned ? "Planned" : "Actual")} fontSize={12}></Text>}
+                {props.SwimlineMode &&
+                        <Circle x={63}
+                                y={350}
+                                stroke={'black'}
+                                radius={20}
+                                strokeWidth={3}
+                                onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
+                                onMouseUp={() => {
+                                        props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
+                                }}
+                        />
+                }
+                {!props.SwimlineMode && <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
                         onMouseUp={() => {
                                 props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
                         }}>
-                                <Rect x={40} y={ 16} height={75} width={45}  ></Rect>
-                <Rect x={50}
-                        y={20} height={20} width={30} strokeWidth={3}
-                        cornerRadius={2}
-                        stroke={'black'}
+                        <Rect x={40} y={306} height={75} width={45}  ></Rect>
+                        <Rect x={50}
+                                y={310} height={20} width={30} strokeWidth={3}
+                                cornerRadius={2}
+                                stroke={'black'}
 
                         ></Rect>
-                        <Arrow points={[65,40,65,60]} dash={[2]} fill='black' stroke={"black"} strokeWidth={2} ></Arrow>
-                <Rect x={50}
-                        y={60} height={20} width={30} strokeWidth={3}
-                        cornerRadius={2}
-                        stroke={'black'}
+                        <Arrow points={[65, 330, 65, 350]} dash={[2]} fill='black' stroke={"black"} strokeWidth={2} ></Arrow>
+                        <Rect x={50}
+                                y={350} height={20} width={30} strokeWidth={3}
+                                cornerRadius={2}
+                                stroke={'black'}
                         ></Rect>
 
                 </Group>
-}
+                }
+
                 <Text x={10}
-                        y={90} text={"Communication\npoint"} align={"center"} fontSize={16} />
+                        y={380} text={"Communication\npoint"} align={"center"} fontSize={16} />
                 <Rect
                         x={153}
-                        y={40}
+                        y={330}
                         height={40}
                         width={50}
                         cornerRadius={10}
@@ -193,11 +203,11 @@ function LeftMeniu(props: LeftMeniuProps) {
                         onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction() }}
                 />
                 <Text x={156}
-                        y={90} text={"Action"} align={"center"} fontSize={16} />
+                        y={380} text={"Action"} align={"center"} fontSize={16} />
                 {props.SwimlineMode == true && <>
                         <Rect
                                 x={35}
-                                y={135}
+                                y={415}
                                 width={50}
                                 height={45}
                                 onClick={() => props.setClickFunction('DrawArrow')}
@@ -205,7 +215,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                         >
                         </Rect>
                         <Arrow
-                                points={[40, 180, 80, 140]}
+                                points={[40, 460, 80, 420]}
                                 stroke={'black'}
                                 radius={20}
                                 strokeWidth={3}
@@ -214,19 +224,19 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                         />
                         <Text x={40}
-                                y={190} text={"Arrow"} align={"center"} fontSize={16} />
+                                y={470} text={"Arrow"} align={"center"} fontSize={16} />
                 </>
                 }
                 {props.currentObject != -1 && <>
-                        <Text text={"Symbol"} x={15} y={220} fontSize={16}></Text>
-                        <Rect x={5} y={240} height={200} width={224} cornerRadius={3} fill='white' ></Rect>
+                        <Text text={"Symbol"} x={15} y={500} fontSize={16}></Text>
+                        <Rect x={5} y={520} height={200} width={224} cornerRadius={3} fill='white' ></Rect>
                         {imageForSymbol}
-                        <Text text={imageText} x={35} y={250} fontSize={14}></Text>
+                        <Text text={imageText} x={35} y={530} fontSize={14}></Text>
                         <ImageSelection images={props.Images} setImage={props.setImage} type={props.currentObject.img != undefined ? 'Actors' : 'Communication Points'}></ImageSelection></>}
 
                 {props.currentObject != -1 && props.currentObject.isEndUser == undefined && <>
-                        <Text text={"Status"} x={15} y={460} fontSize={14}></Text>
-                        {getStatusJSX(props.currentObject, 5, 480, props.circles, props.setCurrentObject, props.setCircles)}
+                        <Text text={"Status"} x={15} y={740} fontSize={14}></Text>
+                        {getStatusJSX(props.currentObject, 5, 720, props.circles, props.setCurrentObject, props.setCircles)}
 
                 </>
                 }
@@ -284,16 +294,16 @@ function LeftMeniu(props: LeftMeniuProps) {
                 />
                 <Text x={154}
                         y={heighth - 35} text={"Form"} align={"center"} fontSize={10} />
-               
-           { props.currentObject != -1 && props.currentObject.isEndUser != undefined && <div>
-                <Text x={18}
-                        y={460} text={"Color"} align={"center"} fontSize={16} />
-                        <ColorPicker x={20} y={480} Actors={props.actors} currentObject={props.currentObject}
-                         setActors={props.setActors} updateCirlces={props.updateCirlces}
+
+                {props.currentObject != -1 && props.currentObject.isEndUser != undefined && <div>
+                        <Text x={18}
+                                y={740} text={"Color"} align={"center"} fontSize={16} />
+                        <ColorPicker x={20} y={760} Actors={props.actors} currentObject={props.currentObject}
+                                setActors={props.setActors} updateCirlces={props.updateCirlces}
                         />
-                       
-                        </div>}
-                       
+
+                </div>}
+
 
         </div>
         );

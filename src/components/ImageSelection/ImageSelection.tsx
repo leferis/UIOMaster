@@ -54,7 +54,7 @@ function ImageSelection(props: ImageSelectionProps) {
 
  makeList();
   return (
-    <Group x={0} y= {270}>
+    <Group x={0} y= {550}>
     <Html ><div id="ImageSelections" style={{maxHeight:170, width:228, overflowY:"scroll", overflowX:"auto"}}>
       {resultFinal} 
     </div>

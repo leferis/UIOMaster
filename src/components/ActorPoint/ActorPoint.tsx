@@ -48,7 +48,7 @@ function ActorPoint(props: ActorPointProps) {
           fill='#f1f1f1'
           strokeWidth={3}
         />
-
+      {getImage(act)}
         <Rect
           onClick={(evt) => {
             props.setCurrentObjectID(act);
@@ -58,7 +58,7 @@ function ActorPoint(props: ActorPointProps) {
           width={100}
           y={act.y}
         />
-        {getImage(act)}
+  
         <TextMessages x={act.x + 35} y={act.y + 100} height={40} width={60} fontSize={12} value={act.Title} modifyObject={act} isEditing={act.isEditing}
           ChangeFunction={((val: any, x: any) => {
             const circles = props.actors.map(act => {

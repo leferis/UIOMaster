@@ -144,7 +144,7 @@ function App() {
               updateCircles={setCircles}
               circles={circles}
             ></ActionPoints>
-<ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
+            <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
           </Layer>}
           { openHome  &&
             <Layer ref={layerEl} draggable onDragEnd={(e) => {
@@ -164,7 +164,9 @@ function App() {
             mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} 
             SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} 
             showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
-            updateCirlces = {updateTouchPointsForChange} />
+            updateCirlces = {updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActor}
+            setActions={setActions}
+            />
            { !openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType ={SwimlineMode} ></Statistics>}
           </Layer>
         </Stage>
