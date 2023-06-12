@@ -31,7 +31,9 @@ export function updateByActors(circles: any[], actions: CJMLAction[], setActions
             return y.id == x.initiator.id
         })
         let receiver = actors.find((y:Actors)=> {
+            if(x.receiver != undefined)
             return y.id == x.receiver.id
+            else return false
         })
         if(initiator != undefined){
             if(x.receiver != undefined){

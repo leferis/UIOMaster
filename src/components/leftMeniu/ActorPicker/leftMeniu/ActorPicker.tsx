@@ -45,8 +45,10 @@ function LeftMeniuActorPicker(props: LeftMeniuActorPickerProps) {
     height: 14,
     display: "inline-flex",
     minWidth: "150px",
+    maxWidth:"150px",
+    maxHeight:"140px",
     // change background colour if dragging
-    background: props.currentObject == item ? "lightgrey" : "#fff",
+    background: props.currentObject == item ? "darkgray" : "lightgrey",
     borderRadius: 5,
     
     // styles we need to apply on draggables
@@ -54,7 +56,7 @@ function LeftMeniuActorPicker(props: LeftMeniuActorPickerProps) {
   });
 
   const getListStyle = (isDraggingOver: boolean) => ({
-    background: isDraggingOver ? "lightblue" : "lightgrey",
+    background: isDraggingOver ? "lightblue" : "white",
     padding: grid,
     width: 210,
     maxHeight: 150,
@@ -92,10 +94,11 @@ function LeftMeniuActorPicker(props: LeftMeniuActorPickerProps) {
                             item
                           )}
                         >
-                          <div style={{ borderRadius: "50%", border: "2px solid " + item.color, width: 24, height: 24, paddingLeft: 2 }}>
-                            <img style={{ width: 20, height: 20, paddingRight: 8 }} src={item.img} />
+                          <div style={{ borderRadius: "50%", border: "2px solid " + item.color, width: 24, height: 24, paddingLeft: 2, position: "relative", right:"7px", bottom:"5px" }}>
+                            <img style={{ width: 20, height: 20 }} src={item.img} />
                           </div>
-                          <div style={{ paddingBottom: 10 }}>{item.Title}</div>
+                          <div style={{  width:140, lineHeight: "16px", wordWrap: 'break-word',maxHeight:"50px", maxLines:5, display:"-webkit-box", overflow:"hidden",
+                           WebkitBoxOrient:"vertical", WebkitLineClamp:"5", height:"18px" }}>{item.Title}</div>
 
                         </div>
                       )}
