@@ -78,7 +78,6 @@ function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJM
   if (actorIn != undefined) {
     const circles2 = Circle.map(circle => {
       if (circle.id == touchPoint.id) {
-        let tempActor, tempy;
         return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", swimlaneReceiverY: circle.receiver.y + 20, y:actorIn != undefined? actorIn.y+ actorIn.height/2: 200 };
       }
       return circle;
@@ -86,9 +85,76 @@ function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJM
     updateCircles(circles2);
     changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
     elementsAreFarFromBorder();
-    moveElement(circles2, index, xPosOfMouse, actions, updateCircles, setActions);
+    moveJourneyElement(circles2, index, xPosOfMouse, actions, updateCircles, setActions);
   } else {
-    moveElement(Circle, index, xPosOfMouse, actions, updateCircles, setActions);
+    moveJourneyElement(Circle, index, xPosOfMouse, actions, updateCircles, setActions);
+  }
+}
+
+export function moveJourneyElement(elementArray: any, index: any, relativeX: number, actions: any, updateCircles: any, setActions: any) {
+  let objects = JSON.parse(JSON.stringify(elementArray)).concat(JSON.parse(JSON.stringify(actions)));
+  let objects2 = elementArray.concat(actions);
+  let lefover = 0 
+  objects.sort((a: CJMLCircle, b: CJMLCircle) => {
+    return a.x - b.x
+  });
+  let indexOfFirsChange = objects.findIndex((x: CJMLCircle) => {
+    return x.x + 180 > relativeX;
+  })
+  if (indexOfFirsChange != -1) {
+    if (indexOfFirsChange > index) {
+      for (let j = 0; j <= indexOfFirsChange; j++) {
+        objects[j].swimlaneX = 400 + (225 * j);
+        if(!objects[j].devation){
+        objects[j].x = 400 + (150 * (j-lefover)) 
+        }
+        else{
+          lefover++;
+          objects[j].x = 400 + (150 * (j-lefover)) 
+        }
+      }
+
+      for (let j = 0; j < objects.length; j++) {
+        for (let k = 0; k < objects.length; k++) {
+          if (objects2[k].id == objects[j].id) {
+            objects2[k].swimlaneX = objects[j].swimlaneX;
+          }
+        }
+      }
+    }
+    else {
+      for (let j = indexOfFirsChange; j < objects.length; j++) {
+        objects[j].swimlaneX = 400 + (225 * j);
+        if(!objects[j].devation){
+          objects[j].x = 400 + (150 * (j-lefover)) 
+          }
+          else{
+            lefover++;
+            objects[j].x = 400 + (150 * (j-lefover)) 
+          }
+      }
+
+      for (let j = 0; j < objects.length; j++) {
+        for (let k = 0; k < objects.length; k++) {
+          if (objects2[k].id == objects[j].id) {
+            objects2[k].swimlaneX = objects[j].swimlaneX;
+            objects2[k].x = objects[j].x;
+          }
+        }
+      }
+    }
+    var actionsTemp: CJMLAction[] = [];
+    var touch: CJMLCircle[] = []
+    for (let j = 0; j < objects2.length; j++) {
+      if (objects2[j].receiver == undefined) {
+        actionsTemp.push(objects2[j]);
+      }
+      else {
+        touch.push(objects2[j]);
+      }
+    }
+    setActions(actionsTemp);
+    updateCircles(touch);
   }
 }
 

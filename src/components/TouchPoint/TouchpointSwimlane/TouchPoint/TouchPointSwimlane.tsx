@@ -208,7 +208,9 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           }}
           onDragEnd={
             (e) => {
-              onDragEnd(e, props.touchPoint, props.actors, props.touchPoints, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned)
+              onDragEnd(e, props.touchPoint, props.actors.filter((x:Actors)=>{
+                return x.isEndUser
+              }), props.touchPoints, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned)
           }}
         />
         {props.getImage(props.touchPoint, 1)}

@@ -46,11 +46,16 @@ interface TouchPointProps {
 }
 
 function TouchPoint(props: TouchPointProps) {
+  const endUser = props.actors.filter((x:Actors) => {return x.isEndUser})[0];
+  console.log(endUser)
   return (
     <div>
       {props.Circle.map((x, index) => {
         if (props.SwimlineMode) {
-          return (<TouchPointSwimlane SwimlaneMode={props.SwimlineMode} actors={props.actors} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction} deviationMode={props.devationMode} elementCheckCloseToBorder={props.elementCheckCloseToBorder}
+          return (
+          <>
+
+          <TouchPointSwimlane SwimlaneMode={props.SwimlineMode} actors={props.actors} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction} deviationMode={props.devationMode} elementCheckCloseToBorder={props.elementCheckCloseToBorder}
             elementsAreFarFromBorder={props.elementsAreFarFromBorder}
             getImage={getImage}
             resetTouchpoints={props.resetTouchpoints}
@@ -63,7 +68,8 @@ function TouchPoint(props: TouchPointProps) {
             setActions={props.setActions} 
             index={index}
             isPlanned={props.isPlanned}
-          ></TouchPointSwimlane>)
+          ></TouchPointSwimlane>
+          </>)
         }
         else {
           return (

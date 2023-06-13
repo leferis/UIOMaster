@@ -29,16 +29,11 @@ function ActorPoint(props: ActorPointProps) {
 
   return (<div>
     {props.actors.map((act: Actors, index: number) => {
-      if (props.SwimlineMode) {
-        if (!act.isEndUser) {
+      if (props.SwimlineMode && !act.isEndUser) {
           return (<div></div>);
-        }
       }
       return (<div>
-
-        
-
-        <Rect
+        {!props.SwimlineMode && <Rect
           x={act.x}
           y={act.y}
           height={act.height}
@@ -47,7 +42,7 @@ function ActorPoint(props: ActorPointProps) {
           cornerRadius={10}
           fill='#f1f1f1'
           strokeWidth={3}
-        />
+        />}
       {getImage(act)}
         <Rect
           onClick={(evt) => {

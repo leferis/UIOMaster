@@ -114,9 +114,9 @@ function ActionPoints(props:ActionPointsProps){
                     }
                     return action;
                   })
+                  console.log(circles)
                   var actorIn: Actors |undefined = collision(e);
                   if(actorIn != undefined){
-                  
                     const circles = props.actions.map((action : CJMLAction) => {
                       if (action.id == x.id ) {
                         if(props.swimlaneMode && actorIn != undefined && actorIn.isEndUser){

@@ -236,7 +236,7 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                 {props.currentObject != -1 && props.currentObject.isEndUser == undefined && <>
                         <Text text={"Status"} x={15} y={740} fontSize={14}></Text>
-                        {getStatusJSX(props.currentObject, 5, 720, props.circles, props.setCurrentObject, props.setCircles)}
+                        {getStatusJSX(props.currentObject, 5, 760, props.circles, props.setCurrentObject, props.setCircles)}
 
                 </>
                 }

@@ -10,15 +10,11 @@ import ActorPoint from './components/ActorPoint/ActorPoint';
 import Settings from './components/settings/settings';
 import CJMLImages from './assets/CJMLImages.json'
 import { TouchPointStatus } from './enumerator/TouchPointStatus';
-import { HexColorPicker } from 'react-colorful';
 import { CJMLAction } from './Classes/CJMLAction';
 import ActionPoints from './components/ActionPoints/ActionPoints';
-import { CJMLDescisionPoint } from './Classes/CJMLDescisionPoint';
 import { Connectable } from './Interface/Connectable';
 import ArrowComponent from './components/ArrowComponent/ArrowComponent';
 import { ExternalEnumerator } from './enumerator/ExternalEnumerator';
-import useImage from 'use-image';
-import ActorLegend from './components/ActorLegend/ActorLegend';
 import Deviation from './components/deviation/deviation';
 import ModaWindow from './components/ModaWindow/ModaWindow';
 import { Journey } from './Classes/Journey';
@@ -29,15 +25,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { randomColor } from 'accessible-colors';
 import IntroductionWindow from './components/IntroductionWindow/IntroductionWindow';
 import JourneySelection from './components/JourneySelection/JourneySelection';
-import { maxWidth } from '@mui/system';
-import { IconButton, Tooltip } from '@mui/material';
-import AddCircle from '@mui/icons-material/AddCircle';
 import Statistics from './components/Statistics/Statistics';
 import Home from './components/Home/Home';
 import JourneyBar from './components/JourneyBar/JourneyBar';
 import { onDragEnd, onDragMove } from './Functions/Movement';
 import { setCirlceAtEnd } from './Functions/creation';
 import { onActionDragEnd, onActionDragMove } from './Functions/actionMovement';
+import SwimlaneInitialValues from './components/swimlaneInitialValues/swimlaneInitialValues';
 
 
 function App() {
@@ -144,6 +138,7 @@ function App() {
               updateCircles={setCircles}
               circles={circles}
             ></ActionPoints>
+            {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
             <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
           </Layer>}
           { openHome  &&

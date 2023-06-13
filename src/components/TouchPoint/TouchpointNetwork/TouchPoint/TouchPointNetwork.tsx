@@ -42,7 +42,11 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
       height={120}
       width={180}
       stroke={props.touchPoint.Capacity?'#F49D6E':'#2B8299'}
-
+      shadowEnabled={props.touchPoint.devation}
+      shadowBlur={5}
+      shadowOffsetX={3}
+      shadowOffsetY={3}
+      shadowOpacity={20}
       onClick={(e) => {
         props.resetTouchpoints();
         props.checkClickFunction(props.touchPoint, e);
@@ -121,7 +125,11 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
       height={120}
       width={180}
       fill='white'
-
+      shadowEnabled={props.touchPoint.devation}
+      shadowBlur={5}
+      shadowOffsetX={3}
+      shadowOffsetY={3}
+      shadowOpacity={20}
       onClick={(e) => {
         props.resetTouchpoints();
         props.checkClickFunction(props.touchPoint, e);
