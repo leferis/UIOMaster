@@ -8,6 +8,7 @@ interface JourneySelectionProps {
   closeJourney: any;
   addJourney: any;
   JourneyList: any;
+  showModal:any;
 }
 
 function JourneySelection(props: JourneySelectionProps) {
@@ -85,6 +86,11 @@ function JourneySelection(props: JourneySelectionProps) {
             <Grid item xs={4}><Button onClick={() => { props.addJourney(true, null); props.closeJourney(false) }} variant="contained">Add Planned Journey</Button> </Grid>
             <Grid item xs={4}><Button onClick={() => { setShowSelection(true); }} variant="contained">Add Actual Journey</Button></Grid>
             <Grid item xs={2}></Grid>
+          </Grid>
+          <Grid style={{paddingTop:"20px"}}>
+            <Grid item xs={4}></Grid>
+            <Grid item xs={4}><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Upload XCJML file</Button></Grid>
+            <Grid item xs={4}></Grid>
           </Grid>
         </>}
       {/* Add logic to not give any selection if there is no Planned journey */}
