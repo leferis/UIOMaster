@@ -47,7 +47,6 @@ interface TouchPointProps {
 
 function TouchPoint(props: TouchPointProps) {
   const endUser = props.actors.filter((x:Actors) => {return x.isEndUser})[0];
-  console.log(endUser)
   return (
     <div>
       {props.Circle.map((x, index) => {

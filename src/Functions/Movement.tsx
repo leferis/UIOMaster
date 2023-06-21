@@ -167,6 +167,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
   let indexOfFirsChange = objects.findIndex((x: CJMLCircle) => {
     return x.swimlaneX + 180 > relativeX;
   })
+  console.log(indexOfFirsChange)
   if (indexOfFirsChange != -1) {
     if (indexOfFirsChange > index) {
       for (let j = 0; j <= indexOfFirsChange; j++) {
@@ -233,7 +234,7 @@ export function remakeArrows(Circle: any, actions: any, arrowId: number, setArro
   setArrows(newArrows);
 }
 
-export function collisionSwim(positionY: any, elements: CJMLCircle, actors: Actors[]) {
+export function collisionSwim(positionY: any, elements: CJMLCircle | CJMLAction, actors: Actors[]) {
   var snapOnIt;
   actors.forEach((element: Actors) => {
     if (

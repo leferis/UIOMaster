@@ -42,5 +42,6 @@ export class CJMLArrow{
         if((this.fromPoint.x < this.toPoint.x - 60 || this.fromPoint.x > this.toPoint.x + 50 ) && this.fromPoint.x  != this.toPoint.x){
         this.intermidiate.push(midpointX,this.fromPoint.y + Math.round((this.fromPoint.height+2)/2)  , midpointX,this.toPoint.y + Math.round((this.toPoint.height+2)/2));
         }
+        console.log(this.intermidiate)
     }
 }

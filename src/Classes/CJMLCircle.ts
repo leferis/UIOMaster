@@ -49,7 +49,8 @@ export class CJMLCircle implements CJMLConnectionUnit {
     id: string ;
     x: number;
     y: number;
-    getType() {
-        return "Touchpoint";
-    }
+
+    public getConnectingPointCordinates(pointX:number,pointY:number) {
+        return 0;
+     }
 }

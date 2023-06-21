@@ -13,4 +13,8 @@ export class Connectable{
         this.height = height;
         this.width = width;
     }
+
+    public getConnectingPointCordinates(pointX:any,pointY:any) {
+        
+    } 
 }

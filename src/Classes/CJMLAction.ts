@@ -36,7 +36,8 @@ export class CJMLAction implements CJMLConnectionUnit{
     x: number;
     y: number;
 
-    getType() {
-        return "Action";
-    }
+
+    public getConnectingPointCordinates(pointX:number,pointY:number) {
+        return 0;
+     }
 }
