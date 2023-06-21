@@ -24,7 +24,7 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
   const endUser = props.actors.filter((x: Actors) => {
     return x.isEndUser;
   })[0];
-  var xPositionFirst = 0, yPositionFirst = 0;
+  var xPositionFirst = 0, yPositionFirst = 0, xPositionLast = 0, yPostionLast = 0;
   if (objects.length > 0) {
     if (objects[0].receiver == undefined) {
       xPositionFirst = objects[0].x - 3
@@ -33,6 +33,13 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
     else {
       xPositionFirst = objects[0].x - objects[0].width - 3
       yPositionFirst = objects[0].y
+
+    }
+    if (objects[objects.length - 1].reciever == undefined) {
+      yPostionLast = objects[objects.length - 1].y + objects[objects.length - 1].height / 2
+    }
+    else {
+      yPostionLast = objects[objects.length - 1].y;
     }
   }
 
@@ -44,8 +51,8 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
 
         {index == 0 && <><Circle x={endUser.x + 100} y={endUser.y + endUser.height / 2} radius={9} stroke={"black"} />
           <Arrow points={[endUser.x + 109, endUser.y + endUser.height / 2, xPositionFirst, yPositionFirst]} fill='black' stroke={"black"} /></>}
-        {index == objects.length - 1 && <><Circle x={objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 50 : endUser.x + 150} y={endUser.y + endUser.height / 2} radius={9} fill={"black"} />
-          <Arrow points={[x.x + x.width + 3, x.y, objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 40 : endUser.x + 150, endUser.y + endUser.height / 2]} fill='black' stroke={"black"} /></>
+        {index == objects.length - 1 && <><Circle x={objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 150 : endUser.x + 150} y={endUser.y + endUser.height / 2} radius={9} fill={"black"} />
+          <Arrow points={[x.x + x.width, yPostionLast, objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 145 : endUser.x + 150, endUser.y + endUser.height / 2]} fill='black' stroke={"black"} /></>
         }
       </>
       )

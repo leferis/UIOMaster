@@ -64,16 +64,16 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
 
         if (objects[j].devation == true) {
             console.log(objects)
-            objects[j].x = prevX > 350? prevX -100 : prevX;
+            objects[j].x = prevX > 350? prevX -200 : prevX;
             objects[j].y = devationx;
             devationx = devationx + 150;
         }
         else {
             objects[j].x = prevX;
-            objects[j].x = 350 + (100 * j);
+            objects[j].x = 350 + (200 * j);
             objects[j].y = 275;
             devationx = 500;
-            prevX += 100;
+            prevX += 200;
         }
 
     }
