@@ -26,22 +26,11 @@ interface TouchPointSwimlaneProps {
   setActions:any;
   index:any;
   isPlanned:any;
+  makeBiggerActors:any;
 }
 
 
 function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
-
-  function collisionSwimlane(e: any) {
-    var snapOnIt;
-    props.actors.forEach((element: Actors) => {
-      if (
-        element.y <= e.target.attrs.y &&
-        element.y + element.height >= e.target.attrs.y && element.isEndUser
-      ) { snapOnIt = element; }
-    });
-
-    return snapOnIt;
-  }
 
   function helpingArrow(clickedObject: CJMLCircle, e: any) {
     props.setClickFunction('DrawArrow');
@@ -205,12 +194,14 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
             props.updateCircles(circles);
             props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
             props.elementCheckCloseToBorder(e.target.getPosition().x);
+            props.makeBiggerActors(e.target.attrs.x);
           }}
           onDragEnd={
             (e) => {
               onDragEnd(e, props.touchPoint, props.actors.filter((x:Actors)=>{
                 return x.isEndUser
               }), props.touchPoints, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned)
+              props.makeBiggerActors(e.target.attrs.x);
           }}
         />
         {props.getImage(props.touchPoint, 1)}

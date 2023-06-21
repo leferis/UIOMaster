@@ -43,6 +43,7 @@ interface TouchPointProps {
   devationMode: any;
   getImageObject: any;
   isPlanned:any;
+  makeBiggerActors:any;
 }
 
 function TouchPoint(props: TouchPointProps) {
@@ -67,6 +68,7 @@ function TouchPoint(props: TouchPointProps) {
             setActions={props.setActions} 
             index={index}
             isPlanned={props.isPlanned}
+            makeBiggerActors = {props.makeBiggerActors}
           ></TouchPointSwimlane>
           </>)
         }
@@ -74,7 +76,9 @@ function TouchPoint(props: TouchPointProps) {
           return (
             <TouchPointNetwork Circle={props.Circle} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} arrowId={props.arrowId} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction}
               elementCheckCloseToBorder={props.elementCheckCloseToBorder} elementsAreFarFromBorder={props.elementsAreFarFromBorder} getImage={getImage} getImageReceiver={getImageReceiver} index={index}
-              resetTouchpoints={props.resetTouchpoints} setActions={props.setActions} setArrowId={props.setArrowId} setArrows={props.setArrows} touchPoint={x} updateCircles={props.updateCircles} isPlanned={props.isPlanned}/>
+              resetTouchpoints={props.resetTouchpoints} setActions={props.setActions} setArrowId={props.setArrowId} setArrows={props.setArrows} touchPoint={x} updateCircles={props.updateCircles} isPlanned={props.isPlanned}
+              makeBiggerActors = {props.makeBiggerActors}
+              />
           )
         }
       })}

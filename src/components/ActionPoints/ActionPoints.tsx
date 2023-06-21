@@ -30,6 +30,7 @@ interface ActionPointsProps {
   swimlaneMode: any;
   updateCircles: any;
   circles: any
+  checkIfCloseToActorsBorder:any;
 }
 
 function ActionPoints(props: ActionPointsProps) {
@@ -135,6 +136,7 @@ function ActionPoints(props: ActionPointsProps) {
                 props.setActions(circles)
                 moveElement(props.circles,index,e.target.attrs.x,circles, props.updateCircles, props.setActions)
                 props.changeArrow(e, x.id, circles.filter(y => y.id == x.id)[0]);
+                props.checkIfCloseToActorsBorder()
               }}
               onDragEnd={
                 (e) => {
@@ -155,7 +157,7 @@ function ActionPoints(props: ActionPointsProps) {
                     props.changeArrow(e, x.id, circles.filter(y => y.id == x.id)[0]);
                     moveElement(props.circles,index,e.target.attrs.x,circles, props.updateCircles, props.setActions)
                   }
-
+                  props.checkIfCloseToActorsBorder()
                 }
               }
 

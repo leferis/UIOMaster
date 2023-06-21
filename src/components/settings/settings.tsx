@@ -32,6 +32,7 @@ interface SettingsProps {
   initialArrowId:any; 
   setInitialArrowID:any;
   setArrows:any;
+  makeBiggerActors:any;
 }
 
 
@@ -173,7 +174,7 @@ function Settings(props: SettingsProps) {
           <Image image={change}
           x={width-70}
           y={10}
-          onClick={() => { props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows)  }}
+          onClick={() => { props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows, props.makeBiggerActors)  }}
           width={50}
           height={50}
           ></Image>

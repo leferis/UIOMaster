@@ -3,24 +3,25 @@ import { CJMLAction } from "../Classes/CJMLAction";
 import { CJMLArrow } from "../Classes/CJMLArrow";
 import { CJMLCircle } from "../Classes/CJMLCircle";
 
-export function switchBetweenDiagrams(mode: boolean, circles: CJMLCircle[], actions: CJMLAction[], setActions: any, updateCircles: any,  initialArrowId: any, setInitialArrowID: any, setArrows: any) {
+export function switchBetweenDiagrams(mode: boolean, circles: CJMLCircle[], actions: CJMLAction[], setActions: any, updateCircles: any,  initialArrowId: any, setInitialArrowID: any, setArrows: any, makeBiggerActors:any) {
     if (mode) {
         fromNetworkToSwimlane(circles, actions, setActions, updateCircles, initialArrowId, setInitialArrowID, setArrows);
     }
     else {
-        fromSwimlaneToNetwork(circles, actions, setActions, updateCircles);
+        fromSwimlaneToNetwork(circles, actions, setActions, updateCircles, makeBiggerActors);
+       
     }
 }
 
-function fromSwimlaneToNetwork(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any) {
+function fromSwimlaneToNetwork(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any,  makeBiggerActors:any) {
     let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
-    let objects2 = circles.concat(actions);
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
         return a.x - b.x
     });
     for (let j = 0; j < objects.length; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
     }
+    makeBiggerActors(objects[objects.length - 1].swimlaneX);
     sortOutAndAssign(objects, setActions, updateCircles)
 }
 

@@ -40,7 +40,7 @@ function App() {
   const [actions, setActions] = useState<CJMLAction[]>([]);
   const [ClickFunction, setClickFunction] = useState<any>('');
   const [Arrows, setArrows] = useState<CJMLArrow[]>([]);
-  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
+  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
   const [initialActorPosY, setPosY] = useState<any>(600);
   const [initialId, setNewID] = useState<any>(3);
   const [initialArrowId, setNewArrowId] = useState<any>(-9999999);
@@ -58,8 +58,8 @@ function App() {
   const [SwimlineMode, setSwimlineMode] = useState<any>(false);
   const [swimlaneXInitial, setSwimlaneX] = useState<any>(400);
   const [journeyChange, setJourneyChange] = useState<any>(-1);
-  const [openHome,ChangeOpenHome] = useState(false);
-  const [mouseDownFunction,setMouseDownFunction] = useState("");
+  const [openHome, ChangeOpenHome] = useState(false);
+  const [mouseDownFunction, setMouseDownFunction] = useState("");
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -91,28 +91,28 @@ function App() {
     <div>
       <div className="App" >
         <ToastContainer />
-        <Stage width={window.innerWidth } height={window.innerHeight-61} 
-        onMouseUp={(e) =>{
-          if(ClickFunction != "")
-           onClickDoes(e);
-          else if(mouseDownFunction != ""){
-           
-            onReleaseDoes(e);
-          }
-          else{
-            setCurrentObjectID(-1)
-          }
-        }}
-        onMouseMove={(e) => {
-          onMouseMovement(e);
-        }} 
+        <Stage width={window.innerWidth} height={window.innerHeight - 61}
+          onMouseUp={(e) => {
+            if (ClickFunction != "")
+              onClickDoes(e);
+            else if (mouseDownFunction != "") {
+
+              onReleaseDoes(e);
+            }
+            else {
+              setCurrentObjectID(-1)
+            }
+          }}
+          onMouseMove={(e) => {
+            onMouseMovement(e);
+          }}
         >
-          { !openHome && <Layer id='test' ref={layerEl} draggable x={500} y={0}
+          {!openHome && <Layer id='test' ref={layerEl} draggable x={500} y={0}
             onDragEnd={(e) => {
               setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
             }}
           >
-            
+
             {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
             {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
             {Journey.length > 0 && <ActorPoint getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}></ActorPoint>}
@@ -122,6 +122,7 @@ function App() {
               addNewArrow={addNewArrow} finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder}
               SwimlineMode={SwimlineMode} resetTouchpoints={resetTouchpoints} devationMode={Journey[currentJourney].isPlanned} getImageObject={getImageObject}
               isPlanned={Journey[currentJourney].isPlanned}
+              makeBiggerActors={ makeBiggerActors}
             ></TouchPoint>}
             <ActionPoints swimlaneMode={SwimlineMode} setActions={setActions}
               actions={actions}
@@ -137,11 +138,12 @@ function App() {
               addNewArrow={addNewArrow} finishArrow={finishArrow} changeArrow={changeArrow}
               updateCircles={setCircles}
               circles={circles}
+              checkIfCloseToActorsBorder={makeBiggerActors}
             ></ActionPoints>
             {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
             <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
           </Layer>}
-          { openHome  &&
+          {openHome &&
             <Layer ref={layerEl} draggable onDragEnd={(e) => {
               setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
             }}>
@@ -151,18 +153,18 @@ function App() {
           }
           <Layer id='Menu'>
             <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
-              setActors={setActors}  open={open} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode = {setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
-              initialArrowId = {initialArrowId} setInitialArrowID = {setNewArrowId} setArrows= {setArrows}
+              setActors={setActors} open={open} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
+              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={ makeBiggerActors}
             ></Settings>
-            <LeftMeniu  setActors= {setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject} 
-            updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles= {setCircles} 
-            mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML} 
-            SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode} 
-            showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
-            updateCirlces = {updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActor}
-            setActions={setActions}
+            <LeftMeniu setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
+              updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
+              mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
+              SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
+              showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
+              updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActor}
+              setActions={setActions}
             />
-           { !openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType ={SwimlineMode} ></Statistics>}
+            {!openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType={SwimlineMode} ></Statistics>}
           </Layer>
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
@@ -172,7 +174,7 @@ function App() {
       </div>
       <div className='JourneyBar'>
         <JourneyBar ChangeOpenHome={ChangeOpenHome} Journey={Journey} changeJourney={changeJourney} currentJourney={currentJourney} journeyChange={journeyChange}
-         setCurrentJourney={setCurrentJourney} setJourney={setJouney} setJourneyChange={setJourneyChange} setShowAddJourney={setshowAddJourney} ></JourneyBar>
+          setCurrentJourney={setCurrentJourney} setJourney={setJouney} setJourneyChange={setJourneyChange} setShowAddJourney={setshowAddJourney} ></JourneyBar>
       </div>
 
     </div>
@@ -192,10 +194,10 @@ function App() {
       updateCurrentJourney();
     }
     if (addId != undefined || addId != null) {
-      setJouney((Journey) => [...Journey, { Toucpoint:  JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions:  JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors:  JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: "Journey2", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
+      setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: "Journey2", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
     }
     else {
-      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: "JourneyActual", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
+      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: "JourneyActual", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
     }
   }
 
@@ -211,7 +213,7 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter User Name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    actor.splice(index, 0, { Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
   }
@@ -241,13 +243,13 @@ function App() {
   }
 
 
-  function addNewAction(){
-    let newAction = new CJMLAction(initialId,-9999,-9999,true, "Enter text", DevationMode, ActorsCJML[0],-99999, Date.now());
-    setActions((prevActions)=>[...prevActions, newAction]);
+  function addNewAction() {
+    let newAction = new CJMLAction(initialId, -9999, -9999, true, "Enter text", DevationMode, ActorsCJML[0], -99999, Date.now());
+    setActions((prevActions) => [...prevActions, newAction]);
   }
 
-  function addNewCircle(){
-    let newCircle = new CJMLCircle(initialId, -9999, -9999, true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, -9999, -9999 , Date.now(), TouchPointStatus.Completed);
+  function addNewCircle() {
+    let newCircle = new CJMLCircle(initialId, -9999, -9999, true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
     setCircles((prevCircles) => [
       ...prevCircles,
       newCircle
@@ -372,7 +374,7 @@ function App() {
         x.swimlaneY += actor.height;
         changeArrow(null, x.id, x);
       } else if (x.receiver.id == actor.id) {
-        x.swimlaneReceiverY += actor.height +50;
+        x.swimlaneReceiverY += actor.height + 50;
         changeArrow(null, x.id, x);
       }
     });
@@ -388,24 +390,24 @@ function App() {
   }
 
   function changeJourneyCurrent(journey: Journey[]) {
-    if(currentJourney > -1){
-    setActions(journey[currentJourney].Actions);
-    setActors(journey[currentJourney].Actors);
-    setCircles(journey[currentJourney].Toucpoint);
-    setArrows(journey[currentJourney].Arrow);
-    setPosY(200 + 150 * journey[currentJourney].Actors.length);
-    setCurrentJourney(currentJourney);
-    setCurrentObjectReference(-1);
-    if (journey[currentJourney].isPlanned) {
-      setDevationMode(false);
-    } else {
-      setDevationMode(true);
+    if (currentJourney > -1) {
+      setActions(journey[currentJourney].Actions);
+      setActors(journey[currentJourney].Actors);
+      setCircles(journey[currentJourney].Toucpoint);
+      setArrows(journey[currentJourney].Arrow);
+      setPosY(200 + 150 * journey[currentJourney].Actors.length);
+      setCurrentJourney(currentJourney);
+      setCurrentObjectReference(-1);
+      if (journey[currentJourney].isPlanned) {
+        setDevationMode(false);
+      } else {
+        setDevationMode(true);
+      }
     }
   }
-  }
   function changeJourney(id: number) {
-    if(currentJourney != -1)
-    updateCurrentJourney();
+    if (currentJourney != -1)
+      updateCurrentJourney();
     setActions(Journey[id].Actions);
     setActors(Journey[id].Actors);
     setCircles(Journey[id].Toucpoint);
@@ -424,21 +426,21 @@ function App() {
     if (drawingArrow == true) {
       changeArrowOnDraw(e);
     }
-    if (mouseDownFunction =="DrawCircle"){
-      
+    if (mouseDownFunction == "DrawCircle") {
+
       changeCircle(e);
     }
-    else if( mouseDownFunction == "DrawAction"){
+    else if (mouseDownFunction == "DrawAction") {
       changeAction(e);
     }
   }
 
-  function changeAction(e:any){
+  function changeAction(e: any) {
     const actionToWork = actions.filter((x) => {
       return x.id == initialId
     })
     const index = actions.indexOf(actionToWork[0]);
-    onActionDragMove(e,circles, actionToWork[0], setCircles, changeArrow, elementsAreFarFromBorder,index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned )
+    onActionDragMove(e, circles, actionToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned)
     const newCircle = actions.map(x => {
       if (x.id == initialId) {
         const arrowNew = x;
@@ -455,12 +457,12 @@ function App() {
     setActions(JSON.parse(JSON.stringify(newCircle)));
   }
 
-  function changeCircle(e:any){
+  function changeCircle(e: any) {
     const circleToWork = circles.filter((x) => {
       return x.id == initialId
     })
     const index = circles.indexOf(circleToWork[0]);
-    onDragMove(e,circles, circleToWork[0], setCircles, changeArrow, elementsAreFarFromBorder,index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned )
+    onDragMove(e, circles, circleToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned)
     const newCircle = circles.map(x => {
       if (x.id == initialId) {
         const arrowNew = x;
@@ -608,6 +610,12 @@ function App() {
     }
   }
 
+  function makeBiggerActors(position: any) {
+    if (checkIfCloseToActorsBorder(position, ActorsCJML[0])) {
+      makeActorsBigger(position);
+    }
+  }
+
   function checkIfCloseToActorsBorder(position: any, actor: Actors) {
     if (position >= actor.x + actor.width - 100) {
       return true;
@@ -627,7 +635,7 @@ function App() {
   function includeInLine(e: any, currentId: any, element: any) {
 
     const id = Arrows.findIndex((x) => {
-      if (x.fromPoint.x <= e.evt.x -  layerEl.current.attrs.x && x.toPoint.x >= e.evt.x -  layerEl.current.attrs.x && (x.fromPoint.id != currentId && x.toPoint.id != currentId)) {
+      if (x.fromPoint.x <= e.evt.x - layerEl.current.attrs.x && x.toPoint.x >= e.evt.x - layerEl.current.attrs.x && (x.fromPoint.id != currentId && x.toPoint.id != currentId)) {
         return true;
       }
       return false;
@@ -649,17 +657,17 @@ function App() {
       let connectTo, connectToAction;
       if (circles.length > 0) {
         connectTo = circles.reduce((current, prev) => {
-          return Math.abs(current.x - e.evt.x -  layerEl.current.attrs.x ) > Math.abs(prev.x - e.evt.x -  layerEl.current.attrs.x ) ? prev : current;
+          return Math.abs(current.x - e.evt.x - layerEl.current.attrs.x) > Math.abs(prev.x - e.evt.x - layerEl.current.attrs.x) ? prev : current;
         })
       }
       if (actions.length > 0) {
         connectToAction = actions.reduce((current, prev) => {
-          return Math.abs(current.x - e.evt.x -  layerEl.current.attrs.x ) > Math.abs(prev.x - e.evt.x -  layerEl.current.attrs.x ) ? prev : current;
+          return Math.abs(current.x - e.evt.x - layerEl.current.attrs.x) > Math.abs(prev.x - e.evt.x - layerEl.current.attrs.x) ? prev : current;
         })
       }
 
       if (connectToAction != undefined && connectTo != undefined) {
-        if (Math.abs(connectToAction.x - e.evt.x -  layerEl.current.attrs.x ) < Math.abs(connectTo.x - e.evt.x -  layerEl.current.attrs.x )) {
+        if (Math.abs(connectToAction.x - e.evt.x - layerEl.current.attrs.x) < Math.abs(connectTo.x - e.evt.x - layerEl.current.attrs.x)) {
           connectTo = connectToAction;
         }
       }
@@ -668,7 +676,7 @@ function App() {
       }
       connectTo = connectTo == undefined ? { x: 0, y: 0, id: 0 } : connectTo;
       const results = Arrows;
-      let newArrow = new CJMLArrow(initialArrowId, connectTo.x < e.evt.x -  layerEl.current.attrs.x  ? connectTo : element, connectTo.x > e.evt.x  - layerEl.current.attrs.x? connectTo: element);
+      let newArrow = new CJMLArrow(initialArrowId, connectTo.x < e.evt.x - layerEl.current.attrs.x ? connectTo : element, connectTo.x > e.evt.x - layerEl.current.attrs.x ? connectTo : element);
       newArrow.Draw();
       results.push(newArrow);
       setNewArrowId(initialArrowId + 1);
@@ -676,7 +684,7 @@ function App() {
     }
   }
 
-  function findActor(e:any){
+  function findActor(e: any) {
     return ActorsCJML.find(x => {
       if (e.evt.y - (layerEl.current.attrs.y) >= x.y && x.y + x.height >= e.evt.y - (layerEl.current.attrs.y)) {
 
@@ -687,29 +695,29 @@ function App() {
 
   }
 
-  function onReleaseDoes(e:any){
+  function onReleaseDoes(e: any) {
     let isOnActor = findActor(e);
     switch (mouseDownFunction) {
       case 'DrawCircle': {
-      const circleToWork = circles.filter((x) => {
+        const circleToWork = circles.filter((x) => {
           return x.id == initialId
         })
-      const index = circles.indexOf(circleToWork[0]);
-      onDragEnd(e, circleToWork[0],ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, Journey[currentJourney].isPlanned);
-      setNewID(initialId+1)
+        const index = circles.indexOf(circleToWork[0]);
+        onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, Journey[currentJourney].isPlanned);
+        setNewID(initialId + 1)
+      }
+        break;
+      case "DrawAction": {
+        const actionToWork = actions.filter((x) => {
+          return x.id == initialId
+        })
+        const index = actions.indexOf(actionToWork[0]);
+        onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned);
+        setNewID(initialId + 1)
+      }
     }
-    break;
-    case "DrawAction":{
-      const actionToWork = actions.filter((x) => {
-        return x.id == initialId
-      })
-    const index = actions.indexOf(actionToWork[0]);
-    onActionDragEnd(e, actionToWork[0],ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned);
-    setNewID(initialId+1)
-    }
+    setMouseDownFunction("")
   }
-  setMouseDownFunction("")
-}
 
   function onClickDoes(e: any) {
     let isOnActor = findActor(e);
@@ -724,12 +732,12 @@ function App() {
             positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 200 : maxLengthCircles + 200;
           }
         }
-        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.x - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.y - (layerEl.current.attrs.y), true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, isOnActor != undefined ? isOnActor.y  : e.evt.y - (layerEl.current.attrs.y), ActorsCJML[1].y , Date.now(), TouchPointStatus.Completed);
+        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.x - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.y - (layerEl.current.attrs.y), true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.y - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
         setCircles((prevCircles) => [
           ...prevCircles,
           newCircle
         ]);
-        if (checkIfCloseToActorsBorder(SwimlineMode ? e.evt.x -  layerEl.current.attrs.x  : positionX, ActorsCJML[0])) {
+        if (checkIfCloseToActorsBorder(SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX, ActorsCJML[0])) {
           makeActorsBigger(SwimlineMode ? e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0) : positionX);
         }
 
@@ -751,13 +759,13 @@ function App() {
             positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 200 : maxLengthCircles + 200;
           }
         }
-        let newAction = new CJMLAction(initialId, SwimlineMode ? e.evt.x - layerEl.current.attrs.x  : positionX, isOnActor != undefined ? isOnActor.y: e.evt.y - (layerEl.current.attrs.y), false, "User's action", DevationMode, isOnActor, swimlaneXInitial, Date.now());
+        let newAction = new CJMLAction(initialId, SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX, isOnActor != undefined ? isOnActor.y : e.evt.y - (layerEl.current.attrs.y), false, "User's action", DevationMode, isOnActor, swimlaneXInitial, Date.now());
         setActions((actions) => [
           ...actions,
           newAction
         ]);
         if (checkIfCloseToActorsBorder(SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX, ActorsCJML[0])) {
-          makeActorsBigger(SwimlineMode ? e.evt.x - layerEl.current.attrs.x  : positionX);
+          makeActorsBigger(SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX);
         }
         if (SwimlineMode) {
           includeInLine(e, initialId, newAction);
@@ -772,7 +780,7 @@ function App() {
         break;
       }
       case '': {
-     
+
       }
     }
   }
@@ -810,7 +818,7 @@ function App() {
       return finalName.replace(/[0-9]/g, '').replaceAll(' ', '');
     }
   }
-  
+
   function getImageByName(Name: string, type: string) {
     if (type == "Actor") {
       if (Name != null) {
@@ -838,13 +846,13 @@ function App() {
     return image;
   }
 
-  function updateTouchPointsForChange(actor:any){
-    const circleNew = circles.map(circle =>{
-      if(circle.initiator.id == actor.id){
+  function updateTouchPointsForChange(actor: any) {
+    const circleNew = circles.map(circle => {
+      if (circle.initiator.id == actor.id) {
         circle.initiator = actor;
         return circle;
       }
-      else if(circle.receiver.id == actor.id){
+      else if (circle.receiver.id == actor.id) {
         circle.receiver = actor;
         return circle;
       }

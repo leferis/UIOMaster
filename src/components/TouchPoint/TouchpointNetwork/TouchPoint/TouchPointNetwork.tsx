@@ -29,6 +29,7 @@ interface TouchPointNetworkProps {
   setActions:any;
   getImage:any;
   isPlanned:boolean
+  makeBiggerActors:any;
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps){
@@ -160,6 +161,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
         props.updateCircles(circles);
 
         props.elementCheckCloseToBorder(e.target.getPosition().x);
+        props.makeBiggerActors(e.target.attrs.x);
       }}
       onDragEnd={
 
@@ -194,6 +196,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
             moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions);
           }
           remakeArrows(props.Circle, props.actions, props.arrowId, props.setArrowId, props.setArrows);
+          props.makeBiggerActors(e.target.attrs.x);
         }
 
       }
