@@ -167,7 +167,6 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
   let indexOfFirsChange = objects.findIndex((x: CJMLCircle) => {
     return x.swimlaneX + 180 > relativeX;
   })
-  console.log(indexOfFirsChange)
   if (indexOfFirsChange != -1) {
     if (indexOfFirsChange > index) {
       for (let j = 0; j <= indexOfFirsChange; j++) {
@@ -179,6 +178,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
         for (let k = 0; k < objects.length; k++) {
           if (objects2[k].id == objects[j].id) {
             objects2[k].swimlaneX = objects[j].swimlaneX;
+            objects2[k].x = objects[j].x;
           }
         }
       }
@@ -208,7 +208,8 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
         touch.push(objects2[j]);
       }
     }
-    setActions(actionsTemp);
+    
+    setActions(JSON.parse(JSON.stringify(actionsTemp)));
     updateCircles(touch);
   }
 }

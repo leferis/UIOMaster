@@ -14,23 +14,23 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
         yPosOfMouse = e.target.getStage().getPointerPosition().y;
         xPosOfMouse = e.target.getStage().getPointerPosition().x;
       }
+     
       var actorIn: Actors | undefined = collisionSwim(yPosOfMouse, touchPoint, actors);
-  
+      console.log(actorIn)
       if (actorIn != undefined) {
         const circles2 = Action.map(circle => {
           if (circle.id == touchPoint.id) {
-            let tempActor, tempy;
            
-              return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200};
+              return { ...circle, initiator: actorIn, y: actorIn != undefined ? actorIn.y + 20 : 200};
           }
           return circle;
         })
         setActions(circles2);
         changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
         elementsAreFarFromBorder();
-        moveElement(circles2, index, xPosOfMouse, circles, updateCircles, setActions);
+        moveElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions);
       } else {
-        moveElement(Action, index, xPosOfMouse, circles, updateCircles, setActions);
+        moveElement(circles, index, xPosOfMouse, Action, updateCircles, setActions);
       }
   }
 

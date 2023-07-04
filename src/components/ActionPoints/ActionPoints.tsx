@@ -8,6 +8,7 @@ import { Connectable } from '../../Interface/Connectable';
 import TextMessages from '../TextMessages/TextMessages';
 import styles from './ActionPoints.module.css';
 import { collisionSwim, moveElement } from '../../Functions/Movement';
+import { onActionDragEnd, onActionDragMove } from '../../Functions/actionMovement';
 
 interface ActionPointsProps {
   setActions: any;
@@ -110,59 +111,16 @@ function ActionPoints(props: ActionPointsProps) {
               }}
               onDragStart={() => x.Capacity = false}
               onDragMove={(e) => {
-                const circles = props.actions.map((action: CJMLAction) => {
-                  if (action.id == x.id) {
-                    return { ...action, x: e.target.getPosition().x, y: e.target.getPosition().y, swimlaneX: e.target.getPosition().x };
-                  }
-                  return action;
-                })
-                props.setActions(circles);
-                var actorIn: Actors | undefined = collisionSwim(e.target.getPosition().y, x, props.actors);
-                if (actorIn != undefined) {
-                  const circles = props.actions.map((action: CJMLAction) => {
-                    if (action.id == x.id) {
-                      if (props.swimlaneMode && actorIn != undefined && actorIn.isEndUser) {
-                        return { ...action,  y: actorIn ? actorIn.y + actorIn.height / 2 - 30 : e.target.getPosition().y };
-                      } else {
-                        return { ...action,  y: actorIn ? actorIn.y + actorIn.height / 2 - 30 : e.target.getPosition().y };
-                      }
-                    }
-                    return action;
-                  })
-                  props.setActions(circles)
-                  moveElement(props.circles,index,e.target.attrs.x,circles, props.updateCircles, props.setActions)
-                  props.changeArrow(e, x.id, circles.filter(y => y.id == x.id)[0]);
-                }
-                props.setActions(circles)
-                moveElement(props.circles,index,e.target.attrs.x,circles, props.updateCircles, props.setActions)
-                props.changeArrow(e, x.id, circles.filter(y => y.id == x.id)[0]);
-                props.checkIfCloseToActorsBorder()
+                onActionDragMove(e, props.circles, x, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, index, props.checkIfCloseToActorsBorder, props.actions, props.setActions, props.actors, props.swimlaneMode, true)
               }}
               onDragEnd={
                 (e) => {
-                  var actorIn: Actors | undefined = collisionSwim(e.target.getPosition().y, x, props.actors);
-                  if (actorIn != undefined) {
-                    const circles = props.actions.map((action: CJMLAction) => {
-                      if (action.id == x.id) {
-                        if (props.swimlaneMode && actorIn != undefined && actorIn.isEndUser) {
-                          return { ...action, x: e.target.getPosition().x, y: actorIn ? actorIn.y + actorIn.height / 2 - 30 : e.target.getPosition().y };
-                        } else if (!props.swimlaneMode && actorIn != undefined) {
-                          return { ...action, swimlaneX: e.target.getPosition().x, y: actorIn ? actorIn.y + actorIn.height / 2 - 30 : e.target.getPosition().y };
-                        }
-                      }
-                      return action;
-                    })
-                    console.log(circles);
-                    props.setActions(JSON.parse(JSON.stringify(circles)));
-                    props.changeArrow(e, x.id, circles.filter(y => y.id == x.id)[0]);
-                    moveElement(props.circles,index,e.target.attrs.x,circles, props.updateCircles, props.setActions)
-                  }
-                  props.checkIfCloseToActorsBorder()
+                  onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true)
                 }
               }
 
             />
-            <TextMessages x={props.swimlaneMode ? x.x + 10 : x.swimlaneX + 10} y={x.y + 10} height={props.swimlaneMode ? 60 : 100} width={props.swimlaneMode ? 90 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={12} isEditing={x.isEditing} changeEditable={(x: any) => {
+            <TextMessages x={ props.swimlaneMode ? x.x + 10 : x.swimlaneX + 10} y={x.y + 10} height={props.swimlaneMode ? 60 : 100} width={props.swimlaneMode ? 90 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={12} isEditing={x.isEditing} changeEditable={(x: any) => {
               const circles = props.actions.map((action: CJMLAction) => {
                 if (action.id == x.id) {
                   return { ...action, isEditing: true };
