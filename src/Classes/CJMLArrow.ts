@@ -17,7 +17,7 @@ export class CJMLArrow{
             this.fromPoint = obj;
         }
         else{
-            this.toPoint =obj;
+            this.toPoint = obj;
         }
     }
 
@@ -39,6 +39,9 @@ export class CJMLArrow{
         this.intermidiate = [];
         this.swap();
         midpointX = this.fromPoint.x + (this.toPoint.x- this.fromPoint.x) /2;
+        if(midpointX < this.fromPoint.x + this.fromPoint.width){
+            midpointX = this.fromPoint.x + this.fromPoint.width
+        }
         if((this.fromPoint.x < this.toPoint.x - 60 || this.fromPoint.x > this.toPoint.x + 50 ) && this.fromPoint.x  != this.toPoint.x){
         this.intermidiate.push(midpointX,this.fromPoint.y + Math.round((this.fromPoint.height+2)/2)  , midpointX,this.toPoint.y + Math.round((this.toPoint.height+2)/2));
         }
