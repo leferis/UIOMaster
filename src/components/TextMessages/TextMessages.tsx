@@ -49,7 +49,6 @@ function TextMessages(props: TextMessagesProps){
           onChange={(e)=>props.ChangeFunction(e.target.value,props.modifyObject)}
           style={style}
           onBlur={()=>{props.ChangeBack(props.modifyObject)}}
-          onMouseOut={()=>{props.ChangeBack(props.modifyObject)}}
         />
     </Html>
   )}

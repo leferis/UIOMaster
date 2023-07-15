@@ -132,7 +132,7 @@ function ActionPoints(props: ActionPointsProps) {
               ChangeBack={(x: any) => {
                 const circles = props.actions.map((action: CJMLAction) => {
                   if (action.id == x.id) {
-                    return { ...action, isEditing: true };
+                    return { ...action, isEditing: false };
                   }
                   return action;
                 })
