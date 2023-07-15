@@ -99,7 +99,6 @@ function TouchPoint(props: TouchPointProps) {
           props.setDrawingObject("Circle");
         }
         else {
-          props.setDrawingArrowMode(false);
           props.finishArrow(clickedObject);
           props.setClickFunction('');
         }

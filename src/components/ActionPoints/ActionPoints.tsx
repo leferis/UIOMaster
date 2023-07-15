@@ -167,7 +167,6 @@ function ActionPoints(props: ActionPointsProps) {
           props.setDrawingObject("Action");
         }
         else {
-          props.setDrawingArrowMode(false);
           props.finishArrow(clickedObject);
           props.setClickFunction('');
         }

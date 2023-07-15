@@ -32,7 +32,7 @@ import { onDragEnd, onDragMove } from './Functions/Movement';
 import { setCirlceAtEnd } from './Functions/creation';
 import { onActionDragEnd, onActionDragMove } from './Functions/actionMovement';
 import SwimlaneInitialValues from './components/swimlaneInitialValues/swimlaneInitialValues';
-
+import _ from 'lodash';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -528,7 +528,6 @@ function App() {
       }
     });
     setArrows(newArrows);
-    console.log("sitas pakeite")
   }
 
   function addNewArrow(obj: any, e: any) {
@@ -538,10 +537,11 @@ function App() {
   }
 
   function finishArrow(obj: any) {
-    const arrowRes = Arrows;
-    arrowRes.map(x => {
+    
+    const arrowRes = _.cloneDeep(Arrows)
+    arrowRes.map((x:CJMLArrow) => {
       if (x.id == initialArrowId) {
-        const rest = x;
+        const rest : CJMLArrow = x as CJMLArrow;
         rest.toPoint = (JSON.parse(JSON.stringify(obj)));
         rest.redraw(JSON.parse(JSON.stringify(obj)))
         return rest;
@@ -550,12 +550,13 @@ function App() {
         return x;
       }
     })
-    arrowRes.filter(x=>{
+    let res = arrowRes.filter((x:CJMLArrow)=>{
       return x.id == initialArrowId
     })
     console.log(arrowRes)
-    console.log(arrowRes[0].fromPoint.id != arrowRes[0].toPoint.id)
-    if(arrowRes[0].fromPoint.id != arrowRes[0].toPoint.id){
+    if(res[0].fromPoint.id != res[0].toPoint.id){
+
+    setDrawingArrowMode(false);
     setArrows(arrowRes);
     setNewArrowId(initialArrowId + 1)
   }
