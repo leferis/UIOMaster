@@ -528,6 +528,7 @@ function App() {
       }
     });
     setArrows(newArrows);
+    console.log("sitas pakeite")
   }
 
   function addNewArrow(obj: any, e: any) {
@@ -549,9 +550,15 @@ function App() {
         return x;
       }
     })
-
+    arrowRes.filter(x=>{
+      return x.id == initialArrowId
+    })
+    console.log(arrowRes)
+    console.log(arrowRes[0].fromPoint.id != arrowRes[0].toPoint.id)
+    if(arrowRes[0].fromPoint.id != arrowRes[0].toPoint.id){
     setArrows(arrowRes);
-    setNewArrowId(initialArrowId + 1);
+    setNewArrowId(initialArrowId + 1)
+  }
   }
 
   function changeExternal(ExternalStatus: any) {

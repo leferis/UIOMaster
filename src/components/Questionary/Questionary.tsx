@@ -132,7 +132,7 @@ function Questionary(props: QuestionaryProps) {
      let temp = TouchPointsTemp.map((element: any, index: number) => {
       const issueElements: {[key:string]: string} = {};
       element.issues= [];
-      if (!element.isAction) {
+      if (element.receiver != null) {
         if(element.imageName == ""){
           issueElements["channelError"]  = ("Channel is missing")
         }
@@ -163,6 +163,7 @@ function Questionary(props: QuestionaryProps) {
         continueProcess = false;
       }
       element.issues = issueElements;
+      console.log(element)
       return element
     });
     setTouchPointTemp(temp);

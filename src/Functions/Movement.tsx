@@ -59,6 +59,12 @@ function onDragMoveJourney(e: any, Circle: CJMLCircle[], touchPoint: any, update
 function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean) {
   let yPosOfMouse
   let xPosOfMouse
+  var max = 0;
+  actors.map(x=>{
+    if(max<x.y +x.height && x.isEndUser){
+      max = x.y +x.height ;
+    }
+  })
   if (e.target.attrs.y != null) {
     yPosOfMouse = e.target.attrs.y;
     xPosOfMouse = e.target.attrs.x;
@@ -76,9 +82,11 @@ function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJM
     actorIn = filtered[0];
   }
   if (actorIn != undefined) {
+    let yValue = actorIn != undefined? actorIn.y+ actorIn.height/2: 200
+    let isDevation = yValue>max?true:false 
     const circles2 = Circle.map(circle => {
       if (circle.id == touchPoint.id) {
-        return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", swimlaneReceiverY: circle.receiver.y + 20, y:actorIn != undefined? actorIn.y+ actorIn.height/2: 200 };
+        return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", swimlaneReceiverY: circle.receiver.y + 20, y:actorIn != undefined? actorIn.y+ actorIn.height/2: 200, devation: isDevation };
       }
       return circle;
     })

@@ -185,12 +185,19 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           }}
           onDragStart={() => props.touchPoint.Capacity = false}
           onDragMove={(e) => {
+            var max = 0;
+            props.actors.map(x=>{
+             if(max<x.y +x.height && x.isEndUser){
+               max = x.y +x.height ;
+             }
+           })
             const circles = props.touchPoints.map(circle => {
               if (circle.id == props.touchPoint.id) {
-                return { ...circle, x: e.target.getPosition().x, y: e.target.getPosition().y };
+                return { ...circle, x: e.target.getPosition().x, y: e.target.getPosition().y, devation: e.target.getPosition().y>max?true:false };
               }
               return circle;
             })
+            
             props.updateCircles(circles);
             props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
             props.elementCheckCloseToBorder(e.target.getPosition().x);
