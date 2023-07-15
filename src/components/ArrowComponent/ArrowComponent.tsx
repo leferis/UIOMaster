@@ -31,7 +31,7 @@ function ArrowComponent(props: ArrowComponentProps) {
           onClick={() => {
             props.setCurrentObject(arrow);
           }}
-          hitStrokeWidth = {15}
+          hitStrokeWidth = {2}
           strokeWidth={1}
           fill={props.currentObject.id == arrow.id ? 'Red' : 'Black'}>
 

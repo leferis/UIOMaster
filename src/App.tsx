@@ -485,8 +485,8 @@ function App() {
     const newArrows = Arrows.map(x => {
       if (x.id == initialArrowId) {
         const arrowNew = x;
-        x.toPoint.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
-        x.toPoint.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) - 20;
+        x.toPoint.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0)-5;
+        x.toPoint.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0)-5;
         return arrowNew
       }
       else {
