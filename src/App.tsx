@@ -90,8 +90,11 @@ function App() {
   return (
     <div>
       <div className="App" >
+        <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
+          <h4 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML</h4>
+        </div>
         <ToastContainer />
-        <Stage width={window.innerWidth} height={window.innerHeight - 61}
+        <Stage width={window.innerWidth} height={window.innerHeight - 101}
           onMouseUp={(e) => {
             if (ClickFunction != "")
               onClickDoes(e);
@@ -122,7 +125,7 @@ function App() {
               addNewArrow={addNewArrow} finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder}
               SwimlineMode={SwimlineMode} resetTouchpoints={resetTouchpoints} devationMode={Journey[currentJourney].isPlanned} getImageObject={getImageObject}
               isPlanned={Journey[currentJourney].isPlanned}
-              makeBiggerActors={ makeBiggerActors}
+              makeBiggerActors={makeBiggerActors}
             ></TouchPoint>}
             <ActionPoints swimlaneMode={SwimlineMode} setActions={setActions}
               actions={actions}
@@ -154,7 +157,7 @@ function App() {
           <Layer id='Menu'>
             <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
               setActors={setActors} open={open} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
-              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={ makeBiggerActors}
+              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors}
             ></Settings>
             <LeftMeniu setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
               updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
@@ -358,7 +361,7 @@ function App() {
   }
 
   function removeArrows(removedObject: any) {
-    
+
     const result = Arrows.filter((x: CJMLArrow) => {
       if (x.fromPoint.id != removedObject.current.id || x.toPoint.id != removedObject.current.id) {
         return false;
@@ -488,8 +491,8 @@ function App() {
     const newArrows = Arrows.map(x => {
       if (x.id == initialArrowId) {
         const arrowNew = x;
-        x.toPoint.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0)-5;
-        x.toPoint.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0)-5;
+        x.toPoint.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0) - 5;
+        x.toPoint.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) - 5;
         return arrowNew
       }
       else {
@@ -540,11 +543,11 @@ function App() {
   }
 
   function finishArrow(obj: any) {
-    
+
     const arrowRes = _.cloneDeep(Arrows)
-    arrowRes.map((x:CJMLArrow) => {
+    arrowRes.map((x: CJMLArrow) => {
       if (x.id == initialArrowId) {
-        const rest : CJMLArrow = x as CJMLArrow;
+        const rest: CJMLArrow = x as CJMLArrow;
         rest.toPoint = (JSON.parse(JSON.stringify(obj)));
         rest.redraw(JSON.parse(JSON.stringify(obj)))
         return rest;
@@ -553,16 +556,16 @@ function App() {
         return x;
       }
     })
-    let res = arrowRes.filter((x:CJMLArrow)=>{
+    let res = arrowRes.filter((x: CJMLArrow) => {
       return x.id == initialArrowId
     })
     console.log(arrowRes)
-    if(res[0].fromPoint.id != res[0].toPoint.id){
+    if (res[0].fromPoint.id != res[0].toPoint.id) {
 
-    setDrawingArrowMode(false);
-    setArrows(arrowRes);
-    setNewArrowId(initialArrowId + 1)
-  }
+      setDrawingArrowMode(false);
+      setArrows(arrowRes);
+      setNewArrowId(initialArrowId + 1)
+    }
   }
 
   function changeExternal(ExternalStatus: any) {

@@ -37,8 +37,8 @@ interface LeftMeniuProps {
         setActors: any;
         updateCirlces: any;
         currentJourney: any;
-        addNewActor:any;
-        setActions:any;
+        addNewActor: any;
+        setActions: any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -153,7 +153,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                 />
                 <Rect x={5} y={10} width={220} height={40} fill='#fff' />
                 <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
-                circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
+                        circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
                 ></ActorPicker>
                 <Text x={10} y={14} text={'Diagram type:' + (props.SwimlineMode ? "Journey diagram\n" : "Journey network diagram\n")} fontSize={12}></Text>
                 {!(props.Journeys[props.currentJourney] == undefined) && <Text x={10} y={34} text={'Journey type:' + (props.Journeys[props.currentJourney].isPlanned ? "Planned" : "Actual")} fontSize={12}></Text>}

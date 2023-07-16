@@ -185,7 +185,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
                     if( actorIn != undefined && !actorIn.isEndUser){
                       actorIn = circle.initiator
                     }}
-                  return { ...circle, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
+                  return { ...circle, receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
                 }
               }
               return circle;
