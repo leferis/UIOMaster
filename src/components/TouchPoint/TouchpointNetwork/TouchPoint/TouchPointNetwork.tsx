@@ -181,8 +181,11 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
                   return { ...circle, receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200, initiatorColor: tempActor != undefined ? tempActor.color : "#fff" };
                 }
                 else {
-                 
-                  return { ...circle, receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
+                  if(props.SwimlineMode ){
+                    if( actorIn != undefined && !actorIn.isEndUser){
+                      actorIn = circle.initiator
+                    }}
+                  return { ...circle, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
                 }
               }
               return circle;

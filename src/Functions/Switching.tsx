@@ -16,8 +16,12 @@ export function switchBetweenDiagrams(mode: boolean, circles: CJMLCircle[], acti
 function fromSwimlaneToNetwork(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any,  makeBiggerActors:any) {
     let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
+        if(Math.abs(a.x - b.x)>0)
         return a.x - b.x
+        else 
+        return a.y - b.y
     });
+    console.log(objects)
     for (let j = 0; j < objects.length; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
     }
@@ -64,14 +68,12 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
     for (let j = 0; j < objects.length; j++) {
 
         if (objects[j].devation == true) {
-            console.log(objects)
             objects[j].x = prevX > 350? prevX -200 : prevX;
             objects[j].y = devationx;
             devationx = devationx + 150;
         }
         else {
             objects[j].x = prevX;
-            objects[j].x = 350 + (200 * j);
             objects[j].y = 275;
             devationx = 500;
             prevX += 200;

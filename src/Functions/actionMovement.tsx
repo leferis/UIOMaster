@@ -20,6 +20,10 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
       if (actorIn != undefined) {
         const circles2 = Action.map(circle => {
           if (circle.id == touchPoint.id) {
+            if(SwimlineMode ){
+              if( actorIn != undefined && !actorIn.isEndUser){
+                actorIn = circle.initiator
+              }}
               let differnce = SwimlineMode?50:20
               return { ...circle, initiator: actorIn, y: actorIn != undefined ? actorIn.y + differnce : 200};
           }

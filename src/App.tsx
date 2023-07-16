@@ -358,12 +358,15 @@ function App() {
   }
 
   function removeArrows(removedObject: any) {
+    
     const result = Arrows.filter((x: CJMLArrow) => {
-      if (x.fromPoint.id != removedObject.id && x.toPoint.id != removedObject.id) {
-        return true;
+      if (x.fromPoint.id != removedObject.current.id || x.toPoint.id != removedObject.current.id) {
+        return false;
       }
-      return false;
+      return true;
     });
+    console.log(result)
+    console.log(removedObject.current)
     setArrows(result);
   }
 
