@@ -8,6 +8,7 @@ import ImageSelection from '../ImageSelection/ImageSelection';
 import { getStatusJSX } from '../../Functions/CJMLStatusFunction';
 import ColorPicker from './ColorPicker/ColorPicker';
 import ActorPicker from './ActorPicker/leftMeniu/ActorPicker';
+import LeftMeniuLeftSubMeniu from './leftSubMeniu/leftMeniu/leftSubMeniu';
 
 interface LeftMeniuProps {
         setClickFunction: any;
@@ -139,6 +140,7 @@ function LeftMeniu(props: LeftMeniuProps) {
 
 
         return (<div>
+                
                 <Rect
                         x={0}
                         y={0}
@@ -152,9 +154,9 @@ function LeftMeniu(props: LeftMeniuProps) {
                         }}
                 />
                 <Rect x={5} y={10} width={220} height={40} fill='#fff' />
-                <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
+                {/* <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
                         circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
-                ></ActorPicker>
+                ></ActorPicker> */}
                 <Text x={10} y={14} text={'Diagram type:' + (props.SwimlineMode ? "Journey diagram\n" : "Journey network diagram\n")} fontSize={12}></Text>
                 {!(props.Journeys[props.currentJourney] == undefined) && <Text x={10} y={34} text={'Journey type:' + (props.Journeys[props.currentJourney].isPlanned ? "Planned" : "Actual")} fontSize={12}></Text>}
                 {props.SwimlineMode &&
@@ -304,7 +306,7 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                 </div>}
 
-
+                <LeftMeniuLeftSubMeniu></LeftMeniuLeftSubMeniu>
         </div>
         );
 }
