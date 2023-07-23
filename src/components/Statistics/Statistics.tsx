@@ -35,6 +35,7 @@ function Statistics(props: StatisticsProps) {
     let text = "";
    
     try {
+      text += "Count:\n"
       text += "Touchpoints: " + props.circles.length + '\n';
       text += "Actions: " + props.actions.length + '\n';
       if (props.Journeys[props.currentJourney].isPlanned) {
@@ -58,9 +59,10 @@ function Statistics(props: StatisticsProps) {
         })
         text += "Actual journey match: ";
         text += MatchCount+ '\n';
-        text += "Average deviation: ";
+        text += "\nAverage:\n"
+        text += "Deviation: ";
         text += (Math.round(deviationCount / countOfJourneys  * 100) / 100).toFixed(2)+ '\n';
-        text += "Average actual touchpoint count: " + (Math.round(touchpointCount / countOfJourneys * 100) / 100).toFixed(2) + '\n';
+        text += "Actual touchpoint count: " + (Math.round(touchpointCount / countOfJourneys * 100) / 100).toFixed(2) + '\n';
       }
       else {
     
@@ -88,11 +90,8 @@ function Statistics(props: StatisticsProps) {
     return text;
   }
   return (<>
-    <Rect x={230} y={0} height={100} width={290}    fill={"#e8eaed"}
-                stroke={'black'} >
-      
-    </Rect>
-    <Text text={getText()} x={233} fontSize={16} y={4}></Text>
+
+    <Text text={getText()} x={47} fontSize={14} y={13}></Text>
   </>);
 }
 export default Statistics;

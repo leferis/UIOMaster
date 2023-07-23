@@ -33,6 +33,7 @@ import { setCirlceAtEnd } from './Functions/creation';
 import { onActionDragEnd, onActionDragMove } from './Functions/actionMovement';
 import SwimlaneInitialValues from './components/swimlaneInitialValues/swimlaneInitialValues';
 import _ from 'lodash';
+import Ribbon from './components/ribbon/ribbon';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -93,6 +94,7 @@ function App() {
         <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
           <h4 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML</h4>
         </div>
+        <Ribbon />
         <ToastContainer />
         <Stage width={window.innerWidth} height={window.innerHeight - 101}
           onMouseUp={(e) => {
@@ -159,16 +161,16 @@ function App() {
               setActors={setActors} open={open} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
               initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors}
             ></Settings>
-            <LeftMeniu setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
+            {!openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType={SwimlineMode} ></Statistics>}
+          </Layer>
+          <LeftMeniu setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
               updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
               mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
               SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
               showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
-              updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActor}
+              updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
               setActions={setActions}
             />
-            {!openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType={SwimlineMode} ></Statistics>}
-          </Layer>
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
         {showQuestionary && <Questionary setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary} showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles} isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}></Questionary>}
@@ -217,6 +219,26 @@ function App() {
       maxWidth = x.width;
     });
     actor.splice(index, 0, { Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    setActors(actor);
+    setNewID(initialId + 1);
+  }
+  function addNewActorinTheEnd(pathImage:string) {
+    console.log(pathImage)
+    var actor = ActorsCJML;
+    var actorAfterInsert = ActorsCJML.sort((x,y) => {
+      return x.y - y.y;
+    })[ActorsCJML.length-1];
+    console.log(actorAfterInsert)
+    var maxWidth = 900;
+    var index = actor.findIndex(x => x.id == actorAfterInsert.id);
+    actor.forEach((x) => {
+      if (x.y > actorAfterInsert.y) {
+        updateNodesAndConnections(x);
+        x.y += x.height + 50;
+      }
+      maxWidth = x.width;
+    });
+    actor.splice(index, 0, { Title: "Enter Actor", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
   }
