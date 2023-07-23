@@ -170,17 +170,7 @@ function Settings(props: SettingsProps) {
 
   return (
 
-        <Group>
-          <Image image={change}
-          x={width-70}
-          y={10}
-          onClick={() => { props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows, props.makeBiggerActors)  }}
-          width={50}
-          height={50}
-          ></Image>
-          <Text x={width-80}  y={55} text={"Diagram type"}></Text>
-        </Group>
-
+  <></>
   );
 }
 export default Settings;

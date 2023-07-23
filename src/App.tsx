@@ -94,7 +94,8 @@ function App() {
         <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
           <h4 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML</h4>
         </div>
-        <Ribbon />
+        <Ribbon  SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
+              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles} setCircles={setCircles} setSwimlineMode={setSwimlineMode}/>
         <ToastContainer />
         <Stage width={window.innerWidth} height={window.innerHeight - 101}
           onMouseUp={(e) => {

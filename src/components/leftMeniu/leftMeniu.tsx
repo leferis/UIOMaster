@@ -176,77 +176,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         }}
                                 />
                         }
-                        {!props.SwimlineMode && <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
-                                onMouseUp={() => {
-                                        props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
-                                }}>
-                                <Rect x={40} y={306} height={75} width={45}  ></Rect>
-                                <Rect x={50}
-                                        y={310} height={20} width={30} strokeWidth={3}
-                                        cornerRadius={2}
-                                        stroke={'black'}
-
-                                ></Rect>
-                                <Arrow points={[65, 330, 65, 350]} dash={[2]} fill='black' stroke={"black"} strokeWidth={2} ></Arrow>
-                                <Rect x={50}
-                                        y={350} height={20} width={30} strokeWidth={3}
-                                        cornerRadius={2}
-                                        stroke={'black'}
-                                ></Rect>
-
-                        </Group>
-                        }
-
-                        <Text x={10}
-                                y={380} text={"Communication\npoint"} align={"center"} fontSize={16} />
-                        <Rect
-                                x={153}
-                                y={330}
-                                height={40}
-                                width={50}
-                                cornerRadius={10}
-                                stroke={'black'}
-                                strokeWidth={3}
-                                onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction() }}
-                        />
-                        <Text x={156}
-                                y={380} text={"Action"} align={"center"} fontSize={16} />
-                        {props.SwimlineMode == true && <>
-                                <Rect
-                                        x={35}
-                                        y={415}
-                                        width={50}
-                                        height={45}
-                                        onClick={() => props.setClickFunction('DrawArrow')}
-
-                                >
-                                </Rect>
-                                <Arrow
-                                        points={[40, 460, 80, 420]}
-                                        stroke={'black'}
-                                        radius={20}
-                                        strokeWidth={3}
-                                        fill={'Black'}
-                                        onClick={() => props.setClickFunction('DrawArrow')}
-
-                                />
-                                <Text x={40}
-                                        y={470} text={"Arrow"} align={"center"} fontSize={16} />
-                        </>
-                        }
-                        {props.currentObject != -1 && <>
-                                <Text text={"Symbol"} x={15} y={500} fontSize={16}></Text>
-                                <Rect x={5} y={520} height={200} width={224} cornerRadius={3} fill='white' ></Rect>
-                                {imageForSymbol}
-                                <Text text={imageText} x={35} y={530} fontSize={14}></Text>
-                                <ImageSelection images={props.Images} setImage={props.setImage} type={props.currentObject.img != undefined ? 'Actors' : 'Communication Points'}></ImageSelection></>}
-
-                        {props.currentObject != -1 && props.currentObject.isEndUser == undefined && <>
-                                <Text text={"Status"} x={15} y={740} fontSize={14}></Text>
-                                {getStatusJSX(props.currentObject, 5, 760, props.circles, props.setCurrentObject, props.setCircles)}
-
-                        </>
-                        }
+                       
 
                         <Image
                                 image={screenshot}
