@@ -77,10 +77,11 @@ function Statistics(props: StatisticsProps) {
           }
         });
         if(props.Journeys[props.currentJourney].Reference != undefined){
-          text += "Touchpoints matches reference: ";
+          text += "Matches:\n"
+          text += "Touchpoints reference: ";
           text += count + '\n';
       
-        text += "Journey matches planned: " + (deviationCount > 0 || count != props.circles.length? "False" : "True") + "\n";
+        text += "Journey reference: " + (deviationCount > 0 || count != props.circles.length? "False" : "True") + "\n";
 
         }
       }

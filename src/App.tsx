@@ -95,9 +95,12 @@ function App() {
           <h4 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML</h4>
         </div>
         <Ribbon  SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
-              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles} setCircles={setCircles} setSwimlineMode={setSwimlineMode}/>
+              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles} 
+              setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
+              actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage}  updateCurrentJourney={updateCurrentJourney}
+              showModal={setShowModal}/>
         <ToastContainer />
-        <Stage width={window.innerWidth} height={window.innerHeight - 101}
+        <Stage width={window.innerWidth} height={window.innerHeight - 150}
           onMouseUp={(e) => {
             if (ClickFunction != "")
               onClickDoes(e);
@@ -274,8 +277,11 @@ function App() {
     setActions((prevActions) => [...prevActions, newAction]);
   }
 
-  function addNewCircle() {
-    let newCircle = new CJMLCircle(initialId, -9999, -9999, true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
+  function addNewCircle(image:string="") {
+    if(image == ""){
+      image ="\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
+    }
+    let newCircle = new CJMLCircle(initialId, -9999, -9999, true, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
     setCircles((prevCircles) => [
       ...prevCircles,
       newCircle
@@ -473,9 +479,9 @@ function App() {
     const newCircle = actions.map(x => {
       if (x.id == initialId) {
         const arrowNew = x;
-        x.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
-        x.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
-        x.swimlaneX = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+        x.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+        x.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+        x.swimlaneX = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
         return arrowNew
       }
       else {
@@ -495,11 +501,11 @@ function App() {
     const newCircle = circles.map(x => {
       if (x.id == initialId) {
         const arrowNew = x;
-        x.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
-        x.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
-        x.swimlaneX = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
-        x.swimlaneY = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
-        x.swimlaneReceiverY = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+        x.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+        x.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+        x.swimlaneX = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+        x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+        x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
         return arrowNew
       }
       else {
@@ -511,11 +517,12 @@ function App() {
   }
 
   function changeArrowOnDraw(e: any) {
+    console.log(e)
     const newArrows = Arrows.map(x => {
       if (x.id == initialArrowId) {
         const arrowNew = x;
-        x.toPoint.x = e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0) - 5;
-        x.toPoint.y = e.evt.y - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) - 5;
+        x.toPoint.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0) - 5;
+        x.toPoint.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) - 5;
         return arrowNew
       }
       else {
@@ -560,8 +567,9 @@ function App() {
   }
 
   function addNewArrow(obj: any, e: any) {
+    console.log(e) // cia taisyti
     const arrowRes = Arrows;
-    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1', e.target.getPosition().x, e.target.getPosition().y, 0, 0)));
+    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1',  e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0), e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0), 0, 0)));
     setArrows(arrowRes);
   }
 
@@ -672,7 +680,7 @@ function App() {
   function includeInLine(e: any, currentId: any, element: any) {
 
     const id = Arrows.findIndex((x) => {
-      if (x.fromPoint.x <= e.evt.x - layerEl.current.attrs.x && x.toPoint.x >= e.evt.x - layerEl.current.attrs.x && (x.fromPoint.id != currentId && x.toPoint.id != currentId)) {
+      if (x.fromPoint.x <= e.evt.layerX - layerEl.current.attrs.x && x.toPoint.x >= e.evt.layerX - layerEl.current.attrs.x && (x.fromPoint.id != currentId && x.toPoint.id != currentId)) {
         return true;
       }
       return false;
@@ -694,17 +702,17 @@ function App() {
       let connectTo, connectToAction;
       if (circles.length > 0) {
         connectTo = circles.reduce((current, prev) => {
-          return Math.abs(current.x - e.evt.x - layerEl.current.attrs.x) > Math.abs(prev.x - e.evt.x - layerEl.current.attrs.x) ? prev : current;
+          return Math.abs(current.x - e.evt.layerX - layerEl.current.attrs.x) > Math.abs(prev.x - e.evt.layerX - layerEl.current.attrs.x) ? prev : current;
         })
       }
       if (actions.length > 0) {
         connectToAction = actions.reduce((current, prev) => {
-          return Math.abs(current.x - e.evt.x - layerEl.current.attrs.x) > Math.abs(prev.x - e.evt.x - layerEl.current.attrs.x) ? prev : current;
+          return Math.abs(current.x - e.evt.layerX - layerEl.current.attrs.x) > Math.abs(prev.x - e.evt.layerX - layerEl.current.attrs.x) ? prev : current;
         })
       }
 
       if (connectToAction != undefined && connectTo != undefined) {
-        if (Math.abs(connectToAction.x - e.evt.x - layerEl.current.attrs.x) < Math.abs(connectTo.x - e.evt.x - layerEl.current.attrs.x)) {
+        if (Math.abs(connectToAction.x - e.evt.layerX - layerEl.current.attrs.x) < Math.abs(connectTo.x - e.evt.layerX - layerEl.current.attrs.x)) {
           connectTo = connectToAction;
         }
       }
@@ -713,7 +721,7 @@ function App() {
       }
       connectTo = connectTo == undefined ? { x: 0, y: 0, id: 0 } : connectTo;
       const results = Arrows;
-      let newArrow = new CJMLArrow(initialArrowId, connectTo.x < e.evt.x - layerEl.current.attrs.x ? connectTo : element, connectTo.x > e.evt.x - layerEl.current.attrs.x ? connectTo : element);
+      let newArrow = new CJMLArrow(initialArrowId, connectTo.x < e.evt.layerX - layerEl.current.attrs.x ? connectTo : element, connectTo.x > e.evt.layerX - layerEl.current.attrs.x ? connectTo : element);
       newArrow.Draw();
       results.push(newArrow);
       setNewArrowId(initialArrowId + 1);
@@ -723,7 +731,7 @@ function App() {
 
   function findActor(e: any) {
     return ActorsCJML.find(x => {
-      if (e.evt.y - (layerEl.current.attrs.y) >= x.y && x.y + x.height >= e.evt.y - (layerEl.current.attrs.y)) {
+      if (e.evt.layerY - (layerEl.current.attrs.y) >= x.y && x.y + x.height >= e.evt.layerY - (layerEl.current.attrs.y)) {
 
         return true;
       }
@@ -769,13 +777,13 @@ function App() {
             positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 200 : maxLengthCircles + 200;
           }
         }
-        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.x - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.y - (layerEl.current.attrs.y), true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.y - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
+        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.layerY - (layerEl.current.attrs.y), true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
         setCircles((prevCircles) => [
           ...prevCircles,
           newCircle
         ]);
-        if (checkIfCloseToActorsBorder(SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX, ActorsCJML[0])) {
-          makeActorsBigger(SwimlineMode ? e.evt.x - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0) : positionX);
+        if (checkIfCloseToActorsBorder(SwimlineMode ? e.evt.layerX - layerEl.current.attrs.x : positionX, ActorsCJML[0])) {
+          makeActorsBigger(SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0) : positionX);
         }
 
         setSwimlaneX(swimlaneXInitial + 225);
@@ -796,13 +804,13 @@ function App() {
             positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 200 : maxLengthCircles + 200;
           }
         }
-        let newAction = new CJMLAction(initialId, SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX, isOnActor != undefined ? isOnActor.y : e.evt.y - (layerEl.current.attrs.y), false, "User's action", DevationMode, isOnActor, swimlaneXInitial, Date.now());
+        let newAction = new CJMLAction(initialId, SwimlineMode ? e.evt.layerX - layerEl.current.attrs.x : positionX, isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), false, "User's action", DevationMode, isOnActor, swimlaneXInitial, Date.now());
         setActions((actions) => [
           ...actions,
           newAction
         ]);
-        if (checkIfCloseToActorsBorder(SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX, ActorsCJML[0])) {
-          makeActorsBigger(SwimlineMode ? e.evt.x - layerEl.current.attrs.x : positionX);
+        if (checkIfCloseToActorsBorder(SwimlineMode ? e.evt.layerX - layerEl.current.attrs.x : positionX, ActorsCJML[0])) {
+          makeActorsBigger(SwimlineMode ? e.evt.layerX - layerEl.current.attrs.x : positionX);
         }
         if (SwimlineMode) {
           includeInLine(e, initialId, newAction);

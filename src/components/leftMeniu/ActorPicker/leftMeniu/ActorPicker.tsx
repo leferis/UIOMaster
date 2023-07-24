@@ -44,9 +44,10 @@ function LeftMeniuActorPicker(props: LeftMeniuActorPickerProps) {
     margin: `0 0 ${grid}px 0`,
     height: 14,
     display: "inline-flex",
-    minWidth: "150px",
-    maxWidth:"150px",
+    minWidth: "100px",
+    maxWidth:"100px",
     maxHeight:"140px",
+    zindex:"-99",
     // change background colour if dragging
     background: props.currentObject == item ? "darkgray" : "lightgrey",
     borderRadius: 5,
@@ -58,16 +59,16 @@ function LeftMeniuActorPicker(props: LeftMeniuActorPickerProps) {
   const getListStyle = (isDraggingOver: boolean) => ({
     background: isDraggingOver ? "lightblue" : "white",
     padding: grid,
-    width: 210,
-    maxHeight: 150,
+    width: 160,
+    maxHeight: 100,
     overflow: "auto"
   });
 
   return (
     <Group>
-      <Html groupProps={{ x: 3, y: 60 }} divProps={{ style: { opacity: 1 } }}>
+      <Html groupProps={{ x: 45, y: 0}} divProps={{ style: { opacity: 1, zindex:"-99", position:"inline" } }}>
         <Group>
-          Actors' list
+          Actors' sequence
           <DragDropContext onDragEnd={(result) => changeActors(result)} >
             <Droppable droppableId='"Actors"' >
               {(provided, snapshot) => (
@@ -94,46 +95,22 @@ function LeftMeniuActorPicker(props: LeftMeniuActorPickerProps) {
                             item
                           )}
                         >
-                          <div style={{ borderRadius: "50%", border: "2px solid " + item.color, width: 24, height: 24, paddingLeft: 2, position: "relative", right:"7px", bottom:"5px" }}>
+                          <div style={{ width: 20, height: 20, paddingLeft: 2, position: "relative", bottom:"5px" }}>
                             <img style={{ width: 20, height: 20 }} src={item.img} />
                           </div>
-                          <div style={{  width:140, lineHeight: "16px", wordWrap: 'break-word',maxHeight:"50px", maxLines:5, display:"-webkit-box", overflow:"hidden",
-                           WebkitBoxOrient:"vertical", WebkitLineClamp:"5", height:"18px" }}>{item.Title}</div>
+                          <div style={{  width:100, lineHeight: "30px", wordWrap: 'break-word',maxHeight:"100px", maxLines:5, display:"-webkit-box", overflow:"hidden", fontSize:"12px",
+                           WebkitBoxOrient:"vertical", WebkitLineClamp:"5", height:"30px" }}>{item.Title}</div>
 
                         </div>
                       )}
                     </Draggable>
 
                   ))}
-                  <Draggable key={9999999999} draggableId={"Insert"} index={props.Actors.length} isDragDisabled={true} >
-                    {(provided, snapshot) => (
-                      <div onClick={() => { props.addNewActor(props.Actors[props.Actors.length-1]) }}
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style,
-                          null
-                        )}
-                      >
-                        <div style={{paddingLeft:"35%"}}> Insert</div>
-                      </div>
-                    )}
-                  </Draggable>
                 </div>
               )}
 
             </Droppable>
           </DragDropContext>
-          {!props.swimLaneMode &&
-            // Check if user is selected and then if it is end user
-            <div>Is End User <Checkbox checked={props.currentObject.isEndUser != undefined ? props.currentObject.isEndUser : false} /></div>
-          }
-          {props.swimLaneMode &&
-            // Check if checkpoint is used and check who is initiator
-            <div>Initiator <Checkbox /></div>
-          }
         </Group>
       </Html>
     </Group>)

@@ -5,6 +5,7 @@ import { Arrow, Circle, Group, Image as Images, Rect } from 'react-konva';
 interface LeftMeniuLeftSubMeniuProps {
   option: string;
   setOption: any;
+  layer:any;
 }
 function representation(type:string, x:any, y:any, path:any = ""){
   if(type == "Image"){
@@ -38,23 +39,23 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
 
     <Rect x={0} y={0} width={45} height={90000} fill="#e8eaed" stroke={"black"} strokeWidth={0.5}
     ></Rect>
-    <Group onClick={() => { props.setOption("Actor") }}>
+    <Group onClick={() => { props.setOption("Actor"); props.layer.current.y(0)}}>
       {backgroundAndElement(6,10,36,36,"Actor", props.option,"Image","\\HelpingImages\\actor.png")} 
     </Group>
 
-    <Group onClick={() => { props.setOption("Touchpoint") }}>
+    <Group onClick={() => { props.setOption("Touchpoint"); props.layer.current.y(0)}}>
       {backgroundAndElement(6,51,35,35,"Touchpoint", props.option,"Circle")} 
     </Group>
 
-    <Group onClick={() => { props.setOption("Action") }}>
+    <Group onClick={() => { props.setOption("Action");props.layer.current.y(0)}}>
       {backgroundAndElement(6,92,35,35,"Action", props.option,"Rect")} 
     </Group>
 
-    <Group onClick={() => { props.setOption("Arrow") }}>
+    <Group onClick={() => { props.setOption("Arrow"); props.layer.current.y(0)}}>
       {backgroundAndElement(6,133,35,35,"Arrow", props.option,"Arrow")} 
     </Group>
 
-    <Group onClick={() => { props.setOption("Statistics") }}>
+    <Group onClick={() => { props.setOption("Statistics");props.layer.current.y(0) }}>
       {backgroundAndElement(6,174,35,35,"Statistics", props.option,"Image","\\HelpingImages\\statistics.png")} 
     </Group>
   </Group>)

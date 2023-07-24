@@ -25,6 +25,7 @@ function fromSwimlaneToNetwork(circles: any[], actions: CJMLAction[], setActions
     for (let j = 0; j < objects.length; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
     }
+    if(objects.length>0)
     makeBiggerActors(objects[objects.length - 1].swimlaneX);
     sortOutAndAssign(objects, setActions, updateCircles)
 }

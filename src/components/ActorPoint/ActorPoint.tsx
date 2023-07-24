@@ -83,7 +83,7 @@ function ActorPoint(props: ActorPointProps) {
             props.setActors(circles);
           }}
         ></TextMessages>
-        {!props.SwimlineMode && <Group onClick={() => { props.addNewActor(act) }}>
+        {/* {!props.SwimlineMode && <Group onClick={() => { props.addNewActor(act) }}>
           <Circle x={act.x + act.width +27}
             y={act.y + act.height +25}
             radius={15}
@@ -93,7 +93,7 @@ function ActorPoint(props: ActorPointProps) {
           </Circle>
           <Text text='+' fontStyle='bold' fontSize={27} x={act.x + act.width  +20 } y={act.y + act.height +15}></Text>
 
-        </Group>}
+        </Group>} */}
       </div>);
     })
 

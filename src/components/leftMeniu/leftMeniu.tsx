@@ -45,8 +45,12 @@ interface LeftMeniuProps {
 
 function LeftMeniu(props: LeftMeniuProps) {
         const [subMeniuOption, setSubMeniuOption] = useState("")
+        const [renderActorList, setrenderActorList] = useState(true)
+        const [enableScroll, setEnableScroll] = useState(true)
+        const [xScrollbarreal, setXScrollbarreal] = useState(10)
+        const [xScroll, setXScroll] = useState(10)
         const layerEl: any = useRef();
-        let xScrollbar = 10
+  
 
         var imageForSymbol;
         var imageText = "";
@@ -88,58 +92,7 @@ function LeftMeniu(props: LeftMeniuProps) {
         let upload = props.getImageObject("\\\HelpingImages\\form.png");
         let form = props.getImageObject("\\\HelpingImages\\upload.png");
         let screenshot = props.getImageObject("\\\HelpingImages\\screenshot.png");
-        function SortActorsByY() {
-                let result = props.actors.sort((x, y) => {
-                        return x.y - y.y;
-                })
-                return result;
-        }
-        function findImagePoints() {
-                let result = SortActorsByY();
-                if (!props.SwimlineMode) {
 
-                        return { y: result[0].y, height: result[result.length - 1].y + result[result.length - 1].height, width: result[0].width + 200 };
-                }
-                else {
-                        let communicationOrderByY = props.circles.sort((x, y) => {
-                                return x.y - y.y;
-                        })
-                        let actionOrderByY = props.actions.sort((x, y) => {
-                                return x.y - y.y;
-                        })
-                        let communicationOrderByX = props.circles.sort((x, y) => {
-                                return x.x - y.x;
-                        })
-                        let actionOrderByX = props.actions.sort((x, y) => {
-                                return x.x - y.x;
-                        })
-
-                        let communicationMostY = communicationOrderByY.length > 0 ? communicationOrderByY[communicationOrderByY.length - 1] : { y: 0 };
-                        let actionmostY = actionOrderByY.length > 0 ? actionOrderByY[actionOrderByY.length - 1] : { y: 0 };
-                        let communicationMostX = communicationOrderByX.length > 0 ? communicationOrderByX[communicationOrderByY.length - 1] : { x: 0, width: 0 };
-                        let actionmostX = actionOrderByX.length > 0 ? actionOrderByX[actionOrderByY.length - 1] : { x: 0, width: 0 };
-                        if (communicationMostY.y > actionmostY.y) {
-                                let height = communicationOrderByY[communicationOrderByY.length - 1].y - result[0].y + 30;
-                                let actorHeight = result[result.length - 1].y + result[result.length - 1].height;
-                                return { y: result[0].y, height: height > actorHeight ? height : actorHeight, width: communicationMostX.x > actionmostX.x ? communicationMostX.x + communicationMostX.width + 50 : actionmostX.x + actionmostX.width + 50 };
-                        }
-                        else {
-                                let height = actionOrderByY[actionOrderByY.length - 1].y - result[0].y + 30;
-                                let actorHeight = result[result.length - 1].y + result[result.length - 1].height;
-                                return { y: result[0].y, height: height > actorHeight ? height : actorHeight, width: communicationMostX.x > actionmostX.x ? communicationMostX.x + communicationMostX.width + 50 : actionmostX.x + actionmostX.width + 50 };
-                        }
-                }
-        }
-
-        function downloadImage(url: any) {
-                const link = document.createElement('a');
-                link.setAttribute('href', url);
-                link.setAttribute('download', `Journey.png`);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-        }
 
 
 
@@ -158,90 +111,12 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
                                 }}
                         />
-                        <Rect x={5} y={10} width={220} height={40} fill='#fff' />
-                        {/* <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
-                        circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
-                ></ActorPicker> */}
-                        <Text x={10} y={14} text={'Diagram type:' + (props.SwimlineMode ? "Journey diagram\n" : "Journey network diagram\n")} fontSize={12}></Text>
-                        {!(props.Journeys[props.currentJourney] == undefined) && <Text x={10} y={34} text={'Journey type:' + (props.Journeys[props.currentJourney].isPlanned ? "Planned" : "Actual")} fontSize={12}></Text>}
-                        {props.SwimlineMode &&
-                                <Circle x={63}
-                                        y={350}
-                                        stroke={'black'}
-                                        radius={20}
-                                        strokeWidth={3}
-                                        onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
-                                        onMouseUp={() => {
-                                                props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
-                                        }}
-                                />
-                        }
-                       
 
-                        <Image
-                                image={screenshot}
-                                x={150}
-                                y={heighth - 140}
-                                height={40}
-                                width={40}
-                                onClick={() => {
-                                        let exportInformation = findImagePoints();
-                                        var image = props.layerHeight.current.toDataURL({ x: props.layerHeight.current.attrs.x, y: props.layerHeight.current.attrs.x.y, width: exportInformation.width, height: exportInformation.height });
-                                        downloadImage(image);
-                                }}
-                        />
-                        <Text x={140}
-                                y={heighth - 105} text={"ScreenShot"} align={"center"} fontSize={10} />
+                        {/*  */}
+                        {/* <Text x={10} y={14} text={'Diagram type:' + (props.SwimlineMode ? "Journey diagram\n" : "Journey network diagram\n")} fontSize={12}></Text>
+                        {!(props.Journeys[props.currentJourney] == undefined) && <Text x={10} y={34} text={'Journey type:' + (props.Journeys[props.currentJourney].isPlanned ? "Planned" : "Actual")} fontSize={12}></Text>} */}
 
-
-
-                        <Image
-                                x={15}
-                                y={heighth - 140}
-                                height={30}
-                                width={40}
-                                image={form}
-                                onClick={() => { props.showModal(true); }}
-
-                        />
-                        <Text x={20}
-                                y={heighth - 105} text={"Import"} align={"center"} fontSize={10} />
-                        <Image
-                                x={15}
-                                y={heighth - 80}
-                                height={40}
-                                width={40}
-                                image={download}
-                                onClick={() => {
-                                        props.updateCurrentJourney();
-                                        XMLCreator(props.Journeys, props.getImages);
-                                }}
-
-                        />
-                        <Text x={18}
-                                y={heighth - 35} text={"Export"} align={"center"} fontSize={10} />
-                        <Image
-                                image={upload}
-                                x={150}
-                                y={heighth - 80}
-                                height={40}
-                                width={40}
-                                onClick={() => { props.showQuestionary(true); }}
-
-                        />
-                        <Text x={154}
-                                y={heighth - 35} text={"Form"} align={"center"} fontSize={10} />
-
-                        {props.currentObject != -1 && props.currentObject.isEndUser != undefined && <div>
-                                <Text x={18}
-                                        y={740} text={"Color"} align={"center"} fontSize={16} />
-                                <ColorPicker x={20} y={760} Actors={props.actors} currentObject={props.currentObject}
-                                        setActors={props.setActors} updateCirlces={props.updateCirlces}
-                                />
-
-                        </div>}
-
-                        <LeftMeniuLeftSubMeniu option={subMeniuOption} setOption={setSubMeniuOption}></LeftMeniuLeftSubMeniu>
+                        <LeftMeniuLeftSubMeniu option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl}></LeftMeniuLeftSubMeniu>
                 </Layer>
                 <Layer ref={layerEl}
                         x={0}
@@ -249,33 +124,70 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                         height={window.innerHeight}
                         width={300}
+                        draggable={(subMeniuOption == "Actor" || subMeniuOption == "Touchpoint") && enableScroll}
                         dragBoundFunc={(pos) => {
-                                return {
-                                        x: 0,
-                                        y: pos.y
+                                if (pos.y > 0) {
+                                        setrenderActorList(true)
+                                        return {
+                                                x: 0,
+                                                y: 0
+                                        }
+                                }
+                                else {
+                                        setrenderActorList(false)
+
+                                        return {
+                                                x: 0,
+                                                y: pos.y
+                                        }
                                 }
                         }}
+                        onMouseLeave={() => { setEnableScroll(true) }}
                         onWheel={(e: any) => {
                                 e.evt.preventDefault();
                                 const dx = e.evt.deltaY * -1;
-                                xScrollbar += dx
-                                let xpos = xScrollbar
-                                layerEl.current.y(xpos)
+                                setXScroll(xScroll + dx)
+                                let xpos = xScroll + dx
+                                if(xScrollbarreal +(dx*2 *-1) > 10){
+                                setXScrollbarreal(xScrollbarreal +(dx*2 *-1))
+                                }
+                                else if(xScrollbarreal +(dx*2 *-1)< 10 ){
+                                        setXScroll(0)
+                                        setXScrollbarreal(10)
+                                        xpos = 0
+                                }
+                                else{
+                                        setXScrollbarreal(-790)
+                                }
+                                console.log(xpos)
+                                if (subMeniuOption == "Actor") {
+                                        if (xpos >= 0) {
+                                                setrenderActorList(true)
+                                        } else setrenderActorList(false)
+                                }
+                                if (xpos > 0) {
+                                        xpos = 0
+                                }
+                                if (subMeniuOption == "Actor" || subMeniuOption == "Touchpoint")
+                                        layerEl.current.y(xpos)
                         }}
                 >
-                        {subMeniuOption == "Actor" && <div><Rect x={30} y={xScrollbar} height={window.innerHeight} width={300}></Rect>
-                                <Rect x={223} y={xScrollbar} height={300} width={5} cornerRadius={5} fill='black'></Rect>
-                                {props.Images != undefined && <LeftMeniuSelector elements={props.Images.Images[0].Images} onMouseUp={(img: string) => props.addNewActor(img)} onMouseDown={() => { }} />}</div>}
+                        {subMeniuOption == "Actor" && <div><Rect x={30} y={xScrollbarreal} height={window.innerHeight} width={300}></Rect>
+                                {renderActorList && <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
+                                        circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
+                                ></ActorPicker>}
+                                <Rect x={223} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
+                                {props.Images != undefined && <LeftMeniuSelector xpos={60} ypos={60} elements={props.Images.Images[0].Images} onMouseUp={(img: string) => props.addNewActor(img)} onMouseDown={() => { }} />}</div>}
 
-                        {subMeniuOption == "Touchpoint" && <div><Rect x={30} y={xScrollbar} height={window.innerHeight} width={300}></Rect>
-                                <Rect x={223} y={xScrollbar} height={300} width={5} cornerRadius={5} fill='black'></Rect>
-                                {props.Images != undefined && <LeftMeniuSelector elements={props.Images.Images[1].Images} onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle() }}
+                        {subMeniuOption == "Touchpoint" && <div><Rect x={30} y={xScrollbarreal} height={window.innerHeight} width={300}></Rect>
+                                <Rect x={223} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
+                                {props.Images != undefined && <LeftMeniuSelector xpos={60} ypos={-60} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle(img); setEnableScroll(false) }}
                                         onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} />}</div>}
                         {subMeniuOption == "Action" && <div>
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction() }}>
                                         <Rect
                                                 x={52}
-                                                y={67}
+                                                y={37}
                                                 height={58}
                                                 width={50}
                                                 cornerRadius={10}
@@ -286,7 +198,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         />
                                         <Rect
                                                 x={57}
-                                                y={72}
+                                                y={42}
                                                 height={30}
                                                 width={40}
                                                 cornerRadius={10}
@@ -295,13 +207,13 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                                         />
                                         <Text x={57}
-                                                y={105} text={"Action"} align={"center"} fontSize={14} />
+                                                y={75} text={"Action"} align={"center"} fontSize={14} />
                                 </Group>
                         </div>}
                         {subMeniuOption == "Arrow" && <div>
                                 <Rect
                                         x={52}
-                                        y={62}
+                                        y={32}
                                         width={47}
                                         height={62}
                                         cornerRadius={10}
@@ -312,7 +224,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 >
                                 </Rect>
                                 <Arrow
-                                        points={[60, 100, 90, 70]}
+                                        points={[60, 70, 90, 40]}
                                         stroke={'black'}
                                         radius={20}
                                         strokeWidth={3}
@@ -321,7 +233,7 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                                 />
                                 <Text x={58}
-                                        y={105} text={"Arrow"} align={"center"} fontSize={14} />
+                                        y={75} text={"Arrow"} align={"center"} fontSize={14} />
                         </div>
                         }
 
