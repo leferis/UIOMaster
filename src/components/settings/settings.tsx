@@ -21,7 +21,6 @@ interface SettingsProps {
   setImage: any;
   setActors: any;
   Actors: Actors[];
-  open: any;
   GetImageFullName: any;
   getImageObject: any;
   Layer:any;

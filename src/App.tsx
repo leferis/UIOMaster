@@ -162,7 +162,7 @@ function App() {
           }
           <Layer id='Menu'>
             <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
-              setActors={setActors} open={open} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
+              setActors={setActors}  GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
               initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors}
             ></Settings>
             {!openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType={SwimlineMode} ></Statistics>}
@@ -197,8 +197,7 @@ function App() {
 
   function addJourney(isPanned: boolean, addId: number | null) {
     if (Journey.length == 0) {
-      [{ JourneyName: isPanned ? 'PlannedJourney' : 'ActualJourney', Actions: [], Actors: [], isPlanned: isPanned, Toucpoint: [], Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyDescription: '', JourneyID: '1', Reference: null, JourneyAnalysis: '' }]
-    }
+          }
     if (Journey.length == 1) {
       updateCurrentJourney();
     }

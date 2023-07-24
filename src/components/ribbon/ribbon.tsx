@@ -5,6 +5,8 @@ import { Actors } from '../../Classes/Actors';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import { CJMLAction } from '../../Classes/CJMLAction';
 import XMLCreator from '../../XMLParsing/V2/v2.XMLCreator';
+import RibbonRibbonButton from './ribbonButton/ribbon/ribbonButton';
+import RibbonDropDownButton from './dropDownButton/ribbon/dropDownButton';
 
 interface RibbonProps {
   SwimlineMode: any,
@@ -78,17 +80,7 @@ function downloadImage(url: any) {
   document.body.removeChild(link);
 }
 
-function ribbonButton(text: string, onClickCommand: any) {
-  const [hower, setHower] = useState(false)
-  return (<div className={hower ? 'BarElementSelected' : 'BarElement'} style={{ float: "left", paddingBottom: "5px", left:"5px" }} onMouseEnter={() => { setHower(true) }} onMouseLeave={() => { setHower(false) }} onClick={() => onClickCommand()}>
-    <span className='BarText' style={{marginRight:"-13%"}}>{text}</span></div>)
-}
 
-function dropDownButton(text: string, onClickCommand: any, onhower: any) {
-  const [hower, setHower] = useState(false)
-  return (<div className={hower ? 'BarElementSelected' : 'BarElement'} style={{ display: onhower ? "inline" : "none", float: "left", paddingBottom: "5px", minWidth: "100%" }} onMouseEnter={() => { setHower(true) }} onMouseLeave={() => { setHower(false) }} onClick={() => onClickCommand()}>
-    <span className='BarText' style={{ display: "inline-block", background: "#fcfcfd", minWidth: "100%", minHeight: "100%", marginTop: "-15px", top:"10px" }}>{text}</span><br></br></div>)
-}
 
 function Ribbon(props: RibbonProps) {
   const [hower, setHower] = useState(false)
@@ -101,20 +93,20 @@ function Ribbon(props: RibbonProps) {
       >
         <span className='BarText' style={{marginRight:"-13%"}}>File</span>
         <div className="dropdown-submeniu" style={{ left: 0, position: "absolute", zIndex: "10" }}>
-          {dropDownButton("Import", () => {props.showModal(true); }, hower)}<br></br>
-          {dropDownButton("Export", () => {
+          {<RibbonDropDownButton onhower={hower} text={"Import"} onClickCommand={ () => {props.showModal(true); }}/>}
+          {<RibbonDropDownButton onhower={hower} text={"Export"} onClickCommand={() => {
             props.updateCurrentJourney();
             XMLCreator(props.Journeys, props.getImages);
-          }, hower)}<br></br>
-          {dropDownButton("Export as PNG", () => {
+          }}/>}
+          {<RibbonDropDownButton onhower={hower} text={"Export as PNG"} onClickCommand={() => {
             let exportInformation = findImagePoints(props.actors, props.SwimlineMode, props.circles, props.actions);
             var image = props.layerHeight.current.toDataURL({ x: props.layerHeight.current.attrs.x, y: props.layerHeight.current.attrs.x.y, width: exportInformation.width, height: exportInformation.height });
             downloadImage(image);
-          }, hower)}
+          }}/>}
         </div>
       </div>
-      {ribbonButton("Form", () => { props.showQuestionary(true) })}
-      {ribbonButton("Help", () => { })}
+      {<RibbonRibbonButton onClickCommand={() => { props.showQuestionary(true) }} text={"Form"}></RibbonRibbonButton>}
+      {<RibbonRibbonButton onClickCommand={() => { }} text={"Help"}></RibbonRibbonButton>}
       <div className={false ? 'BarElementSelected' : 'BarElement'} style={{ float: "right", paddingBottom: "5px" }}>
         <span className='BarText' style={{ background: "rgb(57, 85, 163)", color: "white", borderRadius: "5px", paddingBottom: "5px" }} onClick={() => {
           props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows, props.makeBiggerActors)
