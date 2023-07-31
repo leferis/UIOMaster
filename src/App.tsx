@@ -34,6 +34,7 @@ import { onActionDragEnd, onActionDragMove } from './Functions/actionMovement';
 import SwimlaneInitialValues from './components/swimlaneInitialValues/swimlaneInitialValues';
 import _ from 'lodash';
 import Ribbon from './components/ribbon/ribbon';
+import StatusBar from './components/statusBar/statusBar';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -94,12 +95,13 @@ function App() {
         <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
           <h4 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML</h4>
         </div>
+        <ToastContainer />
         <Ribbon  SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
               initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles} 
               setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
               actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage}  updateCurrentJourney={updateCurrentJourney}
               showModal={setShowModal}/>
-        <ToastContainer />
+    
         <Stage width={window.innerWidth} height={window.innerHeight - 150}
           onMouseUp={(e) => {
             if (ClickFunction != "")
@@ -166,6 +168,7 @@ function App() {
               initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors}
             ></Settings>
             {!openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType={SwimlineMode} ></Statistics>}
+            {!openHome && <StatusBar layer={layerEl} currenJourneyId={currentJourney} journey={Journey} type={SwimlineMode}/>}
           </Layer>
           <LeftMeniu setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
               updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
@@ -225,6 +228,7 @@ function App() {
     setActors(actor);
     setNewID(initialId + 1);
   }
+
   function addNewActorinTheEnd(pathImage:string) {
     console.log(pathImage)
     var actor = ActorsCJML;
@@ -244,6 +248,16 @@ function App() {
     actor.splice(index, 0, { Title: "Enter Actor", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
+    toast.success('Actor has been added', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
   }
 
   function deleteCJMLObject(element: any) {
