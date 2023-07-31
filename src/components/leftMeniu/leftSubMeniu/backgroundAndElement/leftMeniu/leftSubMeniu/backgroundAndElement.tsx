@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import styles from './leftMeniu/leftSubMeniu/backgroundAndElement.module.css';
-import { Rect, Circle, Arrow, Image as Images, Group } from 'react-konva';
+import { Rect, Circle, Arrow, Image as Images, Group, Text } from 'react-konva';
+import { debounce } from 'lodash';
 
 interface LeftMeniuLeftSubMeniuBackgroundAndElementProps {
   x:any, 
@@ -11,6 +12,7 @@ interface LeftMeniuLeftSubMeniuBackgroundAndElementProps {
   currentOption:string, 
   represenation:string, 
   img?:string;
+  text:string;
 }
 
 function getImageObject(imgName: any) {
@@ -36,10 +38,27 @@ function representation(type:string, x:any, y:any, path:any = ""){
 
 const LeftMeniuLeftSubMeniuBackgroundAndElement: FC<LeftMeniuLeftSubMeniuBackgroundAndElementProps> = (props) => {
   const [hower, onHower] = useState(false)
+  const [popUp, onPopup] = useState(false)
+  const [delayHandler, setDelayHandler] = useState<any>(null)
+  
+  const handleMouseEnter = (event:any) => {
+    console.log(props.text.length)
+    console.log(props.text.length*6.5)
+    setDelayHandler(setTimeout(() => {
+        onPopup(true)
+    }, 500))
+}
+const handleMouseLeave = () => {
+  onPopup(false)
+  clearTimeout(delayHandler)
+}
+
   let selected= props.option == props.currentOption
   return(
-    <Group onMouseEnter={() => onHower(true)} onMouseLeave={() => onHower(false)}>
-      <Rect x={props.x} y={props.y} height={props.height} width={props.width} cornerRadius={4}  fill={selected || hower? '#cad2de':""} />
+    <Group onMouseEnter={() => {onHower(true);handleMouseEnter("test")}} onMouseLeave={() => {onHower(false);handleMouseLeave()}}>
+    {popUp && !selected && <><Rect x={props.x + props.width} y={props.y + props.height / 2} width={props.text.length*6.5 +3} height={20} fill='black' stroke={"white"} opacity={0.7} ></Rect>
+    <Text  x={props.x + props.width+ 3} y={props.y + props.height / 2 + 5} text={props.text}  fill='white'/></>}
+    <Rect x={props.x} y={props.y} height={props.height} width={props.width} cornerRadius={4}  fill={selected || hower? '#cad2de':""} />
     {representation(props.represenation, props.x, props.y, props.img)}
     </Group>
   )

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { Stage, Layer, Rect, Text, Circle, Line, Arrow, Image, Group } from 'react-konva';
+import { Stage, Layer, Rect, Text, Circle, Line, Arrow, Image, Group, Tag } from 'react-konva';
 import XMLCreator from '../../XMLParsing/V2/v2.XMLCreator';
 import { Actors } from '../../Classes/Actors';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
@@ -50,7 +50,7 @@ function LeftMeniu(props: LeftMeniuProps) {
         const [xScrollbarreal, setXScrollbarreal] = useState(10)
         const [xScroll, setXScroll] = useState(10)
         const layerEl: any = useRef();
-  
+
 
         var imageForSymbol;
         var imageText = "";
@@ -88,12 +88,6 @@ function LeftMeniu(props: LeftMeniuProps) {
                 return (<Image x={10} y={525} height={20} width={20} image={img} />)
         }
 
-        let download = props.getImageObject("\\\HelpingImages\\Download.png");
-        let upload = props.getImageObject("\\\HelpingImages\\form.png");
-        let form = props.getImageObject("\\\HelpingImages\\upload.png");
-        let screenshot = props.getImageObject("\\\HelpingImages\\screenshot.png");
-
-
 
 
         return (<>
@@ -112,11 +106,6 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 }}
                         />
 
-                        {/*  */}
-                        {/* <Text x={10} y={14} text={'Diagram type:' + (props.SwimlineMode ? "Journey diagram\n" : "Journey network diagram\n")} fontSize={12}></Text>
-                        {!(props.Journeys[props.currentJourney] == undefined) && <Text x={10} y={34} text={'Journey type:' + (props.Journeys[props.currentJourney].isPlanned ? "Planned" : "Actual")} fontSize={12}></Text>} */}
-
-                        <LeftMeniuLeftSubMeniu option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl}></LeftMeniuLeftSubMeniu>
                 </Layer>
                 <Layer ref={layerEl}
                         x={0}
@@ -148,15 +137,15 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 const dx = e.evt.deltaY * -1;
                                 setXScroll(xScroll + dx)
                                 let xpos = xScroll + dx
-                                if(xScrollbarreal +(dx*2 *-1) > 10){
-                                setXScrollbarreal(xScrollbarreal +(dx*2 *-1))
+                                if (xScrollbarreal + (dx * 2 * -1) > 10) {
+                                        setXScrollbarreal(xScrollbarreal + (dx * 2 * -1))
                                 }
-                                else if(xScrollbarreal +(dx*2 *-1)< 10 ){
+                                else if (xScrollbarreal + (dx * 2 * -1) < 10) {
                                         setXScroll(0)
                                         setXScrollbarreal(10)
                                         xpos = 0
                                 }
-                                else{
+                                else {
                                         setXScrollbarreal(-790)
                                 }
                                 console.log(xpos)
@@ -172,12 +161,14 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         layerEl.current.y(xpos)
                         }}
                 >
+
                         {subMeniuOption == "Actor" && <div><Rect x={30} y={xScrollbarreal} height={window.innerHeight} width={300}></Rect>
                                 {renderActorList && <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
                                         circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
                                 ></ActorPicker>}
                                 <Rect x={223} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
-                                {props.Images != undefined && <LeftMeniuSelector xpos={60} ypos={60} elements={props.Images.Images[0].Images} onMouseUp={(img: string) => props.addNewActor(img)} onMouseDown={() => { }} />}</div>}
+                                {props.Images != undefined && <LeftMeniuSelector xpos={60} ypos={60} elements={props.Images.Images[0].Images} onMouseUp={(img: string) =>
+                                        props.addNewActor(img)} onMouseDown={() => { }} />}</div>}
 
                         {subMeniuOption == "Touchpoint" && <div><Rect x={30} y={xScrollbarreal} height={window.innerHeight} width={300}></Rect>
                                 <Rect x={223} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
@@ -239,6 +230,11 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                         {subMeniuOption == "Statistics" &&
                                 <div><Statistics layer={layerEl} Journeys={props.Journeys} actions={props.actions} circles={props.circles} currentJourney={props.currentJourney} diagramType={props.SwimlineMode}></Statistics></div>}
+                </Layer>
+                <Layer onClick={() => console.log(subMeniuOption)}>
+
+
+                        <LeftMeniuLeftSubMeniu option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl}></LeftMeniuLeftSubMeniu>
                 </Layer>
         </>
         );
