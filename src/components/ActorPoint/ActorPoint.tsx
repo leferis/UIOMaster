@@ -17,6 +17,7 @@ interface ActorPointProps {
   addNewActor: any;
   SwimlineMode: any;
   getImageObject: any;
+  currentObject:any;
 }
 
 
@@ -38,7 +39,7 @@ function ActorPoint(props: ActorPointProps) {
           y={act.y}
           height={act.height}
           width={act.width}
-          stroke={'#d9d9d9'}
+          stroke={props.currentObject == act?"#A5C9FF":'#d9d9d9'}
           cornerRadius={10}
           fill='#f1f1f1'
           strokeWidth={3}

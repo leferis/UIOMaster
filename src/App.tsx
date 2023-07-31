@@ -42,7 +42,7 @@ function App() {
   const [actions, setActions] = useState<CJMLAction[]>([]);
   const [ClickFunction, setClickFunction] = useState<any>('');
   const [Arrows, setArrows] = useState<CJMLArrow[]>([]);
-  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
+  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
   const [initialActorPosY, setPosY] = useState<any>(600);
   const [initialId, setNewID] = useState<any>(3);
   const [initialArrowId, setNewArrowId] = useState<any>(-9999999);
@@ -126,7 +126,7 @@ function App() {
 
             {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
             {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
-            {Journey.length > 0 && <ActorPoint getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}></ActorPoint>}
+            {Journey.length > 0 && <ActorPoint currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}></ActorPoint>}
             {Journey.length > 0 && <TouchPoint Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
               drawingArrow={drawingArrow} currentObject={currentObject} setCurrentObjectID={setCurrentObjectReference} setClickFunction={setClickFunction} Images={CJMLImageList} actions={actions}
               setActions={setActions} actors={ActorsCJML} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow}
@@ -208,7 +208,7 @@ function App() {
       setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: "Journey2", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
     }
     else {
-      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: "JourneyActual", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
+      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: "JourneyActual", isPlanned: isPanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
     }
   }
 
@@ -224,7 +224,7 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter Actor", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    actor.splice(index, 0, { Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
   }
@@ -245,7 +245,7 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter Actor", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    actor.splice(index, 0, { Title: "Enter (actor) name", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
     toast.success('Actor has been added', {
@@ -304,6 +304,12 @@ function App() {
   function remove() {
     const index = circles.findIndex((x: CJMLCircle) => { return CurrentObjectReference.current.id == x.id });
     if (index > -1) {
+    Swal.fire({
+      title: 'Do you want to delete touchoint?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {
       const tempCircle = circles;
       tempCircle.splice(index, 1);
       setCircles(tempCircle);
@@ -317,11 +323,17 @@ function App() {
         draggable: false,
         progress: undefined,
         theme: "light",
-      });
-    }
+      })})}
+
 
     const actionIndex = actions.findIndex((x: CJMLAction) => { return CurrentObjectReference.current.id == x.id });
     if (actionIndex > -1) {
+      Swal.fire({
+        title: 'Do you want to delete action?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
       const tempCircle = actions;
       tempCircle.splice(actionIndex, 1);
       setActions(tempCircle);
@@ -336,12 +348,18 @@ function App() {
         progress: undefined,
         theme: "light",
       });
-    }
+    })}
 
     const arrowId = Arrows.findIndex((x: CJMLArrow) => {
       return x.id == CurrentObjectReference.current.id;
     })
     if (arrowId > -1) {
+      Swal.fire({
+        title: 'Do you want to delete action?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
       const tempArrows = Arrows;
       tempArrows.splice(arrowId, 1);
       setArrows(tempArrows);
@@ -354,7 +372,7 @@ function App() {
         draggable: false,
         progress: undefined,
         theme: "light",
-      });
+      });})
     }
 
     const ActorId = ActorsCJML.findIndex((x: Actors) => {
@@ -370,18 +388,25 @@ function App() {
       }).then((result) => {
         if (result.isConfirmed) {
           circles.forEach((cirlce) => {
-            if (cirlce.y >= ActorsCJML[ActorId].y && cirlce.y <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height) {
+            if ((SwimlineMode && cirlce.y >= ActorsCJML[ActorId].y && cirlce.y <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height )|| 
+            ( !SwimlineMode && ((cirlce.swimlaneY >= ActorsCJML[ActorId].y && cirlce.swimlaneY <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height )
+            || (cirlce.swimlaneReceiverY >= ActorsCJML[ActorId].y && cirlce.swimlaneReceiverY <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height ))
+            ) ) {
               deleteCJMLObject(cirlce);
             }
           }
 
           )
           actions.forEach((action) => {
-            if (action.y >= ActorsCJML[ActorId].y && action.y <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height) {
+            if ((SwimlineMode && action.y >= ActorsCJML[ActorId].y && action.y <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height) &&
+            (SwimlineMode && action.swimlaneX >= ActorsCJML[ActorId].y && action.swimlaneX <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height)) {
               deleteCJMLObject(action);
             }
           }
           )
+          for(let i = ActorId+1;i< ActorsCJML.length;i++){
+            tempCircle[i].y = tempCircle[i-1].y
+          }
           tempCircle.splice(ActorId, 1);
           let tempCirc = JSON.parse(JSON.stringify(tempCircle));
           setActors(tempCirc);
@@ -405,13 +430,15 @@ function App() {
   function removeArrows(removedObject: any) {
 
     const result = Arrows.filter((x: CJMLArrow) => {
-      if (x.fromPoint.id != removedObject.current.id || x.toPoint.id != removedObject.current.id) {
+      let element = removedObject
+      if(removedObject.current.id != undefined){
+         element = removedObject.current;
+      }
+      if (x.fromPoint.id != element.id || x.toPoint.id != element.id) {
         return false;
       }
       return true;
     });
-    console.log(result)
-    console.log(removedObject.current)
     setArrows(result);
   }
 
