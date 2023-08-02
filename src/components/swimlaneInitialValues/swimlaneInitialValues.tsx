@@ -49,9 +49,9 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
 
       return (<>
 
-        {index == 0 && <><Circle x={endUser.x + 100} y={endUser.y + endUser.height / 2} radius={9} stroke={"black"} />
+        {index == 0 && <><Circle x={endUser.x + 102} y={endUser.y + endUser.height / 2} radius={7} stroke={"black"} />
           <Arrow points={[endUser.x + 109, endUser.y + endUser.height / 2, xPositionFirst, yPositionFirst]} fill='black' stroke={"black"} /></>}
-        {index == objects.length - 1 && <><Circle x={objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 150 : endUser.x + 150} y={endUser.y + endUser.height / 2} radius={9} fill={"black"} />
+        {index == objects.length - 1 && <><Circle x={objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 152 : endUser.x + 152} y={endUser.y + endUser.height / 2} radius={7} fill={"black"} />
           <Arrow points={[x.x + x.width, yPostionLast, objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 145 : endUser.x + 150, endUser.y + endUser.height / 2]} fill='black' stroke={"black"} /></>
         }
       </>

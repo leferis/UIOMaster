@@ -9,14 +9,21 @@ interface LeftMeniuSelectorRepresentatationProps {
   name:any;
   initialPosY:any;
   image:any;
+  mousetype:any
 }
 
 
 
 const LeftMeniuSelectorRepresentatation: FC<LeftMeniuSelectorRepresentatationProps> = (props) =>{
   const [onHower, setOnHower] = useState(false);
+  
+  const changeMouse= (e:any, style:any) =>{
+    const container = e.target.getStage().container();
+    container.style.cursor = style;
+  }
+
   return(
-  <Group onMouseUp={() => props.onMouseUp()} onMouseDown={() => props.onMouseDown()} onMouseEnter={() => { setOnHower(true) }} onMouseLeave={() => { setOnHower(false) }}>
+  <Group onMouseUp={() => {props.onMouseUp();}} onMouseDown={() => props.onMouseDown()} onMouseEnter={(e) => { setOnHower(true); changeMouse(e,props.mousetype) }} onMouseLeave={(e) => { changeMouse(e,"default");setOnHower(false);  }}>
     {onHower && <Rect x={props.initialPosX - 6} y={props.initialPosY - 3} height={90} width={45} fill='#cad2de' cornerRadius={3}></Rect>}
     <Images x={props.initialPosX} y={props.initialPosY} image={props.image} height={30} width={30} />
     <Text x={props.initialPosX - 2} y={props.initialPosY + 40} text={props.name} fontSize={12} wrap="char" width={40} />

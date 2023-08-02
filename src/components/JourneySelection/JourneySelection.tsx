@@ -2,6 +2,7 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/ma
 import React, { FC, useState } from 'react';
 import { Journey } from '../../Classes/Journey';
 import styles from './JourneySelection.module.css';
+import { Actors } from '../../Classes/Actors';
 
 interface JourneySelectionProps {
   showJourney: any;
@@ -32,7 +33,7 @@ function JourneySelection(props: JourneySelectionProps) {
                 setSelectedJourney(e.target.value);
               }}>
 
-              <MenuItem value={undefined}>None</MenuItem>
+              <MenuItem value={-1}>None</MenuItem>
               {props.JourneyList.map((x: Journey, index: number) => {
                 if (x.isPlanned) {
                   return (
@@ -84,7 +85,14 @@ function JourneySelection(props: JourneySelectionProps) {
           <Grid container spacing={2}>
             <Grid item xs={2}></Grid>
             <Grid item xs={4}><Button onClick={() => { props.addJourney(true, null); props.closeJourney(false) }} variant="contained">Add Planned Journey</Button> </Grid>
-            <Grid item xs={4}><Button onClick={() => { setShowSelection(true); }} variant="contained">Add Actual Journey</Button></Grid>
+            <Grid item xs={4}><Button onClick={() => { 
+              const filteredCount = props.JourneyList.filter((x:Journey) => x.isPlanned).length;
+              if(filteredCount>0){
+              setShowSelection(true);}
+              else{
+                props.addJourney(false, selectedJourney);
+                props.closeJourney(false) 
+              } }} variant="contained">Add Actual Journey</Button></Grid>
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid style={{paddingTop:"20px"}}>

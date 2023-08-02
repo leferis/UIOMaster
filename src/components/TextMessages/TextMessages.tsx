@@ -38,12 +38,16 @@ function getStyle(width:number, height:number, fontSize:number) {
     margintop: "-4px"
   };
 }
+const changeMouse= (e:any, style:any) =>{
+  const container = e.target.getStage().container();
+  container.style.cursor = style;
+}
 
 function TextMessages(props: TextMessagesProps){
   const style:any = getStyle(props.width,props.height, props.fontSize);
   if(props.isEditing){
   return(
-    <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1 } }}>
+    <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1} } }>
     <textarea 
           value={props.value}
           onChange={(e)=>props.ChangeFunction(e.target.value,props.modifyObject)}
@@ -66,7 +70,8 @@ function TextMessages(props: TextMessagesProps){
         onClick={(e)=>{
           props.changeEditable(props.modifyObject);
         }}
-        
+        onMouseEnter={(e)=>changeMouse(e,"pointer")}
+        onMouseLeave={(e)=>changeMouse(e,"default")}
       /></>)
   }
 }

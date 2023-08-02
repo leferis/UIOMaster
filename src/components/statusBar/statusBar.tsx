@@ -34,9 +34,9 @@ function StatusBar(props: StatusBarProps) {
 
   return (
     <Group>
-      <Rect x={230} y={getCanvasHeight() - 30} height={100} width={320} fill='black' opacity={0.04}></Rect>
-      <Text text={getStatusString()} x={233} y={getCanvasHeight() - 20} fontSize={16}></Text>
-      <Text text={getJourneyType()} x={415} y={getCanvasHeight() - 20} fontSize={16}></Text>
+      <Rect x={270} y={getCanvasHeight() - 30} height={100} width={330} fill='black' opacity={0.04}></Rect>
+      <Text text={getStatusString()} x={285} y={getCanvasHeight() - 20} fontSize={16}></Text>
+      <Text text={getJourneyType()} x={465} y={getCanvasHeight() - 20} fontSize={16}></Text>
     </Group>
   )
 }

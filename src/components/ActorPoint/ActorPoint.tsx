@@ -27,7 +27,10 @@ function ActorPoint(props: ActorPointProps) {
     let img = props.getImageObject(x.img);
     return (<Images x={x.x + 45} y={x.y + 55} image={img} />)
   }
-
+  const changeMouse= (e:any, style:any) =>{
+    const container = e.target.getStage().container();
+    container.style.cursor = style;
+  }
   return (<div>
     {props.actors.map((act: Actors, index: number) => {
       if (props.SwimlineMode && !act.isEndUser) {
@@ -49,13 +52,15 @@ function ActorPoint(props: ActorPointProps) {
           onClick={(evt) => {
             props.setCurrentObjectID(act);
           }}
+          onMouseEnter={(e)=>changeMouse(e,"pointer")}
+          onMouseLeave={(e)=>changeMouse(e,"default")}
           x={act.x}
           height={100}
           width={100}
           y={act.y}
         />
   
-        <TextMessages x={act.x + 35} y={act.y + 100} height={40} width={60} fontSize={12} value={act.Title} modifyObject={act} isEditing={act.isEditing}
+        <TextMessages   x={act.x + 35} y={act.y + 100} height={40} width={60} fontSize={12} value={act.Title} modifyObject={act} isEditing={act.isEditing}
           ChangeFunction={((val: any, x: any) => {
             const circles = props.actors.map(act => {
               if (act.id == x.id) {

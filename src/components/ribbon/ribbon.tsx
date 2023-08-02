@@ -91,7 +91,7 @@ function Ribbon(props: RibbonProps) {
         setHower(true)
       }} onMouseLeave={() => { setHower(false) }}
       >
-        <span className='BarText' style={{marginRight:"-13%"}}>File</span>
+        <span className='BarText' style={{marginRight:"-13%", userSelect:"none"}}>File</span>
         <div className="dropdown-submeniu" style={{ left: 0, position: "absolute", zIndex: "10" }}>
           {<RibbonDropDownButton onhower={hower} text={"Import"} onClickCommand={ () => {props.showModal(true); }}/>}
           {<RibbonDropDownButton onhower={hower} text={"Export"} onClickCommand={() => {
@@ -105,10 +105,9 @@ function Ribbon(props: RibbonProps) {
           }}/>}
         </div>
       </div>
-      {<RibbonRibbonButton onClickCommand={() => { props.showQuestionary(true) }} text={"Form"}></RibbonRibbonButton>}
       {<RibbonRibbonButton onClickCommand={() => { }} text={"Help"}></RibbonRibbonButton>}
       <div className={false ? 'BarElementSelected' : 'BarElement'} style={{ float: "right", paddingBottom: "5px" }}>
-        <span className='BarText' style={{ background: "rgb(57, 85, 163)", color: "white", borderRadius: "5px", paddingBottom: "5px" }} onClick={() => {
+        <span className='BarText' style={{ background: "rgb(57, 85, 163)", color: "white", borderRadius: "5px", paddingBottom: "5px",userSelect:"none", cursor:"pointer" }} onClick={() => {
           props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows, props.makeBiggerActors)
         }}> Switch diagram type</span></div>
     </div>

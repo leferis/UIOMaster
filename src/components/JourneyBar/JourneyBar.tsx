@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './JourneyBar.module.css';
 import { IconButton, Tooltip } from '@mui/material';
 import AddCircle from '@mui/icons-material/AddCircle';
 import { Journey } from '../../Classes/Journey';
+import JourneyBarTab from './tab/JourneyBar/tab';
 
 interface JourneyBarProps {
   ChangeOpenHome:any;
@@ -17,42 +18,24 @@ interface JourneyBarProps {
 }
 
 function JourneyBar(props:JourneyBarProps){
+  const [onHower,setOnHower] = useState(false);
   return (       <div >
-    <div style={{ display: "inline-block", minWidth: '96%' }}>
-    <div className={ props.currentJourney == -1 ? 'BarElementSelected' : 'BarElement'} onClick={()=>{
+    <div style={{ display: "inline-block", minWidth: '96%' }} >
+    <div className={ props.currentJourney == -1 || onHower ? 'BarElementSelected' : 'BarElement'} onMouseEnter={()=>setOnHower(true)} onMouseLeave={()=>setOnHower(false)} onClick={()=>{
     props.ChangeOpenHome(true);
     if(props.currentJourney != -1){
       props.changeJourney(props.currentJourney);
       props.setCurrentJourney(-1);
     }
-  }}> <span  className='BarText'>Overview</span></div>
+  }} style={{cursor:"pointer", userSelect:"none" }}> <span  className='BarText'>All Joyrneys</span></div>
       {props.Journey.map((x, index) => {
-        if (index != props.journeyChange) {
-          return (<div className={index == props.currentJourney ? 'BarElementSelected' : 'BarElement'} onClick={() => {
-            props.changeJourney(index);
-            props.ChangeOpenHome(false);
-          }}><span className='BarText' onDoubleClick={() => props.setJourneyChange(index)}>{x.JourneyName}</span></div>)
-        }
-        else {
-          return (<div className={index == props.currentJourney ? 'BarElementSelected' : 'BarElement'}
-          ><textarea className='BarText' maxLength={30} onChange={(x) => {
-            let newJourney = props.Journey.map((xSub, id) => {
-              if (id == index) {
-                xSub.JourneyName = x.target.value;
-                xSub.JourneyID = x.target.value;
-                return xSub;
-              }
-              return xSub;
-            })
-            props.setJourney(newJourney);
-          }} onBlur={() => props.setJourneyChange(-1)}>{x.JourneyName}</textarea></div>)
-        }
+        return(<JourneyBarTab  ChangeOpenHome={props.ChangeOpenHome} Journey={props.Journey} changeJourney={props.changeJourney} currentJourney={props.currentJourney}
+        element={x} index={index} journeyChange={props.journeyChange} setJourney={props.setJourney} setJourneyChange={props.setJourneyChange}></JourneyBarTab>)
       }
-
       )}
     </div>
     <Tooltip title="Add journey">
-      <IconButton aria-label="plus" size="medium" onClick={() => props.setShowAddJourney(true)} >
+      <IconButton aria-label="plus" size="medium" color='primary' onClick={() => props.setShowAddJourney(true)} >
         <AddCircle />
       </IconButton>
     </Tooltip>
