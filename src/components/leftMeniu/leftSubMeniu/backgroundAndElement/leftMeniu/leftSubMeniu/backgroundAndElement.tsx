@@ -13,6 +13,7 @@ interface LeftMeniuLeftSubMeniuBackgroundAndElementProps {
   represenation:string, 
   img?:string;
   text:string;
+  swimLaneMode?:any;
 }
 
 function getImageObject(imgName: any) {
@@ -21,26 +22,36 @@ function getImageObject(imgName: any) {
   return image;
 }
 
-function representation(type:string, x:any, y:any, path:any = ""){
-  if(type == "Image"){
-    return (<Images x={x+ 2.5} y={y} image={getImageObject(path)} height={30} width={30} />)
-  }
-  else if(type == "Rect"){
-    return (<Rect x={x+2.5} y={y+4} width={30} height={27} cornerRadius={3} stroke={"black"} strokeWidth={1} />)
-  }
-  else if (type == "Circle"){
-    return (<Circle x={x+17.5} y={y+17} radius={15} stroke={"black"} strokeWidth={1} />)
-  }
-  else if (type == "Arrow"){
-    return ( <Arrow points={[x+4, y+30, x+30, y+5]} fill='black' stroke={"black"} strokeWidth={1} />)
-  }
-}
 
 const LeftMeniuLeftSubMeniuBackgroundAndElement: FC<LeftMeniuLeftSubMeniuBackgroundAndElementProps> = (props) => {
   const [hower, onHower] = useState(false)
   const [popUp, onPopup] = useState(false)
   const [delayHandler, setDelayHandler] = useState<any>(null)
   
+  function representation(type:string, x:any, y:any, path:any = ""){
+    if(type == "Image"){
+      return (<Images x={x+ 2.5} y={y} image={getImageObject(path)} height={30} width={30} />)
+    }
+    else if(type == "Rect"){
+      return (<Rect x={x+2.5} y={y+4} width={30} height={27} cornerRadius={3} stroke={"black"} strokeWidth={1} />)
+    }
+    else if (type == "Circle"){
+      if(props.swimLaneMode){
+      return (<Circle x={x+17.5} y={y+17} radius={15} stroke={"black"} strokeWidth={1} />)}
+      else{
+        return (<Group>
+          <Rect x={x+11} y={y+4} width={14} height={10} cornerRadius={3} stroke={"black"} strokeWidth={1} />
+          <Arrow points={[x+18,y+14,x+18,y+22]} fill='black' stroke={"black"} dash={[3]} pointerWidth={3}  pointerLength={3} />
+          <Rect x={x+11} y={y+23} width={14} height={10} cornerRadius={3} stroke={"black"} strokeWidth={1} />
+        </Group>)
+      }
+    }
+    else if (type == "Arrow"){
+      return ( <Arrow points={[x+4, y+30, x+30, y+5]} fill='black' stroke={"black"} strokeWidth={1} />)
+    }
+  }
+  
+
   const handleMouseEnter = (event:any) => {
     console.log(props.text.length)
     console.log(props.text.length*6.5)

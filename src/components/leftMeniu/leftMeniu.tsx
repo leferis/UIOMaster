@@ -201,7 +201,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                                 y={75} text={"Action"} align={"center"} fontSize={14} />
                                 </Group>
                         </div>}
-                        {subMeniuOption == "Arrow" && <div>
+                        {subMeniuOption == "Arrow" && props.SwimlineMode && <div>
                                 <Rect
                                         x={95}
                                         y={32}
@@ -232,7 +232,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 <div><Statistics layer={layerEl} Journeys={props.Journeys} actions={props.actions} circles={props.circles} currentJourney={props.currentJourney} diagramType={props.SwimlineMode}></Statistics></div>}
                 </Layer>
                 <Layer onClick={() => console.log(subMeniuOption)}>
-                        <LeftMeniuLeftSubMeniu openForm={props.showQuestionary} option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl}></LeftMeniuLeftSubMeniu>
+                        <LeftMeniuLeftSubMeniu openForm={props.showQuestionary} option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl} swimLaneMode={props.SwimlineMode}></LeftMeniuLeftSubMeniu>
                 </Layer>
         </>
         );
