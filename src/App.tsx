@@ -664,9 +664,7 @@ function App() {
   }
 
   function elementCheckCloseToBorder(position: any) {
-    if (checkIfCloseToActorsBorder(position, ActorsCJML[0])) {
       makeActorsBigger(position);
-    }
   }
 
   function elementsAreFarFromBorder() {
@@ -698,9 +696,7 @@ function App() {
   }
 
   function makeBiggerActors(position: any) {
-    if (checkIfCloseToActorsBorder(position, ActorsCJML[0])) {
-      makeActorsBigger(position);
-    }
+    makeActorsBigger(position);
   }
 
   function checkIfCloseToActorsBorder(position: any, actor: Actors) {
@@ -711,10 +707,22 @@ function App() {
   }
 
   function makeActorsBigger(position: number) {
+    let maxValue= -999;
+    circles.forEach(x =>{
+      if(x.x>maxValue)
+      maxValue = x.x;
+    })
+    actions.forEach(x=>{
+      if(x.x>maxValue){
+        maxValue = x.x;
+      }
+    })
+    if(maxValue<position){
+      maxValue = position;
+    }
     const actorsTemp = ActorsCJML;
     actorsTemp.forEach(x => {
-
-      x.width += position - (x.x + x.width) + 200;
+      x.width = maxValue + 200;
     })
     setActors(actorsTemp);
   }
