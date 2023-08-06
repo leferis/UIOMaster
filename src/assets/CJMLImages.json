@@ -5,146 +5,180 @@
             "Images": [
                 {
                     "Name": "Bank",
+                    "Group":"Finances",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-1.svg"
                 },
                 {
                     "Name": "Bank-2",
+                    "Group":"Finances",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-2.svg"
                 },
                 {
                     "Name": "Bank-3",
+                    "Group":"Finances",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-3.svg"
                 },
                 {
                     "Name": "Bank-4",
+                    "Group":"Finances",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-4.svg"
                 },
                 {
                     "Name": "DataSystems",
+                    "Group":"Virtual systems",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\datasystem.svg"
                 },
                 {
                     "Name": "Employee",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg"
                 },
                 {
                     "Name": "Employee-2",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-2.svg"
                 }
                 ,
                 {
                     "Name": "Employee-3",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-3.svg"
                 }
                 ,
                 {
                     "Name": "Employee-4",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-4.svg"
                 }
                 ,
                 {
                     "Name": "Employee-5",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-5.svg"
                 },
                 {
                     "Name": "Employee-6",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-6.svg"
                 },
                 {
                     "Name": "Online Bank 1",
+                    "Group":"Virtual systems",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\online-bank-1.svg"
                 },
                 {
                     "Name": "Online Bank 2",
+                    "Group":"Virtual systems",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\online-bank-2.svg"
                 },
                 {
                     "Name": "Service Provider 1",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg"
                 }
                 ,
                 {
                     "Name": "Service Provider 2",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-2.svg"
                 },
                 {
                     "Name": "Service Provider 3",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-3.svg"
                 },
                 {
                     "Name": "Service Provider 4",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-4.svg"
                 },
                 {
                     "Name": "Service Provider 5",
+                    "Group":"Worker",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-5.svg"
                 },
                 {
                     "Name": "Store 1",
+                    "Group":"Physical store",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-1.svg"
                 },
                 {
                     "Name": "Store 2",
+                    "Group":"Physical store",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-2.svg"
                 },
                 {
                     "Name": "Store 3",
+                    "Group":"Physical store",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-3.svg"
                 },
                 {
                     "Name": "Store 4",
+                    "Group":"Physical store",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-4.svg"
                 },
                 {
                     "Name": "User 1",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-1.svg"
                 },
                 {
                     "Name": "User 2",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-2.svg"
                 },
                 {
                     "Name": "User 3",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg"
                 }
                 ,
                 {
                     "Name": "User 4",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-4.svg"
                 }
                 ,
                 {
                     "Name": "User 5",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-5.svg"
                 },
                 {
                     "Name": "User 6",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-6.svg"
                 },
                 {
                     "Name": "User 7",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-7.svg"
                 },
                 {
                     "Name": "User 8",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-8.svg"
                 },
                 {
                     "Name": "User 9",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-9.svg"
                 },
                 {
                     "Name": "User 10",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-10.svg"
                 }
                 ,
                 {
                     "Name": "User 11",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-11.svg"
                 }
                 ,
                 {
                     "Name": "User 12",
+                    "Group":"End User",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-12.svg"
                 }
             ]

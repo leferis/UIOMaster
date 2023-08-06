@@ -100,9 +100,9 @@ function App() {
               initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles} 
               setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
               actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage}  updateCurrentJourney={updateCurrentJourney}
-              showModal={setShowModal}/>
+              showModal={setShowModal} images={CJMLImageList} currentObject={currentObject} currentJourney={currentJourney}/>
     
-        <Stage width={window.innerWidth} height={window.innerHeight - 150}
+        <Stage width={window.innerWidth} height={currentObject == -1? (window.innerHeight - 150):(window.innerHeight - 223)}
           onMouseUp={(e) => {
             if (ClickFunction != "")
               onClickDoes(e);

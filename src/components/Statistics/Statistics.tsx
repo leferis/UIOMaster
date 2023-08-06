@@ -77,7 +77,7 @@ function Statistics(props: StatisticsProps) {
           }
         });
         if(props.Journeys[props.currentJourney].Reference != undefined){
-          text += "Matches:\n"
+          text += "\nMatches:\n"
           text += "Touchpoints reference: ";
           text += count + '\n';
       

@@ -7,6 +7,7 @@ import { CJMLAction } from '../../Classes/CJMLAction';
 import XMLCreator from '../../XMLParsing/V2/v2.XMLCreator';
 import RibbonRibbonButton from './ribbonButton/ribbon/ribbonButton';
 import RibbonDropDownButton from './dropDownButton/ribbon/dropDownButton';
+import ChangeBar from './ChangeBar/ribbon/ChangeBar';
 
 interface RibbonProps {
   SwimlineMode: any,
@@ -26,6 +27,9 @@ interface RibbonProps {
   Journeys: any,
   updateCurrentJourney: any,
   showModal: any;
+  images:any;
+  currentObject:any;
+  currentJourney:any;
 }
 function SortActorsByY(actors: Actors[]) {
   let result = actors.sort((x, y) => {
@@ -84,7 +88,7 @@ function downloadImage(url: any) {
 
 function Ribbon(props: RibbonProps) {
   const [hower, setHower] = useState(false)
-
+  console.log(props.images)
   return (<div >
     <div style={{ display: "inline-block", minWidth: '100%', background: "#fcfcfd" }}>
       <div className={hower ? 'BarElementSelected' : 'BarElement'} style={{ float: "left", paddingBottom: "5px", maxWidth: "70px" }} onMouseEnter={() => {
@@ -111,9 +115,7 @@ function Ribbon(props: RibbonProps) {
           props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows, props.makeBiggerActors)
         }}> Switch diagram type</span></div>
     </div>
-    {/* <div style={{ height: "35px", display: "inline-block", minWidth: '100%', background: "#fcfcfd", borderBottom: "2px", borderBottomStyle: "solid", borderBottomColor: "black" }}>
-
-    </div> */}
+    <ChangeBar images={props.images} currentObj={props.currentObject} TouchPoints={props.circles} updateTouhcPoints={props.setCircles} currentJourney={props.Journeys[props.currentJourney]}></ChangeBar>
   </div>)
 }
 

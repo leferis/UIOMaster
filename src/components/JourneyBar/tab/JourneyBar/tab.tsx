@@ -14,7 +14,7 @@ interface JourneyBarTabProps {
 }
 
 function JourneyBarTab(props:JourneyBarTabProps) {
-  const [onHower, setOnHower] = useState(false)
+  const [onHower, setOnHower] = useState(false) 
   if (props.index != props.journeyChange) {
     return (<div className={props.index == props.currentJourney || onHower ? 'BarElementSelected' : 'BarElement'} 
     style={{cursor:"pointer"}}

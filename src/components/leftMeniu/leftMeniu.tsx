@@ -47,7 +47,7 @@ function LeftMeniu(props: LeftMeniuProps) {
         const [subMeniuOption, setSubMeniuOption] = useState("")
         const [renderActorList, setrenderActorList] = useState(true)
         const [enableScroll, setEnableScroll] = useState(true)
-        const [xScrollbarreal, setXScrollbarreal] = useState(10)
+        const [xScrollbarreal, setXScrollbarreal] = useState(70)
         const [xScroll, setXScroll] = useState(10)
         const layerEl: any = useRef();
 
@@ -142,7 +142,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 }
                                 else if (xScrollbarreal + (dx * 2 * -1) < 10) {
                                         setXScroll(0)
-                                        setXScrollbarreal(10)
+                                        setXScrollbarreal(70)
                                         xpos = 0
                                 }
                                 else {
