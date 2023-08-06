@@ -50,7 +50,7 @@ function LeftMeniu(props: LeftMeniuProps) {
         const [xScrollbarreal, setXScrollbarreal] = useState(70)
         const [xScroll, setXScroll] = useState(10)
         const layerEl: any = useRef();
-
+        const [enableStatistics, setEnableStatistics] = useState(false)
 
         var imageForSymbol;
         var imageText = "";
@@ -239,11 +239,11 @@ function LeftMeniu(props: LeftMeniuProps) {
                         </div>
                         }
 
-                        {subMeniuOption == "Statistics" &&
+                        {enableStatistics &&
                                 <div><Statistics layer={layerEl} Journeys={props.Journeys} actions={props.actions} circles={props.circles} currentJourney={props.currentJourney} diagramType={props.SwimlineMode}></Statistics></div>}
                 </Layer>
                 <Layer onClick={() => console.log(subMeniuOption)}>
-                        <LeftMeniuLeftSubMeniu openForm={props.showQuestionary} option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl} swimLaneMode={props.SwimlineMode}></LeftMeniuLeftSubMeniu>
+                        <LeftMeniuLeftSubMeniu openForm={props.showQuestionary} option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl} swimLaneMode={props.SwimlineMode} setStatisticsOn={setEnableStatistics} statisticsMode={enableStatistics}></LeftMeniuLeftSubMeniu>
                 </Layer>
         </>
         );

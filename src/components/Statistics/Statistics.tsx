@@ -91,8 +91,9 @@ function Statistics(props: StatisticsProps) {
     return text;
   }
   return (<>
-
-    <Text text={getText()} x={47} fontSize={14} y={13}></Text>
+    <Rect x={275} y={0} fill='black' opacity={0.02} width={250} height={130}/>
+    <Text text={getText()} x={277} fontSize={14} y={5} opacity={0.6}></Text>
+    
   </>);
 }
 export default Statistics;

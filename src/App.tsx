@@ -167,7 +167,6 @@ function App() {
               setActors={setActors}  GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
               initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors}
             ></Settings>
-            {!openHome && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} layer={layerEl} diagramType={SwimlineMode} ></Statistics>}
             {!openHome && <StatusBar layer={layerEl} currenJourneyId={currentJourney} journey={Journey} type={SwimlineMode}/>}
           </Layer>
           <LeftMeniu setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}

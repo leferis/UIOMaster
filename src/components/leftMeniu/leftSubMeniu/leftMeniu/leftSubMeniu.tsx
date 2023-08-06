@@ -9,10 +9,13 @@ interface LeftMeniuLeftSubMeniuProps {
   layer: any;
   openForm:any;
   swimLaneMode:any;
+  setStatisticsOn:any;
+  statisticsMode:any;
 }
 function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
 
   const [onHower, setOnHower] = useState(false)
+
 
   function getImageObject(imgName: any) {
     const image = new Image();
@@ -51,7 +54,7 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
       <Text x={18} y={285} text='Arrows' fontSize={14} fontVariant='bold'></Text>
     </Group>}
 
-    <Group onClick={() => { props.setOption("Statistics"); props.layer.current.y(0) }}>
+    <Group onClick={() => { props.setStatisticsOn(!props.statisticsMode); props.layer.current.y(0) }}>
       <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={props.swimLaneMode? 314:250} height={45} width={45} option={"Statistics"} currentOption={props.option} represenation='Image' img={"\\HelpingImages\\statistics.png"} text='Statistics' />
       <Text x={10} y={props.swimLaneMode?345:285} text='Statistics' fontSize={14} fontVariant='bold'></Text>
     </Group>
