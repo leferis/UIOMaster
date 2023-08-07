@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 
 import styles from './ribbon/ChangeBar/ImageChange.module.css';
-import { FormControl, InputLabel, Select, MenuItem, ListSubheader } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, ListSubheader, ListItem } from '@mui/material';
 
 interface RibbonChangeBarImageChangeProps {
   images: any;
   text: any;
-  currentObject:any;
+  currentObject: any;
+  changeImage:any;
 }
 
 function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
@@ -19,42 +20,41 @@ function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
     }
     return 0;
   })
-  let value
+  let value: string
   console.log(props.currentObject)
-  if(props.currentObject.imageName != undefined){
+  if (props.currentObject.imageName != undefined) {
     value = props.currentObject.imageName
   }
-  else if(props.currentObject.img != undefined){
-    value =props.currentObject.img
+  else if (props.currentObject.img != undefined) {
+    value = props.currentObject.img
   }
-  else{
-    value=""
+  else {
+    value = ""
   }
-  console.log(value)
+
   let group = "";
-  return (<div style={{display:"inline-block"}} >
-    <FormControl sx={{ m: 1 , minWidth:200}}>
+  return (<div style={{ display: "inline-block" }} >
+    <FormControl sx={{ m: 1, minWidth: 200 }}>
       <InputLabel htmlFor="grouped-select">{props.text}</InputLabel>
-      <Select  value={value} id="grouped-select" label="Grouping"
-      onChange={(e)=>{
-        console.log(e);
-      }}
+      <Select value={value} id="grouped-select" label="Grouping"
+        onChange={(e) => {
+          props.changeImage(e.target.value)
+        }}
       >
         {sorted.map((a: any) => {
-        
           if (group != a.Group) {
             group = a.Group;
+            let value = []
+            value.push(<ListSubheader>{a.Group}</ListSubheader>)
+            value.push(<MenuItem value={a.Location}>{a.Name}</MenuItem>)
             return (
-              <div>
-                <ListSubheader>{a.Group}</ListSubheader>
-                <MenuItem  value={a.Location}>{a.Name}</MenuItem>
-              </div>
+                value.map((val:any) =>{
+                  return val
+                })
             )
           }
           return (
-            <div>
-              <MenuItem  value={a.Location}>{a.Name}</MenuItem>
-            </div>
+            <MenuItem value={a.Location}>{a.Name}</MenuItem>
           )
         })}
       </Select>

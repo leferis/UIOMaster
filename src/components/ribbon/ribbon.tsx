@@ -29,7 +29,9 @@ interface RibbonProps {
   showModal: any;
   images:any;
   currentObject:any;
+  setAcotrs:any;
   currentJourney:any;
+  setCurrentObject:any;
 }
 function SortActorsByY(actors: Actors[]) {
   let result = actors.sort((x, y) => {
@@ -115,7 +117,8 @@ function Ribbon(props: RibbonProps) {
           props.setSwimlineMode(!props.SwimlineMode); switchBetweenDiagrams(!props.SwimlineMode, props.circles, props.actions, props.setActions, props.setCircles, props.initialArrowId, props.setInitialArrowID, props.setArrows, props.makeBiggerActors)
         }}> Switch diagram type</span></div>
     </div>
-    <ChangeBar images={props.images} currentObj={props.currentObject} TouchPoints={props.circles} updateTouhcPoints={props.setCircles} currentJourney={props.Journeys[props.currentJourney]}></ChangeBar>
+    <ChangeBar images={props.images} currentObj={props.currentObject} TouchPoints={props.circles} updateTouhcPoints={props.setCircles} currentJourney={props.Journeys[props.currentJourney]} actors={props.actors} setActors={props.setAcotrs}
+    setCurrentObj={props.setCurrentObject} SwimlaneMode={props.SwimlineMode}></ChangeBar>
   </div>)
 }
 
