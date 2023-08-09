@@ -30,6 +30,7 @@ interface TouchPointNetworkProps {
   getImage:any;
   isPlanned:boolean
   makeBiggerActors:any;
+  setCurrentObject:any;
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps){
@@ -39,7 +40,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
     <div>
     <Rect x={props.touchPoint.swimlaneX}
       y={props.touchPoint.swimlaneY}
-      draggable
+
       height={120}
       width={180}
       stroke={props.touchPoint.Capacity?'#F49D6E':'#2B8299'}
@@ -48,21 +49,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
       shadowOffsetX={3}
       shadowOffsetY={3}
       shadowOpacity={20}
-      onClick={(e) => {
-        props.resetTouchpoints();
-        props.checkClickFunction(props.touchPoint, e);
-      }}
-      onDragStart={() => props.touchPoint.Capacity = false}
-      onDragMove={(e) => {
-        onDragMove(e,props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode, props.isPlanned )
-      }}
-      onDragEnd={
-
-        (e) => {
-          onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned)
-        }
-
-      }
+      
       fill={"#DBEEF4"}
       cornerRadius={10}
       strokeWidth={4}
@@ -73,12 +60,13 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
 
     <TextMessages x={props.touchPoint.swimlaneX + 55}
       y={props.touchPoint.swimlaneY + 10}
-      height={150}
+      height={70}
       fontSize={13}
       value={props.touchPoint.text}
       width={80}
       isEditing={props.touchPoint.isEditing}
       ChangeFunction={((val: any, x: any) => {
+        props.setCurrentObject(-1)
         const circles = props.Circle.map(circle => {
           if (circle.id == x.id) {
             return { ...circle, text: val };
@@ -107,12 +95,46 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
       }}
       modifyObject={props.touchPoint}
     ></TextMessages>
+    
     {props.getImage(props.touchPoint, props.index)}
     <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY + 120]} stroke={'black'}
       strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
     <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY + 120, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY]} stroke={'black'}
       strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
 
+    {!props.touchPoint.isEditing && <Rect x={props.touchPoint.swimlaneX}
+      y={props.touchPoint.swimlaneY}
+      draggable
+      height={120}
+      width={180}
+      onClick={(e) => {
+        props.resetTouchpoints();
+        props.checkClickFunction(props.touchPoint, e);
+      }}
+      onDblClick={()=>{
+       let results =  props.Circle.map((x:CJMLCircle) =>{
+          if(x.id == props.touchPoint.id){
+            x.isEditing = true;
+            x.Capacity= true
+          }
+          return x;
+        });
+        props.updateCircles(results);
+      }}
+      onDragStart={() => props.touchPoint.Capacity = false}
+      onDragMove={(e) => {
+        onDragMove(e,props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode, props.isPlanned )
+      }}
+      onDragEnd={
+
+        (e) => {
+          onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned)
+        }
+
+      }
+      opacity={0}
+
+    />}
     <Arrow points={[props.touchPoint.swimlaneX + 90, props.touchPoint.swimlaneY > props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY  : props.touchPoint.swimlaneY + 120, props.touchPoint.swimlaneX + 90, props.touchPoint.swimlaneY > props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneReceiverY + 123 : props.touchPoint.swimlaneReceiverY-3]}
       fill={"black"}
       stroke={"black"}
@@ -122,7 +144,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
 
     <Rect x={props.touchPoint.swimlaneX}
       y={props.touchPoint.swimlaneReceiverY}
-      draggable
+
       height={120}
       width={180}
       fill='white'
@@ -136,6 +158,72 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
         props.checkClickFunction(props.touchPoint, e);
       }}
       stroke={props.touchPoint.Capacity?'#F49D6E':'#2B8299'}
+      
+      cornerRadius={10}
+      strokeWidth={4}
+      opacity={1}
+      dash={TouchPointStatus[props.touchPoint.Status] == "Missing" ? [5] : [0]}
+    >
+    </Rect>
+
+    <TextMessages x={props.touchPoint.swimlaneX + 55}
+      y={props.touchPoint.swimlaneReceiverY + 10}
+      height={70}
+      fontSize={13}
+      value={props.touchPoint.receiverText}
+      width={80}
+      isEditing={props.touchPoint.isEditing}
+      ChangeFunction={((val: any, x: any) => {
+        props.setCurrentObject(-1)
+        const circles = props.Circle.map(circle => {
+          if (circle.id == x.id) {
+            return { ...circle, receiverText: val };
+          }
+          return circle;
+        })
+        props.updateCircles(circles);
+      })}
+      changeEditable={(x: any) => {
+        const circles = props.Circle.map(circle => {
+          if (circle.id == x.id) {
+            return { ...circle, isEditing: true };
+          }
+          return circle;
+        })
+        props.updateCircles(circles);
+      }}
+      ChangeBack={(x: any) => {
+        const circles = props.Circle.map(circle => {
+          if (circle.id == x.id) {
+            return { ...circle, isEditing: false };
+          }
+          return circle;
+        })
+        props.updateCircles(circles);
+      }}
+      modifyObject={props.touchPoint}
+    ></TextMessages>
+    {props.getImageReceiver(props.touchPoint, props.index)}
+    <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY + 120]} stroke={'black'}
+      strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
+    <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY + 120, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY]} stroke={'black'}
+      strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
+
+{!props.touchPoint.isEditing && <Rect x={props.touchPoint.swimlaneX}
+      y={props.touchPoint.swimlaneReceiverY}
+      draggable
+      height={120}
+      width={180}
+      onDblClick={()=>{
+       let results =  props.Circle.map((x:CJMLCircle) =>{
+          if(x.id == props.touchPoint.id){
+            x.isEditing = true;
+            x.Capacity= true
+          }
+          return x;
+        });
+        props.updateCircles(results);
+      }}
       onDragStart={() => props.touchPoint.Capacity = false}
       onDragMove={(e) => {
         const circles = props.Circle.map(circle => {
@@ -203,54 +291,9 @@ function TouchPointNetwork(props: TouchPointNetworkProps){
         }
 
       }
-      cornerRadius={10}
-      strokeWidth={4}
-      opacity={1}
-      dash={TouchPointStatus[props.touchPoint.Status] == "Missing" ? [5] : [0]}
-    >
-    </Rect>
+      opacity={0}
 
-    <TextMessages x={props.touchPoint.swimlaneX + 55}
-      y={props.touchPoint.swimlaneReceiverY + 10}
-      height={150}
-      fontSize={13}
-      value={props.touchPoint.receiverText}
-      width={80}
-      isEditing={props.touchPoint.isEditing}
-      ChangeFunction={((val: any, x: any) => {
-        const circles = props.Circle.map(circle => {
-          if (circle.id == x.id) {
-            return { ...circle, receiverText: val };
-          }
-          return circle;
-        })
-        props.updateCircles(circles);
-      })}
-      changeEditable={(x: any) => {
-        const circles = props.Circle.map(circle => {
-          if (circle.id == x.id) {
-            return { ...circle, isEditing: true };
-          }
-          return circle;
-        })
-        props.updateCircles(circles);
-      }}
-      ChangeBack={(x: any) => {
-        const circles = props.Circle.map(circle => {
-          if (circle.id == x.id) {
-            return { ...circle, isEditing: false };
-          }
-          return circle;
-        })
-        props.updateCircles(circles);
-      }}
-      modifyObject={props.touchPoint}
-    ></TextMessages>
-    {props.getImageReceiver(props.touchPoint, props.index)}
-    <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY + 120]} stroke={'black'}
-      strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
-    <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY + 120, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY]} stroke={'black'}
-      strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
+    />}
   </div>
   )
   

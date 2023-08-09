@@ -7,15 +7,16 @@ interface StatusBarProps {
   type: any;
   journey: any;
   currenJourneyId: any;
+  moveStatistics:any;
 }
 
 function StatusBar(props: StatusBarProps) {
 
   function getStatusString() {
     if (props.type) {
-      return "Type: Network Diagram"
+      return "Diagram Type: Journey Diagram"
     }
-    return "Type: Journey diagram"
+    return "Diagram Type: Network diagram"
   }
 
   function getJourneyType() {
@@ -34,9 +35,9 @@ function StatusBar(props: StatusBarProps) {
 
   return (
     <Group>
-      <Rect x={270} y={getCanvasHeight() - 30} height={100} width={330} fill='black' opacity={0.04}></Rect>
-      <Text text={getStatusString()} x={285} y={getCanvasHeight() - 20} fontSize={16}></Text>
-      <Text text={getJourneyType()} x={465} y={getCanvasHeight() - 20} fontSize={16}></Text>
+      <Rect x={props.moveStatistics?275:92} y={0} height={40} width={250} fill='black' opacity={0.04}></Rect>
+      <Text text={getStatusString()} x={props.moveStatistics?280:93} y={3} fontSize={16}></Text>
+      <Text text={getJourneyType()} x={props.moveStatistics?280:93} y={23} fontSize={16}></Text>
     </Group>
   )
 }

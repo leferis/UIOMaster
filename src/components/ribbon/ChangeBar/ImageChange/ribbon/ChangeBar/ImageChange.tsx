@@ -33,7 +33,7 @@ function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
   }
 
   let group = "";
-  return (<div style={{ display: "inline-block" }} >
+  return (<div style={{ display: "inline-block", float:"left" }} >
     <FormControl sx={{ m: 1, minWidth: 200 }}>
       <InputLabel htmlFor="grouped-select">{props.text}</InputLabel>
       <Select value={value} id="grouped-select" label="Grouping"

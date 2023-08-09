@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { Stage, Layer, Rect, Text, Circle, Line, Arrow, Image, Group, Tag } from 'react-konva';
+import { Stage, Layer, Rect, Text, Circle, Line, Arrow, Image as Images, Group, Tag } from 'react-konva';
 import XMLCreator from '../../XMLParsing/V2/v2.XMLCreator';
 import { Actors } from '../../Classes/Actors';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
@@ -11,6 +11,7 @@ import ActorPicker from './ActorPicker/leftMeniu/ActorPicker';
 import LeftMeniuLeftSubMeniu from './leftSubMeniu/leftMeniu/leftSubMeniu';
 import LeftMeniuSelector from './leftMeniuSelector/leftMeniuSelector'
 import Statistics from '../Statistics/Statistics';
+import { findImagePoints } from '../../Functions/Screenshot';
 interface LeftMeniuProps {
         setClickFunction: any;
         enableDevationMode: any;
@@ -41,22 +42,38 @@ interface LeftMeniuProps {
         currentJourney: any;
         addNewActor: any;
         setActions: any;
+        mainLayer:any;
+        openModal:any;
+        setmoveStatistics:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
         const [subMeniuOption, setSubMeniuOption] = useState("")
-        const [renderActorList, setrenderActorList] = useState(true)
         const [enableScroll, setEnableScroll] = useState(true)
         const [xScrollbarreal, setXScrollbarreal] = useState(70)
         const [xScroll, setXScroll] = useState(10)
+        const [onHower, setOnHower] = useState(false);
         const layerEl: any = useRef();
+        const layerStat: any = useRef();
         const [enableStatistics, setEnableStatistics] = useState(false)
+        const [renderMeniu, setRenderMeniu] = useState(false);
+
+
+        const changeMouse = (e: any, style: any) => {
+                const container = e.target.getStage().container();
+                container.style.cursor = style;
+        }
 
         var imageForSymbol;
         var imageText = "";
         var heighth = 0;
-        var initialBoxX = 330;
-        var initialBoxY = 55;
+
+        function getImageObject(imgName: any) {
+                const image = new Image();
+                image.src = imgName;
+                return image;
+              }
+
         try {
                 heighth = props.layerHeight.current.canvas.height;
         }
@@ -80,50 +97,49 @@ function LeftMeniu(props: LeftMeniuProps) {
 
         function getImage(x: any, index: any) {
                 let img = props.getImageObject(x.imageName)
-                return (<Image x={10} y={525} height={20} width={20} image={img} />)
+                return (<Images x={10} y={525} height={20} width={20} image={img} />)
         }
         function getImageActor(x: any, index: any) {
                 let img = props.getImageObject(x.img)
                 console.log(x);
-                return (<Image x={10} y={525} height={20} width={20} image={img} />)
+                return (<Images x={10} y={525} height={20} width={20} image={img} />)
         }
 
 
 
         return (<>
                 <Layer >
-
-                        <Rect
-                                x={0}
-                                y={0}
-                                width={275}
-                                fill={"#e8eaed"}
-                                height={window.innerHeight + 30}
-                                stroke={'black'}
-                                strokeWidth={1}
-                                onMouseUp={() => {
-                                        props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
-                                }}
-                        />
+                        {renderMeniu &&
+                                <Rect
+                                        x={0}
+                                        y={0}
+                                        width={275}
+                                        fill={"#e8eaed"}
+                                        height={window.innerHeight + 30}
+                                        stroke={'black'}
+                                        strokeWidth={1}
+                                        onMouseUp={() => {
+                                                props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
+                                        }}
+                                />}
 
                 </Layer>
-                <Layer ref={layerEl}
+                {renderMeniu && <Layer ref={layerEl}
                         x={0}
                         y={0}
-
                         height={window.innerHeight}
                         width={450}
                         draggable={(subMeniuOption == "Actor" || subMeniuOption == "Touchpoint") && enableScroll}
                         dragBoundFunc={(pos) => {
                                 if (pos.y > 0) {
-                                        setrenderActorList(true)
+
                                         return {
                                                 x: 0,
                                                 y: 0
                                         }
                                 }
                                 else {
-                                        setrenderActorList(false)
+
 
                                         return {
                                                 x: 0,
@@ -148,12 +164,8 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 else {
                                         setXScrollbarreal(-790)
                                 }
-                                console.log(xpos)
-                                if (subMeniuOption == "Actor") {
-                                        if (xpos >= 0) {
-                                                setrenderActorList(true)
-                                        } else setrenderActorList(false)
-                                }
+
+
                                 if (xpos > 0) {
                                         xpos = 0
                                 }
@@ -165,29 +177,30 @@ function LeftMeniu(props: LeftMeniuProps) {
                         {subMeniuOption == "Actor" && <div>
                                 <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
                                 <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Actor' />
-                                <Rect x={70} y={xScrollbarreal} height={window.innerHeight} width={400}></Rect>
-                                {renderActorList && <ActorPicker Actors={props.actors} swimLaneMode={props.SwimlineMode} currentObject={props.currentObject} setActors={props.setActors} setCurrentObject={props.setCurrentObject} addNewActor={props.addNewActor} actions={props.actions}
-                                        circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
-                                ></ActorPicker>}
-                                <Line points={[90, 200, 270, 200]} stroke={"#d0d2d5"} fill='#d0d2d5' />
+
+                                <Rect x={90} y={xScrollbarreal} height={window.innerHeight} width={185} ></Rect>
+
                                 <Rect x={270} y={xScrollbarreal} height={330} width={5} cornerRadius={5} fill='black'></Rect>
-                                {props.Images != undefined && <LeftMeniuSelector xpos={100} ypos={120} elements={props.Images.Images[0].Images} onMouseUp={(img: string) =>
-                                        props.addNewActor(img)} onMouseDown={() => { }} mousetype={"pointer"} />}</div>}
+                                {props.Images != undefined && <LeftMeniuSelector xpos={100} ypos={-20} elements={props.Images.Images[0].Images} onMouseUp={(img: string) =>
+                                        props.addNewActor(img)} onMouseDown={() => { }} mousetype={"pointer"} />}</div>
+                        }
 
                         {subMeniuOption == "Touchpoint" && <div>
                                 <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
                                 <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Touchpoint' />
-                                <Rect x={130} y={xScrollbarreal} height={window.innerHeight} width={400}></Rect>
+
+                                <Rect x={90} y={xScrollbarreal} height={window.innerHeight} width={185} ></Rect>
                                 <Rect x={270} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
-                                {props.Images != undefined && <LeftMeniuSelector xpos={80} ypos={-20} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle(img); setEnableScroll(false) }}
-                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} mousetype={"grab"} />}</div>}
-                        {subMeniuOption == "Action" && <div>
-                                <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
-                                <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Action' />
+                                <Text x={95} y={155} fontSize={16} fontStyle='Bold' text='Communication points' />
+
+                                {props.Images != undefined && <LeftMeniuSelector xpos={80} ypos={100} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle(img); setEnableScroll(false) }}
+                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} mousetype={"grab"} />}
+
+                                <Text x={95} y={65} fontSize={16} fontStyle='Bold' text='Action' />
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction() }}>
                                         <Rect
                                                 x={95}
-                                                y={67}
+                                                y={87}
                                                 height={58}
                                                 width={50}
                                                 cornerRadius={10}
@@ -198,7 +211,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         />
                                         <Rect
                                                 x={100}
-                                                y={72}
+                                                y={92}
                                                 height={30}
                                                 width={40}
                                                 cornerRadius={10}
@@ -207,9 +220,11 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                                         />
                                         <Text x={100}
-                                                y={105} text={"Action"} align={"center"} fontSize={14} />
+                                                y={125} text={"Action"} align={"center"} fontSize={14} />
                                 </Group>
+                                <Line points={[90, 145, 270, 145]} stroke={"#d0d2d5"} fill='#d0d2d5' />
                         </div>}
+
                         {subMeniuOption == "Arrow" && props.SwimlineMode && <div>
                                 <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
                                 <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Arrow' />
@@ -239,11 +254,22 @@ function LeftMeniu(props: LeftMeniuProps) {
                         </div>
                         }
 
-                        {enableStatistics &&
-                                <div><Statistics layer={layerEl} Journeys={props.Journeys} actions={props.actions} circles={props.circles} currentJourney={props.currentJourney} diagramType={props.SwimlineMode}></Statistics></div>}
-                </Layer>
-                <Layer onClick={() => console.log(subMeniuOption)}>
-                        <LeftMeniuLeftSubMeniu openForm={props.showQuestionary} option={subMeniuOption} setOption={setSubMeniuOption} layer={layerEl} swimLaneMode={props.SwimlineMode} setStatisticsOn={setEnableStatistics} statisticsMode={enableStatistics}></LeftMeniuLeftSubMeniu>
+                       
+                        <Group onClick={() => { setRenderMeniu(false);props.setmoveStatistics(false); setSubMeniuOption("") }} onMouseEnter={(e) => { changeMouse(e, "pointer"); setOnHower(true) }} onMouseLeave={(e) => { changeMouse(e, "default"); setOnHower(false) }}>
+                                <Rect x={240} y={10} height={30} width={30} fill={onHower ? '#c6c6c7' : "#d3d3d4"} cornerRadius={4} />
+                                <Line points={[250, 20, 260, 30]} stroke={'black'} strokeWidth={2}></Line>
+                                <Line points={[260, 20, 250, 30]} stroke={'black'} strokeWidth={2}></Line>
+                        </Group>
+                </Layer>}
+                <Layer onClick={() => console.log(subMeniuOption)} ref={layerStat}>
+                {enableStatistics &&
+                                <Statistics Journeys={props.Journeys} actions={props.actions} circles={props.circles} currentJourney={props.currentJourney} diagramType={props.SwimlineMode} layer={layerStat}></Statistics>}
+                        <LeftMeniuLeftSubMeniu openModal={props.openModal} imagespoints={()=> {return findImagePoints(props.actors,props.SwimlineMode,props.circles,props.actions)}} 
+                         mainLayer={props.mainLayer} openForm={props.showQuestionary} option={subMeniuOption} 
+                         setRenderMeniu={setRenderMeniu} setmoveStatistics={props.setmoveStatistics} setOption={setSubMeniuOption} layer={layerEl} 
+                         swimLaneMode={props.SwimlineMode} setStatisticsOn={setEnableStatistics}  statisticsMode={enableStatistics}
+                         getImageObject={getImageObject} Journeys={props.Journeys} getImages={props.getImages} updateCurrentJourney={props.updateCurrentJourney}
+                         ></LeftMeniuLeftSubMeniu>
                 </Layer>
         </>
         );

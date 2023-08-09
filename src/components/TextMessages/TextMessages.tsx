@@ -44,7 +44,7 @@ const changeMouse= (e:any, style:any) =>{
 }
 
 function TextMessages(props: TextMessagesProps){
-  const style:any = getStyle(props.width,props.height, props.fontSize);
+  const style:any = getStyle(props.width,props.height+30, props.fontSize);
   if(props.isEditing){
   return(
     <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1} } }>

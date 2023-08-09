@@ -5,180 +5,228 @@
             "Images": [
                 {
                     "Name": "Bank",
-                    "Group":"Finances",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-1.svg"
                 },
                 {
                     "Name": "Bank-2",
-                    "Group":"Finances",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-2.svg"
                 },
                 {
                     "Name": "Bank-3",
-                    "Group":"Finances",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-3.svg"
                 },
                 {
                     "Name": "Bank-4",
-                    "Group":"Finances",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\bank-4.svg"
                 },
                 {
                     "Name": "DataSystems",
-                    "Group":"Virtual systems",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\datasystem.svg"
                 },
                 {
                     "Name": "Employee",
-                    "Group":"Worker",
+                    "Default":true,
+                    "GroupPriority":3,
+                    "Group":"Employee",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg"
                 },
                 {
                     "Name": "Employee-2",
-                    "Group":"Worker",
+                    "Default":true,
+                    "GroupPriority":3,
+                    "Group":"Employee",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-2.svg"
                 }
                 ,
                 {
                     "Name": "Employee-3",
-                    "Group":"Worker",
+                    "Default":true,
+                    "GroupPriority":3,
+                    "Group":"Employee",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-3.svg"
                 }
                 ,
                 {
                     "Name": "Employee-4",
-                    "Group":"Worker",
+                    "GroupPriority":3,
+                    "Group":"Employee",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-4.svg"
                 }
                 ,
                 {
                     "Name": "Employee-5",
-                    "Group":"Worker",
+                    "GroupPriority":3,
+                    "Group":"Employee",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-5.svg"
                 },
                 {
                     "Name": "Employee-6",
-                    "Group":"Worker",
+                    "GroupPriority":3,
+                    "Group":"Employee",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-6.svg"
                 },
                 {
                     "Name": "Online Bank 1",
-                    "Group":"Virtual systems",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\online-bank-1.svg"
                 },
                 {
                     "Name": "Online Bank 2",
-                    "Group":"Virtual systems",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\online-bank-2.svg"
                 },
                 {
                     "Name": "Service Provider 1",
-                    "Group":"Worker",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg"
                 }
                 ,
                 {
                     "Name": "Service Provider 2",
-                    "Group":"Worker",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-2.svg"
                 },
                 {
                     "Name": "Service Provider 3",
-                    "Group":"Worker",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-3.svg"
                 },
                 {
                     "Name": "Service Provider 4",
-                    "Group":"Worker",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-4.svg"
                 },
                 {
                     "Name": "Service Provider 5",
-                    "Group":"Worker",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-5.svg"
                 },
                 {
                     "Name": "Store 1",
-                    "Group":"Physical store",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-1.svg"
                 },
                 {
                     "Name": "Store 2",
-                    "Group":"Physical store",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-2.svg"
                 },
                 {
                     "Name": "Store 3",
-                    "Group":"Physical store",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-3.svg"
                 },
                 {
                     "Name": "Store 4",
-                    "Group":"Physical store",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-4.svg"
                 },
                 {
                     "Name": "User 1",
-                    "Group":"End User",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-1.svg"
                 },
                 {
                     "Name": "User 2",
-                    "Group":"End User",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-2.svg"
                 },
                 {
                     "Name": "User 3",
-                    "Group":"End User",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg"
                 }
                 ,
                 {
                     "Name": "User 4",
-                    "Group":"End User",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-4.svg"
                 }
                 ,
                 {
                     "Name": "User 5",
-                    "Group":"End User",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-5.svg"
                 },
                 {
                     "Name": "User 6",
-                    "Group":"End User",
+                    "GroupPriority":2,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-6.svg"
                 },
                 {
                     "Name": "User 7",
-                    "Group":"End User",
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-7.svg"
                 },
                 {
                     "Name": "User 8",
-                    "Group":"End User",
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-8.svg"
                 },
                 {
                     "Name": "User 9",
-                    "Group":"End User",
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-9.svg"
                 },
                 {
                     "Name": "User 10",
-                    "Group":"End User",
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-10.svg"
                 }
                 ,
                 {
                     "Name": "User 11",
-                    "Group":"End User",
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-11.svg"
                 }
                 ,
                 {
                     "Name": "User 12",
-                    "Group":"End User",
+                    "GroupPriority":1,
+                    "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-12.svg"
                 }
             ]
@@ -188,29 +236,35 @@
             "Images": [
                 {
                     "Name": "app On Pc",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\app-on-pc.svg"
                 },
                 {
                     "Name": "app On Smartphone",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\app-on-smartphone.svg"
                 },
                 {
                     "Name": "app On Tablet",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\app-on-tablet.svg"
                 }
                 ,
                 {
                     "Name": "call Center",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\call-center.svg"
                 }
                 ,
                 {
                     "Name": "chat",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\chat.svg"
                 }
                 ,
                 {
                     "Name": "email 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\email-1.svg"
                 }
                 ,
@@ -221,6 +275,7 @@
                 ,
                 {
                     "Name": "face To Face 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\face-to-face-conversation-1.svg"
                 }
                 ,
@@ -235,16 +290,19 @@
                 ,
                 {
                     "Name": "fax",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\fax.svg"
                 }
                 ,
                 {
                     "Name": "internet Globe",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\internet-globe.svg"
                 }
                 ,
                 {
                     "Name": "internet Via Pc 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\internet-via-pc-1.svg"
                 }
                 ,
@@ -259,6 +317,7 @@
                 },
                 {
                     "Name": "internet Via Smartphone 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\internet-via-smartphone-1.svg"
                 },
                 {
@@ -271,6 +330,7 @@
                 },
                 {
                     "Name": "internet Via Tablet 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\internet-via-tablet-1.svg"
                 },
                 {
@@ -283,6 +343,7 @@
                 },
                 {
                     "Name": "invoice 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\invoice-1.svg"
                 },
                 {
@@ -303,10 +364,12 @@
                 },
                 {
                     "Name": "laptop",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\laptop.svg"
                 },
                 {
                     "Name": "letter 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\letter-1.svg"
                 },
                 {
@@ -315,6 +378,7 @@
                 },
                 {
                     "Name": "message Service 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\message-service-1.svg"
                 },
                 {
@@ -322,9 +386,11 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\message-service-2.svg"
                 },{
                     "Name": "online Shopping",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\online-shopping.svg"
                 },{
                     "Name": "payment Channel 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\payment-1.svg"
                 },{
                     "Name": "payment Channel 2",
@@ -341,15 +407,19 @@
                 },
                 {
                     "Name": "parcel",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\parcel.svg"
                 },{
                     "Name": "pc",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\pc.svg"
                 },{
                     "Name": "phone",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\phone.svg"
                 },{
                     "Name": "self Service Machine 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\self-service-machine-1.svg"
                 },
                 {
@@ -360,12 +430,14 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\self-service-machine-3.svg"
                 },{
                     "Name": "service Desk 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\service-desk-1.svg"
                 },{
                     "Name": "service Desk 2",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\service-desk-2.svg"
                 },{
                     "Name": "shopping 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\shopping-1.svg"
                 },{
                     "Name": "shopping 2",
@@ -373,26 +445,32 @@
                 },
                 {
                     "Name": "smartphone",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\smartphone.svg"
                 },
                 {
                     "Name": "sms",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\sms.svg"
                 },
                 {
                     "Name": "social Media",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\social-media.svg"
                 },
                 {
                     "Name": "social Media Message",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\social-media-interaction.svg"
                 },
                 {
                     "Name": "tablet",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\tablet.svg"
                 },
                 {
                     "Name": "technician 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\technician-1.svg"
                 },
                 {
@@ -405,6 +483,7 @@
                 },
                 {
                     "Name": "telephone 1",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\telephone-1.svg"
                 },
                 {
@@ -413,6 +492,7 @@
                 },
                 {
                     "Name": "unknown Channel",
+                    "Default":true,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
                 }
             ]

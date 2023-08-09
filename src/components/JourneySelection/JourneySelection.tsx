@@ -97,7 +97,7 @@ function JourneySelection(props: JourneySelectionProps) {
           </Grid>
           <Grid style={{paddingTop:"20px"}}>
             <Grid item xs={4}></Grid>
-            <Grid item xs={4}><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Upload XCJML file</Button></Grid>
+            <Grid item xs={4}><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import XCJML file</Button></Grid>
             <Grid item xs={4}></Grid>
           </Grid>
         </>}

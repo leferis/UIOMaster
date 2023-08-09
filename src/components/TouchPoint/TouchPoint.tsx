@@ -69,6 +69,7 @@ function TouchPoint(props: TouchPointProps) {
             index={index}
             isPlanned={props.isPlanned}
             makeBiggerActors = {props.makeBiggerActors}
+            setCurrentObject= {props.setCurrentObjectID}
           ></TouchPointSwimlane>
           </>)
         }
@@ -77,7 +78,7 @@ function TouchPoint(props: TouchPointProps) {
             <TouchPointNetwork Circle={props.Circle} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} arrowId={props.arrowId} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction}
               elementCheckCloseToBorder={props.elementCheckCloseToBorder} elementsAreFarFromBorder={props.elementsAreFarFromBorder} getImage={getImage} getImageReceiver={getImageReceiver} index={index}
               resetTouchpoints={props.resetTouchpoints} setActions={props.setActions} setArrowId={props.setArrowId} setArrows={props.setArrows} touchPoint={x} updateCircles={props.updateCircles} isPlanned={props.isPlanned}
-              makeBiggerActors = {props.makeBiggerActors}
+              makeBiggerActors = {props.makeBiggerActors} setCurrentObject={props.setCurrentObjectID}
               />
           )
         }

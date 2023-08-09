@@ -27,18 +27,18 @@ function JourneyBar(props:JourneyBarProps){
       props.changeJourney(props.currentJourney);
       props.setCurrentJourney(-1);
     }
-  }} style={{cursor:"pointer", userSelect:"none" }}> <span  className='BarText'>All Joyrneys</span></div>
+  }} style={{cursor:"pointer", userSelect:"none" }}> <span  className='BarText'>All Journeys</span></div>
       {props.Journey.map((x, index) => {
         return(<JourneyBarTab  ChangeOpenHome={props.ChangeOpenHome} Journey={props.Journey} changeJourney={props.changeJourney} currentJourney={props.currentJourney}
         element={x} index={index} journeyChange={props.journeyChange} setJourney={props.setJourney} setJourneyChange={props.setJourneyChange}></JourneyBarTab>)
       }
-      )}
-    </div>
-    <Tooltip title="Add journey">
+      )}   <Tooltip title="Add journey" style={{bottom:"10px"}}>
       <IconButton aria-label="plus" size="medium" color='primary' onClick={() => props.setShowAddJourney(true)} >
         <AddCircle />
       </IconButton>
     </Tooltip>
+    </div>
+ 
   </div>)
 }
 

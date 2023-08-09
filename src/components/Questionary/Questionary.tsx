@@ -219,7 +219,7 @@ function Questionary(props: QuestionaryProps) {
       style={{
         position: 'fixed',
         background: 'white',
-        width: '80%',
+        width: '50%',
         height: 'auto',
         top: '50%',
         left: '50%',

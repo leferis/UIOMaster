@@ -27,6 +27,7 @@ interface TouchPointSwimlaneProps {
   index:any;
   isPlanned:any;
   makeBiggerActors:any;
+  setCurrentObject:any
 }
 
 
@@ -48,6 +49,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           value={props.touchPoint.text}
           width={60}
           ChangeFunction={((val: any, x: any) => {
+            props.setCurrentObject(-1)
             const circles = props.touchPoints.map(circle => {
               if (circle.id == x.id) {
                 return { ...circle, text: val };
@@ -86,6 +88,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           value={props.touchPoint.receiverText}
           width={60}
           ChangeFunction={((val: any, x: any) => {
+            props.setCurrentObject(-1)
             const circles = props.touchPoints.map(circle => {
               if (circle.id == x.id) {
                 return { ...circle, receiverText: val };
@@ -179,6 +182,20 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           fill={props.touchPoint.external == 0 ? "White" : "LightGray"}
           strokeWidth={3}
           dash={TouchPointStatus[props.touchPoint.Status] == "Missing" ? [5] : [0]}
+          
+        />
+        {props.getImage(props.touchPoint, 1)}
+        <Line points={[props.touchPoint.x - 15, props.touchPoint.y - 15, props.touchPoint.x + 15, props.touchPoint.y + 15]} stroke={'black'}
+          strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
+        <Line points={[props.touchPoint.x - 15, props.touchPoint.y + 15, props.touchPoint.x + 15, props.touchPoint.y - 15]} stroke={'black'}
+          strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
+          <Circle x={props.touchPoint.x}
+          y={props.touchPoint.y}
+          id={props.touchPoint.id.toString()}
+          draggable
+      
+          radius={20}
+          opacity={0}
           onClick={(e) => {
             props.resetTouchpoints();
             props.checkClickFunction(props.touchPoint, e);
@@ -211,11 +228,6 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
               props.makeBiggerActors(e.target.attrs.x);
           }}
         />
-        {props.getImage(props.touchPoint, 1)}
-        <Line points={[props.touchPoint.x - 15, props.touchPoint.y - 15, props.touchPoint.x + 15, props.touchPoint.y + 15]} stroke={'black'}
-          strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
-        <Line points={[props.touchPoint.x - 15, props.touchPoint.y + 15, props.touchPoint.x + 15, props.touchPoint.y - 15]} stroke={'black'}
-          strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
       </Group>
     </div>
   )

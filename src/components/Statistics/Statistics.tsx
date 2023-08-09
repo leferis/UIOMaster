@@ -6,30 +6,17 @@ import { CJMLCircle } from '../../Classes/CJMLCircle';
 import { TouchPointStatus } from '../../enumerator/TouchPointStatus';
 
 interface StatisticsProps {
-  layer: any;
+
   currentJourney: any;
   Journeys: any;
   circles: CJMLCircle[];
   actions: any;
   diagramType:any;
+  layer:any;
 }
 
 function Statistics(props: StatisticsProps) {
 
-   var heighth = 0;
-  var width = 0;
-   try {
-     heighth = props.layer.current.canvas.height;
-   }
-   catch (ex) {
-     heighth = 20;
-   }
-  try {
-    width = props.layer.current.canvas.width;
-  }
-  catch (ex) {
-    width = 20;
-  }
 
   function getText() {
     let text = "";
@@ -91,9 +78,8 @@ function Statistics(props: StatisticsProps) {
     return text;
   }
   return (<>
-    <Rect x={275} y={0} fill='black' opacity={0.02} width={250} height={130}/>
-    <Text text={getText()} x={277} fontSize={14} y={5} opacity={0.6}></Text>
-    
+    <Rect x={props.layer.current.canvas.width-240} y={0} fill='black' opacity={0.02} width={250} height={130}/>
+    <Text text={getText()} x={props.layer.current.canvas.width-227} fontSize={14} y={5} opacity={0.6}></Text>
   </>);
 }
 export default Statistics;

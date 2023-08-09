@@ -42,7 +42,7 @@ function ActorPoint(props: ActorPointProps) {
           y={act.y}
           height={act.height}
           width={act.width}
-          stroke={props.currentObject == act?"#A5C9FF":'#d9d9d9'}
+          stroke={props.currentObject == act?"#F49D6E":'#d9d9d9'}
           cornerRadius={10}
           fill='#f1f1f1'
           strokeWidth={3}
@@ -62,6 +62,7 @@ function ActorPoint(props: ActorPointProps) {
   
         <TextMessages   x={act.x + 35} y={act.y + 100} height={40} width={60} fontSize={12} value={act.Title} modifyObject={act} isEditing={act.isEditing}
           ChangeFunction={((val: any, x: any) => {
+            props.setCurrentObjectID(-1);
             const circles = props.actors.map(act => {
               if (act.id == x.id) {
                 return { ...act, Title: val };
@@ -89,17 +90,8 @@ function ActorPoint(props: ActorPointProps) {
             props.setActors(circles);
           }}
         ></TextMessages>
-        {/* {!props.SwimlineMode && <Group onClick={() => { props.addNewActor(act) }}>
-          <Circle x={act.x + act.width +27}
-            y={act.y + act.height +25}
-            radius={15}
-            stroke={'black'}
-
-            strokeWidth={1}>
-          </Circle>
-          <Text text='+' fontStyle='bold' fontSize={27} x={act.x + act.width  +20 } y={act.y + act.height +15}></Text>
-
-        </Group>} */}
+       {!props.SwimlineMode && props.currentObject.id == act.id && <Text text='Move Up'x={act.x + 25}  y={act.y+160} />}
+       {!props.SwimlineMode &&  props.currentObject.id == act.id && <Text text='Move Down' x={act.x + 90}  y={act.y+160}/> } 
       </div>);
     })
 

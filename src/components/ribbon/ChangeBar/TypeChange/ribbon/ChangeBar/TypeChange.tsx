@@ -2,11 +2,13 @@ import React, { FC } from 'react';
 import styles from './ribbon/ChangeBar/TypeChange.module.css';
 import { FormControl, InputLabel, Select, MenuItem, ListSubheader } from '@mui/material';
 import { TouchPointStatus } from '../../../../../../enumerator/TouchPointStatus';
+import _ from 'lodash';
 
 interface RibbonChangeBarTypeChangeProps {
   currenctObj:any;
   updateTouhcPoints:any;
   TouchPoints:any;
+  updateCurentObj:any;
 }
 
 function RibbonChangeBarTypeChange(props:RibbonChangeBarTypeChangeProps){
@@ -18,7 +20,9 @@ function RibbonChangeBarTypeChange(props:RibbonChangeBarTypeChangeProps){
         onChange={(e: any) => {
           let tempt = props.TouchPoints;
           let index = tempt.findIndex((x:any)=> {return x.id == props.currenctObj.id })
-          console.log(tempt)
+          let curentObj = _.cloneDeep(props.currenctObj)
+          curentObj.Status= e.target.value;
+          props.updateCurentObj(curentObj);
           tempt[index].Status = e.target.value;
           props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
         }}

@@ -42,7 +42,7 @@ function App() {
   const [actions, setActions] = useState<CJMLAction[]>([]);
   const [ClickFunction, setClickFunction] = useState<any>('');
   const [Arrows, setArrows] = useState<CJMLArrow[]>([]);
-  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
+  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
   const [initialActorPosY, setPosY] = useState<any>(600);
   const [initialId, setNewID] = useState<any>(3);
   const [initialArrowId, setNewArrowId] = useState<any>(-9999999);
@@ -62,6 +62,8 @@ function App() {
   const [journeyChange, setJourneyChange] = useState<any>(-1);
   const [openHome, ChangeOpenHome] = useState(false);
   const [mouseDownFunction, setMouseDownFunction] = useState("");
+  const [journeyIndex, setJourneyIndex] = useState(1);
+  const [moveStatistics, setMoveStatistics] = useState(false);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -104,7 +106,7 @@ function App() {
               setAcotrs={setActors} setCurrentObject={setCurrentObjectID}
               />
     
-        <Stage width={window.innerWidth} height={currentObject == -1? (window.innerHeight - 150):(window.innerHeight - 223)}
+        <Stage width={window.innerWidth} height={(window.innerHeight - 175)}
           onMouseUp={(e) => {
             if (ClickFunction != "")
               onClickDoes(e);
@@ -169,15 +171,15 @@ function App() {
               setActors={setActors}  GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
               initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors}
             ></Settings>
-            {!openHome && <StatusBar layer={layerEl} currenJourneyId={currentJourney} journey={Journey} type={SwimlineMode}/>}
+            {!openHome && <StatusBar layer={layerEl} currenJourneyId={currentJourney} journey={Journey} type={SwimlineMode} moveStatistics={moveStatistics} />}
           </Layer>
-          <LeftMeniu setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
+          <LeftMeniu  setmoveStatistics={setMoveStatistics} mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
               updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
               mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
               SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
               showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
               updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
-              setActions={setActions}
+              setActions={setActions} openModal={setShowModal}
             />
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
@@ -208,10 +210,12 @@ function App() {
     console.log(addId)
     if ((addId != undefined || addId != null)) {
       if(addId != -1)
-      setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: isPlanned?"Planned Journey":"Actual Journey", isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
+      setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: isPlanned?"Planned Journey " + journeyIndex:"Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
+      setJourneyIndex(journeyIndex+1);
     }
     else {
-      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned?"Planned Journey":"Actual Journey", isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
+      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned?"Planned Journey " + journeyIndex:"Actual Journey "+ journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
+      setJourneyIndex(journeyIndex+1);
     }
   }
 
@@ -227,7 +231,7 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter (actor) name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    actor.splice(index, 0, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
   }
@@ -248,7 +252,7 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter (actor) name", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
     toast.success('Actor has been added', {
@@ -289,7 +293,7 @@ function App() {
 
 
   function addNewAction() {
-    let newAction = new CJMLAction(initialId, -9999, -9999, true, "Enter text", DevationMode, ActorsCJML[0], -99999, Date.now());
+    let newAction = new CJMLAction(initialId, -9999, -9999, false, "Enter text", DevationMode, ActorsCJML[0], -99999, Date.now());
     setActions((prevActions) => [...prevActions, newAction]);
   }
 
@@ -297,7 +301,7 @@ function App() {
     if(image == ""){
       image ="\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
     }
-    let newCircle = new CJMLCircle(initialId, -9999, -9999, true, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
+    let newCircle = new CJMLCircle(initialId, -9999, -9999, false, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
     setCircles((prevCircles) => [
       ...prevCircles,
       newCircle
@@ -548,7 +552,7 @@ function App() {
         x.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
         x.swimlaneX = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
         x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
-        x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+        x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) + 200;
         return arrowNew
       }
       else {
@@ -828,7 +832,7 @@ function App() {
             positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 200 : maxLengthCircles + 200;
           }
         }
-        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.layerY - (layerEl.current.attrs.y), true, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
+        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.layerY - (layerEl.current.attrs.y), false, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
         setCircles((prevCircles) => [
           ...prevCircles,
           newCircle

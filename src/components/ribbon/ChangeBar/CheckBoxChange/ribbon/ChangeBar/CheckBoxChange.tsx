@@ -5,7 +5,6 @@ import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from '@
 interface RibbonChangeBarCheckBoxChangeProps {
   text: any;
   value: any;
-
 }
 
 function RibbonChangeBarCheckBoxChange(props: RibbonChangeBarCheckBoxChangeProps) {
