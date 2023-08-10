@@ -34,14 +34,16 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
     }
   }
   return (
-    <div className={styles.TouchpointQuestionary}>
+    <div className={styles.TouchpointQuestionary} style={{paddingTop:"20px"}}>
       {props.TouchPoints.map((x: any, index: number) => {
         return (
           <>
             <Grid style={{
-              background: index % 2 == 0 ? "#fff" : "#f1f2f4"
+              background: "#f1f2f4",
+              borderRadius:"20px",
             }} container spacing={2} >
-              <Grid item xs={8}></Grid>
+              <Grid item xs={2}><h4>{x.receiver == undefined?"Action " + (index+1):"Touchpoint " + (index+1)}</h4></Grid>
+              <Grid item xs={6}></Grid>
               <Grid item xs={1}> {index != 0 && <Tooltip title={"Up"}>
                 <IconButton aria-label="Up" size="large" onClick={() => { props.swapTouchpoints(index, 'up') }} ><ArrowUpwardIcon /></IconButton>
               </Tooltip>}</Grid>
@@ -88,6 +90,32 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
               </Grid>
               {x.receiver != undefined && <><Grid item xs={6}>
                 <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Channel</InputLabel>
+                  <Select
+                    label="Channel"
+                    error= {checkIfErrorous(x,"channelError")}
+                    labelId="demo-simple-select-label"
+                    value={x.imageName}
+                    onChange={(e: any) => {
+                      let tempt = props.TouchPoints;
+                      tempt[index].imageName = e.target.value;
+                      props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
+                    }}
+                  >
+                    {props.CJMLImageList.Images[1].Images.map((y: CJMLImage) => {
+                      if(y.Default){
+                      return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)
+                      }
+                    })}
+
+                  </Select>
+                  {checkIfErrorous(x,"channelError") && <FormHelperText error >{x.issues["channelError"]}</FormHelperText>}
+                </FormControl>
+              </Grid><Grid item xs={6}/>
+              </>
+              }
+              {x.receiver != undefined && <><Grid item xs={6}>
+                <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Receiver</InputLabel>
                   <Select
                     label="Receiver"
@@ -119,30 +147,9 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                     props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
                   }} />
                 </Grid> </>}
-                {x.receiver != undefined && <Grid item xs={6}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Channel</InputLabel>
-                  <Select
-                    label="Channel"
-                    error= {checkIfErrorous(x,"channelError")}
-                    labelId="demo-simple-select-label"
-                    value={x.imageName}
-                    onChange={(e: any) => {
-                      let tempt = props.TouchPoints;
-                      tempt[index].imageName = e.target.value;
-                      props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
-                    }}
-                  >
-                    {props.CJMLImageList.Images[1].Images.map((y: CJMLImage) => {
-                      return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)
-                    })}
 
-                  </Select>
-                  {checkIfErrorous(x,"channelError") && <FormHelperText error >{x.issues["channelError"]}</FormHelperText>}
-                </FormControl>
-              </Grid>}
 
-              {x.receiver != undefined && <Grid item xs={6}><FormGroup>
+              {x.receiver != undefined  &&<Grid item xs={6}><FormGroup>
                 <FormControlLabel labelPlacement="top" control={<Checkbox
                   defaultChecked={x.devation}
                   onChange={(e: any) => {
@@ -151,7 +158,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                     tempt[index].devation = e.target.checked;
                     props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
                   }} />} label={"Devation"} /> </FormGroup></Grid>}
-                     {x.receiver != undefined && <Grid item xs={6}>
+                     {x.receiver != undefined && x.devation && <Grid item xs={6}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Status</InputLabel>
                   <Select
@@ -163,26 +170,12 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                       props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
                     }}
                   >
-                    <MenuItem value={TouchPointStatus.Completed}>Completed</MenuItem>
                     <MenuItem value={TouchPointStatus.Missing}>Missing</MenuItem>
                     <MenuItem value={TouchPointStatus.Failing}>Failing</MenuItem>
                     <MenuItem value={TouchPointStatus.AdHoc}>AdHoc</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>}  
-              {x.receiver != undefined && <Grid item xs={6}> <FormGroup>
-                <FormControlLabel labelPlacement="top" control={<Checkbox
-                  //label="External"
-                  defaultChecked={x.external}
-                  onChange={(e: any) => {
-                    let tempt = props.TouchPoints;
-                    tempt[index].external = e.target.checked;
-                    props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
-                  }}
-                />} label="External" />
-
-              </FormGroup>
-              </Grid>}
               
            
               <Grid item xs={12}>
@@ -195,12 +188,12 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
       })}
 
       <Grid>
-        <Grid item xs={8}>
+        <Grid item xs={1}>
           <Button onClick={() => {
             props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "Touchpoint", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: -1, receiverText: "" }])
           }} >Add new Touchpoint</Button>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={1}>
           <Button onClick={() => {
             props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "Touchpoint", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: undefined, receiverText: "" }])
           }}>Add new Action</Button>

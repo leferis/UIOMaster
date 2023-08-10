@@ -193,10 +193,11 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 <Rect x={270} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
                                 <Text x={95} y={155} fontSize={16} fontStyle='Bold' text='Communication points' />
 
-                                {props.Images != undefined && <LeftMeniuSelector xpos={80} ypos={100} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle(img); setEnableScroll(false) }}
-                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} mousetype={"grab"} />}
+                              
 
                                 <Text x={95} y={65} fontSize={16} fontStyle='Bold' text='Action' />
+                                {props.Images != undefined && <LeftMeniuSelector xpos={80} ypos={100} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle(img); setEnableScroll(false) }}
+                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} mousetype={"grab"} />}
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction() }}>
                                         <Rect
                                                 x={95}

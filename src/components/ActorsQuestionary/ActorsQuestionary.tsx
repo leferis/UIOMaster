@@ -41,83 +41,31 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
 
         return (
           <div style={{
-            background: index %2 == 0?"#fff":"#f1f2f4"
+            paddingTop:"20px"
           }
           }>
-            <Grid container spacing={2}>
-              <Grid item xs={10}></Grid>
+            <Grid container style={{background:"#f1f2f4",paddingBottom:"20px",borderRadius:"20px"}} spacing={2}>
+            <Grid item xs={2}><h4>{x.isEndUser?"End User " + (index +1):"Actor " + (index + 1)}</h4></Grid>
+              <Grid item xs={7}></Grid>
               <Grid item xs={2}> {!props.tempActors[index].isEndUser && <Button variant="outlined" onClick={() => props.removeActor(index)} startIcon={<DeleteIcon />}>
                 Delete
               </Button>}</Grid>
-              <Grid item xs={6}><TextField fullWidth label="Actors Name" defaultValue={x.Title} onInput={(e) => { changeName(e, index); }} />
-              </Grid>
-              <Grid item xs={6}>
-                {!OpenColor[index] && <><div
-                  className="swatch"
-                  onClick={() => {
-
-                    const temp = OpenColor.map((x, indexX) => {
-                      if (indexX == index) {
-                        return true;
-                      }
-                      return false;
-                    })
-
-                    ChangeOpenColorStatus(temp);
-                  }}
-                  style={{
-                    background: x.color ? x.color : "#fff",
-                    width: "18px",
-                    height: "18px",
-                    borderRadius: "8px",
-                    border: "3px solid #fff",
-                    boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1)",
-                    cursor: "pointer",
-                    display: "inline-block"
-                  }} />
-                  <TextField style={{
-                    width: '70%', left: "10px",
-                    bottom: "7px",
-                    position: "relative"
-                  }} 
-                  label={"Color"}
-                  helperText={"Color which will be used to distinguish Actors"}
-                  value={x.color} onInput={(e: any) => {
-                    var temp = props.tempActors;
-                    temp[index].color = e.target.value;
-                    props.setTempActors(temp);
-                  }}></TextField></>
-                }{OpenColor[index] == true && <HexColorPicker
-                  color={x.color ? x.color : "#fff"}
-                  onChange={(e) => {
-                    console.log(x.color);
-                    var temp = props.tempActors;
-                    temp[index].color = e;
-                    props.setTempActors(temp);
-                    console.log(temp);
-                  }}
-                  onDoubleClick={(e) => {
-                    const temp = OpenColor.map((x, indexX) => {
-                      if (indexX == index) {
-                        return false;
-                      }
-                      return false;
-                    })
-                    ChangeOpenColorStatus(temp);
-                  }}></HexColorPicker>}
-              </Grid>
               <Grid item xs={6}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Actor type</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{x.isEndUser?"Actor type":"Actor role"}</InputLabel>
                   <Select
-                    label="Actor type"
+                    label={x.isEndUser?"Actor type":"Actor role"}
                     value={""}
-                  >   {props.CJMLImageList.Images[1].Images.map((y: CJMLImage) => {
-                    return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)
+                  >   {props.CJMLImageList.Images[0].Images.map((y: CJMLImage) => {
+                    if(y.Default){
+                    return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)}
                   })}
                   </Select>
                 </FormControl>
               </Grid>
+              <Grid item xs={6}><TextField fullWidth label="Actors Name" defaultValue={x.Title} onInput={(e) => { changeName(e, index); }} />
+              </Grid>
+
             </Grid>
             <hr></hr>
           </div>
