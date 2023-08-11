@@ -28,7 +28,6 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
 
   const [onHower, setOnHower] = useState(false)
 
-
   var height = 0;
   try {
     height = props.mainLayer.current.canvas.height;
@@ -45,6 +44,8 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
     const container = e.target.getStage().container();
     container.style.cursor = style;
   }
+  
+  console.log("aukstis: "+ height)
   return (<Group>
 
     <Rect x={0} y={0} width={90} height={90000} fill="#e8eaed" stroke={"black"} strokeWidth={0.5}
