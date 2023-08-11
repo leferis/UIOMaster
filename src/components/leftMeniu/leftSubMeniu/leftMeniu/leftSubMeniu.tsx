@@ -45,7 +45,6 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
     container.style.cursor = style;
   }
   
-  console.log("aukstis: "+ height)
   return (<Group>
 
     <Rect x={0} y={0} width={90} height={90000} fill="#e8eaed" stroke={"black"} strokeWidth={0.5}

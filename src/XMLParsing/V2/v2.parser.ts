@@ -67,6 +67,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
             return x.id == node.initiator
         });
         let yValue = nodeTemp.initiator.isEndUser ? nodeTemp.initiator : nodeTemp.receiver;
+        console.log(nodeTemp);
         nodeTemp.y = yValue.y + yValue.height / 2 ;
         nodeTemp.swimlaneY = nodeTemp.initiator.y + 20;
         nodeTemp.swimlaneReceiverY = nodeTemp.receiver.y + 20;
