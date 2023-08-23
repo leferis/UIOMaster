@@ -6,6 +6,10 @@ import { CJMLCircle } from '../../../../Classes/CJMLCircle';
 import { TouchPointStatus } from '../../../../enumerator/TouchPointStatus';
 import { Actors } from '../../../../Classes/Actors';
 import { onDragEnd } from '../../../../Functions/Movement';
+import ElementChangeBar from '../../../elementChangeBar/elementChangeBar';
+import RibbonChangeBarImageChange from '../../../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
+import _ from 'lodash';
+import RibbonChangeBarActorChange from '../../../ribbon/ChangeBar/ActorChange/ribbon/ChangeBar/ActorChange';
 
 interface TouchPointSwimlaneProps {
   touchPoint: CJMLCircle
@@ -28,6 +32,8 @@ interface TouchPointSwimlaneProps {
   isPlanned:any;
   makeBiggerActors:any;
   setCurrentObject:any
+  Images:any;
+  currentObject:any;
 }
 
 
@@ -38,9 +44,64 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
     props.checkClickFunction(clickedObject, e);
   }
 
+  
+  function changeActor(e:any, type:any){
+    let touchpointData = _.cloneDeep(props.touchPoints);
+    let indexTouchpoint = touchpointData.findIndex((x:any) => {
+      return x.id ==props.currentObject.id
+    });
+    let newActor = props.actors.findIndex((x)=> {
+      return x.id == e
+    })
+    if(type == "Initiator"){
+      if(props.currentObject.initiator.id != props.actors[newActor].id){
+        if(props.currentObject.receiver.isEndUser && props.currentObject.receiver.id != props.actors[newActor].id){
+          touchpointData[indexTouchpoint].initiator = props.actors[newActor]
+        }
+        else{
+          touchpointData[indexTouchpoint].receiver = _.cloneDeep(touchpointData[indexTouchpoint].initiator);
+          touchpointData[indexTouchpoint].initiator = props.actors[newActor];
+          touchpointData[indexTouchpoint].initiatorColor = props.actors[newActor].color;
+        }
+      }
+    }
+    else if(type == "Receiver"){
+      if(props.currentObject.receiver.id != props.actors[newActor].id){
+        if(props.currentObject.initiator.isEndUser && props.currentObject.initiator.id != props.actors[newActor].id){
+          touchpointData[indexTouchpoint].receiver = props.actors[newActor]
+        }
+        else{
+          touchpointData[indexTouchpoint].initiator = _.cloneDeep(touchpointData[indexTouchpoint].receiver);
+          touchpointData[indexTouchpoint].receiver = props.actors[newActor];
+          touchpointData[indexTouchpoint].initiatorColor = touchpointData[indexTouchpoint].initiator.color;
+        }
+      }
+    }
+    props.setCurrentObject( _.cloneDeep(touchpointData[indexTouchpoint]))
+    props.updateCircles(touchpointData)
+  }
+
   return (
     <div>
       <Group >
+        {props.touchPoint.Capacity == 1 &&           <ElementChangeBar x={props.touchPoint.x+30 } y={props.touchPoint.y-90}>
+            <RibbonChangeBarActorChange x={props.touchPoint.x+30} y={props.touchPoint.y-88} text={"Receiver"} currentId={props.currentObject.receiver.id} changeActor={(e:any)=>{changeActor(e,"Receiver")}} actors={props.actors}></RibbonChangeBarActorChange>
+            <RibbonChangeBarActorChange x={props.touchPoint.x+170} y={props.touchPoint.y-88} text={"Initiator"} currentId={props.currentObject.initiator.id}changeActor={(e:any)=>{changeActor(e,"Initiator")}} actors={props.actors}></RibbonChangeBarActorChange>
+            <RibbonChangeBarImageChange x={props.touchPoint.x + 310} y={props.touchPoint.y-88} images={props.Images.Images[1]} text={"Channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+          let copyOfCircles = _.cloneDeep(props.touchPoints);
+          let copyOfCurrentObject;
+          copyOfCircles = copyOfCircles.map(x => {
+            if (x.id == props.touchPoint.id) {
+              x.imageName = e;
+              copyOfCurrentObject = x;
+            }
+            return x;
+          })
+          props.updateCircles(copyOfCircles);
+          props.setCurrentObject(copyOfCurrentObject);
+        }}  ></RibbonChangeBarImageChange>
+            {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
+          </ElementChangeBar>}
         {props.touchPoint.initiator.isEndUser && <TextMessages x={props.touchPoint.devation ? props.touchPoint.x - 80 : props.touchPoint.x - 25}
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}
           height={20}
@@ -231,6 +292,9 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
       </Group>
     </div>
   )
+
+  
 }
+
 
 export default TouchPointSwimlane;

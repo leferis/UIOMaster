@@ -31,7 +31,7 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
   }
 
   function getActorsImage() {
-    let result = getImage(props.ActorImage, XPOSITION, YINITIALPOSITION * props.journeyIndex)
+    let result = getImage(props.ActorImage, XPOSITION, YINITIALPOSITION * props.journeyIndex+100)
     XPOSITION += XMOVEMENTGAP;
     return result;
   }
@@ -43,8 +43,8 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
       {props.IncludeActor &&
         getActorsImage()
     }
-      <Circle x={XPOSITION} y={YINITIALPOSITION * props.journeyIndex} stroke={"black"} radius={6}></Circle>
-      <Line points={[XPOSITION + 6, YINITIALPOSITION * props.journeyIndex, XPOSITION + XMOVEMENTGAP - RADIUS, YINITIALPOSITION * props.journeyIndex]} stroke={"black"} strokeWidth={3}  ></Line>
+      <Circle x={XPOSITION} y={YINITIALPOSITION * props.journeyIndex+100} stroke={"black"} radius={6}></Circle>
+      <Line points={[XPOSITION + 6, YINITIALPOSITION * props.journeyIndex+100, XPOSITION + XMOVEMENTGAP - RADIUS, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3}  ></Line>
       {props.Toucpoint.sort((x, y) => {
         return x.x - y.x;
       }).map(((circle: CJMLCircle, index:any) => {
@@ -52,7 +52,7 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
         XPOSITION += XMOVEMENTGAP;
         return (<div>
           <Circle x={XPOSITION}
-            y={YINITIALPOSITION * props.journeyIndex}
+            y={YINITIALPOSITION * props.journeyIndex+100}
             radius={RADIUS}
             stroke={circle.initiator.color}
             dash={TouchPointStatus[circle.Status] == "Missing" ? [5] : [0]}
@@ -61,17 +61,17 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
           {TouchPointStatus[circle.Status] == "Failing" && 
           <Group>
           
-          <Line points={[XPOSITION+ RADIUS* Math.cos(Math.PI /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI /4), XPOSITION + RADIUS* Math.cos((Math.PI * 5) /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI * 5 /4)]} stroke={"black"} strokeWidth={2} />
-          <Line points={[XPOSITION+ RADIUS* Math.cos(Math.PI * 3 /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI *3 /4), XPOSITION + RADIUS* Math.cos((Math.PI * 7) /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI * 7 /4)]} stroke={"black"} strokeWidth={2} />
+          <Line points={[XPOSITION+ RADIUS* Math.cos(Math.PI /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI /4)+100, XPOSITION + RADIUS* Math.cos((Math.PI * 5) /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI * 5 /4)+100]} stroke={"black"} strokeWidth={2} />
+          <Line points={[XPOSITION+ RADIUS* Math.cos(Math.PI * 3 /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI *3 /4)+100, XPOSITION + RADIUS* Math.cos((Math.PI * 7) /4), YINITIALPOSITION * props.journeyIndex - RADIUS* Math.sin(Math.PI * 7 /4)+100]} stroke={"black"} strokeWidth={2} />
           </Group>
           }
-          {getImage(circle.imageName, XPOSITION, YINITIALPOSITION * props.journeyIndex)}
-          { index> 0 && <Arrow points={[previousPoint + RADIUS, YINITIALPOSITION * props.journeyIndex, XPOSITION - RADIUS - 3, YINITIALPOSITION * props.journeyIndex]} stroke={"black"} strokeWidth={3} fill='black'></Arrow>}
+          {getImage(circle.imageName, XPOSITION, YINITIALPOSITION * props.journeyIndex+100)}
+          { index> 0 && <Arrow points={[previousPoint + RADIUS, YINITIALPOSITION * props.journeyIndex+100, XPOSITION - RADIUS - 3, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3} fill='black'></Arrow>}
         </div>)
       }))}
-      <Line points={[XPOSITION + RADIUS, YINITIALPOSITION * props.journeyIndex, XPOSITION + XMOVEMENTGAP, YINITIALPOSITION * props.journeyIndex]} stroke={"black"} strokeWidth={3}  ></Line>
-      <Circle x={XPOSITION + XMOVEMENTGAP} y={YINITIALPOSITION * props.journeyIndex} fill={"black"} stroke={"black"} radius={6}></Circle>
-      <Rect x={XPOSITIONINITIAL - 30} y={YINITIALPOSITION * props.journeyIndex - RECTHEIGHT / 2} width={XPOSITION - XPOSITIONINITIAL + XMOVEMENTGAP * 2} height={RECTHEIGHT} stroke={"black"} strokeWidth={2} />
+      <Line points={[XPOSITION + RADIUS, YINITIALPOSITION * props.journeyIndex+100, XPOSITION + XMOVEMENTGAP, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3}  ></Line>
+      <Circle x={XPOSITION + XMOVEMENTGAP} y={YINITIALPOSITION * props.journeyIndex+100} fill={"black"} stroke={"black"} radius={6}></Circle>
+      <Rect x={XPOSITIONINITIAL - 30} y={YINITIALPOSITION * props.journeyIndex - RECTHEIGHT / 2+100} width={XPOSITION - XPOSITIONINITIAL + XMOVEMENTGAP * 2} height={RECTHEIGHT} stroke={"black"} strokeWidth={2} />
     </Group>
   )
 }

@@ -242,7 +242,7 @@ function Questionary(props: QuestionaryProps) {
       {ToucpointSelect && <TouchpointQuestionary GetImage={props.GetImage} actors={tempActors} CJMLImageList={props.CJMLImageList} TouchPoints={TouchPointsTemp} updateTouhcPoints={setTouchPointTemp} actions={JSON.stringify(props.actions)}
         isPanned={props.isPlanned} removeTouchpoint={removeTouchpoint} swapTouchpoints={swapTouchpoints} removeTouncpoint={removeTouncpoint}></TouchpointQuestionary>}
 
-      <Button onClick={() => ClosingValidation()}>Close</Button>
+      <Button  variant="contained" color="success" onClick={() => ClosingValidation()}>Save</Button>
 
     </section>
 

@@ -1,10 +1,11 @@
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Actors } from '../../Classes/Actors';
 import { CJMLImage } from '../../Classes/CJMLImage';
 import styles from './ActorsQuestionary.module.css';
+import _ from 'lodash';
 
 interface ActorsQuestionaryProps {
   tempActors: any;
@@ -41,31 +42,40 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
 
         return (
           <div style={{
-            paddingTop:"20px"
+            paddingTop: "20px"
           }
           }>
-            <Grid container style={{background:"#f1f2f4",paddingBottom:"20px",borderRadius:"20px"}} spacing={2}>
-            <Grid item xs={2}><h4>{x.isEndUser?"End User " + (index +1):"Actor " + (index + 1)}</h4></Grid>
+            <Grid container style={{ background: "#f1f2f4", paddingBottom: "30px", borderRadius: "20px" }} spacing={2} justifyContent="center"
+              alignItems="center" rowSpacing={2}>
+              <Grid item xs={2}><h2>{x.isEndUser ? "End User " + (index + 1) : "Actor " + (index + 1)}</h2></Grid>
               <Grid item xs={7}></Grid>
-              <Grid item xs={2}> {!props.tempActors[index].isEndUser && <Button variant="outlined" onClick={() => props.removeActor(index)} startIcon={<DeleteIcon />}>
+              <Grid item xs={2}> {!props.tempActors[index].isEndUser && <Button  color="error" variant="outlined" onClick={() => props.removeActor(index)} startIcon={<DeleteIcon />}>
                 Delete
               </Button>}</Grid>
               <Grid item xs={6}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">{x.isEndUser?"Actor type":"Actor role"}</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{x.isEndUser ? "End user type" : "Actor role"}</InputLabel>
                   <Select
-                    label={x.isEndUser?"Actor type":"Actor role"}
-                    value={""}
+                    label={!x.isEndUser ? "End user type" : "Actor role"}
+                    defaultValue={x.img}
+                    onChange={(e: any) => {
+                      let tempt = _.cloneDeep(props.tempActors);
+                      tempt[index].img = e.target.value;
+                      props.setTempActors(tempt);
+                    }}
                   >   {props.CJMLImageList.Images[0].Images.map((y: CJMLImage) => {
-                    if(y.Default){
-                    return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)}
+                    if (y.Default) {
+                      return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)
+                    }
                   })}
                   </Select>
+                  <FormHelperText>User's role in journey</FormHelperText>
                 </FormControl>
               </Grid>
               <Grid item xs={6}><TextField fullWidth label="Actors Name" defaultValue={x.Title} onInput={(e) => { changeName(e, index); }} />
+              <FormHelperText>Name is used to identify user</FormHelperText>
               </Grid>
-
+          
             </Grid>
             <hr></hr>
           </div>
@@ -73,11 +83,15 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
       })}
 
     </form>
-    <Button onClick={() => {
+    <h5 style={{position:"absolute", left:"60px"}}>Actors' colour representations can be changed in settings</h5>
+    <br></br>
+    <br></br>
+    <br></br>
+    <Button style={{position:"absolute", left:"50px"}} variant="outlined" onClick={() => {
       props.setTempActors([...props.tempActors, { Title: "Enter User Name", img: "", x: 200, y: 300, id: props.tempActors.length + 1, height: 150, width: 700, color: "#fff" }]);
       ChangeOpenColorStatus([...OpenColor, false]);
     }} >Add new Actor</Button>
-
+    <br></br>
   </div>);
 }
 

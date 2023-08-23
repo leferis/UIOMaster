@@ -64,6 +64,7 @@ function App() {
   const [mouseDownFunction, setMouseDownFunction] = useState("");
   const [journeyIndex, setJourneyIndex] = useState(1);
   const [moveStatistics, setMoveStatistics] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -95,17 +96,18 @@ function App() {
     <div>
       <div className="App" >
         <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
-          <h4 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML</h4>
+          <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML Tool</h2>
+          
         </div>
         <ToastContainer />
-        <Ribbon  SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
-              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles} 
-              setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
-              actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage}  updateCurrentJourney={updateCurrentJourney}
-              showModal={setShowModal} images={CJMLImageList} currentObject={currentObject} currentJourney={currentJourney}
-              setAcotrs={setActors} setCurrentObject={setCurrentObjectID}
-              />
-    
+        <Ribbon SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
+          initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles}
+          setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
+          actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage} updateCurrentJourney={updateCurrentJourney}
+          showModal={setShowModal} images={CJMLImageList} currentObject={currentObject} currentJourney={currentJourney}
+          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome} 
+        />
+      
         <Stage width={window.innerWidth} height={(window.innerHeight - 175)}
           onMouseUp={(e) => {
             if (ClickFunction != "")
@@ -122,7 +124,7 @@ function App() {
             onMouseMovement(e);
           }}
         >
-          {!openHome && <Layer id='test' ref={layerEl} draggable x={500} y={0}
+          {!openHome && <Layer id='test' ref={layerEl} draggable x={100} y={-100}
             onDragEnd={(e) => {
               setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
             }}
@@ -130,7 +132,9 @@ function App() {
 
             {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
             {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
-            {Journey.length > 0 && <ActorPoint currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}></ActorPoint>}
+            {Journey.length > 0 && <ActorPoint currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
+              actions={actions} circles={circles} setActions={setActions} updateCircles={setCircles}
+            />}
             {Journey.length > 0 && <TouchPoint Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
               drawingArrow={drawingArrow} currentObject={currentObject} setCurrentObjectID={setCurrentObjectReference} setClickFunction={setClickFunction} Images={CJMLImageList} actions={actions}
               setActions={setActions} actors={ActorsCJML} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow}
@@ -160,32 +164,33 @@ function App() {
           </Layer>}
           {openHome &&
             <Layer ref={layerEl} draggable onDragEnd={(e) => {
-              setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
+              setLocation([layerEl.current.attrs.x != undefined ? - layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
             }}>
               {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
               <Home CloseHomeWindow={ChangeOpenHome} setJourney={changeJourney} journeys={Journey} getImageObject={getImageObject}></Home>
             </Layer>
           }
           <Layer id='Menu'>
-            <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
-              setActors={setActors}  GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
-              initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors}
-            ></Settings>
-            {!openHome && <StatusBar layer={layerEl} currenJourneyId={currentJourney} journey={Journey} type={SwimlineMode} moveStatistics={moveStatistics} />}
+         
           </Layer>
-          <LeftMeniu  setmoveStatistics={setMoveStatistics} mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
-              updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
-              mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
-              SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
-              showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
-              updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
-              setActions={setActions} openModal={setShowModal}
-            />
+          <LeftMeniu setmoveStatistics={setMoveStatistics} mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
+            updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
+            mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
+            SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
+            showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
+            updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
+            setActions={setActions} openModal={setShowModal} setShowSettings={setShowSettings}
+          />
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
         {showQuestionary && <Questionary setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary} showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles} isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}></Questionary>}
         {showIntroduction && <IntroductionWindow showIntro={showIntroduction} closeIntro={setshowIntroduction} showSelection={setshowAddJourney} />}
         {showAddJourney && <JourneySelection showJourney={showAddJourney} closeJourney={setshowAddJourney} addJourney={addJourney} JourneyList={Journey} showModal={setShowModal} />}
+        {showSettings && <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
+          setActors={setActors} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
+          initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings = {setShowSettings}
+          currentJurney={currentJourney} setJourneys={setJouney}
+        ></Settings>}
       </div>
       <div className='JourneyBar'>
         <JourneyBar ChangeOpenHome={ChangeOpenHome} Journey={Journey} changeJourney={changeJourney} currentJourney={currentJourney} journeyChange={journeyChange}
@@ -203,19 +208,19 @@ function App() {
 
   function addJourney(isPlanned: boolean, addId: any) {
     if (Journey.length == 0) {
-          }
+    }
     if (Journey.length == 1) {
       updateCurrentJourney();
     }
     console.log(addId)
     if ((addId != undefined || addId != null)) {
-      if(addId != -1)
-      setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: isPlanned?"Planned Journey " + journeyIndex:"Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
-      setJourneyIndex(journeyIndex+1);
+      if (addId != -1)
+        setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
+      setJourneyIndex(journeyIndex + 1);
     }
     else {
-      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned?"Planned Journey " + journeyIndex:"Actual Journey "+ journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
-      setJourneyIndex(journeyIndex+1);
+      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
+      setJourneyIndex(journeyIndex + 1);
     }
   }
 
@@ -236,12 +241,12 @@ function App() {
     setNewID(initialId + 1);
   }
 
-  function addNewActorinTheEnd(pathImage:string) {
+  function addNewActorinTheEnd(pathImage: string) {
     console.log(pathImage)
     var actor = ActorsCJML;
-    var actorAfterInsert = ActorsCJML.sort((x,y) => {
+    var actorAfterInsert = ActorsCJML.sort((x, y) => {
       return x.y - y.y;
-    })[ActorsCJML.length-1];
+    })[ActorsCJML.length - 1];
     console.log(actorAfterInsert)
     var maxWidth = 900;
     var index = actor.findIndex(x => x.id == actorAfterInsert.id);
@@ -297,11 +302,11 @@ function App() {
     setActions((prevActions) => [...prevActions, newAction]);
   }
 
-  function addNewCircle(image:string="") {
-    if(image == ""){
-      image ="\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
+  function addNewCircle(image: string = "") {
+    if (image == "") {
+      image = "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
     }
-    let newCircle = new CJMLCircle(initialId, -9999, -9999, false, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
+    let newCircle = new CJMLCircle(initialId, -9999, -9999, false, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
     setCircles((prevCircles) => [
       ...prevCircles,
       newCircle
@@ -311,26 +316,28 @@ function App() {
   function remove() {
     const index = circles.findIndex((x: CJMLCircle) => { return CurrentObjectReference.current.id == x.id });
     if (index > -1) {
-    Swal.fire({
-      title: 'Do you want to delete touchoint?',
-      showDenyButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: `No`,
-    }).then((result) => {
-      const tempCircle = circles;
-      tempCircle.splice(index, 1);
-      setCircles(tempCircle);
-      removeArrows(CurrentObjectReference);
-      toast.success('Touchpoint has been removed', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      })})}
+      Swal.fire({
+        title: 'Do you want to delete touchoint?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
+        const tempCircle = circles;
+        tempCircle.splice(index, 1);
+        setCircles(tempCircle);
+        removeArrows(CurrentObjectReference);
+        toast.success('Touchpoint has been removed', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        })
+      })
+    }
 
 
     const actionIndex = actions.findIndex((x: CJMLAction) => { return CurrentObjectReference.current.id == x.id });
@@ -341,21 +348,22 @@ function App() {
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-      const tempCircle = actions;
-      tempCircle.splice(actionIndex, 1);
-      setActions(tempCircle);
-      removeArrows(CurrentObjectReference);
-      toast.success('Action has been removed', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });
-    })}
+        const tempCircle = actions;
+        tempCircle.splice(actionIndex, 1);
+        setActions(tempCircle);
+        removeArrows(CurrentObjectReference);
+        toast.success('Action has been removed', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+    }
 
     const arrowId = Arrows.findIndex((x: CJMLArrow) => {
       return x.id == CurrentObjectReference.current.id;
@@ -367,19 +375,20 @@ function App() {
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-      const tempArrows = Arrows;
-      tempArrows.splice(arrowId, 1);
-      setArrows(tempArrows);
-      toast.success('Arrow has been removed', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });})
+        const tempArrows = Arrows;
+        tempArrows.splice(arrowId, 1);
+        setArrows(tempArrows);
+        toast.success('Arrow has been removed', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
+      })
     }
 
     const ActorId = ActorsCJML.findIndex((x: Actors) => {
@@ -395,10 +404,10 @@ function App() {
       }).then((result) => {
         if (result.isConfirmed) {
           circles.forEach((cirlce) => {
-            if ((SwimlineMode && cirlce.y >= ActorsCJML[ActorId].y && cirlce.y <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height )|| 
-            ( !SwimlineMode && ((cirlce.swimlaneY >= ActorsCJML[ActorId].y && cirlce.swimlaneY <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height )
-            || (cirlce.swimlaneReceiverY >= ActorsCJML[ActorId].y && cirlce.swimlaneReceiverY <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height ))
-            ) ) {
+            if ((SwimlineMode && cirlce.y >= ActorsCJML[ActorId].y && cirlce.y <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height) ||
+              (!SwimlineMode && ((cirlce.swimlaneY >= ActorsCJML[ActorId].y && cirlce.swimlaneY <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height)
+                || (cirlce.swimlaneReceiverY >= ActorsCJML[ActorId].y && cirlce.swimlaneReceiverY <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height))
+              )) {
               deleteCJMLObject(cirlce);
             }
           }
@@ -406,13 +415,13 @@ function App() {
           )
           actions.forEach((action) => {
             if ((SwimlineMode && action.y >= ActorsCJML[ActorId].y && action.y <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height) &&
-            (SwimlineMode && action.swimlaneX >= ActorsCJML[ActorId].y && action.swimlaneX <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height)) {
+              (SwimlineMode && action.swimlaneX >= ActorsCJML[ActorId].y && action.swimlaneX <= ActorsCJML[ActorId].y + ActorsCJML[ActorId].height)) {
               deleteCJMLObject(action);
             }
           }
           )
-          for(let i = ActorId+1;i< ActorsCJML.length;i++){
-            tempCircle[i].y = tempCircle[i-1].y
+          for (let i = ActorId + 1; i < ActorsCJML.length; i++) {
+            tempCircle[i].y = tempCircle[i - 1].y
           }
           tempCircle.splice(ActorId, 1);
           let tempCirc = JSON.parse(JSON.stringify(tempCircle));
@@ -438,8 +447,8 @@ function App() {
 
     const result = Arrows.filter((x: CJMLArrow) => {
       let element = removedObject
-      if(removedObject.current.id != undefined){
-         element = removedObject.current;
+      if (removedObject.current.id != undefined) {
+        element = removedObject.current;
       }
       if (x.fromPoint.id != element.id || x.toPoint.id != element.id) {
         return false;
@@ -616,7 +625,7 @@ function App() {
   function addNewArrow(obj: any, e: any) {
     console.log(e) // cia taisyti
     const arrowRes = Arrows;
-    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1',  e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0), e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0), 0, 0)));
+    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1', e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0), e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0), 0, 0)));
     setArrows(arrowRes);
   }
 
@@ -669,7 +678,7 @@ function App() {
   }
 
   function elementCheckCloseToBorder(position: any) {
-      makeActorsBigger(position);
+    makeActorsBigger(position);
   }
 
   function elementsAreFarFromBorder() {
@@ -712,17 +721,17 @@ function App() {
   }
 
   function makeActorsBigger(position: number) {
-    let maxValue= -999;
-    circles.forEach(x =>{
-      if(x.x>maxValue)
-      maxValue = x.x;
+    let maxValue = -999;
+    circles.forEach(x => {
+      if (x.x > maxValue)
+        maxValue = x.x;
     })
-    actions.forEach(x=>{
-      if(x.x>maxValue){
+    actions.forEach(x => {
+      if (x.x > maxValue) {
         maxValue = x.x;
       }
     })
-    if(maxValue<position){
+    if (maxValue < position) {
       maxValue = position;
     }
     const actorsTemp = ActorsCJML;
@@ -832,7 +841,7 @@ function App() {
             positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 200 : maxLengthCircles + 200;
           }
         }
-        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.layerY - (layerEl.current.attrs.y), false, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter initiator's interaction", "Enter receiver's interaction", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
+        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.layerY - (layerEl.current.attrs.y), false, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter text", "Enter text", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
         setCircles((prevCircles) => [
           ...prevCircles,
           newCircle

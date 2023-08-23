@@ -30,43 +30,44 @@ function RibbonChangeBar(props: RibbonChangeBarProps) {
   }
   console.log(render);
   console.log(props.currentJourney)
-  return (<div>
-    {props.currentObj != -1 && <div >
-      {props.currentObj.img != undefined && <div >
-        {props.images != undefined && <ImageChange images={props.images.Images[0]} text={"Actor's Symbol"} currentObject={props.currentObj} 
-        changeImage={setActorsImage}
-        />}
-        {/*<ColorChange/> */}
-        <div className={false ? 'BarElementSelected' : 'BarElement'} style={{ float: "right", paddingBottom: "5px", paddingTop:"10px" }}>
+  return (<></>)
+  // return (<div>
+  //   {props.currentObj != -1 && <div >
+  //     {props.currentObj.img != undefined && <div >
+  //       {props.images != undefined && <ImageChange images={props.images.Images[0]} text={"Actor's Symbol"} currentObject={props.currentObj} 
+  //       changeImage={setActorsImage}
+  //       />}
+  //       {/*<ColorChange/> */}
+  //       <div className={false ? 'BarElementSelected' : 'BarElement'} style={{ float: "right", paddingBottom: "5px", paddingTop:"10px" }}>
      
-        <span className='BarText' style={{ background: "rgb(57, 85, 163)", color: "white", borderRadius: "5px", paddingBottom: "5px",userSelect:"none", cursor:"pointer" }} onClick={props.changeType}> Switch diagram type</span></div>
-      </div>
-      }
-      {props.currentObj.imageName != undefined &&
-      <div>
-        <div style={{ display: "inline-block", float:"left"}}>
-          {props.images != undefined &&
-            <div >
-              {! props.SwimlaneMode && <ImageChange images={props.images.Images[1]} text="Initiator's Symbol" currentObject={props.currentObj} changeImage={setTouchpointImage}/>}
-              {! props.SwimlaneMode &&<ImageChange images={props.images.Images[1]} text="Receivers's Symbol" currentObject={props.currentObj} changeImage={()=>{}}/>}
-              { props.SwimlaneMode && <RibbonChangeBarActorChange text={"Initiator"} actors={props.actors} currentId={props.currentObj.initiator.id} changeActor={(e:any)=>{changeActor(e,"Initiator")}}/>}
-              { props.SwimlaneMode && <RibbonChangeBarActorChange text={"Receiver"} actors={props.actors} currentId={props.currentObj.receiver.id} changeActor={(e:any)=>{changeActor(e,"Receiver")}}/>}
-              {(render) &&
-                <TypeChange currenctObj={props.currentObj} TouchPoints={props.TouchPoints} updateTouhcPoints={props.updateTouhcPoints} updateCurentObj={props.setCurrentObj} />}
-              {(render) && <RibbonChangeBarCheckBoxChange text={"Deviation"} value={props.currentObj.devation} />}
+  //       <span className='BarText' style={{ background: "rgb(57, 85, 163)", color: "white", borderRadius: "5px", paddingBottom: "5px",userSelect:"none", cursor:"pointer" }} onClick={props.changeType}> Switch diagram type</span></div>
+  //     </div>
+  //     }
+  //     {props.currentObj.imageName != undefined &&
+  //     <div>
+  //       <div style={{ display: "inline-block", float:"left"}}>
+  //         {props.images != undefined &&
+  //           <div >
+  //             {! props.SwimlaneMode && <ImageChange images={props.images.Images[1]} text="Initiator's Symbol" currentObject={props.currentObj} changeImage={setTouchpointImage}/>}
+  //             {! props.SwimlaneMode &&<ImageChange images={props.images.Images[1]} text="Receivers's Symbol" currentObject={props.currentObj} changeImage={()=>{}}/>}
+  //             { props.SwimlaneMode && <RibbonChangeBarActorChange text={"Initiator"} actors={props.actors} currentId={props.currentObj.initiator.id} changeActor={(e:any)=>{changeActor(e,"Initiator")}}/>}
+  //             { props.SwimlaneMode && <RibbonChangeBarActorChange text={"Receiver"} actors={props.actors} currentId={props.currentObj.receiver.id} changeActor={(e:any)=>{changeActor(e,"Receiver")}}/>}
+  //             {(render) &&
+  //               <TypeChange currenctObj={props.currentObj} TouchPoints={props.TouchPoints} updateTouhcPoints={props.updateTouhcPoints} updateCurentObj={props.setCurrentObj} />}
+  //             {(render) && <RibbonChangeBarCheckBoxChange text={"Deviation"} value={props.currentObj.devation} />}
               
-            </div>}
+  //           </div>}
 
 
-        </div>
-        <div className={false ? 'BarElementSelected' : 'BarElement'} style={{ float: "right", paddingBottom: "5px", paddingTop:"10px" }}>
+  //       </div>
+  //       <div className={false ? 'BarElementSelected' : 'BarElement'} style={{ float: "right", paddingBottom: "5px", paddingTop:"10px" }}>
      
-     <span className='BarText' style={{ background: "rgb(57, 85, 163)", color: "white", borderRadius: "5px", paddingBottom: "5px",userSelect:"none", cursor:"pointer" }} onClick={props.changeType}> Switch diagram type</span></div>
-     </div>
-      }
-    </div>}
-  </div>
-  )
+  //    <span className='BarText' style={{ background: "rgb(57, 85, 163)", color: "white", borderRadius: "5px", paddingBottom: "5px",userSelect:"none", cursor:"pointer" }} onClick={props.changeType}> Switch diagram type</span></div>
+  //    </div>
+  //     }
+  //   </div>}
+  // </div>
+  // )
 
   function changeActor(e:any, type:any){
     let touchpointData = _.cloneDeep(props.TouchPoints);

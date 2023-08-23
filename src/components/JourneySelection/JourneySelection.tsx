@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
+import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { Journey } from '../../Classes/Journey';
 import styles from './JourneySelection.module.css';
@@ -9,13 +9,14 @@ interface JourneySelectionProps {
   closeJourney: any;
   addJourney: any;
   JourneyList: any;
-  showModal:any;
+  showModal: any;
 }
 
 function JourneySelection(props: JourneySelectionProps) {
   const showHideClassName = props.showJourney ? "modal display-block" : "modal display-none";
   const [showSelection, setShowSelection] = useState<boolean>(false);
   const [selectedJourney, setSelectedJourney] = useState<any>(null);
+  const [isPlannedJourney, setIsPlannedJourney] = useState(true);
   // Code window for dropdown of journey. Can select none Planned journey i guess? 
   function getSelectionWindow() {
     return (<>
@@ -84,22 +85,35 @@ function JourneySelection(props: JourneySelectionProps) {
           <h2> Do you want to add Planned Journey or Actual Journey</h2>
           <Grid container spacing={2}>
             <Grid item xs={2}></Grid>
-            <Grid item xs={4}><Button onClick={() => { props.addJourney(true, null); props.closeJourney(false) }} variant="contained">Add Planned Journey</Button> </Grid>
-            <Grid item xs={4}><Button onClick={() => { 
-              const filteredCount = props.JourneyList.filter((x:Journey) => x.isPlanned).length;
-              if(filteredCount>0){
-              setShowSelection(true);}
-              else{
-                props.addJourney(false, selectedJourney);
-                props.closeJourney(false) 
-              } }} variant="contained">Add Actual Journey</Button></Grid>
+            <Grid item xs={4}>  <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned" /></Grid>
+            <Grid item xs={4}>  <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual" /></Grid>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={4}></Grid>
+            <Grid item xs={4}><Button onClick={() => {
+              if (isPlannedJourney) {
+                props.addJourney(true, null);
+                props.closeJourney(false)
+              }
+              else {
+
+                const filteredCount = props.JourneyList.filter((x: Journey) => x.isPlanned).length;
+                if (filteredCount > 0) {
+                  setShowSelection(true);
+                }
+                else {
+                  props.addJourney(false, selectedJourney);
+                  props.closeJourney(false)
+                }
+              }
+
+            }} variant="contained">Add Journey</Button> </Grid>
             <Grid item xs={2}></Grid>
           </Grid>
-          <Grid style={{paddingTop:"20px"}}>
+{    props.JourneyList.length<1 &&      <Grid style={{ paddingTop: "20px" }}>
             <Grid item xs={4}></Grid>
             <Grid item xs={4}><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import XCJML file</Button></Grid>
             <Grid item xs={4}></Grid>
-          </Grid>
+          </Grid>}
         </>}
       {/* Add logic to not give any selection if there is no Planned journey */}
       {showSelection && getSelectionWindow()}

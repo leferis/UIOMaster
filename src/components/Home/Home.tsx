@@ -30,13 +30,13 @@ function Home(props: HomeProps) {
     {props.journeys.filter((x) => {
       return x.isPlanned
     }).map((journey, index) => {
-      if (maxXPlanned < journey.Toucpoint.length * 250) { maxXPlanned = journey.Toucpoint.length * 250; }
-      return (<JourneyVisualization  CloseHomeWindow ={ props.CloseHomeWindow}setJourney={props.setJourney} journeyID={getJourneyIndex(journey)} IncludeActor={false} ActorImage={getMainActor(journey.Actors)} Toucpoint={journey.Toucpoint} journeyIndex={index} getImageObject={props.getImageObject} XINITIALPOSITION={200}></JourneyVisualization>)
+      if (maxXPlanned < journey.Toucpoint.length * 180) { maxXPlanned = journey.Toucpoint.length * 180; }
+      return (<JourneyVisualization  CloseHomeWindow ={ props.CloseHomeWindow}setJourney={props.setJourney} journeyID={getJourneyIndex(journey)} IncludeActor={false} ActorImage={getMainActor(journey.Actors)} Toucpoint={journey.Toucpoint} journeyIndex={index} getImageObject={props.getImageObject} XINITIALPOSITION={300}></JourneyVisualization>)
     })}
     {props.journeys.filter((x) => {
       return !x.isPlanned
     }).map((journey, index) => {
-      return (<JourneyVisualization CloseHomeWindow={props.CloseHomeWindow} setJourney={props.setJourney} journeyID={getJourneyIndex(journey)} IncludeActor={true} ActorImage={getMainActor(journey.Actors)} Toucpoint={journey.Toucpoint} journeyIndex={index} getImageObject={props.getImageObject} XINITIALPOSITION={maxXPlanned + 400}></JourneyVisualization>)
+      return (<JourneyVisualization CloseHomeWindow={props.CloseHomeWindow} setJourney={props.setJourney} journeyID={getJourneyIndex(journey)} IncludeActor={true} ActorImage={getMainActor(journey.Actors)} Toucpoint={journey.Toucpoint} journeyIndex={index} getImageObject={props.getImageObject} XINITIALPOSITION={maxXPlanned }></JourneyVisualization>)
     })}
   </Group>)
 }

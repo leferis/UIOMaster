@@ -12,6 +12,7 @@ export class CJMLCircle implements CJMLConnectionUnit {
     text: string
     external:ExternalEnumerator;
     imageName:string;
+    imageNameReceiver:string;
     initiator:any;
     initiatorColor:string;
     devation:boolean;
@@ -43,6 +44,7 @@ export class CJMLCircle implements CJMLConnectionUnit {
         this.lastRelativex = 0;
         this.timestamp= timestamp;
         this.isEditing = false;
+        this.imageNameReceiver = this.imageName;
     }
     receiver:any;
     receiverText:any;

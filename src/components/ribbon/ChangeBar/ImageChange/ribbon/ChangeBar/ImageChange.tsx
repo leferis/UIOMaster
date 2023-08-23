@@ -2,12 +2,16 @@ import React, { FC, Fragment } from 'react';
 
 import styles from './ribbon/ChangeBar/ImageChange.module.css';
 import { FormControl, InputLabel, Select, MenuItem, ListSubheader, ListItem } from '@mui/material';
+import { Html } from 'react-konva-utils';
 
 interface RibbonChangeBarImageChangeProps {
   images: any;
   text: any;
   currentObject: any;
-  changeImage:any;
+  changeImage: any;
+  x:any;
+  y:any;
+  alternative?:any;
 }
 
 function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
@@ -22,44 +26,50 @@ function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
   })
   let value: string
   console.log(props.currentObject)
-  if (props.currentObject.imageName != undefined) {
-    value = props.currentObject.imageName
+  if (props.alternative){
+    value = props.currentObject.imageNameReceiver;
+  }
+  else if (props.currentObject.imageName != undefined) {
+    value = props.currentObject.imageName;
   }
   else if (props.currentObject.img != undefined) {
-    value = props.currentObject.img
+    value = props.currentObject.img;
   }
   else {
     value = ""
   }
 
   let group = "";
-  return (<div style={{ display: "inline-block", float:"left" }} >
-    <FormControl sx={{ m: 1, minWidth: 200 }}>
-      <InputLabel htmlFor="grouped-select">{props.text}</InputLabel>
-      <Select value={value} id="grouped-select" label="Grouping"
-        onChange={(e) => {
-          props.changeImage(e.target.value)
-        }}
-      >
-        {sorted.map((a: any) => {
-          if (group != a.Group) {
-            group = a.Group;
-            let value = []
-            value.push(<ListSubheader>{a.Group}</ListSubheader>)
-            value.push(<MenuItem value={a.Location}>{a.Name}</MenuItem>)
-            return (
-                value.map((val:any) =>{
-                  return val
-                })
-            )
-          }
-          return (
-            <MenuItem value={a.Location}>{a.Name}</MenuItem>
-          )
-        })}
-      </Select>
-    </FormControl>
-  </div>)
+  return (
+    <Html  groupProps={{ x: props.x, y: props.y }} >
+      <div style={{ display: "inline-block", float: "left" }} >
+        <FormControl sx={{ m: 1, minWidth: 130, maxWidth:130 }} size="small">
+          <InputLabel htmlFor="grouped-select">{props.text}</InputLabel>
+          <Select value={value} id="grouped-select" label="Grouping"
+            onChange={(e) => {
+              props.changeImage(e.target.value)
+            }}
+          >
+            {sorted.map((a: any) => {
+              if (group != a.Group) {
+                group = a.Group;
+                let value = []
+                value.push(<ListSubheader>{a.Group}</ListSubheader>)
+                value.push(<MenuItem value={a.Location}>{a.Name}</MenuItem>)
+                return (
+                  value.map((val: any) => {
+                    return val
+                  })
+                )
+              }
+              return (
+                <MenuItem value={a.Location}>{a.Name}</MenuItem>
+              )
+            })}
+          </Select>
+        </FormControl>
+      </div>
+    </Html>)
 };
 
 export default RibbonChangeBarImageChange;

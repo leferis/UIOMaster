@@ -1,4 +1,5 @@
 import { Actors } from "../Classes/Actors";
+import { CJMLAction } from "../Classes/CJMLAction";
 import { CJMLCircle } from "../Classes/CJMLCircle"
 
 export function setCirlceAtEnd(circles:any[], setObject:any, actors:Actors[]){
@@ -17,6 +18,23 @@ export function setCirlceAtEnd(circles:any[], setObject:any, actors:Actors[]){
         }
         if(x.swimlaneY == -9999){
             x.swimlaneY = x.initiator.y +20;
+        }
+        return x
+    })
+    setObject(result);
+}
+
+export function setActionAtEnd(circles:any[], setObject:any, actors:Actors[]){
+    const endUser = actors.filter((x) =>{
+        return x.isEndUser;
+    })[0];
+    const result = circles.map((x:CJMLAction)=>{
+        if(x.x == -9999){
+            x.x = endUser.x ;
+            x.swimlaneX = endUser.x
+        }
+        if(x.y== -9999){
+            x.y = endUser.y + 75; 
         }
         return x
     })

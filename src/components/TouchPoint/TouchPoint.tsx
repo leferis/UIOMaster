@@ -13,6 +13,10 @@ import { Html } from 'react-konva-utils';
 import styles from './TouchPoint.module.css'
 import TouchPointSwimlane from './TouchpointSwimlane/TouchPoint/TouchPointSwimlane';
 import TouchPointNetwork from './TouchpointNetwork/TouchPoint/TouchPointNetwork';
+import ElementChangeBar from '../elementChangeBar/elementChangeBar';
+import ImageSelection from '../ImageSelection/ImageSelection';
+import RibbonChangeBarImageChange from '../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
+import RibbonChangeBarTypeChange from '../ribbon/ChangeBar/TypeChange/ribbon/ChangeBar/TypeChange';
 
 interface TouchPointProps {
   Circle: CJMLCircle[];
@@ -54,7 +58,6 @@ function TouchPoint(props: TouchPointProps) {
         if (props.SwimlineMode) {
           return (
           <>
-
           <TouchPointSwimlane SwimlaneMode={props.SwimlineMode} actors={props.actors} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction} deviationMode={props.devationMode} elementCheckCloseToBorder={props.elementCheckCloseToBorder}
             elementsAreFarFromBorder={props.elementsAreFarFromBorder}
             getImage={getImage}
@@ -70,6 +73,8 @@ function TouchPoint(props: TouchPointProps) {
             isPlanned={props.isPlanned}
             makeBiggerActors = {props.makeBiggerActors}
             setCurrentObject= {props.setCurrentObjectID}
+            Images={props.Images}
+            currentObject={props.currentObject}
           ></TouchPointSwimlane>
           </>)
         }
@@ -78,7 +83,7 @@ function TouchPoint(props: TouchPointProps) {
             <TouchPointNetwork Circle={props.Circle} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} arrowId={props.arrowId} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction}
               elementCheckCloseToBorder={props.elementCheckCloseToBorder} elementsAreFarFromBorder={props.elementsAreFarFromBorder} getImage={getImage} getImageReceiver={getImageReceiver} index={index}
               resetTouchpoints={props.resetTouchpoints} setActions={props.setActions} setArrowId={props.setArrowId} setArrows={props.setArrows} touchPoint={x} updateCircles={props.updateCircles} isPlanned={props.isPlanned}
-              makeBiggerActors = {props.makeBiggerActors} setCurrentObject={props.setCurrentObjectID}
+              makeBiggerActors = {props.makeBiggerActors} setCurrentObject={props.setCurrentObjectID} Images={props.Images} currentObject={props.currentObject}
               />
           )
         }
@@ -131,7 +136,7 @@ function TouchPoint(props: TouchPointProps) {
   }
 
   function getImageReceiver(x: any, index: any) {
-    let img = props.getImageObject(x.imageName)
+    let img = props.getImageObject(x.imageNameReceiver)
     return (<Image x={props.SwimlineMode ? x.x - 15 : x.swimlaneX + 15} y={props.SwimlineMode ? x.y - 15 : x.swimlaneReceiverY + 40} image={img} />)
   }
 }

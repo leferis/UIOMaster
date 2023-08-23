@@ -37,12 +37,14 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
     <div className={styles.TouchpointQuestionary} style={{paddingTop:"20px"}}>
       {props.TouchPoints.map((x: any, index: number) => {
         return (
-          <>
+          <div style={{paddingBottom:index == props.TouchPoints.length-1 ?"0px":"30px"}}>
             <Grid style={{
               background: "#f1f2f4",
               borderRadius:"20px",
-            }} container spacing={2} >
-              <Grid item xs={2}><h4>{x.receiver == undefined?"Action " + (index+1):"Touchpoint " + (index+1)}</h4></Grid>
+              
+            }} container spacing={2}   justifyContent="center"
+            alignItems="center" >
+              <Grid item xs={2}><h2>{x.receiver == undefined?"Action " + (index+1):"Touchpoint " + (index+1)}</h2></Grid>
               <Grid item xs={6}></Grid>
               <Grid item xs={1}> {index != 0 && <Tooltip title={"Up"}>
                 <IconButton aria-label="Up" size="large" onClick={() => { props.swapTouchpoints(index, 'up') }} ><ArrowUpwardIcon /></IconButton>
@@ -50,7 +52,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
               <Grid item xs={1}> {index + 1 != props.TouchPoints.length && <Tooltip title={"Down"}>
                 <IconButton aria-label="Down" size="large" onClick={() => { props.swapTouchpoints(index, 'down') }}><ArrowDownwardIcon /></IconButton>
               </Tooltip>}</Grid>
-              <Grid item xs={2}> <Button variant="outlined" onClick={() => props.removeTouchpoint(index)} startIcon={<DeleteIcon />}>
+              <Grid item xs={2}> <Button color="error" variant="outlined" onClick={() => props.removeTouchpoint(index)} startIcon={<DeleteIcon />}>
                 Delete
               </Button>
               </Grid>
@@ -183,23 +185,21 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
               </Grid>
             </Grid>
             <hr></hr>
-          </>)
+          </div>)
 
       })}
-
-      <Grid>
-        <Grid item xs={1}>
-          <Button onClick={() => {
-            props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "Touchpoint", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: -1, receiverText: "" }])
-          }} >Add new Touchpoint</Button>
-        </Grid>
-        <Grid item xs={1}>
-          <Button onClick={() => {
+          <h5 style={{position:"absolute", left:"60px"}}>Communication points' representations can be changed to alternatives in settings</h5>
+    <br></br>
+    <br></br>
+    <br></br>
+     <Button style={{position:"absolute",left:"50px"}} variant="outlined" onClick={() => {
             props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "Touchpoint", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: undefined, receiverText: "" }])
           }}>Add new Action</Button>
-        </Grid>
-
-      </Grid>
+          <Button style={{position:"absolute",left:"220px"}} variant="outlined" onClick={() => {
+            props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "Touchpoint", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: -1, receiverText: "" }])
+          }} >Add new Touchpoint</Button>
+          <br></br>
+          <br></br>
     </div>
 
   );

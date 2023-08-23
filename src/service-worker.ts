@@ -15,6 +15,7 @@ import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 
 declare const self: ServiceWorkerGlobalScope;
+const version ="1.0.0"
 
 clientsClaim();
 

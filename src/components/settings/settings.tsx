@@ -10,6 +10,13 @@ import ImageSelection from '../ImageSelection/ImageSelection';
 import { Actors } from '../../Classes/Actors';
 import ActorSelect from '../ActorSelect/ActorSelect';
 import { switchBetweenDiagrams } from '../../Functions/Switching';
+import { IconButton, Tabs, Tab, Button } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import SettingsJourneySettings from './JourneySettings/settings/JourneySettings';
+import _ from 'lodash';
+import { Journey } from '../../Classes/Journey';
+import SettingsActorSettings from './ActorSettings/settings/ActorSettings';
+import SettingsTouchpointSettings from './TouchpointSettings/settings/TouchpointSettings';
 
 interface SettingsProps {
   Images: any;
@@ -32,144 +39,83 @@ interface SettingsProps {
   setInitialArrowID:any;
   setArrows:any;
   makeBiggerActors:any;
+  showSettings:any;
+  journeys:any;
+  currentJurney:any;
+  setShowSettings:any;
+  setJourneys:any;
 }
 
 
 
 function Settings(props: SettingsProps) {
-
-  var width = 0;
-  try {
-    width = props.Layer.current.canvas.width;
-  }
-  catch (ex) {
-    width = 20;
-  }
-  var Options: any[] = [];
-  var initialBoxX = 330;
-  var initialBoxY = 55;
-  let change = props.getImageObject("\\\HelpingImages\\change.png");
- 
-
-  Object.values(TouchPointStatus).forEach((x) => {
-    if (typeof (x) == "string" && x != TouchPointStatus[props.currentObject.Status]) {
-
-      Options.push(<div><Rect x={initialBoxX}
-        y={initialBoxY}
-        stroke={'black'}
-        strokeWidth={1}
-        height={30}
-        width={130}
-        fill={"White"}
-        onClick={() => {
-          if (props.currentObject != null || props.currentObject != undefined) {
-            const circles = props.circles.map((circle: CJMLCircle) => {
-              if (circle.id == props.currentObject.id) {
-                return { ...circle, Status: Object.values(TouchPointStatus).indexOf(x) };
-              }
-              return circle;
-            })
-            var edited = props.currentObject;
-            edited.Status = Object.values(TouchPointStatus).indexOf(x);
-            props.setCurrentObjectID(edited);
-            props.setCircles(circles);
-          }
-        }}
-        cornerRadius={Options.length == 2 ? [0, 0, 10, 10] : 0}
-      />
-        <Line points={[345 - 11, initialBoxY + 4, 345 + 11, initialBoxY + 23]} stroke={'black'}
-          strokeWidth={1} opacity={x == "Failing" ? 1 : 0}></Line>
-        <Line points={[345 - 11, initialBoxY + 24, 345 + 11, initialBoxY + 3]} stroke={'black'}
-          strokeWidth={1} opacity={x == "Failing" ? 1 : 0}></Line>
-        <Circle
-          x={345}
-          y={initialBoxY + 14}
-          radius={10}
-          dash={x == "Missing" ? [5] : [0]}
-          stroke={'black'}
-          strokeWidth={1}
-        ></Circle>
-        <Text x={365}
-          y={initialBoxY + 12} text={x.toString()} ></Text>
-      </div>
-      )
-      initialBoxY += 30;
-    }
-
-  });
-
-
-  const color = <Html groupProps={{ x: 880, y: 26 }} divProps={{
-    style: {
-      position: 'fixed',
-      top: 300,
-      left: 300,
-    },
-  }}> <div>
-      <HexColorPicker
-        color={props.currentObject.color ? props.currentObject.color : "#fff"}
-        onChange={(e) => {
-          const update = props.Actors.map(act => {
-            if (act.id == props.currentObject.id) {
-              act.color = e;
-            }
-            return act;
-          });
-          props.setActors(update);
-        }}
-        onDoubleClick={(e) => {
-        }}></HexColorPicker>
-    </div></Html>;
-
-  const colorSquare = <Html groupProps={{ x: 894, y: 29 }} divProps={{
-    style: {
-      position: 'fixed',
-      top: 300,
-      left: 300,
-    },
-  }}>
-    <div
-      className="swatch"
-      style={{
-        background: props.currentObject.color ? props.currentObject.color : "#fff",
-        width: "18px",
-        height: "18px",
-        borderRadius: "8px",
-        border: "3px solid #fff",
-        boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1)",
-        cursor: "pointer"
-      }}
-    />
-  </Html>
-
-  function getCurrentStatus(x: any) {
-    if (x != -1) {
-      return (<div>
-        <Group>
-          <Line points={[345 - 11, 27 + 4, 345 + 11, 27 + 23]} stroke={'black'}
-            strokeWidth={1} opacity={TouchPointStatus[x.Status] == "Failing" ? 1 : 0}></Line>
-          <Line points={[345 - 11, 27 + 23, 345 + 11, 27 + 4]} stroke={'black'}
-            strokeWidth={1} opacity={TouchPointStatus[x.Status] == "Failing" ? 1 : 0}></Line>
-          <Circle
-            x={345}
-            y={40}
-            radius={10}
-            stroke={'black'}
-            dash={TouchPointStatus[x.Status] == "Missing" ? [2] : [0]}
-            strokeWidth={1}
-          ></Circle>
-          <Text x={365}
-            y={35} text={TouchPointStatus[x.Status]} ></Text></Group>
-      </div>);
-    } else {
-      return (<div></div>);
-    }
-  }
-
+  const showHideClassName = props.showSettings ? "modal display-block" : "modal display-none";
+  const [activeTab, setActiveTab] = React.useState(0);
+  const [JourneyPart, setJourneyPart] = React.useState(true);
+  const [TouchpointPart, setToucpointpart] = React.useState(false);
+  const [ActorPart, setActorPart] = React.useState(false);
+  const [journeyClone, setJourneyClone] = React.useState(_.cloneDeep(props.journeys[props.currentJurney]));
+  const [actorClone, setActorClone] = React.useState(_.cloneDeep(props.Actors));
+  const [touchpointClone, setTouchpointClone] = React.useState(_.cloneDeep(props.circles));
 
   return (
+    <div className={showHideClassName} style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      background: 'rgba(0, 0, 0, 0.6)'
+    }}>
+  
+      <section className="modal-main"
+        style={{
+          position: 'fixed',
+          background: 'white',
+          width: '50%',
+          height: 'auto',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%,-50%)',
+          paddingBottom: '  30px',
+          maxHeight: "100%",
+          overflowY: "auto"
+        }}>
+          <div style={{float:"right"}}>
+           <IconButton aria-label="Up" size="large" onClick={() => { props.setShowSettings(false) }} ><CloseIcon /></IconButton>
+           </div>
+        <Tabs
+          value={activeTab}
+          onChange={(event: React.SyntheticEvent, newValue: number) => setActiveTab(newValue)}
+        >
+          <Tab onClick={() => { setJourneyPart(true); setActorPart(false); setToucpointpart(false) }} label="Journey"></Tab>
+          <Tab onClick={() => { setJourneyPart(false); setActorPart(true); setToucpointpart(false)  }} label="Actor"></Tab>
+          <Tab onClick={() => { setJourneyPart(false); setActorPart(false); setToucpointpart(true) }} label="Toucpoints"></Tab>
+        </Tabs>
+        {JourneyPart && <SettingsJourneySettings currentJourney={journeyClone} journeys={props.journeys} setTempJourney={setJourneyClone}/>}
+        {ActorPart && <SettingsActorSettings actors={actorClone} setTempActors={setActorClone} Images={props.Images}/>}
+        {TouchpointPart &&  <SettingsTouchpointSettings updateCircles={setTouchpointClone} Images={props.Images} circles={touchpointClone} />}
+        <Button  style={{top:"15px"}} variant="contained" color="success" onClick={()=>{
+          props.setShowSettings(false);
+          let tempJourneys = _.cloneDeep(props.journeys);
+          tempJourneys[props.currentJurney] = journeyClone;
+          if(journeyClone.isPlanned == false && props.journeys[props.currentJurney].isPanned == true){
+            tempJourneys = tempJourneys.map((x:Journey) => { 
+              if(x.Reference == props.journeys[props.currentJurney].JourneyName){
+                x.Reference = null;
+              }
+              return x;
+            })
+          }
+          props.setJourneys(tempJourneys);
+          props.setCircles(touchpointClone);
+          props.setActors(actorClone);
 
-  <></>
+        }}>Save</Button>
+  
+      </section>
+  
+    </div>
   );
 }
 export default Settings;
