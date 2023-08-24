@@ -97,7 +97,7 @@ function App() {
       <div className="App" >
         <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
           <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML Tool</h2>
-          
+
         </div>
         <ToastContainer />
         <Ribbon SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
@@ -105,9 +105,9 @@ function App() {
           setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
           actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage} updateCurrentJourney={updateCurrentJourney}
           showModal={setShowModal} images={CJMLImageList} currentObject={currentObject} currentJourney={currentJourney}
-          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome} 
+          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome}
         />
-      
+
         <Stage width={window.innerWidth} height={(window.innerHeight - 175)}
           onMouseUp={(e) => {
             if (ClickFunction != "")
@@ -171,7 +171,7 @@ function App() {
             </Layer>
           }
           <Layer id='Menu'>
-         
+
           </Layer>
           <LeftMeniu setmoveStatistics={setMoveStatistics} mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
             updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
@@ -183,12 +183,12 @@ function App() {
           />
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
-        {showQuestionary && <Questionary setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary} showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles} isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}></Questionary>}
+        {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary} showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles} isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}></Questionary>}
         {showIntroduction && <IntroductionWindow showIntro={showIntroduction} closeIntro={setshowIntroduction} showSelection={setshowAddJourney} />}
         {showAddJourney && <JourneySelection showJourney={showAddJourney} closeJourney={setshowAddJourney} addJourney={addJourney} JourneyList={Journey} showModal={setShowModal} />}
         {showSettings && <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
           setActors={setActors} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
-          initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings = {setShowSettings}
+          initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings={setShowSettings}
           currentJurney={currentJourney} setJourneys={setJouney}
         ></Settings>}
       </div>
@@ -322,20 +322,27 @@ function App() {
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-        const tempCircle = circles;
-        tempCircle.splice(index, 1);
-        setCircles(tempCircle);
-        removeArrows(CurrentObjectReference);
-        toast.success('Touchpoint has been removed', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        })
+        
+          if (result.isConfirmed) {
+            const tempCircle = circles;
+            tempCircle.splice(index, 1);
+            setCircles(tempCircle);
+            removeArrows(CurrentObjectReference);
+            toast.success('Touchpoint has been removed', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "light",
+            })
+          }
+          else if (result.isDenied) {
+            Swal.fire('Communication point was not removed', '', 'info')
+          }
+        
       })
     }
 
@@ -348,7 +355,8 @@ function App() {
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-        const tempCircle = actions;
+       if(result.isConfirmed)
+        { const tempCircle = actions;
         tempCircle.splice(actionIndex, 1);
         setActions(tempCircle);
         removeArrows(CurrentObjectReference);
@@ -361,7 +369,10 @@ function App() {
           draggable: false,
           progress: undefined,
           theme: "light",
-        });
+        });}
+        else if (result.isDenied) {
+          Swal.fire('Action was not removed', '', 'info')
+        }
       })
     }
 
@@ -375,7 +386,7 @@ function App() {
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-        const tempArrows = Arrows;
+       if(result.isConfirmed){ const tempArrows = Arrows;
         tempArrows.splice(arrowId, 1);
         setArrows(tempArrows);
         toast.success('Arrow has been removed', {
@@ -387,7 +398,10 @@ function App() {
           draggable: false,
           progress: undefined,
           theme: "light",
-        });
+        });}
+        else if (result.isDenied) {
+          Swal.fire('Arrow was not removed', '', 'info')
+        }
       })
     }
 

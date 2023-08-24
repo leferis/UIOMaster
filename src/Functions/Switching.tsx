@@ -24,6 +24,9 @@ function fromSwimlaneToNetwork(circles: any[], actions: CJMLAction[], setActions
     console.log(objects)
     for (let j = 0; j < objects.length; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
+        if(objects[j].receiver == undefined){
+            objects[j].y = objects[j].initiator.y + 20
+        }
     }
     if(objects.length>0)
     makeBiggerActors(objects[objects.length - 1].swimlaneX);
@@ -46,7 +49,7 @@ export function updateByActors(circles: any[], actions: CJMLAction[], setActions
                 x.swimlaneY = initiator.y + 20
             }
             else{
-                x.swimlaneY = initiator.y + 20
+                x.swimlaneY = initiator.y - 30
             }
         }
         if(receiver != undefined){
@@ -75,7 +78,12 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
         }
         else {
             objects[j].x = prevX;
+            if(objects[j].receiver != undefined){
             objects[j].y = 275;
+            }
+            else{
+                objects[j].y = 245;
+            }
             devationx = 500;
             prevX += 200;
         }

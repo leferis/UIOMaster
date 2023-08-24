@@ -80,14 +80,16 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
     props.setCurrentObject( _.cloneDeep(touchpointData[indexTouchpoint]))
     props.updateCircles(touchpointData)
   }
-
+  const images = props.Images.Images[1].Images.filter((x:any)=>{
+    return x.Default;
+  })  
   return (
     <div>
       <Group >
-        {props.touchPoint.Capacity == 1 &&           <ElementChangeBar x={props.touchPoint.x+30 } y={props.touchPoint.y-90}>
+        {props.touchPoint.id == props.currentObject.id &&           <ElementChangeBar x={props.touchPoint.x+30 } y={props.touchPoint.y-90}>
             <RibbonChangeBarActorChange x={props.touchPoint.x+30} y={props.touchPoint.y-88} text={"Receiver"} currentId={props.currentObject.receiver.id} changeActor={(e:any)=>{changeActor(e,"Receiver")}} actors={props.actors}></RibbonChangeBarActorChange>
             <RibbonChangeBarActorChange x={props.touchPoint.x+170} y={props.touchPoint.y-88} text={"Initiator"} currentId={props.currentObject.initiator.id}changeActor={(e:any)=>{changeActor(e,"Initiator")}} actors={props.actors}></RibbonChangeBarActorChange>
-            <RibbonChangeBarImageChange x={props.touchPoint.x + 310} y={props.touchPoint.y-88} images={props.Images.Images[1]} text={"Channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+            <RibbonChangeBarImageChange x={props.touchPoint.x + 310} y={props.touchPoint.y-88} images={{Name:"Touchpoint",Images:images}} text={"Channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.touchPoints);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
@@ -181,7 +183,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           modifyObject={props.touchPoint}
         ></TextMessages>}
         {/* {Rewrite to proper component} */}
-        <Rect x={props.touchPoint.x - 25}
+        <Rect name='asd' x={props.touchPoint.x - 25}
           y={props.touchPoint.y - 25}
           height={50}
           width={50}

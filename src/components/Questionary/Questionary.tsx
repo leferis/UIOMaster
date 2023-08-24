@@ -22,7 +22,8 @@ interface QuestionaryProps {
   setActions: any;
   setActors: any;
   GetImage: any;
-  setArrows:any;
+  setArrows: any;
+  swimlaneMode: any;
 }
 
 function Questionary(props: QuestionaryProps) {
@@ -35,7 +36,7 @@ function Questionary(props: QuestionaryProps) {
   const showHideClassName = props.showQuestionary ? "modal display-block" : "modal display-none";
 
   function ClosingValidation() {
-    
+
     if (checkTouchPoints()) {
       reassignActors();
       assignIdAndLocation();
@@ -44,7 +45,7 @@ function Questionary(props: QuestionaryProps) {
 
   }
   function reassignActors() {
-    const updatetActors = tempActors.map((actor:Actors, index:number) => {
+    const updatetActors = tempActors.map((actor: Actors, index: number) => {
       actor.y = (index + 1) * 200;
       return actor;
     });
@@ -85,7 +86,12 @@ function Questionary(props: QuestionaryProps) {
         swimLaneX += 225;
         elementCopy.swimlaneY = elementCopy.initiator.y + elementCopy.initiator.height / 2;
         x += 150;
-        elementCopy.y = elementCopy.initiator.y + elementCopy.initiator.height / 2;
+        if (!props.swimlaneMode) {
+          elementCopy.y = elementCopy.initiator.y + 20;
+        }
+        else {
+          elementCopy.y = elementCopy.initiator.y + elementCopy.initiator.height / 2;
+        }
         actions.push(elementCopy);
       }
       else {
@@ -128,19 +134,19 @@ function Questionary(props: QuestionaryProps) {
 
 
   function checkTouchPoints() {
-     let continueProcess = true;
-     let temp = TouchPointsTemp.map((element: any, index: number) => {
-      const issueElements: {[key:string]: string} = {};
-      element.issues= [];
+    let continueProcess = true;
+    let temp = TouchPointsTemp.map((element: any, index: number) => {
+      const issueElements: { [key: string]: string } = {};
+      element.issues = [];
       if (element.receiver != null) {
-        if(element.imageName == ""){
-          issueElements["channelError"]  = ("Channel is missing")
+        if (element.imageName == "") {
+          issueElements["channelError"] = ("Channel is missing")
         }
         let check = tempActors.find((x: Actors) => {
           return x.id == element.initiator.id;
         });
         if (check == undefined) {
-          issueElements["initiatorError"]  =("Initiator is missing")
+          issueElements["initiatorError"] = ("Initiator is missing")
         }
         if (element.receiver != null) {
           check = tempActors.find((x: Actors) => {
@@ -148,7 +154,7 @@ function Questionary(props: QuestionaryProps) {
           });
         }
         if (check == undefined) {
-          issueElements["receiverError"]  =("Receiver is missing")
+          issueElements["receiverError"] = ("Receiver is missing")
         }
       }
       if (element.text.trim() == "") {
@@ -159,7 +165,7 @@ function Questionary(props: QuestionaryProps) {
           issueElements["reciversTextError"] = ("Receiver's text is missing")
         }
       }
-      if (Object.entries(issueElements).length> 0){
+      if (Object.entries(issueElements).length > 0) {
         continueProcess = false;
       }
       element.issues = issueElements;
@@ -167,18 +173,18 @@ function Questionary(props: QuestionaryProps) {
       return element
     });
     setTouchPointTemp(temp);
-  if(!continueProcess){
-    toast.error("There are issues with communication points", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-      progress: undefined,
-      theme: "light",
-    })
-  }
+    if (!continueProcess) {
+      toast.error("There are issues with communication points", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      })
+    }
     return continueProcess;
   }
 
@@ -228,9 +234,9 @@ function Questionary(props: QuestionaryProps) {
         maxHeight: "100%",
         overflowY: "auto"
       }}>
-        <div style={{float:"right"}}>
-         <IconButton aria-label="Up" size="large" onClick={() => {   props.handleClose(false); }} ><CloseIcon /></IconButton>
-         </div>
+      <div style={{ float: "right" }}>
+        <IconButton aria-label="Up" size="large" onClick={() => { props.handleClose(false); }} ><CloseIcon /></IconButton>
+      </div>
       <Tabs
         value={activeTab}
         onChange={(event: React.SyntheticEvent, newValue: number) => setActiveTab(newValue)}
@@ -242,7 +248,7 @@ function Questionary(props: QuestionaryProps) {
       {ToucpointSelect && <TouchpointQuestionary GetImage={props.GetImage} actors={tempActors} CJMLImageList={props.CJMLImageList} TouchPoints={TouchPointsTemp} updateTouhcPoints={setTouchPointTemp} actions={JSON.stringify(props.actions)}
         isPanned={props.isPlanned} removeTouchpoint={removeTouchpoint} swapTouchpoints={swapTouchpoints} removeTouncpoint={removeTouncpoint}></TouchpointQuestionary>}
 
-      <Button  variant="contained" color="success" onClick={() => ClosingValidation()}>Save</Button>
+      <Button variant="contained" color="success" onClick={() => ClosingValidation()}>Save</Button>
 
     </section>
 

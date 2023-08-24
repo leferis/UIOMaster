@@ -33,6 +33,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
       return false;
     }
   }
+  
   return (
     <div className={styles.TouchpointQuestionary} style={{paddingTop:"20px"}}>
       {props.TouchPoints.map((x: any, index: number) => {

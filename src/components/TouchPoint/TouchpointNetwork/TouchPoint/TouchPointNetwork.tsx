@@ -39,7 +39,9 @@ interface TouchPointNetworkProps {
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps) {
-
+  const images = props.Images.Images[1].Images.filter((x:any)=>{
+    return x.Default;
+  })  
 
   return (
     <div>
@@ -49,7 +51,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
 
         height={120}
         width={180}
-        stroke={props.touchPoint.Capacity ? '#F49D6E' : '#2B8299'}
+        stroke={props.touchPoint.id == props.currentObject.id ? '#F49D6E' : '#2B8299'}
         shadowEnabled={props.touchPoint.devation}
         shadowBlur={5}
         shadowOffsetX={3}
@@ -301,8 +303,8 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         opacity={0}
 
       />}
-      {props.touchPoint.Capacity == 1 && <ElementChangeBar x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 90}>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 88} images={props.Images.Images[1]} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+      {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 90}>
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 88} images={{Name:"Touchpoint",Images:images}} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
@@ -316,7 +318,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.setCurrentObject(copyOfCurrentObject);
           
         }} ></RibbonChangeBarImageChange>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={props.touchPoint.swimlaneY - 88} alternative={true} images={props.Images.Images[1]} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={props.touchPoint.swimlaneY - 88} alternative={true} images={{Name:"Touchpoint",Images:images}} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
