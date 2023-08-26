@@ -102,6 +102,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                     onChange={(e: any) => {
                       let tempt = props.TouchPoints;
                       tempt[index].imageName = e.target.value;
+                      tempt[index].imageNameReceiver = e.target.value;
                       props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
                     }}
                   >

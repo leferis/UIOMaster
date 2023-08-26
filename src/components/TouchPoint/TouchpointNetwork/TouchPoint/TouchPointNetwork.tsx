@@ -71,7 +71,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         height={70}
         fontSize={13}
         value={props.touchPoint.text}
-        width={80}
+        width={110}
         isEditing={props.touchPoint.isEditing}
         ChangeFunction={((val: any, x: any) => {
           props.setCurrentObject(-1)
@@ -179,7 +179,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         height={70}
         fontSize={13}
         value={props.touchPoint.receiverText}
-        width={80}
+        width={110}
         isEditing={props.touchPoint.isEditing}
         ChangeFunction={((val: any, x: any) => {
           props.setCurrentObject(-1)
@@ -304,7 +304,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
 
       />}
       {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 90}>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 88} images={{Name:"Touchpoint",Images:images}} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 88} images={{Name:"Touchpoint",Images:images}} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
@@ -318,7 +318,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.setCurrentObject(copyOfCurrentObject);
           
         }} ></RibbonChangeBarImageChange>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={props.touchPoint.swimlaneY - 88} alternative={true} images={{Name:"Touchpoint",Images:images}} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={props.touchPoint.swimlaneY - 88} alternative={true} images={{Name:"Touchpoint",Images:images}} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {

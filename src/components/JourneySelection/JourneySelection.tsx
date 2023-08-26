@@ -16,7 +16,7 @@ function JourneySelection(props: JourneySelectionProps) {
   const showHideClassName = props.showJourney ? "modal display-block" : "modal display-none";
   const [showSelection, setShowSelection] = useState<boolean>(false);
   const [selectedJourney, setSelectedJourney] = useState<any>(null);
-  const [isPlannedJourney, setIsPlannedJourney] = useState(true);
+  const [isPlannedJourney, setIsPlannedJourney] = useState(false);
   // Code window for dropdown of journey. Can select none Planned journey i guess? 
   function getSelectionWindow() {
     return (<>

@@ -26,7 +26,7 @@ function StatusBar(props: StatusBarProps) {
   }
 
   return (
-    <div style={{display:"inline-block",textAlign:"left", fontSize:"12pt", fontWeight:"500", paddingTop:"20px", float:"left"}}>
+    <div style={{display:"inline-block",textAlign:"left", fontSize:"14pt", fontWeight:"500", paddingTop:"20px", float:"left"}}>
       {getStatusString()}
       <br></br>
       {getJourneyType()}

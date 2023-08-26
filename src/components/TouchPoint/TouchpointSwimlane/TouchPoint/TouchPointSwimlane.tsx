@@ -110,7 +110,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           isEditing={props.touchPoint.isEditing}
           fontSize={10}
           value={props.touchPoint.text}
-          width={60}
+          width={100}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObject(-1)
             const circles = props.touchPoints.map(circle => {
@@ -149,7 +149,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           isEditing={props.touchPoint.isEditing}
           fontSize={10}
           value={props.touchPoint.receiverText}
-          width={60}
+          width={100}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObject(-1)
             const circles = props.touchPoints.map(circle => {

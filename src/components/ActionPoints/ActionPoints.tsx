@@ -120,7 +120,9 @@ function ActionPoints(props: ActionPointsProps) {
               }
 
             />
-            <TextMessages x={ props.swimlaneMode ? x.x + 10 : x.swimlaneX + 10} y={x.y + 10} height={props.swimlaneMode ? 60 : 100} width={props.swimlaneMode ? 90 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={12} isEditing={x.isEditing} changeEditable={(x: any) => {
+            <TextMessages x={ props.swimlaneMode ? x.x +3 : x.swimlaneX + 10} y={x.y + 10} 
+            height={props.swimlaneMode ? 20 : 75} 
+            width={props.swimlaneMode ? 80 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={12} isEditing={x.isEditing} changeEditable={(x: any) => {
               const circles = props.actions.map((action: CJMLAction) => {
                 props.setCurrentObjectID(-1);
                 if (action.id == x.id) {
