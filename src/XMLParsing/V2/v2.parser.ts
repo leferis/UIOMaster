@@ -122,6 +122,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
                 swimlaneXInitial += 225;
                 touchpoint = setTouchPointMetadata(actors, touchpoint);
                 touchpoint.imageName = GetImage(touchpoint.imageName, "Other");
+                touchpoint.imageNameReceiver = GetImage(touchpoint.imageName, "Other");
                 if (!touchpoint.devation) {
                     x += 150;
                     devationMove = 170;
@@ -181,6 +182,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
                 swimlaneXInitial += 225;
                 touchpoint = setTouchPointMetadata(actors, touchpoint);
                 touchpoint.imageName = GetImage(touchpoint.imageName, "Other");
+                touchpoint.imageNameReceiver = GetImage(touchpoint.imageName, "Other");
                 if (!touchpoint.devation) x += 150;
                 journeyNew.Toucpoint.push(touchpoint);
                 if (previousInteraction != null) {

@@ -47,6 +47,7 @@ interface LeftMeniuProps {
         openModal: any;
         setmoveStatistics: any;
         setShowSettings: any;
+        setImageChange: any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -193,17 +194,15 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                                 <Rect x={90} y={xScrollbarreal} height={window.innerHeight} width={185} ></Rect>
                                 <Rect x={270} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
-                                <Text x={95} y={155} fontSize={18} fontStyle='Bold' text='Communication points' />
+                                <Text x={95} y={185} fontSize={18} fontStyle='Bold' text='Communication points' />
 
-
-
-                                <Text x={95} y={65} fontSize={18} fontStyle='Bold' text='Action' />
-                                {props.Images != undefined && <LeftMeniuSelector xpos={80} ypos={100} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('DrawCircle'); props.addNewCircle(img); setEnableScroll(false) }}
-                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} mousetype={"grab"} />}
+                                <Text x={205} y={65} fontSize={18} fontStyle='Bold' text='Action' />
+                                {props.Images != undefined && <LeftMeniuSelector xpos={80} ypos={120} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
+                                        onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} />}
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction(); setEnableScroll(false) }} onMouseUp={() => setActionAtEnd(props.actions, props.setActions, props.actors)}>
                                         <Rect
-                                                x={95}
-                                                y={87}
+                                                x={205}
+                                                y={107}
                                                 height={58}
                                                 width={50}
                                                 cornerRadius={10}
@@ -213,8 +212,8 @@ function LeftMeniu(props: LeftMeniuProps) {
                                                 onMouseLeave={(e: any) => { e.currentTarget.fill("") }}
                                         />
                                         <Rect
-                                                x={100}
-                                                y={92}
+                                                x={210}
+                                                y={118}
                                                 height={30}
                                                 width={40}
                                                 cornerRadius={10}
@@ -222,10 +221,48 @@ function LeftMeniu(props: LeftMeniuProps) {
                                                 strokeWidth={1}
 
                                         />
-                                        <Text x={100}
-                                                y={125} text={"Action"} align={"center"} fontSize={14} />
                                 </Group>
-                                <Line points={[90, 145, 270, 145]} stroke={"#d0d2d5"} fill='#d0d2d5' />
+                                <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
+                                props.addNewCircle(); setEnableScroll(false) }}
+                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)}>
+                                        <Rect x={100}
+                                                y={92}
+                                                height={30}
+                                                width={40}
+                                                cornerRadius={10}
+                                                stroke={'black'}
+                                                strokeWidth={1}></Rect>
+
+                                        <Rect x={100}
+                                                y={142}
+                                                height={30}
+                                                width={40}
+                                                cornerRadius={10}
+                                                stroke={'black'}
+                                                strokeWidth={1}></Rect>
+                                        <Arrow  points={[120, 122, 120, 140]} stroke={"black"} fill='black' dash={[2]} pointerWidth={5}  pointerLength={5}/>
+                                </Group>
+                                <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
+                                props.addNewCircle("", true); setEnableScroll(false) }}
+                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)}>
+                                        <Rect x={150}
+                                                y={92}
+                                                height={30}
+                                                width={40}
+                                                cornerRadius={10}
+                                                stroke={'black'}
+                                                strokeWidth={1}></Rect>
+
+                                        <Rect x={150}
+                                                y={142}
+                                                height={30}
+                                                width={40}
+                                                cornerRadius={10}
+                                                stroke={'black'}
+                                                strokeWidth={1}></Rect>
+                                        <Arrow  points={[170, 142, 170, 122]} stroke={"black"} fill='black' dash={[2]} pointerWidth={5}  pointerLength={5}/>
+                                </Group>
+                                <Line points={[90, 185, 270, 185]} stroke={"#d0d2d5"} fill='#d0d2d5' />
                         </div>}
 
                         {subMeniuOption == "Arrow" && props.SwimlineMode && <div>

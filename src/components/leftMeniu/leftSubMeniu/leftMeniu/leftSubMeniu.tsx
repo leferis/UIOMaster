@@ -31,7 +31,7 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
 
   var height = 0;
   try {
-    height = props.mainLayer.current.canvas.height;
+    height = window.innerHeight-180;
   }
   catch (ex) {
     height = 20;

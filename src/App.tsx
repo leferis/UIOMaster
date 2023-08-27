@@ -35,6 +35,7 @@ import SwimlaneInitialValues from './components/swimlaneInitialValues/swimlaneIn
 import _ from 'lodash';
 import Ribbon from './components/ribbon/ribbon';
 import StatusBar from './components/statusBar/statusBar';
+import { ImageChange } from './Classes/ImageChange';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -65,6 +66,7 @@ function App() {
   const [journeyIndex, setJourneyIndex] = useState(1);
   const [moveStatistics, setMoveStatistics] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [ImageChange, setImageChange] = useState<ImageChange| undefined>(undefined);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -129,10 +131,10 @@ function App() {
               setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
             }}
           >
-
+           
             {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
             {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
-            {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned) && <ActorPoint currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
+            {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned)  && <ActorPoint currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
               actions={actions} circles={circles} setActions={setActions} updateCircles={setCircles}
             />}
             {Journey.length > 0 && <TouchPoint Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
@@ -144,6 +146,7 @@ function App() {
               makeBiggerActors={makeBiggerActors}
             ></TouchPoint>}
             <ActionPoints swimlaneMode={SwimlineMode} setActions={setActions}
+
               actions={actions}
               setClickFunction={setClickFunction}
               ClickFunction={ClickFunction}
@@ -161,6 +164,7 @@ function App() {
             ></ActionPoints>
             {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
             <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
+            {Journey.length > 0 && ImageChange!= undefined && !openHome && <KonvaImage x={ImageChange?.x-15} y={ImageChange?.y-15} height={30} width={30} image={getImageObject(ImageChange.Image)}></KonvaImage>}
           </Layer>}
           {openHome &&
             <Layer ref={layerEl} draggable onDragEnd={(e) => {
@@ -179,7 +183,7 @@ function App() {
             SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
             showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
             updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
-            setActions={setActions} openModal={setShowModal} setShowSettings={setShowSettings}
+            setActions={setActions} openModal={setShowModal} setShowSettings={setShowSettings} setImageChange={setImageChange}
           />
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
@@ -302,11 +306,17 @@ function App() {
     setActions((prevActions) => [...prevActions, newAction]);
   }
 
-  function addNewCircle(image: string = "") {
+  function addNewCircle(image: string = "", upsideDown: boolean = false) {
     if (image == "") {
       image = "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
     }
-    let newCircle = new CJMLCircle(initialId, -9999, -9999, false, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
+    let newCircle:CJMLCircle;
+    if(upsideDown){
+      newCircle= new CJMLCircle(initialId, -9999, -10999, false, DevationMode, ActorsCJML[0], ActorsCJML[1], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
+    }
+    else{
+    newCircle= new CJMLCircle(initialId, -9999, -9999, false, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
+    }
     setCircles((prevCircles) => [
       ...prevCircles,
       newCircle
@@ -532,8 +542,10 @@ function App() {
       changeArrowOnDraw(e);
     }
     if (mouseDownFunction == "DrawCircle") {
-
       changeCircle(e);
+    }
+    else if(mouseDownFunction == "ImageChange"){
+      ChangeImage(e);
     }
     else if (mouseDownFunction == "DrawAction") {
       changeAction(e);
@@ -574,8 +586,15 @@ function App() {
         x.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
         x.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
         x.swimlaneX = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
-        x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
-        x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) + 200;
+        if(x.receiver.y < x.initiator.y){
+          x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) +200;
+          x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) ;
+        }
+        else{
+          x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+          x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) + 200;
+        }
+
         return arrowNew
       }
       else {
@@ -584,6 +603,17 @@ function App() {
     });
 
     setCircles(JSON.parse(JSON.stringify(newCircle)));
+  }
+
+  function ChangeImage(e:any){
+    let x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+    let y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+    let copy = _.cloneDeep(ImageChange);
+    if(copy !== undefined){
+    copy!.x = x;
+    copy!.y = y
+  }
+    setImageChange(copy);
   }
 
   function changeArrowOnDraw(e: any) {
@@ -829,6 +859,7 @@ function App() {
         onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, Journey[currentJourney].isPlanned);
         setNewID(initialId + 1)
       }
+      
         break;
       case "DrawAction": {
         const actionToWork = actions.filter((x) => {
@@ -838,10 +869,51 @@ function App() {
         onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned);
         setNewID(initialId + 1)
       }
+      break;
+      case "ImageChange":{
+        setImageToTouchpoint(e);
+        setImageChange(undefined);
+      }
     }
     setMouseDownFunction("")
   }
 
+  function setImageToTouchpoint(e:any){
+    let yPosOfMouse:number;
+    let xPosOfMouse:number;
+    if (e.target.attrs.y != null) {
+      yPosOfMouse = e.target.attrs.y;
+      xPosOfMouse = e.target.attrs.x;
+    }
+    else {
+      yPosOfMouse = e.target.getStage().getPointerPosition().y;
+      xPosOfMouse = e.target.getStage().getPointerPosition().x;
+    }
+   
+    let copyOfCirlces = _.cloneDeep(circles);
+    copyOfCirlces = copyOfCirlces.map((x:CJMLCircle)=>{
+      if(!SwimlineMode){
+        if(x.swimlaneX-15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse ){
+          if(x.swimlaneY-15 <= yPosOfMouse && x.swimlaneY +195 >= yPosOfMouse){
+            x.imageName = ImageChange?.Image;
+          }
+          else if(x.swimlaneReceiverY-15  <= yPosOfMouse && x.swimlaneReceiverY +195 >= yPosOfMouse){
+            x.imageNameReceiver = ImageChange?.Image;
+          }
+        }
+      }
+      else{
+        if(x.x-35 <= xPosOfMouse && x.x + 35 >= xPosOfMouse ){
+          if(x.y-35 <= yPosOfMouse && x.y +35 >= yPosOfMouse){
+            x.imageName = ImageChange?.Image;
+            x.imageNameReceiver = ImageChange?.Image;
+          }
+        }
+      }
+      return x;
+    });
+    setCircles(copyOfCirlces);
+  }
   function onClickDoes(e: any) {
     let isOnActor = findActor(e);
 
