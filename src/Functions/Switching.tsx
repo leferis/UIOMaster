@@ -79,7 +79,7 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
         else {
             objects[j].x = prevX;
             if(objects[j].receiver != undefined){
-            objects[j].y = 275;
+            objects[j].y = 265;
             }
             else{
                 objects[j].y = 245;

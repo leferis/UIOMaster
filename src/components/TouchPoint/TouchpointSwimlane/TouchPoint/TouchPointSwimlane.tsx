@@ -10,6 +10,8 @@ import ElementChangeBar from '../../../elementChangeBar/elementChangeBar';
 import RibbonChangeBarImageChange from '../../../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
 import _ from 'lodash';
 import RibbonChangeBarActorChange from '../../../ribbon/ChangeBar/ActorChange/ribbon/ChangeBar/ActorChange';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface TouchPointSwimlaneProps {
   touchPoint: CJMLCircle
@@ -34,6 +36,7 @@ interface TouchPointSwimlaneProps {
   setCurrentObject:any
   Images:any;
   currentObject:any;
+  remove:any;
 }
 
 
@@ -103,6 +106,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           props.setCurrentObject(copyOfCurrentObject);
         }}  ></RibbonChangeBarImageChange>
             {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
+            <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
           </ElementChangeBar>}
         {props.touchPoint.initiator.isEndUser && <TextMessages x={props.touchPoint.devation ? props.touchPoint.x - 80 : props.touchPoint.x - 25}
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}

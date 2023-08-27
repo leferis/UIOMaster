@@ -10,7 +10,8 @@ import { updateByActors } from '../../Functions/Switching';
 import _ from 'lodash';
 import ElementChangeBar from '../elementChangeBar/elementChangeBar';
 import RibbonChangeBarImageChange from '../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from '@mui/material';
 interface ActorPointProps {
   setActors: any;
   actors: Actors[];
@@ -26,16 +27,18 @@ interface ActorPointProps {
   actions: any;
   setActions: any;
   updateCircles: any;
+  remove:any;
 }
 
 
 function ActorPoint(props: ActorPointProps) {
   const [onHower, setHower] = useState(false);
   const [onHowerDown, setHowerDown] = useState(false);
+  const [showButtons, setShowButtons] = useState<number|undefined>(undefined);
   const width = 1;
   function getImage(x: any) {
     let img = props.getImageObject(x.img);
-    return (<Images x={x.x + 45} y={x.y + 55} image={img} />)
+    return (<Images x={x.x + 45} y={x.y + 35} image={img} />)
   }
   const changeMouse = (e: any, style: any) => {
     const container = e.target.getStage().container();
@@ -74,13 +77,15 @@ function ActorPoint(props: ActorPointProps) {
     }
   });
   return (<div>
-    {props.actors.map((act: Actors, index: number) => {
+    {props.actors.sort((x:any,y:any)=>{
+      return x.y - y.y
+    }).map((act: Actors, index: number) => {
       if (props.SwimlineMode && !act.isEndUser) {
         return (<div></div>);
       }
       return (<div>
 
-        {act == props.currentObject && <ElementChangeBar x={act.x + 30} y={act.y - 70}>
+        {act == props.currentObject && showButtons!= index && <ElementChangeBar x={act.x + 30} y={act.y - 70}>
           <RibbonChangeBarImageChange x={act.x + 30} y={act.y - 68} images={act.isEndUser?{Name:"Actors",Images:endUserImages}:{Name:"Actors",Images:userImages}} text={"Type"} currentObject={props.currentObject} changeImage={(e: any) => {
             let copyOfActors = _.cloneDeep(props.actors);
             let copyOfCurrentObject;
@@ -95,6 +100,10 @@ function ActorPoint(props: ActorPointProps) {
             props.setCurrentObjectID(copyOfCurrentObject);
 
           }} ></RibbonChangeBarImageChange>
+         { !act.isEndUser && <Html  groupProps= {{x:act.x + 200,y:act.y - 55}}>
+        <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
+              
+        </Html>}
         </ElementChangeBar>}
         {!props.SwimlineMode && <Rect
           x={act.x}
@@ -105,11 +114,13 @@ function ActorPoint(props: ActorPointProps) {
           cornerRadius={10}
           fill='#f1f1f1'
           strokeWidth={3}
+          onClick={()=> {setShowButtons(index); props.setCurrentObjectID(act);}}
         />}
         {getImage(act)}
         <Rect
           onClick={(evt) => {
             props.setCurrentObjectID(act);
+            setShowButtons(undefined);
           }}
           onMouseEnter={(e) => changeMouse(e, "pointer")}
           onMouseLeave={(e) => changeMouse(e, "default")}
@@ -119,7 +130,7 @@ function ActorPoint(props: ActorPointProps) {
           y={act.y}
         />
 
-        <TextMessages x={act.x + 35} y={act.y + 100} height={40} width={60} fontSize={12} value={act.Title} modifyObject={act} isEditing={act.isEditing}
+        <TextMessages x={act.x + 40} y={act.y + 80} height={40} width={60} fontSize={12} value={act.Title} modifyObject={act} isEditing={act.isEditing}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObjectID(-1);
             const circles = props.actors.map(act => {
@@ -152,14 +163,14 @@ function ActorPoint(props: ActorPointProps) {
         {!props.SwimlineMode && props.currentObject.id == act.id && index != 0 && <Group onMouseEnter={(e) => { changeMouse(e, "pointer"); setHower(true) }} onMouseLeave={(e) => { changeMouse(e, "default"); setHower(false) }}
           onClick={() => { changeActors(index, true); setHower(false) }}
         >
-          <Rect x={act.x + 20} y={act.y + 155} width={60} height={20} stroke={"black"} cornerRadius={4} fill={onHower ? '#dbdddf' : '#f4f6f8'} />
-          <Text text='Move Up' x={act.x + 25} y={act.y + 160} />
+          <Rect x={act.x + act.width - 70} y={act.y + 155} width={60} height={20} stroke={"black"} cornerRadius={4} fill={onHower ? '#dbdddf' : '#f4f6f8'} />
+          <Text text='Move Up' x={act.x + act.width - 65} y={act.y + 160} />
         </Group>}
         {!props.SwimlineMode && props.currentObject.id == act.id && index != props.actors.length - 1 &&
           <Group onMouseEnter={(e) => { changeMouse(e, "pointer"); setHowerDown(true) }} onMouseLeave={(e) => { changeMouse(e, "default"); setHowerDown(false) }}
             onClick={() => { changeActors(index, false); setHowerDown(false) }} >
-            <Rect x={index == 0 ? act.x + 20 : act.x + 86} y={act.y + 155} width={72} height={20} stroke={"black"} cornerRadius={4} fill={onHowerDown ? '#dbdddf' : '#f4f6f8'} />
-            <Text text='Move Down' x={index == 0 ? act.x + 23 : act.x + 90} y={act.y + 160} />
+            <Rect x={index == 0 ? act.x + act.width - 75 : act.x + act.width - 145} y={act.y + 155} width={72} height={20} stroke={"black"} cornerRadius={4} fill={onHowerDown ? '#dbdddf' : '#f4f6f8'} />
+            <Text text='Move Down' x={index == 0 ?act.x + act.width - 70 : act.x + act.width - 140} y={act.y + 160} />
           </Group>
         }
       </div>);

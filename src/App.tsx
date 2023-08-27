@@ -43,7 +43,7 @@ function App() {
   const [actions, setActions] = useState<CJMLAction[]>([]);
   const [ClickFunction, setClickFunction] = useState<any>('');
   const [Arrows, setArrows] = useState<CJMLArrow[]>([]);
-  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
+  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 130, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 130, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
   const [initialActorPosY, setPosY] = useState<any>(600);
   const [initialId, setNewID] = useState<any>(3);
   const [initialArrowId, setNewArrowId] = useState<any>(-9999999);
@@ -134,10 +134,13 @@ function App() {
            
             {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
             {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
-            {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned)  && <ActorPoint currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
+            {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned)  && 
+            <ActorPoint 
+            currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} remove={remove} 
+            setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
               actions={actions} circles={circles} setActions={setActions} updateCircles={setCircles}
             />}
-            {Journey.length > 0 && <TouchPoint Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
+            {Journey.length > 0 && <TouchPoint remove={remove} Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
               drawingArrow={drawingArrow} currentObject={currentObject} setCurrentObjectID={setCurrentObjectReference} setClickFunction={setClickFunction} Images={CJMLImageList} actions={actions}
               setActions={setActions} actors={ActorsCJML} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow}
               addNewArrow={addNewArrow} finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder}
@@ -146,7 +149,7 @@ function App() {
               makeBiggerActors={makeBiggerActors}
             ></TouchPoint>}
             <ActionPoints swimlaneMode={SwimlineMode} setActions={setActions}
-
+              remove={remove}
               actions={actions}
               setClickFunction={setClickFunction}
               ClickFunction={ClickFunction}
@@ -184,6 +187,7 @@ function App() {
             showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
             updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
             setActions={setActions} openModal={setShowModal} setShowSettings={setShowSettings} setImageChange={setImageChange}
+            addNewActorDragAndDrop = {addNewActorDragAndDrop}
           />
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
@@ -223,7 +227,7 @@ function App() {
       setJourneyIndex(journeyIndex + 1);
     }
     else {
-      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 150, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 150, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
+      setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 130, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 130, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
       setJourneyIndex(journeyIndex + 1);
     }
   }
@@ -240,7 +244,7 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    actor.splice(index, 0, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 130, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
   }
@@ -261,7 +265,8 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 150, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+
+    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 130, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
     toast.success('Actor has been added', {
@@ -274,6 +279,27 @@ function App() {
       progress: undefined,
       theme: "light",
     });
+  }
+
+  function addNewActorDragAndDrop(pathImage:any){
+    console.log(pathImage)
+    var actor = ActorsCJML;
+    var actorAfterInsert = ActorsCJML.sort((x, y) => {
+      return x.y - y.y;
+    })[ActorsCJML.length - 1];
+    var maxWidth = 900;
+    var index = actor.findIndex(x => x.id == actorAfterInsert.id);
+    actor.forEach((x) => {
+      if (x.y > actorAfterInsert.y) {
+        updateNodesAndConnections(x);
+        x.y += x.height + 50;
+      }
+      maxWidth = x.width;
+    });
+
+    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 9999, y: 9999, id: initialId, height: 130, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    setActors(actor);
+    setNewID(initialId + 1);
   }
 
   function deleteCJMLObject(element: any) {
@@ -306,7 +332,7 @@ function App() {
     setActions((prevActions) => [...prevActions, newAction]);
   }
 
-  function addNewCircle(image: string = "", upsideDown: boolean = false) {
+  function addNewCircle(image: string = "", upsideDown: boolean = false, initiator?:Actors) {
     if (image == "") {
       image = "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
     }
@@ -315,7 +341,7 @@ function App() {
       newCircle= new CJMLCircle(initialId, -9999, -10999, false, DevationMode, ActorsCJML[0], ActorsCJML[1], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
     }
     else{
-    newCircle= new CJMLCircle(initialId, -9999, -9999, false, DevationMode, ActorsCJML[1], ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
+    newCircle= new CJMLCircle(initialId, -9999, -9999, false, DevationMode, initiator != undefined? ActorsCJML[0]:ActorsCJML[1], initiator != undefined? initiator: ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
     }
     setCircles((prevCircles) => [
       ...prevCircles,
@@ -489,7 +515,7 @@ function App() {
         x.swimlaneY += actor.height;
         changeArrow(null, x.id, x);
       } else if (x.receiver.id == actor.id) {
-        x.swimlaneReceiverY += actor.height + 50;
+        x.swimlaneReceiverY += actor.height + 30;
         changeArrow(null, x.id, x);
       }
     });
@@ -550,6 +576,60 @@ function App() {
     else if (mouseDownFunction == "DrawAction") {
       changeAction(e);
     }
+    else if( mouseDownFunction == "DragActor"){
+      changeActor(e);
+    }
+  }
+
+  function changeActor(e:any){
+    let workingActor = initialId-1;
+    let acotrsCopy = _.cloneDeep(ActorsCJML);
+    
+    let touchpoints = _.cloneDeep(circles);
+    let actionscopy = _.cloneDeep(actions);
+
+    acotrsCopy = acotrsCopy.sort((x:Actors,y:Actors)=>{
+      return x.y-y.y;
+    }).map((value:Actors, index:number)=>{
+      if(value.id != workingActor.toString()){
+        value.y = (index+1) *200
+      }
+      else{
+        value.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
+        value.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
+      }
+      touchpoints = touchpoints.map((x)=>{
+        if(x.initiator.id == value.id){
+          x.swimlaneY = value.y +20
+        }
+        else if(x.receiver.id == value.id){
+          x.swimlaneReceiverY = value.y +20
+        }
+        return x;
+      })
+      actionscopy = actionscopy.map((x)=>{
+        if(x.initiator.id == value.id){
+          x.y = value.y +20; 
+        }
+        return x
+      })
+      return value;
+    })
+    setActors(acotrsCopy);
+    setActions(actionscopy);
+    setCircles(touchpoints)
+  }
+
+  function setActorLocations(){
+    let acotrsCopy = _.cloneDeep(ActorsCJML);
+    acotrsCopy = acotrsCopy.sort((x:Actors,y:Actors)=>{
+      return x.y-y.y;
+    }).map((value:Actors, index:number)=>{
+        value.y = (index+1) *200
+        value.x = 150;
+      return value;
+    })
+    setActors(acotrsCopy);
   }
 
   function changeAction(e: any) {
@@ -873,6 +953,10 @@ function App() {
       case "ImageChange":{
         setImageToTouchpoint(e);
         setImageChange(undefined);
+      }
+      break;
+      case "DragActor":{
+        setActorLocations();
       }
     }
     setMouseDownFunction("")

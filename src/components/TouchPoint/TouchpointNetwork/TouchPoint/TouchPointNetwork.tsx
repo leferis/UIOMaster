@@ -11,6 +11,9 @@ import { collisionSwim, moveElement, onDragEnd, onDragMove, remakeArrows } from 
 import ElementChangeBar from '../../../elementChangeBar/elementChangeBar';
 import RibbonChangeBarImageChange from '../../../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
 import _ from 'lodash';
+import { Html } from 'react-konva-utils';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface TouchPointNetworkProps {
   touchPoint: CJMLCircle;
@@ -36,6 +39,7 @@ interface TouchPointNetworkProps {
   setCurrentObject: any;
   Images: any;
   currentObject: any;
+  remove:any;
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps) {
@@ -49,7 +53,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
       <Rect x={props.touchPoint.swimlaneX}
         y={props.touchPoint.swimlaneY}
 
-        height={120}
+        height={80}
         width={180}
         stroke={props.touchPoint.id == props.currentObject.id ? '#F49D6E' : '#2B8299'}
         shadowEnabled={props.touchPoint.devation}
@@ -68,7 +72,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
 
       <TextMessages x={props.touchPoint.swimlaneX + 55}
         y={props.touchPoint.swimlaneY + 10}
-        height={70}
+        height={30}
         fontSize={13}
         value={props.touchPoint.text}
         width={110}
@@ -105,15 +109,15 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
       ></TextMessages>
 
       {props.getImage(props.touchPoint, props.index)}
-      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY + 120]} stroke={'black'}
+      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY + 100]} stroke={'black'}
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
-      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY + 120, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY]} stroke={'black'}
+      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY + 100, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY]} stroke={'black'}
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
 
       {!props.touchPoint.isEditing && <Rect x={props.touchPoint.swimlaneX}
         y={props.touchPoint.swimlaneY}
         draggable
-        height={120}
+        height={80}
         width={180}
         onClick={(e) => {
           props.resetTouchpoints();
@@ -143,7 +147,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         opacity={0}
 
       />}
-      <Arrow points={[props.touchPoint.swimlaneX + 90, props.touchPoint.swimlaneY > props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneY + 120, props.touchPoint.swimlaneX + 90, props.touchPoint.swimlaneY > props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneReceiverY + 123 : props.touchPoint.swimlaneReceiverY - 3]}
+      <Arrow points={[props.touchPoint.swimlaneX + 90, props.touchPoint.swimlaneY > props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneY + 80, props.touchPoint.swimlaneX + 90, props.touchPoint.swimlaneY > props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneReceiverY + 83 : props.touchPoint.swimlaneReceiverY - 3]}
         fill={"black"}
         stroke={"black"}
         strokeWidth={3}
@@ -153,7 +157,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
       <Rect x={props.touchPoint.swimlaneX}
         y={props.touchPoint.swimlaneReceiverY}
 
-        height={120}
+        height={80}
         width={180}
         fill='white'
         shadowEnabled={props.touchPoint.devation}
@@ -176,7 +180,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
 
       <TextMessages x={props.touchPoint.swimlaneX + 55}
         y={props.touchPoint.swimlaneReceiverY + 10}
-        height={70}
+        height={30}
         fontSize={13}
         value={props.touchPoint.receiverText}
         width={110}
@@ -220,7 +224,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
       {!props.touchPoint.isEditing && <Rect x={props.touchPoint.swimlaneX}
         y={props.touchPoint.swimlaneReceiverY}
         draggable
-        height={120}
+        height={80}
         width={180}
         onDblClick={() => {
           let results = props.Circle.map((x: CJMLCircle) => {
@@ -331,6 +335,10 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.updateCircles(copyOfCircles);
           props.setCurrentObject(copyOfCurrentObject);
         }} ></RibbonChangeBarImageChange>
+        <Html  groupProps= {{x:props.touchPoint.swimlaneX + 330,y:props.touchPoint.swimlaneY - 78}}>
+        <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
+              
+        </Html>
         {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
       </ElementChangeBar>}
     </div>

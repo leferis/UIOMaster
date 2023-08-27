@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select } from '@mui/material';
+import { Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { Journey } from '../../Classes/Journey';
 import styles from './JourneySelection.module.css';
@@ -83,13 +83,9 @@ function JourneySelection(props: JourneySelectionProps) {
       {!showSelection &&
         <>
           <h2> Do you want to add Planned Journey or Actual Journey</h2>
-          <Grid container spacing={2}>
-            <Grid item xs={2}></Grid>
-            <Grid item xs={4}>  <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned" /></Grid>
-            <Grid item xs={4}>  <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual" /></Grid>
-            <Grid item xs={2}></Grid>
+          <Grid container spacing={2}   alignItems="flex-start"   justifyContent="flex-start">
             <Grid item xs={4}></Grid>
-            <Grid item xs={4}><Button onClick={() => {
+            <Grid item xs={3} > <Button  onClick={() => {
               if (isPlannedJourney) {
                 props.addJourney(true, null);
                 props.closeJourney(false)
@@ -106,14 +102,20 @@ function JourneySelection(props: JourneySelectionProps) {
                 }
               }
 
-            }} variant="contained">Add Journey</Button> </Grid>
-            <Grid item xs={2}></Grid>
+            }} variant="contained">Add Journey</Button>  <FormHelperText style={{    paddingLeft: "20px"}}>Draw your journey from strach</FormHelperText></Grid>
+            <Grid item xs={4} >   <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned" /><br></br>
+            <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual" /></Grid>
+            <Grid item xs={4}></Grid>
+            <Grid item xs={5} style={{paddingRight:"50px"}}><Button variant="contained" disabled >Open example journey</Button>
+            <FormHelperText style={{    paddingLeft: "20px"}}>Load an example journey that you can edit</FormHelperText></Grid>
+            <Grid item xs={4}></Grid>
+            {    props.JourneyList.length<1 && <>    
+            
+            <Grid item xs={5} style={{paddingRight:"90px"}}><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import XCJML file</Button>
+            <FormHelperText style={{    paddingLeft: "20px"}}>Open xCJML file</FormHelperText></Grid>
+            <Grid item xs={4}></Grid></> }
           </Grid>
-{    props.JourneyList.length<1 &&      <Grid style={{ paddingTop: "20px" }}>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={4}><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import XCJML file</Button></Grid>
-            <Grid item xs={4}></Grid>
-          </Grid>}
+
         </>}
       {/* Add logic to not give any selection if there is no Planned journey */}
       {showSelection && getSelectionWindow()}

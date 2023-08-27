@@ -9,6 +9,13 @@ import TextMessages from '../TextMessages/TextMessages';
 import styles from './ActionPoints.module.css';
 import { collisionSwim, moveElement } from '../../Functions/Movement';
 import { onActionDragEnd, onActionDragMove } from '../../Functions/actionMovement';
+import { Button } from '@mui/material';
+import _ from 'lodash';
+import { Html } from 'react-konva-utils';
+import ElementChangeBar from '../elementChangeBar/elementChangeBar';
+import RibbonChangeBarImageChange from '../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 interface ActionPointsProps {
   setActions: any;
@@ -32,6 +39,7 @@ interface ActionPointsProps {
   updateCircles: any;
   circles: any
   checkIfCloseToActorsBorder:any;
+  remove:any;
 }
 
 function ActionPoints(props: ActionPointsProps) {
@@ -40,6 +48,14 @@ function ActionPoints(props: ActionPointsProps) {
       {props.actions.map((x: CJMLAction, index: number) => {
         return (
           <div>
+                  {x.id == props.currentObject.id && <ElementChangeBar x={x.swimlaneX + 30} y={x.y - 90}>
+
+        <Html  groupProps= {{x:x.swimlaneX + 50,y:x.y - 78}}>
+        <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
+              
+        </Html>
+        {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
+      </ElementChangeBar>}
             {props.swimlaneMode && <div>
               <Rect x={x.x - 15}
                 y={x.y - 15}
@@ -102,7 +118,7 @@ function ActionPoints(props: ActionPointsProps) {
               draggable
               stroke={'black'}
               cornerRadius={10}
-              height={props.swimlaneMode ? 60 : 120}
+              height={props.swimlaneMode ? 60 : 80}
               width={props.swimlaneMode ? 90 : 180}
               fill={x.external == 0 ? "White" : "LightGray"}
               strokeWidth={3}
@@ -121,7 +137,7 @@ function ActionPoints(props: ActionPointsProps) {
 
             />
             <TextMessages x={ props.swimlaneMode ? x.x +3 : x.swimlaneX + 10} y={x.y + 10} 
-            height={props.swimlaneMode ? 20 : 75} 
+            height={props.swimlaneMode ? 20 : 40} 
             width={props.swimlaneMode ? 80 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={12} isEditing={x.isEditing} changeEditable={(x: any) => {
               const circles = props.actions.map((action: CJMLAction) => {
                 props.setCurrentObjectID(-1);

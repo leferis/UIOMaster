@@ -215,7 +215,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
             var image = GetImage(getImageOfActor(actors[i]), "Actor");
             image = image == undefined ? "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg" : image;
             var color = randomColor();
-            const actorEntrie = new Actors(Title == null ? name : Title, name, image, yLocation, 200, 700, 150, actors[i].nodeName == 'endUser' ? true : false);
+            const actorEntrie = new Actors(Title == null ? name : Title, name, image, yLocation, 200, 700, 130, actors[i].nodeName == 'endUser' ? true : false);
             actorEntrie.color = color;
             yLocation += 200;
             actorsList.push(actorEntrie);

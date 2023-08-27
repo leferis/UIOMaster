@@ -52,15 +52,15 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
     ></Rect>
 
     <Group onClick={() => { props.setOption("Actor"); props.setRenderMeniu(true);props.setmoveStatistics(true); props.layer.current.y(0) }}>
-      <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={25} height={45} width={45} option={"Actor"} text='Actors'
+      <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={25} height={59} width={45} option={"Actor"} text='Actors'
         currentOption={props.option} represenation='Image' img={"\\HelpingImages\\actor.png"}
       />
-      <Text x={24} y={59} text='Actor' fontVariant='bold' fontSize={14}></Text>
+      <Text x={18} y={59} text='Add Actor' align='center'  width={50}fontVariant='bold' fontSize={14}></Text>
     </Group>
 
     <Group onClick={() => { props.setOption("Touchpoint"); props.setRenderMeniu(true);props.setmoveStatistics(true); props.layer.current.y(0) }}>
-      <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={81} height={45} width={45} option={"Touchpoint"} currentOption={props.option} represenation='Circle' text='Communication points' swimLaneMode={props.swimLaneMode} />
-      <Text x={6} y={118} text='Touchpoint' fontSize={14} fontVariant='bold'></Text>
+      <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={91} height={59} width={45} option={"Touchpoint"} currentOption={props.option} represenation='Circle' text='Communication points' swimLaneMode={props.swimLaneMode} />
+      <Text x={-5} y={128} align='center' text='Add Touchpoint' width={100}fontSize={14} fontVariant='bold'></Text>
 
     </Group>
 

@@ -42,7 +42,7 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
       yPostionLast = objects[objects.length - 1].y;
     }
   }
-
+if(objects.length>0){
   return (
 
     objects.map((x: any, index: any) => {
@@ -58,7 +58,19 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
       )
     }
 
-    ))
+    ))}
+    else{
+      
+      return (<>
+
+      <><Circle x={320} y={endUser.y + endUser.height / 2} radius={7} stroke={"black"} />
+      
+       <Circle x={452} y={endUser.y + endUser.height / 2} radius={7} fill={"black"} />
+        </>
+        
+      </>
+      )
+    }
 }
 
 export default SwimlaneInitialValues;

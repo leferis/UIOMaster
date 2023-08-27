@@ -287,7 +287,14 @@ export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJM
               if(circle.swimlaneY > circle.swimlaneReceiverY){
                 swap = false;
               }
-
+              if (circle.id == touchPoint.id) {
+                let tempActor, tempy;
+                if (!SwimlineMode && circle.receiver == actorIn) {
+                  
+                  tempActor = JSON.parse(JSON.stringify(circle.initiator));
+                  tempy = circle.initiator.y + 20;
+                  return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200 };
+                }}
               if(!swap){
                 tempActor = JSON.parse(JSON.stringify(circle.initiator));
                 tempy = tempActor.y + 20;

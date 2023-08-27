@@ -9,6 +9,7 @@ interface leftMeniuSelectorProps {
     ypos: any;
     mousetype:any;
     width?:any;
+    additionalFiltering?:boolean
 }
 
 function LeftMeniuSelector(props: leftMeniuSelectorProps) {
@@ -30,11 +31,28 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
     }
     return (
         <div>
-            {elements.filter((x:any) => {return x.Default == true}).map((x: any, index: number) => {
+            {elements.filter((x:any) => {
+                if(props.additionalFiltering!= undefined){
+                    if(props.additionalFiltering)
+                    return x.Default == true && x.Main == true;
+                    else{
+
+                    return x.Default == true && x.Main != true;
+                }
+                }   
+                else
+                return x.Default == true}).sort((a:any,b:any)=>{
+                    if(props.additionalFiltering!= undefined){
+                        return a.Sequence - b.Sequence
+                    }
+                    else{
+                        return 0
+                    }
+            }).map((x: any, index: number) => {
                 let change = false;
                 if(props.elements[0].GroupPriority == undefined){
                 if (index % 3 == 0 ) {
-                    initialPosX = 100;
+                    initialPosX = props.xpos;
                     initialPosY += 100;
                 } else {
                     initialPosX += 60;
@@ -43,7 +61,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                     if(previousGroup == x.GroupPriority){
                         counter++;
                         if (counter % 3 == 0 ) {
-                            initialPosX = 100;
+                            initialPosX = props.xpos;
                             initialPosY += 90;
                         } else {
                             initialPosX += 60;

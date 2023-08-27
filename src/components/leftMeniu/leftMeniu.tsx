@@ -48,6 +48,7 @@ interface LeftMeniuProps {
         setmoveStatistics: any;
         setShowSettings: any;
         setImageChange: any;
+        addNewActorDragAndDrop:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -60,7 +61,7 @@ function LeftMeniu(props: LeftMeniuProps) {
         const layerStat: any = useRef();
         const [enableStatistics, setEnableStatistics] = useState(false)
         const [renderMeniu, setRenderMeniu] = useState(false);
-
+        const [showMoreOptions, setShowMoreOptions] = useState(false);
 
         const changeMouse = (e: any, style: any) => {
                 const container = e.target.getStage().container();
@@ -184,8 +185,9 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 <Rect x={90} y={xScrollbarreal} height={window.innerHeight} width={185} ></Rect>
 
                                 <Rect x={270} y={xScrollbarreal} height={330} width={5} cornerRadius={5} fill='black'></Rect>
-                                {props.Images != undefined && <LeftMeniuSelector width={25} xpos={115} ypos={-20} elements={props.Images.Images[0].Images} onMouseUp={(img: string) =>
-                                        props.addNewActor(img)} onMouseDown={() => { }} mousetype={"pointer"} />}</div>
+                                {props.Images != undefined && <LeftMeniuSelector width={25} xpos={100} ypos={-20} elements={props.Images.Images[0].Images} onMouseUp={(img: string) =>
+                                        {if(props.SwimlineMode) props.addNewActor(img)}} onMouseDown={(img:any) => {  setEnableScroll(false);props.addNewActorDragAndDrop(img);
+                                                props.setMouseDownFunction("DragActor")}} mousetype={"pointer"} />}</div>
                         }
 
                         {subMeniuOption == "Touchpoint" && <div>
@@ -194,11 +196,19 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                                 <Rect x={90} y={xScrollbarreal} height={window.innerHeight} width={185} ></Rect>
                                 <Rect x={270} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
-                                <Text x={95} y={185} fontSize={18} fontStyle='Bold' text='Communication points' />
+                                <Text x={95} y={190} fontSize={16} fontStyle='Bold' text='Channel type' />
+                                <Group onClick={()=>{setShowMoreOptions(!showMoreOptions)}}>
+                                <Text x={95} y={620} fontSize={16} fontStyle='Bold' text='More Channels' />
+                                <Rect x={90} y={620} height={30} width={185}/>
+                                {!showMoreOptions && <Line points={[240,620,250,630,260,620]} fill='black' width={3} stroke={"black"} />}
+                                {showMoreOptions && <Line points={[240,630,250,620,260,630]} fill='black' width={3} stroke={"black"} />}
+                                </Group>
+                                <Text x={208} y={65} fontSize={16} fontStyle='Bold' text='Action' />
+                                {props.Images != undefined && <LeftMeniuSelector xpos={100} ypos={120} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
+                                        onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={true}/>}
 
-                                <Text x={205} y={65} fontSize={18} fontStyle='Bold' text='Action' />
-                                {props.Images != undefined && <LeftMeniuSelector xpos={80} ypos={120} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
-                                        onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} />}
+                                {props.Images != undefined && showMoreOptions && <LeftMeniuSelector xpos={100} ypos={560} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
+                                        onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={false}/>}
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction(); setEnableScroll(false) }} onMouseUp={() => setActionAtEnd(props.actions, props.setActions, props.actors)}>
                                         <Rect
                                                 x={205}
@@ -222,9 +232,22 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                                         />
                                 </Group>
-                                <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
+                                <Text x={92} y={55}  width={109} align='center' fontSize={16} fontStyle='Bold' text='Comunication point' />
+                                { !props.SwimlineMode && 
+                                <div><Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
                                 props.addNewCircle(); setEnableScroll(false) }}
                                         onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)}>
+                                                 <Rect
+                                                x={95}
+                                                y={88}
+                                                height={90}
+                                                width={50}
+                                                cornerRadius={10}
+                                                fill=''
+                                                strokeWidth={1}
+                                                onMouseEnter={(e: any) => { e.currentTarget.fill("#cad2de") }}
+                                                onMouseLeave={(e: any) => { e.currentTarget.fill("") }}
+                                        />
                                         <Rect x={100}
                                                 y={92}
                                                 height={30}
@@ -241,10 +264,22 @@ function LeftMeniu(props: LeftMeniuProps) {
                                                 stroke={'black'}
                                                 strokeWidth={1}></Rect>
                                         <Arrow  points={[120, 122, 120, 140]} stroke={"black"} fill='black' dash={[2]} pointerWidth={5}  pointerLength={5}/>
+                                       
                                 </Group>
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
                                 props.addNewCircle("", true); setEnableScroll(false) }}
                                         onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)}>
+                                                               <Rect
+                                                x={145}
+                                                y={88}
+                                                height={90}
+                                                width={50}
+                                                cornerRadius={10}
+                                                fill=''
+                                                strokeWidth={1}
+                                                onMouseEnter={(e: any) => { e.currentTarget.fill("#cad2de") }}
+                                                onMouseLeave={(e: any) => { e.currentTarget.fill("") }}
+                                        />
                                         <Rect x={150}
                                                 y={92}
                                                 height={30}
@@ -262,6 +297,21 @@ function LeftMeniu(props: LeftMeniuProps) {
                                                 strokeWidth={1}></Rect>
                                         <Arrow  points={[170, 142, 170, 122]} stroke={"black"} fill='black' dash={[2]} pointerWidth={5}  pointerLength={5}/>
                                 </Group>
+                                </div>
+                                }
+                                {
+                                        props.SwimlineMode && <div>
+
+                                                {props.actors.map((x:Actors, index:number)=>{
+                                                        console.log(index, Math.floor((index + 1) /5))
+                                                        return (<Group  onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
+                                                        props.addNewCircle("",false,x); setEnableScroll(false) }}
+                                                                onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)}>
+                                                                <Circle x={110 + ( 40 *(index %3) )} y={110 + ( 40* (Math.floor((index + 1) /4)) )}  radius={15} stroke={x.color}/>
+                                                        </Group>)
+                                                })}
+                                                </div>
+                                }
                                 <Line points={[90, 185, 270, 185]} stroke={"#d0d2d5"} fill='#d0d2d5' />
                         </div>}
 

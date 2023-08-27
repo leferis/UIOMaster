@@ -237,11 +237,15 @@
                 {
                     "Name": "App On Pc",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":6,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\app-on-pc.svg"
                 },
                 {
                     "Name": "App On Smartphone",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":5,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\app-on-smartphone.svg"
                 },
                 {
@@ -259,23 +263,29 @@
                 {
                     "Name": "Chat",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":7,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\chat.svg"
+                }
+                ,
+                {
+                    "Name": "Email 2",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\email-1.svg"
                 }
                 ,
                 {
                     "Name": "Email",
                     "Default":true,
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\email-1.svg"
-                }
-                ,
-                {
-                    "Name": "Email 2",
+                    "Main":true,
+                    "Sequence":3,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\email-2.svg"
                 }
                 ,
                 {
                     "Name": "Face To Face ",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":2,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\face-to-face-conversation-1.svg"
                 }
                 ,
@@ -370,6 +380,8 @@
                 {
                     "Name": "Letter",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":9,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\letter-1.svg"
                 },
                 {
@@ -391,6 +403,8 @@
                 },{
                     "Name": "Payment Channel",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":8,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\payment-1.svg"
                 },{
                     "Name": "Payment Channel 2",
@@ -408,6 +422,8 @@
                 {
                     "Name": "Parcel",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":10,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\parcel.svg"
                 },{
                     "Name": "Pc",
@@ -416,6 +432,8 @@
                 },{
                     "Name": "Phone",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":1,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\phone.svg"
                 },{
                     "Name": "Self Service Machine",
@@ -429,19 +447,22 @@
                     "Name": "Self Service Machine 3",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\self-service-machine-3.svg"
                 },{
-                    "Name": "Service Desk ",
-                    "Default":true,
+                    "Name": "Service Desk 2",
+
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\service-desk-1.svg"
                 },{
-                    "Name": "Service Desk 2",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\service-desk-2.svg"
-                },{
-                    "Name": "Shopping",
+                    "Name": "Service Desk",
                     "Default":true,
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\shopping-1.svg"
-                },{
-                    "Name": "Shopping 2",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\shopping-2.svg"
+                    "Main":true,
+                    "Sequence":12,
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\service-desk-2.svg"
+                },
+                {
+                    "Name": "Shopping ",
+                    "Default":true,
+                    "Main":true,
+                    "Sequence":10,
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\shop-counter-1.svg"
                 },
                 {
                     "Name": "Smartphone",
@@ -451,6 +472,8 @@
                 {
                     "Name": "SMS",
                     "Default":true,
+                    "Main":true,
+                    "Sequence":4,
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\sms.svg"
                 },
                 {
