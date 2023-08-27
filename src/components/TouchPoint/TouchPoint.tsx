@@ -96,14 +96,14 @@ function TouchPoint(props: TouchPointProps) {
 
 
   function checkClickFunction(clickedObject: CJMLCircle, e: any) {
+    console.log(clickedObject);
     switch (props.ClickFunction) {
 
       case 'DrawArrow': {
         if (props.drawingArrow == false) {
-          props.setDrawingArrowMode(true);
+           props.setDrawingArrowMode(true);
           props.addNewArrow(clickedObject, e);
-          props.setCurrentObjectID(clickedObject);
-          props.setDrawingObject("Circle");
+           props.setDrawingObject("Circle");
         }
         else {
           props.finishArrow(clickedObject);
