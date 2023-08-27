@@ -226,6 +226,10 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         draggable
         height={80}
         width={180}
+        onClick={(e) => {
+          props.resetTouchpoints();
+          props.checkClickFunction(props.touchPoint, e);
+        }}
         onDblClick={() => {
           let results = props.Circle.map((x: CJMLCircle) => {
             if (x.id == props.touchPoint.id) {
