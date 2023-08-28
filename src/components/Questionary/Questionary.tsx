@@ -31,7 +31,7 @@ interface QuestionaryProps {
 
 function Questionary(props: QuestionaryProps) {
 
-  const [ActorSelect, setActorSelect] = useState<boolean>(true);
+  const [ActorSelect, setActorSelect] = useState<boolean>(false);
   const [ToucpointSelect, setTouchpointSelect] = useState<boolean>(false);
   const [TouchPointsTemp, setTouchPointTemp] = useState<any>(JSON.parse(JSON.stringify(props.circles)).concat(JSON.parse(JSON.stringify(props.actions))).sort((a: Connectable, b: Connectable) => { return a.x - b.x }));
   const [tempActors, setTempActors] = useState(JSON.parse(JSON.stringify(props.actors)));

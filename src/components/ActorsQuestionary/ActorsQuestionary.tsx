@@ -21,14 +21,6 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
 
   const [OpenColor, ChangeOpenColorStatus] = useState<boolean[]>(Array(props.tempActors.length).fill(false));
 
-  const options =
-    props.CJMLImageList.Images[0].Images.map((y: CJMLImage) => {
-      return {
-        label: y.Name,
-        value: y.Location
-      }
-    })
-
 
   function changeName(e: any, id: any) {
     var temp = props.tempActors;
