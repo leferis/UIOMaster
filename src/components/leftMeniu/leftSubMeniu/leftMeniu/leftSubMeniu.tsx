@@ -22,7 +22,6 @@ interface LeftMeniuLeftSubMeniuProps {
   Journeys:any;
   getImages:any;
   openModal:any;
-  setmoveStatistics:any;
   setShowSettings:any;
 }
 function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
@@ -51,26 +50,26 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
     <Rect x={0} y={0} width={90} height={90000} fill="#e8eaed" stroke={"black"} strokeWidth={0.5}
     ></Rect>
 
-    <Group onClick={() => { props.setOption("Actor"); props.setRenderMeniu(true);props.setmoveStatistics(true); props.layer.current.y(0) }}>
+    <Group onClick={() => { props.setOption("Actor"); props.setRenderMeniu(true); props.layer.current.y(0) }}>
       <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={25} height={59} width={45} option={"Actor"} text='Actors'
         currentOption={props.option} represenation='Image' img={"\\HelpingImages\\actor.png"}
       />
       <Text x={18} y={59} text='Add Actor' align='center'  width={50}fontVariant='bold' fontSize={14}></Text>
     </Group>
 
-    <Group onClick={() => { props.setOption("Touchpoint"); props.setRenderMeniu(true);props.setmoveStatistics(true); props.layer.current.y(0) }}>
+    <Group onClick={() => { props.setOption("Touchpoint"); props.setRenderMeniu(true); props.layer.current.y(0) }}>
       <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={91} height={59} width={45} option={"Touchpoint"} currentOption={props.option} represenation='Circle' text='Communication points' swimLaneMode={props.swimLaneMode} />
       <Text x={-5} y={128} align='center' text='Add Touchpoint' width={100}fontSize={14} fontVariant='bold'></Text>
 
     </Group>
 
 
-    {props.swimLaneMode && <Group onClick={() => { props.setOption("Arrow"); props.setRenderMeniu(true);props.setmoveStatistics(true); props.layer.current.y(0) }}>
+    {props.swimLaneMode && <Group onClick={() => { props.setOption("Arrow"); props.setRenderMeniu(true); props.layer.current.y(0) }}>
       <LeftMeniuLeftSubMeniuBackgroundAndElement x={27} y={180} height={45} width={45} option={"Arrow"} currentOption={props.option} represenation='Arrow' text='Arrows' />
       <Text x={18} y={215} text='Arrows' fontSize={14} fontVariant='bold'></Text>
     </Group>}
 
-    <Group onClick={() => { props.setStatisticsOn(!props.statisticsMode); }}>
+    <Group onClick={() => { props.setStatisticsOn(true); }}>
     {props.statisticsMode && <Rect x={5} y={props.swimLaneMode ? 314 : 250} height={45+6} width={45+35} cornerRadius={4}  fill={props.statisticsMode? '#d4dbe4':""}  /> }
       <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={props.swimLaneMode ? 314 : 250} height={45} width={45} option={"Statistics"} currentOption={props.option} represenation='Image' img={"\\HelpingImages\\statistics.png"} text='Statistics' />
      

@@ -16,17 +16,20 @@ export function switchBetweenDiagrams(mode: boolean, circles: CJMLCircle[], acti
 function fromSwimlaneToNetwork(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any,  makeBiggerActors:any) {
     let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
-        if(Math.abs(a.x - b.x)>0)
-        return a.x - b.x
+        if (b.x != a.x)
+        return   a.x -b.x
         else 
         return a.y - b.y
     });
-    console.log(objects)
     for (let j = 0; j < objects.length; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
         if(objects[j].receiver == undefined){
             objects[j].y = objects[j].initiator.y + 20
+        }else{
+            objects[j].swimlaneY = objects[j].initiator.y + 20
+            objects[j].swimlaneReceiverY = objects[j].receiver.y + 20
         }
+
     }
     if(objects.length>0)
     makeBiggerActors(objects[objects.length - 1].swimlaneX);
@@ -65,6 +68,7 @@ export function updateByActors(circles: any[], actions: CJMLAction[], setActions
 function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any, initialArrowId: any, setInitialArrowID: any, setArrows: any) {
     let devationx = 500;
     let prevX = 350;
+
     let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
         return a.swimlaneX - b.swimlaneX
@@ -75,6 +79,8 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
             objects[j].x = prevX > 350? prevX -200 : prevX;
             objects[j].y = devationx;
             devationx = devationx + 150;
+            if(j==0)
+            prevX += 200;
         }
         else {
             objects[j].x = prevX;
@@ -93,8 +99,7 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
     createArrows(objects, initialArrowId, setInitialArrowID, setArrows);
 }
 
-function createArrows(objects: any,initialArrowId:any, setInitialArrowID:any, setArrows:any) {
-    console.log(objects)
+export function createArrows(objects: any,initialArrowId:any, setInitialArrowID:any, setArrows:any) {
     let array: CJMLArrow[] = [];
     for (let i = 0; i < objects.length -1; i++) {
         let arrow = new CJMLArrow(initialArrowId,objects[i],objects[i+1]);

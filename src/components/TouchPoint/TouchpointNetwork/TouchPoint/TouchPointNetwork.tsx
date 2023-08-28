@@ -12,8 +12,9 @@ import ElementChangeBar from '../../../elementChangeBar/elementChangeBar';
 import RibbonChangeBarImageChange from '../../../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
 import _ from 'lodash';
 import { Html } from 'react-konva-utils';
-import { Button } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import RibbonChangeBarTypeChange from '../../../ribbon/ChangeBar/TypeChange/ribbon/ChangeBar/TypeChange';
 
 interface TouchPointNetworkProps {
   touchPoint: CJMLCircle;
@@ -40,13 +41,15 @@ interface TouchPointNetworkProps {
   Images: any;
   currentObject: any;
   remove:any;
+  findFurthestPoint:any;
+  ChangeDevation:any;
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps) {
   const images = props.Images.Images[1].Images.filter((x:any)=>{
     return x.Default;
   })  
-
+  console.log(props.isPlanned)
   return (
     <div>
 
@@ -109,9 +112,9 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
       ></TextMessages>
 
       {props.getImage(props.touchPoint, props.index)}
-      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY + 100]} stroke={'black'}
+      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY + 80]} stroke={'black'}
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
-      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY + 100, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY]} stroke={'black'}
+      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY + 80, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY]} stroke={'black'}
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
 
       {!props.touchPoint.isEditing && <Rect x={props.touchPoint.swimlaneX}
@@ -135,12 +138,13 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         }}
         onDragStart={() => props.touchPoint.Capacity = false}
         onDragMove={(e) => {
-          onDragMove(e, props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode, props.isPlanned)
+          onDragMove(e, props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
         }}
         onDragEnd={
 
           (e) => {
-            onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned)
+            onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
+            props.findFurthestPoint();
           }
 
         }
@@ -169,7 +173,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.resetTouchpoints();
           props.checkClickFunction(props.touchPoint, e);
         }}
-        stroke={props.touchPoint.Capacity ? '#F49D6E' : '#2B8299'}
+        stroke={props.touchPoint.id == props.currentObject.id ? '#F49D6E' : '#2B8299'}
 
         cornerRadius={10}
         strokeWidth={4}
@@ -216,9 +220,9 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         modifyObject={props.touchPoint}
       ></TextMessages>
       {props.getImageReceiver(props.touchPoint, props.index)}
-      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY + 120]} stroke={'black'}
+      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY + 80]} stroke={'black'}
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
-      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY + 120, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY]} stroke={'black'}
+      <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY + 80, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY]} stroke={'black'}
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
 
       {!props.touchPoint.isEditing && <Rect x={props.touchPoint.swimlaneX}
@@ -261,7 +265,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
             props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
             props.elementsAreFarFromBorder();
           }
-          moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions);
+          moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
           props.updateCircles(circles);
 
           props.elementCheckCloseToBorder(e.target.getPosition().x);
@@ -299,12 +303,12 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
               props.updateCircles(circles);
               props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
               props.elementsAreFarFromBorder();
-              moveElement(circles, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions);
+              moveElement(circles, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
             } else {
-              moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions);
+              moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
             }
-            remakeArrows(props.Circle, props.actions, props.arrowId, props.setArrowId, props.setArrows);
             props.makeBiggerActors(e.target.attrs.x);
+            props.findFurthestPoint();
           }
 
         }
@@ -339,7 +343,14 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.updateCircles(copyOfCircles);
           props.setCurrentObject(copyOfCurrentObject);
         }} ></RibbonChangeBarImageChange>
-        <Html  groupProps= {{x:props.touchPoint.swimlaneX + 330,y:props.touchPoint.swimlaneY - 78}}>
+        {!props.isPlanned &&  <RibbonChangeBarTypeChange  x={ props.touchPoint.swimlaneX + 420} y={ props.touchPoint.swimlaneY -88} TouchPoints={props.Circle} currenctObj={props.currentObject}  updateCurentObj={props.setCurrentObject} updateTouhcPoints={props.updateCircles}></RibbonChangeBarTypeChange>  }
+        {!props.isPlanned && <Html  groupProps= {{x:(props.touchPoint.swimlaneX + 320),y:props.touchPoint.swimlaneY - 80}}>
+        <FormGroup>
+  <FormControlLabel control={<Checkbox onChange={()=>(props.ChangeDevation(props.touchPoint))} defaultChecked={props.touchPoint.devation} />} label="Devation" />
+  </FormGroup>
+</Html>
+        }
+        <Html  groupProps= {{x:(props.isPlanned?props.touchPoint.swimlaneX+330:props.touchPoint.swimlaneX + 580),y:props.touchPoint.swimlaneY - 75}}>
         <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
               
         </Html>

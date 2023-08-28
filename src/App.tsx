@@ -32,10 +32,11 @@ import { onDragEnd, onDragMove } from './Functions/Movement';
 import { setCirlceAtEnd } from './Functions/creation';
 import { onActionDragEnd, onActionDragMove } from './Functions/actionMovement';
 import SwimlaneInitialValues from './components/swimlaneInitialValues/swimlaneInitialValues';
-import _ from 'lodash';
+import _, { values } from 'lodash';
 import Ribbon from './components/ribbon/ribbon';
 import StatusBar from './components/statusBar/statusBar';
 import { ImageChange } from './Classes/ImageChange';
+import Legend from './components/Legend/Legend';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -64,9 +65,9 @@ function App() {
   const [openHome, ChangeOpenHome] = useState(false);
   const [mouseDownFunction, setMouseDownFunction] = useState("");
   const [journeyIndex, setJourneyIndex] = useState(1);
-  const [moveStatistics, setMoveStatistics] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [ImageChange, setImageChange] = useState<ImageChange| undefined>(undefined);
+  const [openStatistics, setOpenStatistics] = useState(false);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -146,7 +147,8 @@ function App() {
               addNewArrow={addNewArrow} finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder}
               SwimlineMode={SwimlineMode} resetTouchpoints={resetTouchpoints} devationMode={Journey[currentJourney].isPlanned} getImageObject={getImageObject}
               isPlanned={Journey[currentJourney].isPlanned}
-              makeBiggerActors={makeBiggerActors}
+              makeBiggerActors={makeBiggerActors} 
+              findFurthestPoint={findFurthestPoint}
             ></TouchPoint>}
             <ActionPoints swimlaneMode={SwimlineMode} setActions={setActions}
               remove={remove}
@@ -163,6 +165,7 @@ function App() {
               addNewArrow={addNewArrow} finishArrow={finishArrow} changeArrow={changeArrow}
               updateCircles={setCircles}
               circles={circles}
+              findFurthestPoint={findFurthestPoint}
               checkIfCloseToActorsBorder={makeBiggerActors}
             ></ActionPoints>
             {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
@@ -177,21 +180,24 @@ function App() {
               <Home CloseHomeWindow={ChangeOpenHome} setJourney={changeJourney} journeys={Journey} getImageObject={getImageObject}></Home>
             </Layer>
           }
-          <Layer id='Menu'>
-
-          </Layer>
-          <LeftMeniu setmoveStatistics={setMoveStatistics} mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
+        
+          <LeftMeniu  mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
             updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
             mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
             SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
             showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
             updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
             setActions={setActions} openModal={setShowModal} setShowSettings={setShowSettings} setImageChange={setImageChange}
-            addNewActorDragAndDrop = {addNewActorDragAndDrop}
+            addNewActorDragAndDrop = {addNewActorDragAndDrop} setOpenStatistics={setOpenStatistics}
           />
+            {SwimlineMode && <Legend actors={ActorsCJML} setActors={setActors}/>}
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent}></ModaWindow>}
-        {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary} showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles} isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}></Questionary>}
+        {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary} 
+        showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles} 
+        isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}
+        arrowsId={initialArrowId} setInitialArrowID={setNewArrowId} 
+        />}
         {showIntroduction && <IntroductionWindow showIntro={showIntroduction} closeIntro={setshowIntroduction} showSelection={setshowAddJourney} />}
         {showAddJourney && <JourneySelection showJourney={showAddJourney} closeJourney={setshowAddJourney} addJourney={addJourney} JourneyList={Journey} showModal={setShowModal} />}
         {showSettings && <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
@@ -199,6 +205,8 @@ function App() {
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings={setShowSettings}
           currentJurney={currentJourney} setJourneys={setJouney}
         ></Settings>}
+       
+        {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney}  handleClose={setOpenStatistics} show={openStatistics}/>}
       </div>
       <div className='JourneyBar'>
         <JourneyBar ChangeOpenHome={ChangeOpenHome} Journey={Journey} changeJourney={changeJourney} currentJourney={currentJourney} journeyChange={journeyChange}
@@ -637,7 +645,7 @@ function App() {
       return x.id == initialId
     })
     const index = actions.indexOf(actionToWork[0]);
-    onActionDragMove(e, circles, actionToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned)
+    onActionDragMove(e, circles, actionToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows)
     const newCircle = actions.map(x => {
       if (x.id == initialId) {
         const arrowNew = x;
@@ -659,7 +667,7 @@ function App() {
       return x.id == initialId
     })
     const index = circles.indexOf(circleToWork[0]);
-    onDragMove(e, circles, circleToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned)
+    onDragMove(e, circles, circleToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows)
     const newCircle = circles.map(x => {
       if (x.id == initialId) {
         const arrowNew = x;
@@ -734,9 +742,13 @@ function App() {
   }
 
   function changeArrow(e: any, obj: any, changingObj: any) {
+    let copyobject = _.cloneDeep(changingObj);
     const newArrows = Arrows.map(x => {
       if (x.fromPoint.id == obj || x.toPoint.id == obj) {
-        x.redraw(changingObj);
+        if(changingObj.receiver == undefined){
+          copyobject.y = copyobject.y -14
+        }
+        x.redraw(copyobject);
         return x;
       }
       else {
@@ -749,7 +761,7 @@ function App() {
   function addNewArrow(obj: any, e: any) {
     console.log(e) // cia taisyti
     const arrowRes = Arrows;
-    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1', e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0), e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0), 0, 0)));
+    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1', e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0), e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0), 0, 0,false)));
     setArrows(arrowRes);
   }
 
@@ -759,8 +771,12 @@ function App() {
     arrowRes.map((x: CJMLArrow) => {
       if (x.id == initialArrowId) {
         const rest: CJMLArrow = x as CJMLArrow;
-        rest.toPoint = (JSON.parse(JSON.stringify(obj)));
-        rest.redraw(JSON.parse(JSON.stringify(obj)))
+        let objCopy= _.cloneDeep(obj);
+        if(obj.receiver == undefined){
+          objCopy.y = objCopy.y-12;
+        }
+        rest.toPoint = (JSON.parse(JSON.stringify(objCopy)));
+        rest.redraw(JSON.parse(JSON.stringify(objCopy)))
         return rest;
       }
       else {
@@ -770,7 +786,6 @@ function App() {
     let res = arrowRes.filter((x: CJMLArrow) => {
       return x.id == initialArrowId
     })
-    console.log(arrowRes)
     if (res[0].fromPoint.id != res[0].toPoint.id) {
 
       setDrawingArrowMode(false);
@@ -936,8 +951,9 @@ function App() {
           return x.id == initialId
         })
         const index = circles.indexOf(circleToWork[0]);
-        onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, Journey[currentJourney].isPlanned);
+        onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows);
         setNewID(initialId + 1)
+        findFurthestPoint()
       }
       
         break;
@@ -946,8 +962,9 @@ function App() {
           return x.id == initialId
         })
         const index = actions.indexOf(actionToWork[0]);
-        onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned);
+        onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows);
         setNewID(initialId + 1)
+        findFurthestPoint()
       }
       break;
       case "ImageChange":{
@@ -959,7 +976,31 @@ function App() {
         setActorLocations();
       }
     }
+
     setMouseDownFunction("")
+  }
+
+  function findFurthestPoint(){
+    let furhterPoint:number =0;
+     circles.forEach((value) => {
+      if(furhterPoint < value.swimlaneX){
+        furhterPoint = value.swimlaneX;
+      }
+    });
+    actions.forEach((value)=>{
+      if(furhterPoint < value.swimlaneX){
+        furhterPoint = value.swimlaneX}
+    });
+    let actors = _.cloneDeep(ActorsCJML);
+    actors = actors.map((x)=>{
+      if(furhterPoint - x.x < x.width){
+        x.width =furhterPoint - x.x +200;
+      }
+      return x;
+    })
+    console.log(furhterPoint);
+    console.log(circles);
+    setActors(actors);
   }
 
   function setImageToTouchpoint(e:any){

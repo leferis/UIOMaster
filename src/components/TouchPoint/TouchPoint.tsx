@@ -17,6 +17,7 @@ import ElementChangeBar from '../elementChangeBar/elementChangeBar';
 import ImageSelection from '../ImageSelection/ImageSelection';
 import RibbonChangeBarImageChange from '../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
 import RibbonChangeBarTypeChange from '../ribbon/ChangeBar/TypeChange/ribbon/ChangeBar/TypeChange';
+import _ from 'lodash';
 
 interface TouchPointProps {
   Circle: CJMLCircle[];
@@ -49,10 +50,12 @@ interface TouchPointProps {
   isPlanned:any;
   makeBiggerActors:any;
   remove:any;
+  findFurthestPoint:any;
 }
 
 function TouchPoint(props: TouchPointProps) {
   const endUser = props.actors.filter((x:Actors) => {return x.isEndUser})[0];
+
   return (
     <div>
       {props.Circle.map((x, index) => {
@@ -76,6 +79,9 @@ function TouchPoint(props: TouchPointProps) {
             setCurrentObject= {props.setCurrentObjectID}
             Images={props.Images}
             currentObject={props.currentObject}
+            arrowId={props.arrowId}
+            setArrowId={props.setArrowId}
+            setArrows={props.setArrows}
           ></TouchPointSwimlane>
           </>)
         }
@@ -85,6 +91,7 @@ function TouchPoint(props: TouchPointProps) {
               elementCheckCloseToBorder={props.elementCheckCloseToBorder} elementsAreFarFromBorder={props.elementsAreFarFromBorder} getImage={getImage} getImageReceiver={getImageReceiver} index={index}
               resetTouchpoints={props.resetTouchpoints} setActions={props.setActions} setArrowId={props.setArrowId} setArrows={props.setArrows} touchPoint={x} updateCircles={props.updateCircles} isPlanned={props.isPlanned}
               makeBiggerActors = {props.makeBiggerActors} setCurrentObject={props.setCurrentObjectID} Images={props.Images} currentObject={props.currentObject}
+              findFurthestPoint={props.findFurthestPoint} ChangeDevation={changeDevation}
               />
           )
         }
@@ -93,12 +100,20 @@ function TouchPoint(props: TouchPointProps) {
     </div>
   );
 
-
+ function changeDevation(object:any){
+  let copyObject = _.cloneDeep(props.Circle);
+  copyObject = copyObject.map((x:CJMLCircle)=>{
+    if(x.id == object.id){
+      x.devation = !x.devation
+    }
+    return x;
+  })
+  props.updateCircles(copyObject);
+ }
 
   function checkClickFunction(clickedObject: CJMLCircle, e: any) {
     console.log(clickedObject);
     switch (props.ClickFunction) {
-
       case 'DrawArrow': {
         if (props.drawingArrow == false) {
            props.setDrawingArrowMode(true);
@@ -115,12 +130,12 @@ function TouchPoint(props: TouchPointProps) {
 
         const circles = props.Circle.map(circle => {
           if (circle.id == clickedObject.id) {
+          
             props.setCurrentObjectID(circle);
             return { ...circle, Capacity: true };
           }
           return circle;
         });
-
 
         props.updateCircles(circles);
       }

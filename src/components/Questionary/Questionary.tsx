@@ -8,6 +8,7 @@ import TouchpointQuestionary from '../TouchpointQuestionary/TouchpointQuestionar
 import styles from './Questionary.module.css';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import { toast } from 'react-toastify';
+import { createArrows } from '../../Functions/Switching';
 
 
 interface QuestionaryProps {
@@ -24,6 +25,8 @@ interface QuestionaryProps {
   GetImage: any;
   setArrows: any;
   swimlaneMode: any;
+  arrowsId: any;
+  setInitialArrowID: any;
 }
 
 function Questionary(props: QuestionaryProps) {
@@ -99,8 +102,8 @@ function Questionary(props: QuestionaryProps) {
           elementCopy.x = x;
           elementCopy.y = devationY;
           elementCopy.swimlaneX = swimLaneX;
-          elementCopy.swimlaneY = elementCopy.initiator.y + elementCopy.initiator.height / 2;
-          elementCopy.swimlaneReceiverY = elementCopy.initiator.y + elementCopy.initiator.height / 2;
+          elementCopy.swimlaneY = elementCopy.initiator.y + 20;
+          elementCopy.swimlaneReceiverY = elementCopy.receiver.y + 20;
           swimLaneX += 225;
           devationY += 100;
         } else {
@@ -119,6 +122,11 @@ function Questionary(props: QuestionaryProps) {
     props.setActions(actions);
     props.setCircles(touchPoints);
     props.setArrows([]);
+    let objects = JSON.parse(JSON.stringify(actions)).concat(JSON.parse(JSON.stringify(touchPoints)));
+    objects.sort((a: CJMLCircle, b: CJMLCircle) => {
+        return a.swimlaneX - b.swimlaneX
+    });
+    createArrows(objects, props.arrowsId, props.setInitialArrowID, props.setArrows)
   }
 
   function removeActors(index: number) {

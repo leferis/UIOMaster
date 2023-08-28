@@ -67,6 +67,7 @@ function TextMessages(props: TextMessagesProps){
         fontSize={props.fontSize}
         perfectDrawEnabled={false}
         width={props.width}
+        height={props.height * 2}
         onClick={(e)=>{
           props.changeEditable(props.modifyObject);
         }}

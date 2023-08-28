@@ -12,6 +12,8 @@ import _ from 'lodash';
 import RibbonChangeBarActorChange from '../../../ribbon/ChangeBar/ActorChange/ribbon/ChangeBar/ActorChange';
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Html } from 'react-konva-utils';
+import RibbonChangeBarTypeChange from '../../../ribbon/ChangeBar/TypeChange/ribbon/ChangeBar/TypeChange';
 
 interface TouchPointSwimlaneProps {
   touchPoint: CJMLCircle
@@ -22,21 +24,24 @@ interface TouchPointSwimlaneProps {
   resetTouchpoints: any;
   checkClickFunction: any;
   actors: Actors[];
-  setClickFunction:any;
-  getImage:any;
-  elementsAreFarFromBorder:any;
-  changeArrow:any;
-  elementCheckCloseToBorder:any;
-  SwimlineMode:any;
-  actions:any;
-  setActions:any;
-  index:any;
-  isPlanned:any;
-  makeBiggerActors:any;
-  setCurrentObject:any
-  Images:any;
-  currentObject:any;
-  remove:any;
+  setClickFunction: any;
+  getImage: any;
+  elementsAreFarFromBorder: any;
+  changeArrow: any;
+  elementCheckCloseToBorder: any;
+  SwimlineMode: any;
+  actions: any;
+  setActions: any;
+  index: any;
+  isPlanned: any;
+  makeBiggerActors: any;
+  setCurrentObject: any
+  Images: any;
+  currentObject: any;
+  remove: any;
+  setArrows: any;
+  arrowId: any;
+  setArrowId: any;
 }
 
 
@@ -47,68 +52,50 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
     props.checkClickFunction(clickedObject, e);
   }
 
-  
-  function changeActor(e:any, type:any){
+
+  function changeActor(e: any, type: any) {
     let touchpointData = _.cloneDeep(props.touchPoints);
-    let indexTouchpoint = touchpointData.findIndex((x:any) => {
-      return x.id ==props.currentObject.id
+    let indexTouchpoint = touchpointData.findIndex((x: any) => {
+      return x.id == props.currentObject.id
     });
-    let newActor = props.actors.findIndex((x)=> {
+    let newActor = props.actors.findIndex((x) => {
       return x.id == e
     })
-    if(type == "Initiator"){
-      if(props.currentObject.initiator.id != props.actors[newActor].id){
-        if(props.currentObject.receiver.isEndUser && props.currentObject.receiver.id != props.actors[newActor].id){
+    if (type == "Initiator") {
+      if (props.currentObject.initiator.id != props.actors[newActor].id) {
+        if (props.currentObject.receiver.isEndUser && props.currentObject.receiver.id != props.actors[newActor].id) {
           touchpointData[indexTouchpoint].initiator = props.actors[newActor]
         }
-        else{
+        else {
           touchpointData[indexTouchpoint].receiver = _.cloneDeep(touchpointData[indexTouchpoint].initiator);
           touchpointData[indexTouchpoint].initiator = props.actors[newActor];
           touchpointData[indexTouchpoint].initiatorColor = props.actors[newActor].color;
         }
       }
     }
-    else if(type == "Receiver"){
-      if(props.currentObject.receiver.id != props.actors[newActor].id){
-        if(props.currentObject.initiator.isEndUser && props.currentObject.initiator.id != props.actors[newActor].id){
+    else if (type == "Receiver") {
+      if (props.currentObject.receiver.id != props.actors[newActor].id) {
+        if (props.currentObject.initiator.isEndUser && props.currentObject.initiator.id != props.actors[newActor].id) {
           touchpointData[indexTouchpoint].receiver = props.actors[newActor]
         }
-        else{
+        else {
           touchpointData[indexTouchpoint].initiator = _.cloneDeep(touchpointData[indexTouchpoint].receiver);
           touchpointData[indexTouchpoint].receiver = props.actors[newActor];
           touchpointData[indexTouchpoint].initiatorColor = touchpointData[indexTouchpoint].initiator.color;
         }
       }
     }
-    props.setCurrentObject( _.cloneDeep(touchpointData[indexTouchpoint]))
+    props.setCurrentObject(_.cloneDeep(touchpointData[indexTouchpoint]))
     props.updateCircles(touchpointData)
   }
-  const images = props.Images.Images[1].Images.filter((x:any)=>{
+  const images = props.Images.Images[1].Images.filter((x: any) => {
     return x.Default;
-  })  
+  })
   return (
     <div>
       <Group >
-        {props.touchPoint.id == props.currentObject.id &&           <ElementChangeBar x={props.touchPoint.x+30 } y={props.touchPoint.y-90}>
-            <RibbonChangeBarActorChange x={props.touchPoint.x+30} y={props.touchPoint.y-88} text={"Receiver"} currentId={props.currentObject.receiver.id} changeActor={(e:any)=>{changeActor(e,"Receiver")}} actors={props.actors}></RibbonChangeBarActorChange>
-            <RibbonChangeBarActorChange x={props.touchPoint.x+170} y={props.touchPoint.y-88} text={"Initiator"} currentId={props.currentObject.initiator.id}changeActor={(e:any)=>{changeActor(e,"Initiator")}} actors={props.actors}></RibbonChangeBarActorChange>
-            <RibbonChangeBarImageChange x={props.touchPoint.x + 310} y={props.touchPoint.y-88} images={{Name:"Touchpoint",Images:images}} text={"Channel"} currentObject={props.currentObject} changeImage={(e: any) => {
-          let copyOfCircles = _.cloneDeep(props.touchPoints);
-          let copyOfCurrentObject;
-          copyOfCircles = copyOfCircles.map(x => {
-            if (x.id == props.touchPoint.id) {
-              x.imageName = e;
-              copyOfCurrentObject = x;
-            }
-            return x;
-          })
-          props.updateCircles(copyOfCircles);
-          props.setCurrentObject(copyOfCurrentObject);
-        }}  ></RibbonChangeBarImageChange>
-            {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
-            <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
-          </ElementChangeBar>}
-        {props.touchPoint.initiator.isEndUser && <TextMessages x={props.touchPoint.devation ? props.touchPoint.x - 80 : props.touchPoint.x - 25}
+
+        {props.touchPoint.initiator.isEndUser && <TextMessages x={props.touchPoint.devation ? props.touchPoint.x - 120 : props.touchPoint.x - 25}
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}
           height={20}
           isEditing={props.touchPoint.isEditing}
@@ -147,7 +134,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           }}
           modifyObject={props.touchPoint}
         ></TextMessages>}
-        {props.touchPoint.receiver.isEndUser && <TextMessages x={props.touchPoint.devation ? props.touchPoint.x - 80 : props.touchPoint.x - 25}
+        {props.touchPoint.receiver.isEndUser && <TextMessages x={props.touchPoint.devation ? props.touchPoint.x - 120 : props.touchPoint.x - 25}
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}
           height={20}
           isEditing={props.touchPoint.isEditing}
@@ -249,18 +236,18 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           fill={props.touchPoint.external == 0 ? "White" : "LightGray"}
           strokeWidth={3}
           dash={TouchPointStatus[props.touchPoint.Status] == "Missing" ? [5] : [0]}
-          
+
         />
         {props.getImage(props.touchPoint, 1)}
         <Line points={[props.touchPoint.x - 15, props.touchPoint.y - 15, props.touchPoint.x + 15, props.touchPoint.y + 15]} stroke={'black'}
           strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
         <Line points={[props.touchPoint.x - 15, props.touchPoint.y + 15, props.touchPoint.x + 15, props.touchPoint.y - 15]} stroke={'black'}
           strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
-          <Circle x={props.touchPoint.x}
+        <Circle x={props.touchPoint.x}
           y={props.touchPoint.y}
           id={props.touchPoint.id.toString()}
           draggable
-      
+
           radius={20}
           opacity={0}
           onClick={(e) => {
@@ -270,18 +257,18 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           onDragStart={() => props.touchPoint.Capacity = false}
           onDragMove={(e) => {
             var max = 0;
-            props.actors.map(x=>{
-             if(max<x.y +x.height && x.isEndUser){
-               max = x.y +x.height ;
-             }
-           })
+            props.actors.map(x => {
+              if (max < x.y + x.height && x.isEndUser) {
+                max = x.y + x.height;
+              }
+            })
             const circles = props.touchPoints.map(circle => {
               if (circle.id == props.touchPoint.id) {
-                return { ...circle, x: e.target.getPosition().x, y: e.target.getPosition().y, devation: e.target.getPosition().y>max?true:false };
+                return { ...circle, x: e.target.getPosition().x, y: e.target.getPosition().y, devation: e.target.getPosition().y > max ? true : false };
               }
               return circle;
             })
-            
+
             props.updateCircles(circles);
             props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
             props.elementCheckCloseToBorder(e.target.getPosition().x);
@@ -289,17 +276,38 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           }}
           onDragEnd={
             (e) => {
-              onDragEnd(e, props.touchPoint, props.actors.filter((x:Actors)=>{
+              onDragEnd(e, props.touchPoint, props.actors.filter((x: Actors) => {
                 return x.isEndUser
-              }), props.touchPoints, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned)
+              }), props.touchPoints, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned,props.arrowId, props.setArrowId, props.setArrows)
               props.makeBiggerActors(e.target.attrs.x);
-          }}
+            }}
         />
+        {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.x + 30} y={props.touchPoint.y - 90}>
+          <RibbonChangeBarActorChange x={props.touchPoint.x + 30} y={props.touchPoint.y - 88} text={"Receiver"} currentId={props.currentObject.receiver.id} changeActor={(e: any) => { changeActor(e, "Receiver") }} actors={props.actors}></RibbonChangeBarActorChange>
+          <RibbonChangeBarActorChange x={props.touchPoint.x + 170} y={props.touchPoint.y - 88} text={"Initiator"} currentId={props.currentObject.initiator.id} changeActor={(e: any) => { changeActor(e, "Initiator") }} actors={props.actors}></RibbonChangeBarActorChange>
+          <RibbonChangeBarImageChange x={props.touchPoint.x + 310} y={props.touchPoint.y - 88} images={{ Name: "Touchpoint", Images: images }} text={"Channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+            let copyOfCircles = _.cloneDeep(props.touchPoints);
+            let copyOfCurrentObject;
+            copyOfCircles = copyOfCircles.map(x => {
+              if (x.id == props.touchPoint.id) {
+                x.imageName = e;
+                copyOfCurrentObject = x;
+              }
+              return x;
+            })
+            props.updateCircles(copyOfCircles);
+            props.setCurrentObject(copyOfCurrentObject);
+          }}  ></RibbonChangeBarImageChange>
+           {!props.isPlanned && <RibbonChangeBarTypeChange  x={ props.touchPoint.x + 460} y={ props.touchPoint.y -88} TouchPoints={props.touchPoints} currenctObj={props.currentObject}  updateCurentObj={props.setCurrentObject} updateTouhcPoints={props.updateCircles}></RibbonChangeBarTypeChange>}  
+          <Html groupProps={{ x: (props.isPlanned ?props.touchPoint.x + 470: props.touchPoint.x + 620), y: props.touchPoint.y - 75 }}>
+            <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />} />
+          </Html>
+        </ElementChangeBar>}
       </Group>
     </div>
   )
 
-  
+
 }
 
 

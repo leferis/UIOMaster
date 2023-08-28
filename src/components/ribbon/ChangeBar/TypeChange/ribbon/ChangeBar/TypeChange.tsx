@@ -3,8 +3,11 @@ import styles from './ribbon/ChangeBar/TypeChange.module.css';
 import { FormControl, InputLabel, Select, MenuItem, ListSubheader } from '@mui/material';
 import { TouchPointStatus } from '../../../../../../enumerator/TouchPointStatus';
 import _ from 'lodash';
+import { Html } from 'react-konva-utils';
 
 interface RibbonChangeBarTypeChangeProps {
+  x:any;
+  y:any;
   currenctObj:any;
   updateTouhcPoints:any;
   TouchPoints:any;
@@ -12,8 +15,8 @@ interface RibbonChangeBarTypeChangeProps {
 }
 
 function RibbonChangeBarTypeChange(props:RibbonChangeBarTypeChangeProps){
-  return(<div style={{display:"inline-block"}}>
-  <FormControl sx={{ m: 1, minWidth:120}}>
+  return(<Html groupProps={{x:props.x, y:props.y}}>
+  <FormControl sx={{ m: 1, minWidth:120}}  size="small"> 
         <InputLabel htmlFor="grouped-select">Status</InputLabel>
         <Select  value={props.currenctObj.Status} 
         id="grouped-select" label="Grouping"
@@ -33,7 +36,7 @@ function RibbonChangeBarTypeChange(props:RibbonChangeBarTypeChangeProps){
         <MenuItem value={TouchPointStatus.AdHoc}>AdHoc</MenuItem>
         </Select>
       </FormControl>
-  </div>)
+  </Html>)
 };
 
 export default RibbonChangeBarTypeChange;

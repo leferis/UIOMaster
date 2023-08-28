@@ -149,29 +149,26 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-4.svg"
                 },
                 {
-                    "Name": "User",
-                    "Default":true,
+                    "Name": "User 11",
                     "GroupPriority":1,
                     "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-1.svg"
                 },
                 {
-                    "Name": "User 2",
-                    "Default":true,
+                    "Name": "User 5",
                     "GroupPriority":1,
                     "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-2.svg"
                 },
                 {
-                    "Name": "User 3",
-                    "Default":true,
+                    "Name": "User 4",
                     "GroupPriority":1,
                     "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg"
                 }
                 ,
                 {
-                    "Name": "User 4",
+                    "Name": "User",
                     "Default":true,
                     "GroupPriority":1,
                     "Group":"End user",
@@ -179,7 +176,15 @@
                 }
                 ,
                 {
-                    "Name": "User 5",
+                    "Name": "Patient",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"End user",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\patient-1.svg"
+                }
+                ,
+                {
+                    "Name": "User 2",
                     "Default":true,
                     "GroupPriority":1,
                     "Group":"End user",
@@ -192,7 +197,8 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-6.svg"
                 },
                 {
-                    "Name": "User 7",
+                    "Name": "User 3",
+                    "Default":true,
                     "GroupPriority":1,
                     "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-7.svg"
@@ -228,7 +234,51 @@
                     "GroupPriority":1,
                     "Group":"End user",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-12.svg"
+                },
+                {
+                    "Name": "Doctor",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\doctor-1.svg"
+                },
+                {
+                    "Name": "General practitioner",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\general-practitioner.svg"
+                },
+                {
+                    "Name": "Hospital",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\hospital-1.svg"
+                },
+                {
+                    "Name": "Chief Nurse",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\chief-nurse.svg"
+                },
+                {
+                    "Name": "Nurse",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\nurse-1.svg"
                 }
+                ,
+                {
+                    "Name": "Nurse 2",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\nurse-2.svg"
+                }             
+               
             ]
         },
         {

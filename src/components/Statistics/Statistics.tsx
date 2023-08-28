@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import styles from './Statistics.module.css';
-import { Rect, Text } from 'react-konva';
+import { Rect } from 'react-konva';
 import { Journey } from '../../Classes/Journey';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import { TouchPointStatus } from '../../enumerator/TouchPointStatus';
+import { Button } from '@mui/material';
 
 interface StatisticsProps {
 
@@ -11,8 +12,8 @@ interface StatisticsProps {
   Journeys: any;
   circles: CJMLCircle[];
   actions: any;
-  diagramType:any;
-  layer:any;
+  show:any;
+  handleClose:any;
 }
 
 function Statistics(props: StatisticsProps) {
@@ -77,9 +78,36 @@ function Statistics(props: StatisticsProps) {
     }
     return text;
   }
-  return (<>
-    <Rect x={props.layer.current.canvas.width-240} y={0} fill='black' opacity={0.02} width={250} height={130}/>
-    <Text text={getText()} x={props.layer.current.canvas.width-227} fontSize={14} y={5} opacity={0.6}></Text>
-  </>);
+  const showHideClassName = props.show ? "modal display-block" : "modal display-none";
+
+
+  return (
+    <div className={showHideClassName} style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      background: 'rgba(0, 0, 0, 0.6)'
+    }}>
+      <section className="modal-main" 
+      style={{ position:'fixed',
+        background: 'white',
+        width: '40%',
+        height: 'auto',
+        top:'50%',
+        left:'50%',
+        transform: 'translate(-50%,-50%)',
+        paddingBottom:'30px'
+        }}>
+           <h3>Statistics</h3>
+           <div style={{whiteSpace:"pre-line"}}>{getText()}</div>
+           <br/>
+
+        <Button variant="contained"  onClick={() => {props.handleClose(false)}}>Close</Button>
+      </section>
+
+    </div>);
+;
 }
 export default Statistics;
