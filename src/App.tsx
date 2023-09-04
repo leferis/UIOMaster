@@ -37,6 +37,9 @@ import Ribbon from './components/ribbon/ribbon';
 import StatusBar from './components/statusBar/statusBar';
 import { ImageChange } from './Classes/ImageChange';
 import Legend from './components/Legend/Legend';
+import { Rnd } from "react-rnd";
+import zIndex from '@mui/material/styles/zIndex';
+import { Button } from '@mui/material';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -68,6 +71,7 @@ function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [ImageChange, setImageChange] = useState<ImageChange| undefined>(undefined);
   const [openStatistics, setOpenStatistics] = useState(false);
+  const [TaskId, setTaskID]= useState(0);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -102,6 +106,58 @@ function App() {
           <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML Analyzer</h2>
 
         </div>
+{ TaskId>0 &&       <Rnd
+  initial={{
+    x: window.innerWidth / 2 - 200,
+    y: window.innerHeight / 2 - 80,
+    width: 400,
+    height: 160,
+  }}
+style={{zIndex:"9999", background:"	#BEBEBE"}}
+  minWidth={700}
+  minHeight={500}
+  maxWidth={1200}
+  maxHeight={500}
+  bounds={'parent'}
+>
+  <span className="box" style={{background:"	#BEBEBE"}}>
+    { TaskId==1 && <div>
+      <h2>Welcome to the study</h2>
+      <h4>In this study you will have to use the tool to replicate CJML diagrams using this tool.</h4>
+      <h4>The test is made up of 3 tasks.</h4>
+      <h4>In the first task you will have to use the canvas to create 4 touchpoints.</h4>
+      <h4>In the second task you will have to use the form to create 3 touchpoints.</h4>
+      <h4>In the third task you will have to add a new journey and add additional 2 touchpoints and modify one</h4>
+      </div>}
+      { TaskId==2 && <div>
+      <h2>Background about the task</h2>
+      <h4>The journey will be around two mobile providers called: "Mobile provider" and "Mobile provider 2". The end user "User" notices that his subscription with the "Mobile provider2" is ending.</h4>
+      <h4>So he uses his PC to fill out the form to tell "Mobile provider2" to get in touch with him. After that, he receives the call from the "Mobile provider 2" and hears out all possible options.</h4>
+      <h4>After the call he is not intrested in provided options, so he goes to the competing provider "Mobile provider" to their physical store to talk about the their subscriptions. At the service desk the user hears out the offers.</h4>
+      <h4>The competing subscriber offers even more expensive plans to the user. So, the user decides to stay with current user and goes to back into "Mobile provider 2" website to fill out the form for them to get in touch with him. After that</h4>
+      <h4>The user receives the call and accepts a new subscription. When the call ends the "User" receives the email from the "Mobile provider 2" an email with information about the new subscription and and he confirms that everything is allright.
+      </h4>
+      </div>}
+      { TaskId==3 && <div>
+      <h2>Task 1</h2>
+      <h4>You have to recreate the first four touchpoints from the story using the canvas. Click next to see what you need to recreate.</h4>
+      </div>}
+    { TaskId==4 &&<img style={{height:"90%",width:"100%"}}className='testImage' src='Task 1.png'></img>}
+    { TaskId==5 && <div>
+      <h2>Task 2</h2>
+      <h4>You have to recreate the another 3 touchpoints, but this time using the form. Click next to see what you need to recreate.</h4>
+      </div>}
+    { TaskId==6 &&<img style={{height:"90%",width:"100%"}}className='testImage' src='Task 2.png'></img>}
+    { TaskId==7 && <div>
+      <h2>Task 3</h2>
+      <h4>You have to add a new journey based on the planned journey. After that you need to add two new touchpoints and change touchpoint status. . Click next to see what you need to recreate.</h4>
+      </div>}
+    { TaskId==8 &&<img style={{height:"90%",width:"100%"}}className='testImage' src='Task 3.png'></img>}
+    { TaskId==9 && <h1>Thank you for completing the tasks and participating!</h1>}
+   { TaskId>1 && <Button style={{position:"absolute", left:0, bottom:0, display:'flex', justifyContent:"center", right:0, padding:"10px",maxWidth:"50%"}} variant="contained" onClick={()=>setTaskID(TaskId-1)}>Previous</Button>}
+    { TaskId<9 && <Button  style={{position:"absolute", left:"50%", bottom:0, display:'flex', justifyContent:"center", right:0, padding:"10px",maxWidth:"50%"}}variant="contained" onClick={()=>setTaskID(TaskId+1)}>Next</Button>}
+  </span>
+</Rnd>}
         <ToastContainer />
         <Ribbon SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles}
@@ -238,6 +294,7 @@ function App() {
       setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 130, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 130, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
       setJourneyIndex(journeyIndex + 1);
     }
+    setTaskID(TaskId+1)
   }
 
 
