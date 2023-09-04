@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react';
 
 import styles from './ribbon/ChangeBar/ImageChange.module.css';
-import { FormControl, InputLabel, Select, MenuItem, ListSubheader, ListItem } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, ListSubheader, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import { Html } from 'react-konva-utils';
 
 interface RibbonChangeBarImageChangeProps {
@@ -49,13 +49,15 @@ function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
             onChange={(e) => {
               props.changeImage(e.target.value)
             }}
+            style={{ maxHeight:40}}
           >
             {sorted.map((a: any) => {
               if (group != a.Group) {
                 group = a.Group;
                 let value = []
                 value.push(<ListSubheader>{a.Group}</ListSubheader>)
-                value.push(<MenuItem value={a.Location}>{a.Name}</MenuItem>)
+                value.push(<MenuItem value={a.Location}><ListItemIcon><img style={{width:"20px", height:"20px"}} src={a.Location}/></ListItemIcon> <ListItemText primary={a.Name} /> 
+                </MenuItem>)
                 return (
                   value.map((val: any) => {
                     return val
@@ -63,7 +65,10 @@ function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
                 )
               }
               return (
-                <MenuItem value={a.Location}>{a.Name}</MenuItem>
+                <MenuItem value={a.Location} >  <ListItemIcon>
+                  <img style={{width:"20px", height:"20px"}} src={a.Location}/>
+                </ListItemIcon>
+                <ListItemText primary={a.Name} /></MenuItem>
               )
             })}
           </Select>

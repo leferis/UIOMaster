@@ -58,8 +58,8 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
     </Group>
 
     <Group onClick={() => { props.setOption("Touchpoint"); props.setRenderMeniu(true); props.layer.current.y(0) }}>
-      <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={91} height={59} width={45} option={"Touchpoint"} currentOption={props.option} represenation='Circle' text='Communication points' swimLaneMode={props.swimLaneMode} />
-      <Text x={-5} y={128} align='center' text='Add Touchpoint' width={100}fontSize={14} fontVariant='bold'></Text>
+      <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={101} height={59} width={45} option={"Touchpoint"} currentOption={props.option} represenation='Circle' text='Communication points' swimLaneMode={props.swimLaneMode} />
+      <Text x={-5} y={138} align='center' text='Add Touchpoint' width={100}fontSize={14} fontVariant='bold'></Text>
 
     </Group>
 

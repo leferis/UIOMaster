@@ -33,7 +33,7 @@ return(<div className={showHideClassName} style={{
       }}>
            
 
-           <h2>CJML Drawing tool</h2>
+           <h2>CJML Analyzer</h2>
            <h3> Video to check how to use</h3>
            <iframe width="560" height="315" src="https://www.youtube.com/embed/u31qwQUeGuM?si=PJu7gL2ocjrhgpie&amp;controls=0" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
           <br></br>

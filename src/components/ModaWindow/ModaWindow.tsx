@@ -2,7 +2,13 @@ import React, { FC } from 'react';
 import V2parse from '../../XMLParsing/V2/v2.parser';
 import './ModaWindow.module.css'
 
-interface ModaWindow { show: boolean, handleClose: any, setJourneys:any, getImage:any, updateCurrentJourney:any }
+interface ModaWindow { show: boolean, 
+  handleClose: any, 
+  setJourneys:any, 
+  getImage:any,
+  updateCurrentJourney:any,
+  Journeys:any,
+  ShowSelectionWindow:any; }
 
 function ModaWindow(props: ModaWindow) {
   const showHideClassName = props.show ? "modal display-block" : "modal display-none";
@@ -51,9 +57,13 @@ function ModaWindow(props: ModaWindow) {
            <h4>Upload File</h4>
         <input type="file"
           id="file1"
-          name="upload" onChange={upload} />
+          name="upload" onChange={upload}  accept=".xml, .xcjml"/>
         <br></br>
-        <button type="button" onClick={() => {props.handleClose(false)}}>
+        <button type="button" onClick={() => {props.handleClose(false);
+        console.log(props.Journeys.length)
+        if(props.Journeys.length == 0 ){
+          props.ShowSelectionWindow(true);
+        }}}>
           Close
         </button>
       </section>

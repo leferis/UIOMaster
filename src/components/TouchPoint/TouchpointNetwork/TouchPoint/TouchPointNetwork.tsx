@@ -138,12 +138,13 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         }}
         onDragStart={() => props.touchPoint.Capacity = false}
         onDragMove={(e) => {
-          onDragMove(e, props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
+          onDragMove(e, props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode,
+             props.isPlanned, props.arrowId, props.setArrowId, props.setArrows, props.makeBiggerActors)
         }}
         onDragEnd={
 
           (e) => {
-            onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow, props.elementsAreFarFromBorder, props.actions, props.setActions, props.index, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
+            onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow,props.actions, props.setActions, props.index, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
             props.findFurthestPoint();
           }
 
@@ -263,7 +264,6 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
             props.updateCircles(circles);
 
             props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
-            props.elementsAreFarFromBorder();
           }
           moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
           props.updateCircles(circles);
@@ -302,12 +302,12 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
 
               props.updateCircles(circles);
               props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
-              props.elementsAreFarFromBorder();
+              props.findFurthestPoint();
               moveElement(circles, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
             } else {
               moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
             }
-            props.makeBiggerActors(e.target.attrs.x);
+           
             props.findFurthestPoint();
           }
 

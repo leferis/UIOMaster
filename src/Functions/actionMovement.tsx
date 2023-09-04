@@ -17,7 +17,6 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
       }
      
       var actorIn: Actors | undefined = collisionSwim(yPosOfMouse, touchPoint, actors);
-      console.log(actorIn)
       if (actorIn != undefined) {
         const circles2 = Action.map(circle => {
           if (circle.id == touchPoint.id) {
@@ -25,7 +24,7 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
               if( actorIn != undefined && !actorIn.isEndUser){
                 actorIn = circle.initiator
               }}
-              let differnce = SwimlineMode?50:20
+              let differnce = SwimlineMode?36:20
               return { ...circle, initiator: actorIn, y: actorIn != undefined ? actorIn.y + differnce : 200};
           }
           return circle;

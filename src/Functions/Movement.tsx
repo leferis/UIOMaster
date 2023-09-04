@@ -4,9 +4,10 @@ import { CJMLAction } from "../Classes/CJMLAction";
 import { CJMLArrow } from "../Classes/CJMLArrow";
 import { CJMLCircle } from "../Classes/CJMLCircle";
 
-export function onDragMove(e: any, Circle: CJMLCircle[], touchPoint: any, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, index: any, elementCheckCloseToBorder: any, actions: any, setActions: any, actors: any,SwimlineMode: boolean, isPlanned:any,arrowId:any, setArrowId:any, setArrows:any) {
+export function onDragMove(e: any, Circle: CJMLCircle[], touchPoint: any, updateCircles: any, changeArrow: any,  index: any, elementCheckCloseToBorder: any, actions: any, setActions: any, actors: any,SwimlineMode: boolean, 
+  isPlanned:any,arrowId:any, setArrowId:any, setArrows:any, makeBiggerActors:any) {
   if (SwimlineMode) {
-    onDragEndJourney(e, touchPoint, actors, Circle, SwimlineMode, updateCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, isPlanned, arrowId, setArrowId, setArrows)
+    onDragEndJourney(e, touchPoint, actors, Circle, SwimlineMode, updateCircles, changeArrow, actions, setActions, index, isPlanned, arrowId, setArrowId, setArrows)
   }
   else {
   const circles = Circle.map(circle => {
@@ -25,15 +26,14 @@ export function onDragMove(e: any, Circle: CJMLCircle[], touchPoint: any, update
     })
     updateCircles(circles);
     changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
-    elementsAreFarFromBorder();
   }
   moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
+  makeBiggerActors(e.target.attrs.x);
   updateCircles(circles);
-  elementCheckCloseToBorder(e.target.getPosition().x);
 }
 }
 
-function onDragMoveJourney(e: any, Circle: CJMLCircle[], touchPoint: any, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, index: any, elementCheckCloseToBorder: any, actions: any, setActions: any, actors: any,SwimlineMode: boolean,arrowId:any, setArrowId:any, setArrows:any){
+function onDragMoveJourney(e: any, Circle: CJMLCircle[], touchPoint: any, updateCircles: any, changeArrow: any, index: any, elementCheckCloseToBorder: any, actions: any, setActions: any, actors: any,SwimlineMode: boolean,arrowId:any, setArrowId:any, setArrows:any){
   const circles = Circle.map(circle => {
     if (circle.id == touchPoint.id) {
       return { ...circle, swimlaneX: e.target.getPosition().x, swimlaneY: e.target.getPosition().y };
@@ -50,14 +50,13 @@ function onDragMoveJourney(e: any, Circle: CJMLCircle[], touchPoint: any, update
     })
     updateCircles(circles);
     changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
-    elementsAreFarFromBorder();
   }
   moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
   updateCircles(circles);
   elementCheckCloseToBorder(e.target.getPosition().x);
 }
 
-function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean,arrowId:any, setArrowId:any, setArrows:any) {
+function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any,  actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean,arrowId:any, setArrowId:any, setArrows:any) {
   let yPosOfMouse
   let xPosOfMouse
   var max = 0;
@@ -97,7 +96,6 @@ function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJM
     })
     updateCircles(circles2);
     changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
-    elementsAreFarFromBorder();
     moveJourneyElement(circles2, index, xPosOfMouse, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
   } else {
     moveJourneyElement(Circle, index, xPosOfMouse, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
@@ -267,10 +265,10 @@ export function collisionSwim(positionY: any, elements: CJMLCircle | CJMLAction,
   return snapOnIt;
 }
 
-export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean,
+export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any, actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean,
   arrowId:any, setArrowId:any, setArrows:any) {
   if (SwimlineMode) {
-    onDragEndJourney(e, touchPoint, actors, Circle, SwimlineMode, updateCircles, changeArrow, elementsAreFarFromBorder, actions, setActions, index, isPlanned, arrowId, setArrowId, setArrows)
+    onDragEndJourney(e, touchPoint, actors, Circle, SwimlineMode, updateCircles, changeArrow, actions, setActions, index, isPlanned, arrowId, setArrowId, setArrows)
   }
   else {
     let yPosOfMouse
@@ -320,7 +318,6 @@ export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJM
       })
       updateCircles(circles2);
       changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
-      elementsAreFarFromBorder();
       moveElement(circles2, index, xPosOfMouse, actions, updateCircles, setActions,arrowId, setArrowId, setArrows);
     } else {
       moveElement(Circle, index, xPosOfMouse, actions, updateCircles, setActions,arrowId, setArrowId, setArrows);

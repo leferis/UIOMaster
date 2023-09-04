@@ -74,7 +74,7 @@ const changeMouse= (e:any, style:any) =>{
     <Group  onMouseEnter={(e) => {onHower(true);handleMouseEnter("test");changeMouse(e,"pointer")}} onMouseLeave={(e) => {onHower(false);handleMouseLeave();changeMouse(e,"default")}}>
     {popUp && !selected && <><Rect x={props.x + props.width} y={props.y + props.height / 2} width={props.text.length*6.5 +3} height={20} fill='black' stroke={"white"} opacity={0.7} ></Rect>
     <Text  x={props.x + props.width+ 3} y={props.y + props.height / 2 + 5} text={props.text}  fill='white'/></>}
-    <Rect x={5} y={props.y} height={props.height+6} width={props.width+35} cornerRadius={4}  fill={selected || hower? '#cad2de':""} />
+    <Rect x={5} y={props.y} height={props.height+6} width={props.width+35} cornerRadius={4}  fill={selected || hower? '#cad2de':"#d9dfe7"} />
     {representation(props.represenation, props.x, props.y, props.img)}
     </Group>
     </div>

@@ -80,7 +80,7 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
     <br></br>
     <br></br>
     <Button style={{position:"absolute", left:"50px"}} variant="outlined" onClick={() => {
-      props.setTempActors([...props.tempActors, { Title: "Enter User Name", img: "", x: 200, y: 300, id: props.tempActors.length + 1, height: 150, width: 700, color: "#fff" }]);
+      props.setTempActors([...props.tempActors, { Title: "Enter User Name", img: "", x: 150, y: 300, id: props.tempActors.length + 1, height: 150, width: 700, color: "#fff" }]);
       ChangeOpenColorStatus([...OpenColor, false]);
     }} >Add new Actor</Button>
     <br></br>

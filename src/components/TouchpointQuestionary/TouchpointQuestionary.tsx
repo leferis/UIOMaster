@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, IconButton, InputLabel, MenuItem, Select, TextField, Tooltip } from '@mui/material';
+import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, IconButton, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, TextField, Tooltip } from '@mui/material';
 interface TouchpointQuestionaryProps {
   CJMLImageList: any;
   TouchPoints: any;
@@ -108,7 +108,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                   >
                     {props.CJMLImageList.Images[1].Images.map((y: CJMLImage) => {
                       if(y.Default){
-                      return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)
+                      return (<MenuItem value={y.Location}> <ListItemIcon><img style={{width:"20px", height:"20px"}} src={y.Location}/></ListItemIcon><ListItemText primary={y.Name} /> </MenuItem>)
                       }
                     })}
 

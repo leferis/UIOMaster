@@ -88,7 +88,7 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
             objects[j].y = 265;
             }
             else{
-                objects[j].y = 245;
+                objects[j].y = 236;
             }
             devationx = 500;
             prevX += 200;

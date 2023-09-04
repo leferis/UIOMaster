@@ -50,6 +50,7 @@ function Ribbon(props: RibbonProps) {
     <div style={{ display: "inline-block", minWidth: '100%', background: "#ededee", height: "70px" }}>
   
       {!props.openHome && <StatusBar currenJourneyId={props.currentJourney} journey={props.Journeys} type={props.SwimlineMode} layer={undefined} />}
+      <div style={{float:'left',borderLeft:"1px solid black", height:"57px", marginLeft:"5px", marginTop:"10px"}}></div>
       {!props.openHome  &&
         <div className={false ? 'BarElementSelected' : 'BarElement'} style={{userSelect:"none",verticalAlign:"middle", cursor:"pointer", maxWidth:"100px",textAlign:"center",marginLeft:"20px", float: "left", paddingBottom: "5px", paddingTop: "10px", paddingLeft:"10px", height:"57px", background:onHower?"#e6e6e6":"#f5f5f5", borderRadius:"10px" }} onMouseEnter={()=>{
           setHower(true);
@@ -73,7 +74,7 @@ function Ribbon(props: RibbonProps) {
         onMouseLeave={()=> {
           setHowerSecond(false);
         }}
-        onClick={() =>props.showQuestionary(true)}>
+        onClick={() =>{props.showQuestionary(true); props.setCurrentObject(-1 )}}>
           <span style={{textAlign:"center", fontWeight:"500"}}> Open Form</span>
           </div>
           
