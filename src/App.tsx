@@ -128,6 +128,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
       <h4>In the first task you will have to use the canvas to create 4 touchpoints.</h4>
       <h4>In the second task you will have to use the form to create 3 touchpoints.</h4>
       <h4>In the third task you will have to add a new journey and add additional 2 touchpoints and modify one</h4>
+      
       </div>}
       { TaskId==2 && <div>
       <h2>Background about the task</h2>
