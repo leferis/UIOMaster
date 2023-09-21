@@ -130,7 +130,7 @@ function ActorPoint(props: ActorPointProps) {
           y={act.y}
         />
 
-        <TextMessages x={act.x + 40} y={act.y + 80} height={40} width={60} fontSize={12} value={act.Title} modifyObject={act} isEditing={act.isEditing}
+        <TextMessages x={act.x + 20} y={act.y + 80} height={25} width={80} fontSize={15} value={act.Title} modifyObject={act} isEditing={act.isEditing} default={"Enter actor's name"}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObjectID(-1);
             const circles = props.actors.map(act => {
@@ -163,15 +163,21 @@ function ActorPoint(props: ActorPointProps) {
         {!props.SwimlineMode && props.currentObject.id == act.id && index != 0 && <Group onMouseEnter={(e) => { changeMouse(e, "pointer"); setHower(true) }} onMouseLeave={(e) => { changeMouse(e, "default"); setHower(false) }}
           onClick={() => { changeActors(index, true); setHower(false) }}
         >
-          <Rect x={act.x + act.width - 70} y={act.y + 155} width={60} height={20} stroke={"black"} cornerRadius={4} fill={onHower ? '#dbdddf' : '#f4f6f8'} />
-          <Text text='Move Up' x={act.x + act.width - 65} y={act.y + 160} />
+          <Rect x={act.x + act.width - 70} y={act.y + 135} width={60} height={20} stroke={"black"} cornerRadius={4} fill={onHower ? '#dbdddf' : '#f4f6f8'} />
+          <Text text='Move Up' x={act.x + act.width - 65} y={act.y + 140} />
         </Group>}
         {!props.SwimlineMode && props.currentObject.id == act.id && index != props.actors.length - 1 &&
           <Group onMouseEnter={(e) => { changeMouse(e, "pointer"); setHowerDown(true) }} onMouseLeave={(e) => { changeMouse(e, "default"); setHowerDown(false) }}
             onClick={() => { changeActors(index, false); setHowerDown(false) }} >
-            <Rect x={index == 0 ? act.x + act.width - 75 : act.x + act.width - 145} y={act.y + 155} width={72} height={20} stroke={"black"} cornerRadius={4} fill={onHowerDown ? '#dbdddf' : '#f4f6f8'} />
-            <Text text='Move Down' x={index == 0 ?act.x + act.width - 70 : act.x + act.width - 140} y={act.y + 160} />
+            <Rect x={index == 0 ? act.x + act.width - 82 : act.x + act.width - 150} y={act.y + 135} width={72} height={20} stroke={"black"} cornerRadius={4} fill={onHowerDown ? '#dbdddf' : '#f4f6f8'} />
+            <Text text='Move Down' x={index == 0 ?act.x + act.width - 78 : act.x + act.width - 145} y={act.y + 140} />
           </Group>
+        }
+          {!props.SwimlineMode && props.currentObject.id == act.id && !act.isEndUser &&
+           <Html  groupProps= {{x:act.x + act.width, y:act.y +133}}>
+        <Button  size='small' color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
+              
+        </Html>
         }
       </div>);
     })

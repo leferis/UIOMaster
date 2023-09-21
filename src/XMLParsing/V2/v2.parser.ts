@@ -235,7 +235,6 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
                 let match = plannedActors.filter(y => {
                     return y.isEndUser
                 })[endUserId];
-                console.log(match, "Pataikem i enduseri")
                 if (match != undefined) {
 
                     endUserId++;

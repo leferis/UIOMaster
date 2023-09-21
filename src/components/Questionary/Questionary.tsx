@@ -50,7 +50,7 @@ function Questionary(props: QuestionaryProps) {
   function reassignActors() {
     const updatetActors = tempActors.map((actor: Actors, index: number) => {
       actor.y = (index + 1) * 200;
-      actor.width = TouchPointsTemp.length * 270;
+      actor.width = (TouchPointsTemp.length>0? TouchPointsTemp.length* 270: 300 );
       return actor;
     });
     props.setActors(updatetActors);
@@ -74,7 +74,7 @@ function Questionary(props: QuestionaryProps) {
   function assignIdAndLocation() {
     var touchPoints: any[] = [];
     var actions: any[] = [];
-    let id = 0;
+    let id = 5000;
     let x = 400;
     let devationY = 500
     let swimLaneX = 400;

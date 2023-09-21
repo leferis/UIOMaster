@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { Html } from 'react-konva-utils';
 import { Text  } from "react-konva";
 import styles from './TextMessages.module.css';
@@ -15,6 +15,7 @@ interface TextMessagesProps {
   isEditing:any;
   changeEditable:any;
   ChangeBack:any;
+  default:any;
 }
 function getStyle(width:number, height:number, fontSize:number) {
   const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
@@ -43,13 +44,16 @@ const changeMouse= (e:any, style:any) =>{
   container.style.cursor = style;
 }
 
+
 function TextMessages(props: TextMessagesProps){
+
   const style:any = getStyle(props.width,props.height+30, props.fontSize);
   if(props.isEditing){
   return(
     <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1} } }>
     <textarea 
-          value={props.value}
+          value={props.value == props.default?"":props.value }
+          autoFocus
           onChange={(e)=>props.ChangeFunction(e.target.value,props.modifyObject)}
           style={style}
           onBlur={()=>{props.ChangeBack(props.modifyObject)}}
@@ -59,6 +63,7 @@ function TextMessages(props: TextMessagesProps){
   else{
     return (<>
     <Text
+   
         x={props.x}
         y={props.y}
         text={props.value}

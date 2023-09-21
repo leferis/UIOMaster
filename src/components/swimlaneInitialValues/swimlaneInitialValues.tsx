@@ -49,10 +49,12 @@ if(objects.length>0){
 
       return (<>
 
-        {index == 0 && <><Circle x={endUser.x + 102} y={endUser.y + endUser.height / 2} radius={7} stroke={"black"} />
-          <Arrow points={[endUser.x + 109, endUser.y + endUser.height / 2, xPositionFirst, yPositionFirst]} fill='black' stroke={"black"} /></>}
-        {index == objects.length - 1 && <><Circle x={objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 152 : endUser.x + 152} y={endUser.y + endUser.height / 2} radius={7} fill={"black"} />
-          <Arrow points={[x.x + x.width, yPostionLast, objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 145 : endUser.x + 150, endUser.y + endUser.height / 2]} fill='black' stroke={"black"} /></>
+        {index == 0 && <><Circle x={endUser.x + 102} y={endUser.y + endUser.height / 2} radius={6} stroke={"#7F7F7F"} />
+          <Arrow        pointerWidth={7}
+          pointerLength={7} points={[endUser.x + 109, endUser.y + endUser.height / 2, xPositionFirst, yPositionFirst]} fill='#7F7F7F' stroke={"#7F7F7F"} /></>}
+        {index == objects.length - 1 && <><Circle x={objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 152 : endUser.x + 152} y={endUser.y + endUser.height / 2} radius={7} fill={"#7F7F7F"} />
+          <Arrow        pointerWidth={7}
+          pointerLength={7} points={[x.x + x.width, yPostionLast, objects.length > 0 && objects[objects.length - 1].x != undefined ? objects[objects.length - 1].x + 145 : endUser.x + 150, endUser.y + endUser.height / 2]} fill='#7F7F7F' stroke={"#7F7F7F"} /></>
         }
       </>
       )
@@ -63,9 +65,9 @@ if(objects.length>0){
       
       return (<>
 
-      <><Circle x={320} y={endUser.y + endUser.height / 2} radius={7} stroke={"black"} />
+      <><Circle x={320} y={endUser.y + endUser.height / 2} radius={6} stroke={"#7F7F7F"} />
       
-       <Circle x={452} y={endUser.y + endUser.height / 2} radius={7} fill={"black"} />
+       <Circle x={452} y={endUser.y + endUser.height / 2} radius={7} fill={"#7F7F7F"} />
         </>
         
       </>

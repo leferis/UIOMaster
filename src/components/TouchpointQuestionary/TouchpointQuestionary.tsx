@@ -108,7 +108,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                   >
                     {props.CJMLImageList.Images[1].Images.map((y: CJMLImage) => {
                       if(y.Default){
-                      return (<MenuItem value={y.Location}> <ListItemIcon><img style={{width:"20px", height:"20px"}} src={y.Location}/></ListItemIcon><ListItemText primary={y.Name} /> </MenuItem>)
+                      return (<MenuItem value={y.Location}> <ListItemIcon><img style={{width:"20px", height:"20px"}} src={y.Location}/><ListItemText primary={y.Name} /></ListItemIcon> </MenuItem>)
                       }
                     })}
 

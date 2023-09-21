@@ -56,7 +56,7 @@ function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
                 group = a.Group;
                 let value = []
                 value.push(<ListSubheader>{a.Group}</ListSubheader>)
-                value.push(<MenuItem value={a.Location}><ListItemIcon><img style={{width:"20px", height:"20px"}} src={a.Location}/></ListItemIcon> <ListItemText primary={a.Name} /> 
+                value.push(<MenuItem  style={{alignItems:"center"}} value={a.Location}><ListItemIcon><img style={{width:"20px", height:"20px"}} src={a.Location}/> <ListItemText primary={a.Name} /> </ListItemIcon> 
                 </MenuItem>)
                 return (
                   value.map((val: any) => {
@@ -65,10 +65,11 @@ function RibbonChangeBarImageChange(props: RibbonChangeBarImageChangeProps) {
                 )
               }
               return (
-                <MenuItem value={a.Location} >  <ListItemIcon>
+                <MenuItem style={{alignItems:"center"}} value={a.Location} >  <ListItemIcon>
                   <img style={{width:"20px", height:"20px"}} src={a.Location}/>
+                  <ListItemText primary={a.Name} />
                 </ListItemIcon>
-                <ListItemText primary={a.Name} /></MenuItem>
+                </MenuItem>
               )
             })}
           </Select>

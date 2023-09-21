@@ -22,6 +22,7 @@ export class CJMLCircle implements CJMLConnectionUnit {
     lastRelativex:number;
     timestamp:any;
     isEditing:any;
+    isEditingReceiver:any;
     constructor(id: string, x: number, y: number, Capacity: boolean, devation:boolean, receiver:any, initiator:any, img:any, receiverText:string, initiatorText:string, initialSwimlaneX:number, initialSwimlaneY:number, swimlaneReceiverY:number, timestamp:any, Status:any) {
         this.x = x;
         this.y = y;
@@ -45,6 +46,7 @@ export class CJMLCircle implements CJMLConnectionUnit {
         this.timestamp= timestamp;
         this.isEditing = false;
         this.imageNameReceiver = this.imageName;
+        this.isEditingReceiver = false;
     }
     receiver:any;
     receiverText:any;

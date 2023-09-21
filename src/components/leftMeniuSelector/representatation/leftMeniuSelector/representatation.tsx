@@ -24,7 +24,9 @@ const LeftMeniuSelectorRepresentatation: FC<LeftMeniuSelectorRepresentatationPro
   }
 
   return(
-  <Group onMouseUp={() => {props.onMouseUp();}} onMouseDown={() => props.onMouseDown()} onMouseEnter={(e) => { setOnHower(true); changeMouse(e,props.mousetype) }} onMouseLeave={(e) => { changeMouse(e,"default");setOnHower(false);  }}>
+  <Group onMouseUp={() => {props.onMouseUp();}} onMouseDown={() => props.onMouseDown()}
+  onTap={()=>{props.onMouseDown();}} onTouchMove={() =>{ props.onMouseUp(); console.log("tesxtas")}} onDragStart={() => props.onMouseDown()}  
+  onMouseEnter={(e) => { setOnHower(true); changeMouse(e,props.mousetype) }} onMouseLeave={(e) => { changeMouse(e,"default");setOnHower(false);  }}>
     {onHower && <Rect x={props.initialPosX - 6} y={props.initialPosY - 3} height={90} width={45} fill='#cad2de' cornerRadius={3}></Rect>}
     <Images x={props.initialPosX} y={props.initialPosY} image={props.image} height={30} width={props.width} />
     <Text x={props.initialPosX - 2} y={props.initialPosY + 40} text={props.name} fontSize={12} wrap="char" width={40} />

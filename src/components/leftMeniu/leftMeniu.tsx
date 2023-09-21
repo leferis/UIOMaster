@@ -143,6 +143,12 @@ function LeftMeniu(props: LeftMeniuProps) {
                                                 y: 0
                                         }
                                 }
+                                else if (pos.y >400){
+                                        return {
+                                                x: 0,
+                                                y: 400
+                                        }
+                                }
                                 else {
 
 
@@ -158,10 +164,14 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 const dx = e.evt.deltaY * -1;
                                 setXScroll(xScroll + dx)
                                 let xpos = xScroll + dx
-                                if (xScrollbarreal + (dx * 2 * -1) > 10) {
+                                if (xScrollbarreal + (dx * 2 * -1) > 10 ) {
+                                        if(xpos < -400){
+                                                setXScrollbarreal(-400)
+                                        }
+                                        else
                                         setXScrollbarreal(xScrollbarreal + (dx * 2 * -1))
                                 }
-                                else if (xScrollbarreal + (dx * 2 * -1) < 10) {
+                                else if (xScrollbarreal + (dx * 2 * -1) < 10 ) {
                                         setXScroll(0)
                                         setXScrollbarreal(70)
                                         xpos = 0
@@ -174,11 +184,35 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 if (xpos > 0) {
                                         xpos = 0
                                 }
+                                if (xpos < -400) {
+                                        xpos = -400
+                                }
                                 if (subMeniuOption == "Actor" || subMeniuOption == "Touchpoint")
                                         layerEl.current.y(xpos)
                         }}
                 >
+                      {(subMeniuOption == "Actor" || subMeniuOption == "Touchpoint")  &&  <Rect x={layerEl.current == null?0:-1*layerEl.current.attrs.x}
+                        y={layerEl.current == null?0:-1*layerEl.current.attrs.y}
+                        height={1000}
+                        width={280}  onClick={()=>{
+                        }}  draggable={(subMeniuOption == "Actor" || subMeniuOption == "Touchpoint") && enableScroll} 
+                        dragBoundFunc={(pos) => {
+                                if (pos.y > 0) {
 
+                                        return {
+                                                x: 0,
+                                                y: 0
+                                        }
+                                }
+                                else {
+                                        layerEl.current.y(pos.y)
+                                        return {
+                                                x: 0,
+                                                y: pos.y
+                                        }
+                                }
+                        }}
+                        ></Rect>}
                         {subMeniuOption == "Actor" && <div>
                                 <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
                                 <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Actor' />
@@ -187,7 +221,8 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                                 <Rect x={270} y={xScrollbarreal} height={330} width={5} cornerRadius={5} fill='black'></Rect>
                                 {props.Images != undefined && <LeftMeniuSelector width={25} xpos={100} ypos={-20} elements={props.Images.Images[0].Images} onMouseUp={(img: string) =>
-                                        {if(props.SwimlineMode) props.addNewActor(img)}} onMouseDown={(img:any) => {  setEnableScroll(false);props.addNewActorDragAndDrop(img);
+                                        {if(props.SwimlineMode) props.addNewActor(img)}} 
+                                        onMouseDown={(img:any) => {  setEnableScroll(false);props.addNewActorDragAndDrop(img);
                                                 props.setMouseDownFunction("DragActor")}} mousetype={"pointer"} />}</div>
                         }
 
@@ -198,15 +233,17 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 <Rect x={90} y={xScrollbarreal} height={window.innerHeight} width={185} ></Rect>
                                 <Rect x={270} y={xScrollbarreal} height={300} width={5} cornerRadius={5} fill='black'></Rect>
                                 <Text x={95} y={190} fontSize={16} fontStyle='Bold' text='Channel type' />
-                                <Group onClick={()=>{setShowMoreOptions(!showMoreOptions)}}>
+                                <Group onClick={()=>{setShowMoreOptions(!showMoreOptions)}} onTap={() =>setShowMoreOptions(!showMoreOptions)}>
                                 <Text x={95} y={620} fontSize={16} fontStyle='Bold' text='More Channels' />
                                 <Rect x={90} y={620} height={30} width={185}/>
                                 {!showMoreOptions && <Line points={[240,620,250,630,260,620]} fill='black' width={3} stroke={"black"} />}
                                 {showMoreOptions && <Line points={[240,630,250,620,260,630]} fill='black' width={3} stroke={"black"} />}
                                 </Group>
                                 <Text x={208} y={65} fontSize={16} fontStyle='Bold' text='Action' />
-                                {props.Images != undefined && <LeftMeniuSelector xpos={100} ypos={120} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
-                                        onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={true}/>}
+                                {props.Images != undefined && <LeftMeniuSelector xpos={100} ypos={120} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); 
+                                props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
+                                        onMouseUp={(img: any) => { props.addNewCircle(img); 
+                                        props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={true}/>}
 
                                 {props.Images != undefined && showMoreOptions && <LeftMeniuSelector xpos={100} ypos={560} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
                                         onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={false}/>}
@@ -266,7 +303,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                        
                                 </Group>
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
-                                props.addNewCircle("", true); setEnableScroll(false) }}
+                                props.addNewCircle("", true, undefined); setEnableScroll(false) }}
                                         onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} onMouseEnter={(e:any) => e.currentTarget.children[0].fill("#cad2de")} onMouseLeave={(e:any) => e.currentTarget.children[0].fill("")} >
                                                                <Rect
                                                 x={145}
@@ -344,14 +381,14 @@ function LeftMeniu(props: LeftMeniuProps) {
                         }
 
 
-                        <Group onClick={() => { setRenderMeniu(false);  setSubMeniuOption("") }} onMouseEnter={(e) => { changeMouse(e, "pointer"); setOnHower(true) }} onMouseLeave={(e) => { changeMouse(e, "default"); setOnHower(false) }}>
+                        <Group onClick={() => { setRenderMeniu(false);  setSubMeniuOption("") }} onTap={()=>{setRenderMeniu(false);  setSubMeniuOption("")}} onMouseEnter={(e) => { changeMouse(e, "pointer"); setOnHower(true) }} onMouseLeave={(e) => { changeMouse(e, "default"); setOnHower(false) }}>
                                 <Rect x={240} y={10} height={30} width={30} fill={onHower ? '#c6c6c7' : "#d3d3d4"} cornerRadius={4} />
                                 <Line points={[250, 20, 260, 30]} stroke={'black'} strokeWidth={2}></Line>
                                 <Line points={[260, 20, 250, 30]} stroke={'black'} strokeWidth={2}></Line>
                         </Group>
                         
                 </Layer>}
-                <Layer onClick={() => console.log(subMeniuOption)} ref={layerStat}>
+                <Layer ref={layerStat}>
                         <LeftMeniuLeftSubMeniu openModal={props.openModal} imagespoints={() => { return findImagePoints(props.actors, props.SwimlineMode, props.circles, props.actions) }}
                                 mainLayer={props.mainLayer} openForm={props.showQuestionary} option={subMeniuOption}
                                 setRenderMeniu={setRenderMeniu}  setOption={setSubMeniuOption} layer={layerEl}

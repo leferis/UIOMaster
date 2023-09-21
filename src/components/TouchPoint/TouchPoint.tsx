@@ -146,9 +146,10 @@ function TouchPoint(props: TouchPointProps) {
 
   function getImage(x: any, index: any) {
     let img = props.getImageObject(x.imageName)
+    console.log(img.width +" space " + img.height + " text "+ x.imageName);
     return (<Image onClick={(e) => {
       checkClickFunction(x, e);
-    }} x={props.SwimlineMode ? x.x -10 : x.swimlaneX + 15} y={props.SwimlineMode ? x.y - 15 : x.swimlaneY + 20} image={img} scale={props.SwimlineMode ?   {x:0.75, y:0.75}: {x:1, y:1}} />)
+    }} x={props.SwimlineMode ? x.x -(img.width/3 +1) : x.swimlaneX + 15} y={props.SwimlineMode ? x.y -(img.height /2 -2) : x.swimlaneY + 20} image={img} scale={props.SwimlineMode ?   {x:0.75, y:0.75}: {x:1, y:1}} />)
   }
 
   function getImageReceiver(x: any, index: any) {

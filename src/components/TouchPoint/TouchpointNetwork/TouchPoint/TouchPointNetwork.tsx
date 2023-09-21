@@ -40,15 +40,15 @@ interface TouchPointNetworkProps {
   setCurrentObject: any;
   Images: any;
   currentObject: any;
-  remove:any;
-  findFurthestPoint:any;
-  ChangeDevation:any;
+  remove: any;
+  findFurthestPoint: any;
+  ChangeDevation: any;
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps) {
-  const images = props.Images.Images[1].Images.filter((x:any)=>{
+  const images = props.Images.Images[1].Images.filter((x: any) => {
     return x.Default;
-  })  
+  })
   console.log(props.isPlanned)
   return (
     <div>
@@ -76,10 +76,11 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
       <TextMessages x={props.touchPoint.swimlaneX + 55}
         y={props.touchPoint.swimlaneY + 10}
         height={30}
-        fontSize={13}
+        fontSize={14}
         value={props.touchPoint.text}
         width={110}
-        isEditing={props.touchPoint.isEditing}
+        default={"Enter text"}
+        isEditing={props.touchPoint.isEditingReceiver}
         ChangeFunction={((val: any, x: any) => {
           props.setCurrentObject(-1)
           const circles = props.Circle.map(circle => {
@@ -93,7 +94,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         changeEditable={(x: any) => {
           const circles = props.Circle.map(circle => {
             if (circle.id == x.id) {
-              return { ...circle, isEditing: true };
+              return { ...circle, isEditingReceiver: true };
             }
             return circle;
           })
@@ -102,7 +103,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         ChangeBack={(x: any) => {
           const circles = props.Circle.map(circle => {
             if (circle.id == x.id) {
-              return { ...circle, isEditing: false };
+              return { ...circle, isEditingReceiver: false };
             }
             return circle;
           })
@@ -129,7 +130,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         onDblClick={() => {
           let results = props.Circle.map((x: CJMLCircle) => {
             if (x.id == props.touchPoint.id) {
-              x.isEditing = true;
+              x.isEditingReceiver = true;
               x.Capacity = true
             }
             return x;
@@ -139,12 +140,13 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         onDragStart={() => props.touchPoint.Capacity = false}
         onDragMove={(e) => {
           onDragMove(e, props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode,
-             props.isPlanned, props.arrowId, props.setArrowId, props.setArrows, props.makeBiggerActors)
+            props.isPlanned, props.arrowId, props.setArrowId, props.setArrows, props.makeBiggerActors)
+            props.findFurthestPoint();
         }}
         onDragEnd={
 
           (e) => {
-            onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow,props.actions, props.setActions, props.index, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
+            onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow, props.actions, props.setActions, props.index, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
             props.findFurthestPoint();
           }
 
@@ -186,7 +188,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
       <TextMessages x={props.touchPoint.swimlaneX + 55}
         y={props.touchPoint.swimlaneReceiverY + 10}
         height={30}
-        fontSize={13}
+        fontSize={14}
         value={props.touchPoint.receiverText}
         width={110}
         isEditing={props.touchPoint.isEditing}
@@ -219,6 +221,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.updateCircles(circles);
         }}
         modifyObject={props.touchPoint}
+        default={"Enter text"}
       ></TextMessages>
       {props.getImageReceiver(props.touchPoint, props.index)}
       <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneReceiverY, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneReceiverY + 80]} stroke={'black'}
@@ -265,11 +268,11 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
 
             props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
           }
-          moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
+          moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions, props.arrowId, props.setArrowId, props.setArrows);
           props.updateCircles(circles);
 
           props.elementCheckCloseToBorder(e.target.getPosition().x);
-          props.makeBiggerActors(e.target.attrs.x);
+          props.findFurthestPoint()
         }}
         onDragEnd={
 
@@ -280,34 +283,40 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
             if (actorIn != undefined) {
 
               const circles = props.Circle.map(circle => {
+                let tempActor, tempy;
+                let swap = true;
+                if((circle.swimlaneY > circle.swimlaneReceiverY -100 && circle.swimlaneY < circle.swimlaneReceiverY+ 100) ||  circle.swimlaneY == circle.swimlaneReceiverY ){
+                  swap = false;
+                }
                 if (circle.id == props.touchPoint.id) {
-                  let tempActor, tempy;
                   if (!props.SwimlineMode && circle.initiator == actorIn) {
                     console.log(circle)
                     tempActor = JSON.parse(JSON.stringify(circle.receiver));
                     tempy = circle.receiver.y + 20;
                     return { ...circle, receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200, initiatorColor: tempActor != undefined ? tempActor.color : "#fff" };
                   }
-                  else {
-                    if (props.SwimlineMode) {
-                      if (actorIn != undefined && !actorIn.isEndUser) {
-                        actorIn = circle.initiator
-                      }
-                    }
-                    return { ...circle, receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
+                  if(!swap){
+                    tempActor = JSON.parse(JSON.stringify(circle.receiver));
+                    tempy = circle.receiver.y + 20;
+                    return { ...circle, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200 , initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver:actorIn , swimlaneReceiverY:actorIn != undefined ? actorIn.y + 20 : 200 };
+                  }
+                  else{
+                    tempActor = JSON.parse(JSON.stringify(circle.initiator));
+                    tempy = tempActor.y + 20;
+                  return { ...circle, initiator: tempActor, swimlaneY:tempActor != undefined ? tempy : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: actorIn, swimlaneReceiverY:  actorIn != undefined ? actorIn.y + 20 : 200};
                   }
                 }
-                return circle;
+               return circle
               })
 
               props.updateCircles(circles);
               props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
               props.findFurthestPoint();
-              moveElement(circles, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
+              moveElement(circles, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions, props.arrowId, props.setArrowId, props.setArrows);
             } else {
-              moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions,props.arrowId, props.setArrowId, props.setArrows);
+              moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions, props.arrowId, props.setArrowId, props.setArrows);
             }
-           
+
             props.findFurthestPoint();
           }
 
@@ -315,8 +324,8 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         opacity={0}
 
       />}
-      {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 90}>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={props.touchPoint.swimlaneY - 88} images={{Name:"Touchpoint",Images:images}} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+      {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.swimlaneX + 30} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 90}>
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 88} images={{ Name: "Touchpoint", Images: images }} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
@@ -328,9 +337,9 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           })
           props.updateCircles(copyOfCircles);
           props.setCurrentObject(copyOfCurrentObject);
-          
+
         }} ></RibbonChangeBarImageChange>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={props.touchPoint.swimlaneY - 88} alternative={true} images={{Name:"Touchpoint",Images:images}} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) -88} alternative={true} images={{ Name: "Touchpoint", Images: images }} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
@@ -343,16 +352,16 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.updateCircles(copyOfCircles);
           props.setCurrentObject(copyOfCurrentObject);
         }} ></RibbonChangeBarImageChange>
-        {!props.isPlanned &&  <RibbonChangeBarTypeChange  x={ props.touchPoint.swimlaneX + 420} y={ props.touchPoint.swimlaneY -88} TouchPoints={props.Circle} currenctObj={props.currentObject}  updateCurentObj={props.setCurrentObject} updateTouhcPoints={props.updateCircles}></RibbonChangeBarTypeChange>  }
-        {!props.isPlanned && <Html  groupProps= {{x:(props.touchPoint.swimlaneX + 320),y:props.touchPoint.swimlaneY - 80}}>
-        <FormGroup>
-  <FormControlLabel control={<Checkbox onChange={()=>(props.ChangeDevation(props.touchPoint))} defaultChecked={props.touchPoint.devation} />} label="Devation" />
-  </FormGroup>
-</Html>
+        {!props.isPlanned && <RibbonChangeBarTypeChange x={props.touchPoint.swimlaneX + 420} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 88} TouchPoints={props.Circle} currenctObj={props.currentObject} updateCurentObj={props.setCurrentObject} updateTouhcPoints={props.updateCircles}></RibbonChangeBarTypeChange>}
+        {!props.isPlanned && <Html groupProps={{ x: (props.touchPoint.swimlaneX + 320), y:(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 80 }}>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox onChange={() => (props.ChangeDevation(props.touchPoint))} defaultChecked={props.touchPoint.devation} />} label="Devation" />
+          </FormGroup>
+        </Html>
         }
-        <Html  groupProps= {{x:(props.isPlanned?props.touchPoint.swimlaneX+330:props.touchPoint.swimlaneX + 580),y:props.touchPoint.swimlaneY - 75}}>
-        <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
-              
+        <Html groupProps={{ x: (props.isPlanned ? props.touchPoint.swimlaneX + 330 : props.touchPoint.swimlaneX + 580), y: (props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 75 }}>
+          <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />} />
+
         </Html>
         {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
       </ElementChangeBar>}

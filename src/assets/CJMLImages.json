@@ -3,6 +3,41 @@
         {
             "Name": "Actors",
             "Images": [
+			 {
+                    "Name": "Service Provider 1",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg"
+                },
+                {
+                    "Name": "Service Provider 2",
+                    "GroupPriority":2,
+					"Default":true,
+                    "Group":"Service Provider",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-3.svg"
+                },
+                
+                {
+                    "Name": "Service Provider 3",
+                    "Default":true,
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-2.svg"
+                },
+
+                {
+                    "Name": "Service Provider 4",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-4.svg"
+                },
+                {
+                    "Name": "Service Provider 5",
+                    "GroupPriority":2,
+                    "Group":"Service Provider",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-5.svg"
+                },
                 {
                     "Name": "Bank",
                     "Default":true,
@@ -90,39 +125,7 @@
                     "Group":"Service Provider",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\online-bank-2.svg"
                 },
-                {
-                    "Name": "Service Provider",
-                    "Default":true,
-                    "GroupPriority":2,
-                    "Group":"Service Provider",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg"
-                }
-                ,
-                {
-                    "Name": "Service Provider 2",
-                    "Default":true,
-                    "GroupPriority":2,
-                    "Group":"Service Provider",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-2.svg"
-                },
-                {
-                    "Name": "Service Provider 3",
-                    "GroupPriority":2,
-                    "Group":"Service Provider",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-3.svg"
-                },
-                {
-                    "Name": "Service Provider 4",
-                    "GroupPriority":2,
-                    "Group":"Service Provider",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-4.svg"
-                },
-                {
-                    "Name": "Service Provider 5",
-                    "GroupPriority":2,
-                    "Group":"Service Provider",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-5.svg"
-                },
+               
                 {
                     "Name": "Store",
                     "Default":true,
@@ -149,7 +152,7 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\store-4.svg"
                 },
                 {
-                    "Name": "User",
+                    "Name": "User 1",
                     "Default":true,
                     "GroupPriority":1,
                     "Group":"End user",
@@ -265,7 +268,7 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\chief-nurse.svg"
                 },
                 {
-                    "Name": "Nurse",
+                    "Name": "Nurse 1",
                     "Default":true,
                     "GroupPriority":4,
                     "Group":"Health",

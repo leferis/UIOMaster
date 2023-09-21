@@ -40,6 +40,13 @@ import Legend from './components/Legend/Legend';
 import { Rnd } from "react-rnd";
 import zIndex from '@mui/material/styles/zIndex';
 import { Button } from '@mui/material';
+import {
+
+  GlassMagnifier
+
+} from "@igorgraziano/react-image-magnifier";
+import Confetti from 'react-confetti'
+import ColorCoding from './components/colorCoding/colorCoding';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -94,7 +101,9 @@ function App() {
 
   React.useEffect(() => {
     document.addEventListener("keyup", deleteElement);
+    
     return () => {
+      
       document.removeEventListener('keyup', deleteElement)
     }
   }, [circles, actions, Arrows, ActorsCJML])
@@ -117,48 +126,91 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
   minWidth={700}
   minHeight={500}
   maxWidth={1200}
-  maxHeight={500}
+  maxHeight={600}
   bounds={'parent'}
 >
-  <span className="box" style={{background:"	#BEBEBE"}}>
-    { TaskId==1 && <div>
+  <div style={{background:"	#BEBEBE", maxHeight:"600px"}}>
+    { TaskId==1 && <div style={{textAlign:"left"}}>
       <h2>Welcome to the study</h2>
-      <h4>In this study you will have to use the tool to replicate CJML diagrams using this tool.</h4>
-      <h4>The test is made up of 3 tasks.</h4>
-      <h4>In the first task you will have to use the canvas to create 4 touchpoints.</h4>
-      <h4>In the second task you will have to use the form to create 3 touchpoints.</h4>
-      <h4>In the third task you will have to add a new journey and add additional 2 touchpoints and modify one</h4>
-      
+      <h4>The test consists of three tasks.</h4>
+      <h4>1. Draw a journey using the canvas, add 3 touchpoints</h4>
+      <h4>2. Add an actor and 3 more touchpoints, but this time using form</h4>
+      <h4>3. Add 2 more touchpoints, but this times as devations and change one touchpoint status to failing</h4>
+
       </div>}
-      { TaskId==2 && <div>
-      <h2>Background about the task</h2>
-      <h4>The journey will be around two mobile providers called: "Mobile provider" and "Mobile provider 2". The end user "User" notices that his subscription with the "Mobile provider2" is ending.</h4>
-      <h4>So he uses his PC to fill out the form to tell "Mobile provider2" to get in touch with him. After that, he receives the call from the "Mobile provider 2" and hears out all possible options.</h4>
-      <h4>After the call he is not intrested in provided options, so he goes to the competing provider "Mobile provider" to their physical store to talk about the their subscriptions. At the service desk the user hears out the offers.</h4>
-      <h4>The competing subscriber offers even more expensive plans to the user. So, the user decides to stay with current user and goes to back into "Mobile provider 2" website to fill out the form for them to get in touch with him. After that</h4>
-      <h4>The user receives the call and accepts a new subscription. When the call ends the "User" receives the email from the "Mobile provider 2" an email with information about the new subscription and and he confirms that everything is allright.
-      </h4>
+      { TaskId==2 && <div style={{textAlign:"left"}}>
+      <h2>Task 1 context</h2>
+      <h4>The journey will include two actors: "Customer" and "Mobile provider".</h4>
+      <img src="Actors.png" ></img>
+      <h4>The customer notices that he has ran out of mobile data. To ask how much costs additional data, he calls his mobile provider. </h4>
+
+      <h4>After company picks up the call, they provide prices for additional data. </h4>
+      <h4>The customer does not choose the plan and thinks about other options.</h4>
       </div>}
-      { TaskId==3 && <div>
+      { TaskId==3 && <div style={{textAlign:"left"}}>
       <h2>Task 1</h2>
-      <h4>You have to recreate the first four touchpoints from the story using the canvas. Click next to see what you need to recreate.</h4>
+      <h4>You have to recreate the first three touchpoints from the story using the canvas.</h4>
+      <h3>Click next to see image of what you need to recreate.</h3>
       </div>}
-    { TaskId==4 &&<img style={{height:"90%",width:"100%"}}className='testImage' src='Task 1.png'></img>}
-    { TaskId==5 && <div>
+    { TaskId==4 &&   <GlassMagnifier style={{maxHeight:"100%", maxWidth:"100%", }}
+   imageSrc="Task 1.png"
+   imageAlt="Example"
+ />
+ }
+ { TaskId==5 &&
+  <div style={{textAlign:"left"}}>
+     <h2>Task 2 context</h2>
+      <h4>After thinking about his options, the customer decides to visit other provider. So he goes to "Mobile provider 2" physical store and talks with service desk to find out their pricing.</h4>
+      <img src="actors_task2.png" ></img>
+      <h4> After the hearing the competing service provider pricing, customer decides that current provider has better prices.</h4>
+      <h4> So, he calls again the "Mobile provider" to accept their offer. </h4>
+      <h4>After the call "Mobile provider" send out an email to the customer with new contract details. The customer reviews the email for mistakes.
+      </h4>
+    </div>
+
+ }
+    { TaskId==6 && <div style={{textAlign:"left"}}>
       <h2>Task 2</h2>
-      <h4>You have to recreate the another 3 touchpoints, but this time using the form. Click next to see what you need to recreate.</h4>
+      <h4>You have to add 3 additional touchpoints and an actor.</h4>
+      <h3> But this time you have to use form. Click next to see image of what you need to recreate.</h3>
       </div>}
-    { TaskId==6 &&<img style={{height:"90%",width:"100%"}}className='testImage' src='Task 2.png'></img>}
-    { TaskId==7 && <div>
+    { TaskId==7 &&   <GlassMagnifier style={{maxHeight:"100%", maxWidth:"100%", }}
+   imageSrc="Task 2.png"
+   imageAlt="Example"
+ />}
+  { TaskId== 8 &&
+  <div style={{textAlign:"left"}}>
+     <h2>Task 3 context</h2>
+      <h4>Turns out there was a mistake in the touchpoint and the offer is considered failing due to that. </h4>
+      <h4>It was soon noticed by the "Mobile provider", which soon after called the customer.</h4> 
+      <h4> In the call, the "Mobile provider" apologized for 
+        the mistake to which customer asked to send correct confirmation.</h4>
+        <h4> After the call finished, the "Mobile provider" sent out an email with the correct details, which user checked and confirmed to be correct.
+      </h4>
+    </div>
+
+ }
+    { TaskId== 9 && <div style={{textAlign:"left"}}>
       <h2>Task 3</h2>
-      <h4>You have to add a new journey based on the planned journey. After that you need to add two new touchpoints and change touchpoint status. . Click next to see what you need to recreate.</h4>
+      <h4>Modify current journey. Add two new touchpoints and change touchpoint status. 
+      </h4> 
+      <h3>Click next to see what you need to recreate.</h3>
       </div>}
-    { TaskId==8 &&<img style={{height:"90%",width:"100%"}}className='testImage' src='Task 3.png'></img>}
-    { TaskId==9 && <h1>Thank you for completing the tasks and participating!</h1>}
+    { TaskId==10 &&  <GlassMagnifier style={{maxHeight:"100%", maxWidth:"100%", }}
+   imageSrc="Task 3.png"
+   imageAlt="Example"
+ />}
+    { TaskId==11 && <h1>Thank you for completing the tasks and participating!</h1>}
    { TaskId>1 && <Button style={{position:"absolute", left:0, bottom:0, display:'flex', justifyContent:"center", right:0, padding:"10px",maxWidth:"50%"}} variant="contained" onClick={()=>setTaskID(TaskId-1)}>Previous</Button>}
-    { TaskId<9 && <Button  style={{position:"absolute", left:"50%", bottom:0, display:'flex', justifyContent:"center", right:0, padding:"10px",maxWidth:"50%"}}variant="contained" onClick={()=>setTaskID(TaskId+1)}>Next</Button>}
-  </span>
+    { TaskId<11 && <Button  style={{position:"absolute", left:"50%", bottom:0, display:'flex', justifyContent:"center", right:0, padding:"10px",maxWidth:"50%"}}variant="contained" onClick={()=>setTaskID(TaskId+1)}>Next</Button>}
+  </div>
 </Rnd>}
+{TaskId==11 && <Confetti
+      width={ window.innerWidth}
+      height={ window.innerHeight}
+      numberOfPieces={500}
+
+    />}
         <ToastContainer />
         <Ribbon SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles}
@@ -180,7 +232,35 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
               setCurrentObjectID(-1)
             }
           }}
+          onTouchEnd={(e) => {
+            if (ClickFunction != "")
+              onClickDoes(e);
+            else if (mouseDownFunction != "") {
+
+              onReleaseDoes(e);
+            }
+            else {
+              setCurrentObjectID(-1)
+            }
+          }}
+          onDragEnd={(e) => {
+            if (ClickFunction != "")
+              onClickDoes(e);
+            else if (mouseDownFunction != "") {
+
+              onReleaseDoes(e);
+            }
+            else {
+              setCurrentObjectID(-1)
+            }
+          }}
           onMouseMove={(e) => {
+            onMouseMovement(e);
+          }}
+          onTouchMove={(e) => {
+            onMouseMovement(e);
+          }}
+          onDragMove={(e) => {
             onMouseMovement(e);
           }}
         >
@@ -189,7 +269,8 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
               setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
             }}
           >
-           
+               {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
+           <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
             {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
             {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
             {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned)  && 
@@ -198,6 +279,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
             setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
               actions={actions} circles={circles} setActions={setActions} updateCircles={setCircles}
             />}
+               
             {Journey.length > 0 && <TouchPoint remove={remove} Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
               drawingArrow={drawingArrow} currentObject={currentObject} setCurrentObjectID={setCurrentObjectReference} setClickFunction={setClickFunction} Images={CJMLImageList} actions={actions}
               setActions={setActions} actors={ActorsCJML} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow}
@@ -225,9 +307,10 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
               findFurthestPoint={findFurthestPoint}
               checkIfCloseToActorsBorder={makeBiggerActors}
             ></ActionPoints>
-            {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
-            <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
+         
+         
             {Journey.length > 0 && ImageChange!= undefined && !openHome && <KonvaImage x={ImageChange?.x-15} y={ImageChange?.y-15} height={30} width={30} image={getImageObject(ImageChange.Image)}></KonvaImage>}
+            {ActorsCJML.length > 0 && SwimlineMode && <ColorCoding actors={ActorsCJML}/>}
           </Layer>}
           {openHome &&
             <Layer ref={layerEl} draggable onDragEnd={(e) => {
@@ -403,11 +486,12 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
       image = "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
     }
     let newCircle:CJMLCircle;
+
     if(upsideDown){
-      newCircle= new CJMLCircle(initialId, -9999, -10999, false, DevationMode, ActorsCJML[0], ActorsCJML[1], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
+      newCircle= new CJMLCircle(initialId, -9999, -10999, false, false, ActorsCJML[0], ActorsCJML[1], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
     }
     else{
-    newCircle= new CJMLCircle(initialId, -9999, -9999, false, DevationMode, initiator != undefined? ActorsCJML[0]:ActorsCJML[1], initiator != undefined? initiator: ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
+    newCircle= new CJMLCircle(initialId, -9999, -9999, false, false, initiator != undefined? ActorsCJML[0]:ActorsCJML[1], initiator != undefined? initiator: ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
     }
     setCircles((prevCircles) => [
       ...prevCircles,
@@ -636,7 +720,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     }
     if (mouseDownFunction == "DrawCircle") {
       changeCircle(e);
-      findFurthestPoint()
+      findFurthestPoint(e)
     }
     else if(mouseDownFunction == "ImageChange"){
       ChangeImage(e);
@@ -644,7 +728,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     }
     else if (mouseDownFunction == "DrawAction") {
       changeAction(e);
-      findFurthestPoint()
+      findFurthestPoint(e)
     }
     else if( mouseDownFunction == "DragActor"){
       changeActor(e);
@@ -1017,6 +1101,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
         onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, actions, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows);
         setNewID(initialId + 1)
         findFurthestPoint(e)
+
       }
       
         break;
@@ -1059,10 +1144,14 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
       if(furhterPoint < value.swimlaneX){
         furhterPoint = value.swimlaneX}
     });
+    if(furhterPoint%200 != 0){
+      
+      furhterPoint = 200 *( (furhterPoint/200)+1)
+    }
     let actors = _.cloneDeep(ActorsCJML);
     actors = actors.map((x)=>{
-      if(furhterPoint - x.x < x.width){
-        x.width =furhterPoint - x.x +250;
+      if(furhterPoint - x.x > x.width){
+        x.width =furhterPoint - x.x +280;
       }
       return x;
     })

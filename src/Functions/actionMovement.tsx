@@ -31,7 +31,6 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
         })
         setActions(circles2);
         changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
-        elementsAreFarFromBorder();
         moveElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows);
       } else {
         moveElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows);
@@ -57,7 +56,6 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
       })
       setActions(circles);
       changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
-      elementsAreFarFromBorder();
     }
     changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
     moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);

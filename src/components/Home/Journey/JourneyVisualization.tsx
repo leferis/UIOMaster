@@ -27,7 +27,7 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
 
   function getImage(imageName: any, xPosition: number, yPosition: number) {
     let img = props.getImageObject(imageName);
-    return (<Image x={xPosition - 10} y={yPosition - 7} scale={{x:0.75, y:0.75}} image={img} />);
+    return (<Image x={xPosition - (img.width/3 +1)} y={yPosition -(img.height /2 -2)} scale={{x:0.75, y:0.75}} image={img} />);
   }
 
   function getActorsImage() {
@@ -66,7 +66,8 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
           </Group>
           }
           {getImage(circle.imageName, XPOSITION, YINITIALPOSITION * props.journeyIndex+100)}
-          { index> 0 && <Arrow points={[previousPoint + RADIUS, YINITIALPOSITION * props.journeyIndex+100, XPOSITION - RADIUS - 3, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3} fill='black'></Arrow>}
+          { index> 0 && <Arrow        pointerWidth={7}
+          pointerLength={7} points={[previousPoint + RADIUS, YINITIALPOSITION * props.journeyIndex+100, XPOSITION - RADIUS - 3, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3} fill='black'></Arrow>}
         </div>)
       }))}
       <Line points={[XPOSITION + RADIUS, YINITIALPOSITION * props.journeyIndex+100, XPOSITION + XMOVEMENTGAP, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3}  ></Line>

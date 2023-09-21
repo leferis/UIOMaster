@@ -99,9 +99,10 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}
           height={20}
           isEditing={props.touchPoint.isEditing}
-          fontSize={10}
+          fontSize={12}
           value={props.touchPoint.text}
           width={100}
+          default={"Enter text"}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObject(-1)
             const circles = props.touchPoints.map(circle => {
@@ -138,9 +139,10 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}
           height={20}
           isEditing={props.touchPoint.isEditing}
-          fontSize={10}
+          fontSize={12}
           value={props.touchPoint.receiverText}
           width={100}
+          default={"Enter text"}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObject(-1)
             const circles = props.touchPoints.map(circle => {
@@ -283,8 +285,8 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
             }}
         />
         {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.x + 30} y={props.touchPoint.y - 90}>
-          <RibbonChangeBarActorChange x={props.touchPoint.x + 30} y={props.touchPoint.y - 88} text={"Receiver"} currentId={props.currentObject.receiver.id} changeActor={(e: any) => { changeActor(e, "Receiver") }} actors={props.actors}></RibbonChangeBarActorChange>
-          <RibbonChangeBarActorChange x={props.touchPoint.x + 170} y={props.touchPoint.y - 88} text={"Initiator"} currentId={props.currentObject.initiator.id} changeActor={(e: any) => { changeActor(e, "Initiator") }} actors={props.actors}></RibbonChangeBarActorChange>
+        <RibbonChangeBarActorChange x={props.touchPoint.x + 30} y={props.touchPoint.y - 88} text={"Initiator"} currentId={props.currentObject.initiator.id} changeActor={(e: any) => { changeActor(e, "Initiator") }} actors={props.actors}></RibbonChangeBarActorChange>
+          <RibbonChangeBarActorChange x={props.touchPoint.x + 170} y={props.touchPoint.y - 88} text={"Receiver"} currentId={props.currentObject.receiver.id} changeActor={(e: any) => { changeActor(e, "Receiver") }} actors={props.actors}></RibbonChangeBarActorChange>
           <RibbonChangeBarImageChange x={props.touchPoint.x + 310} y={props.touchPoint.y - 88} images={{ Name: "Touchpoint", Images: images }} text={"Channel"} currentObject={props.currentObject} changeImage={(e: any) => {
             let copyOfCircles = _.cloneDeep(props.touchPoints);
             let copyOfCurrentObject;

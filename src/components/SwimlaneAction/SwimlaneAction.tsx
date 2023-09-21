@@ -145,6 +145,7 @@ function SwimlaneAction(props: SwimlaneActionProps){
                    })
                   props.setActions(circles);
                 }}
+                default={"Enter text"}
                 ></TextMessages>
             </Group>
           </div>

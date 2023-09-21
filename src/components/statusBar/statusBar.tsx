@@ -20,9 +20,9 @@ function StatusBar(props: StatusBarProps) {
 
   function getJourneyType() {
     if (props.journey[props.currenJourneyId] != undefined && props.journey[props.currenJourneyId].isPlanned) {
-      return "Journey: Planned"
+      return "Journey Type: Planned"
     }
-    return "Journey: Actual"
+    return "Journey Type: Actual"
   }
 
   return (

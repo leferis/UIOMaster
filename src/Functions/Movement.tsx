@@ -184,6 +184,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
     return x.swimlaneX + 180 > relativeX;
   })
   if (indexOfFirsChange != -1) {
+
     if (indexOfFirsChange > index) {
       for (let j = 0; j <= indexOfFirsChange; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
@@ -224,7 +225,6 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
         touch.push(objects2[j]);
       }
     }
-    
     setActions(JSON.parse(JSON.stringify(actionsTemp)));
     updateCircles(touch);
     remakeArrows(touch,actionsTemp, arrowId,setArrowId,setArrows)
@@ -286,14 +286,12 @@ export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJM
     if (actorIn != undefined) {
       const circles2 = Circle.map(circle => {
         if (circle.id == touchPoint.id) {
-         
-          
             let tempActor, tempy;
               let swap = true;
-        
-              if(circle.swimlaneY > circle.swimlaneReceiverY){
+              if(circle.swimlaneY > circle.swimlaneReceiverY -50 && circle.swimlaneY < circle.swimlaneReceiverY+ 100 ){
                 swap = false;
               }
+              
               if (circle.id == touchPoint.id) {
                 let tempActor, tempy;
                 if (!SwimlineMode && circle.receiver == actorIn) {
@@ -303,16 +301,21 @@ export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJM
                   return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200 };
                 }}
               if(!swap){
+              
                 tempActor = JSON.parse(JSON.stringify(circle.initiator));
-                tempy = tempActor.y + 20;
-                return { ...circle, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
+                tempy = circle.initiator.y + 20;
+                return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200 };
               }
               else{
                 tempActor = JSON.parse(JSON.stringify(circle.receiver));
                 tempy = tempActor.y + 20;
+                if(actorIn?.id != tempActor?.id){
               return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200 };
+                }
+                else{
+                  return { ...circle, initiator: circle.initiator, swimlaneY: circle.initiator != undefined ? circle.initiator.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: circle.receiver, swimlaneReceiverY: circle.receiver != undefined ? circle.receiver.y + 20 : 200 };
+                }
               }
-            
         }
         return circle;
       })

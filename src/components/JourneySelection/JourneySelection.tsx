@@ -83,9 +83,9 @@ function JourneySelection(props: JourneySelectionProps) {
       {!showSelection &&
         <>
           <h2> Do you want to add Planned Journey or Actual Journey</h2>
-          <Grid container spacing={2}   alignItems="flex-start"   justifyContent="flex-start">
-            <Grid item xs={4}></Grid>
-            <Grid item xs={3} > <Button  onClick={() => {
+          <Grid container spacing={2}   alignItems="center"   justifyContent="flex-start">
+            <Grid item xs={1}></Grid>
+            <Grid item xs={4} > <Button  onClick={() => {
               if (isPlannedJourney) {
                 props.addJourney(true, null);
                 props.closeJourney(false)
@@ -102,18 +102,18 @@ function JourneySelection(props: JourneySelectionProps) {
                 }
               }
 
-            }} variant="contained">Add Journey</Button>  <FormHelperText style={{    paddingLeft: "20px"}}>Draw your journey from strach</FormHelperText></Grid>
-            <Grid item xs={4} >   <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned" /><br></br>
+            }} variant="contained">Add Journey</Button>  <FormHelperText style={{    paddingLeft: "30%"}}>Draw your journey from scratch</FormHelperText></Grid>
+            <Grid item xs={3} >   <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned" /><br></br>
             <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual" /></Grid>
             <Grid item xs={4}></Grid>
-            <Grid item xs={5} style={{paddingRight:"50px"}}><Button variant="contained" disabled >Open example journey</Button>
-            <FormHelperText style={{    paddingLeft: "20px"}}>Load an example journey that you can edit</FormHelperText></Grid>
-            <Grid item xs={4}></Grid>
+            {/* <Grid item xs={5} style={{paddingRight:"50px"}}><Button variant="contained" disabled >Open example journey</Button>
+            <FormHelperText style={{    paddingLeft: "20px"}}>Load an example journey that you can edit</FormHelperText></Grid> */}
+            <Grid item xs={1}></Grid>
             {    props.JourneyList.length<1 && <>    
             
-            <Grid item xs={5} style={{paddingRight:"90px"}}><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import XCJML file</Button>
-            <FormHelperText style={{    paddingLeft: "20px"}}>Open xCJML file</FormHelperText></Grid>
-            <Grid item xs={4}></Grid></> }
+            <Grid item xs={4} ><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import XCJML file</Button>
+            <FormHelperText  style={{    paddingLeft: "30%"}}>Open xCJML file</FormHelperText></Grid>
+            <Grid item xs={3}></Grid></> }
           </Grid>
 
         </>}

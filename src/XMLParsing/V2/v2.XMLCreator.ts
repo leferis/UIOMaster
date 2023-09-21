@@ -5,6 +5,7 @@ import { Actors } from './../../Classes/Actors';
 import { Journey } from "../../Classes/Journey";
 import { CJMLImage } from '../../Classes/CJMLImage';
 
+
 function XMLCreator(Journey:Journey[],images:any){
     var previousActors:string[]= []
     function getendUserActors(Actors:Actors[]){
@@ -118,7 +119,11 @@ function XMLCreator(Journey:Journey[],images:any){
     }
 
     data += "</CJML>";
-    const blob = new Blob([data], { type: "text/plain" });
+    const XmlBeautify = require('xml-beautify');
+    const { DOMParser } = require('xmldom');// When used in a node.js environment, DOMParser is needed.
+
+    const xml = new XmlBeautify({ parser: DOMParser }).beautify(data);
+    const blob = new Blob([xml], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.download = "Journey.xml";

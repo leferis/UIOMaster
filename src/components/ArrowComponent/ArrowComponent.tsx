@@ -26,14 +26,15 @@ function ArrowComponent(props: ArrowComponentProps) {
     {props.SwimlineMode && props.Arrows.map(arrow => {
       return (
         <Arrow points={getPoints(arrow)}
-          stroke={props.currentObject.id == arrow.id ? 'Red' : 'Black'}
-          radius={2}
+          stroke={props.currentObject.id == arrow.id ? 'Red' : '#7F7F7F'}
+          pointerWidth={7}
+          pointerLength={7}
           onClick={() => {
             props.setCurrentObject(arrow);
           }}
-          hitStrokeWidth = {2}
-          strokeWidth={1}
-          fill={props.currentObject.id == arrow.id ? 'Red' : 'Black'}>
+          hitStrokeWidth = {3}
+          strokeWidth={2}
+          fill={props.currentObject.id == arrow.id ? 'Red' : '#7F7F7F'}>
 
         </Arrow>
 )

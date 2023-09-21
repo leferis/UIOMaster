@@ -57,7 +57,7 @@ function ActionPoints(props: ActionPointsProps) {
         </Html>
         {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
       </ElementChangeBar>}
-            {props.swimlaneMode && <div>
+            {props.swimlaneMode && props.currentObject.id == x.id && <div>
               <Rect x={x.x - 15}
                 y={x.y - 15}
                 height={90}
@@ -113,42 +113,22 @@ function ActionPoints(props: ActionPointsProps) {
                 }}
               ></Arrow>
             </div>}
+
             <Rect x={props.swimlaneMode ? x.x : x.swimlaneX}
               y={x.y}
               id={x.id.toString()}
-              draggable
+
               stroke={'black'}
               cornerRadius={10}
               height={props.swimlaneMode ? 60 : 80}
               width={props.swimlaneMode ? 90 : 180}
               fill={x.external == 0 ? "White" : "LightGray"}
               strokeWidth={3}
-              onClick={(e) => {
-                checkClickFunction(x, e);
-              }}
-              onDragStart={() => x.Capacity = false}
-              onDragMove={(e) => {
-                onActionDragMove(e, props.circles, x, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, index, props.checkIfCloseToActorsBorder, props.actions, props.setActions, props.actors, props.swimlaneMode, true, props.arrowId, props.setArrowId, props.setArrows)
-              }}
-              onDragEnd={
-                (e) => {
-                  onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true,props.arrowId, props.setArrowId, props.setArrows);
-                  props.findFurthestPoint()
-                }
-              }
 
             />
-            <TextMessages x={ props.swimlaneMode ? x.x +3 : x.swimlaneX + 10} y={x.y + 10} 
+                        <TextMessages x={ props.swimlaneMode ? x.x +3 : x.swimlaneX + 10} y={x.y + 10} 
             height={props.swimlaneMode ? 20 : 40} 
-            width={props.swimlaneMode ? 80 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={12} isEditing={x.isEditing} changeEditable={(x: any) => {
-              const circles = props.actions.map((action: CJMLAction) => {
-                props.setCurrentObjectID(-1);
-                if (action.id == x.id) {
-                  return { ...action, isEditing: true };
-                }
-                return action;
-              })
-              props.setActions(circles);
+            width={props.swimlaneMode ? 80 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={14} isEditing={x.isEditing} changeEditable={(x: any) => {
             }}
               ChangeBack={(x: any) => {
                 const circles = props.actions.map((action: CJMLAction) => {
@@ -159,7 +139,41 @@ function ActionPoints(props: ActionPointsProps) {
                 })
                 props.setActions(circles);
               }}
+              default={"Enter text"}
             ></TextMessages>
+            {!x.isEditing && <Rect       x={props.swimlaneMode ? x.x : x.swimlaneX}
+              y={x.y}
+              height={props.swimlaneMode ? 60 : 80}
+              width={props.swimlaneMode ? 90 : 180}
+              id={x.id.toString()}
+              draggable    
+              onClick={(e) => {
+                checkClickFunction(x, e);
+              }}
+              onDblClick={()=>{
+                const circles = props.actions.map((action: CJMLAction) => {
+                  props.setCurrentObjectID(-1);
+                  if (action.id == x.id) {
+                    return { ...action, isEditing: true };
+                  }
+                  return action;
+                })
+                props.setActions(circles);
+              }}
+              onDragStart={() => x.Capacity = false}
+              onDragMove={(e) => {
+                onActionDragMove(e, props.circles, x, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, index, props.checkIfCloseToActorsBorder, props.actions, props.setActions, props.actors, props.swimlaneMode, true, props.arrowId, props.setArrowId, props.setArrows)
+                props.findFurthestPoint()
+              }}
+              onDragEnd={
+                (e) => {
+                  onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true,props.arrowId, props.setArrowId, props.setArrows);
+                  props.findFurthestPoint()
+                }
+              }
+/>
+            }
+
           </div>
         );
       })}
