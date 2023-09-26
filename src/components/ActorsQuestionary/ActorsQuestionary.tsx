@@ -1,4 +1,4 @@
-import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, FormHelperText, Grid, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, TextField } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -57,7 +57,7 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
                     }}
                   >   {props.CJMLImageList.Images[0].Images.map((y: CJMLImage) => {
                     if (y.Default) {
-                      return (<MenuItem value={y.Location}>{y.Name}</MenuItem>)
+                      return (<MenuItem value={y.Location}><ListItemIcon><img style={{width:"20px", height:"20px",paddingRight:"8px"}} src={y.Location}/><ListItemText primary={y.Name} style={{color:"black"}}/></ListItemIcon></MenuItem>)
                     }
                   })}
                   </Select>
@@ -75,15 +75,17 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
       })}
 
     </form>
-    <h5 style={{position:"absolute", left:"60px"}}>Actors' colour representations can be changed in settings</h5>
+   
     <br></br>
-    <br></br>
-    <br></br>
+
     <Button style={{position:"absolute", left:"50px"}} variant="outlined" onClick={() => {
       props.setTempActors([...props.tempActors, { Title: "Enter actor's name", img: "", x: 200, y: 300, id: props.tempActors.length + 1 + 2000, height: 130, width: 700, color: "#fff" }]);
       ChangeOpenColorStatus([...OpenColor, false]);
     }} >Add new Actor</Button>
+        <br></br><h5 style={{position:"absolute", left:"60px"}}>Actors' colour representations can be changed in settings</h5>
     <br></br>
+    <br></br>
+    
   </div>);
 }
 

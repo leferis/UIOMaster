@@ -1,4 +1,4 @@
-import { Button, IconButton, Tab, Tabs } from '@mui/material';
+import { AppBar, Button, IconButton, Tab, Tabs } from '@mui/material';
 import React, { FC, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Actors } from '../../Classes/Actors';
@@ -9,6 +9,7 @@ import styles from './Questionary.module.css';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import { toast } from 'react-toastify';
 import { createArrows } from '../../Functions/Switching';
+import Swal from 'sweetalert2';
 
 
 interface QuestionaryProps {
@@ -43,14 +44,31 @@ function Questionary(props: QuestionaryProps) {
     if (checkTouchPoints()) {
       reassignActors();
       assignIdAndLocation();
+      if(TouchPointsTemp.length == 0){
+        Swal.fire({
+          title: 'There is no touchpoints. Do you want to add them?',
+          showDenyButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: `No`,
+        }).then((result) => {
+          if(result.isConfirmed){
+            setActorSelect(false); setTouchpointSelect(true);
+          }
+          if(result.isDenied){
+            props.handleClose(false);
+          }
+        });
+      }
+      else{
       props.handleClose(false);
+      }
     }
 
   }
   function reassignActors() {
     const updatetActors = tempActors.map((actor: Actors, index: number) => {
       actor.y = (index + 1) * 200;
-      actor.width = (TouchPointsTemp.length>0? TouchPointsTemp.length* 270: 300 );
+      actor.width = (TouchPointsTemp.length>0? TouchPointsTemp.length* 400: 300 );
       return actor;
     });
     props.setActors(updatetActors);
@@ -244,13 +262,19 @@ function Questionary(props: QuestionaryProps) {
       <div style={{ float: "right" }}>
         <IconButton aria-label="Up" size="large" onClick={() => { props.handleClose(false); }} ><CloseIcon /></IconButton>
       </div>
+      <AppBar position="static">
       <Tabs
         value={activeTab}
+        variant="fullWidth"
+        indicatorColor="primary"
+        textColor="inherit"
+        aria-label="full width tabs example"
         onChange={(event: React.SyntheticEvent, newValue: number) => setActiveTab(newValue)}
       >
         <Tab onClick={() => { setActorSelect(true); setTouchpointSelect(false); }} label="Actors"></Tab>
-        <Tab onClick={() => { setTouchpointSelect(true); setActorSelect(false); }} label="Toucpoints / Actions"></Tab>
+        <Tab onClick={() => { setTouchpointSelect(true); setActorSelect(false); }} label="Touchpoints"></Tab>
       </Tabs>
+      </AppBar>
       {ActorSelect && <ActorsQuestionary tempActors={tempActors} setTempActors={setTempActors} CJMLImageList={props.CJMLImageList} GetImage={props.GetImage} removeActor={removeActors}></ActorsQuestionary>}
       {ToucpointSelect && <TouchpointQuestionary GetImage={props.GetImage} actors={tempActors} CJMLImageList={props.CJMLImageList} TouchPoints={TouchPointsTemp} updateTouhcPoints={setTouchPointTemp} actions={JSON.stringify(props.actions)}
         isPanned={props.isPlanned} removeTouchpoint={removeTouchpoint} swapTouchpoints={swapTouchpoints} removeTouncpoint={removeTouncpoint}></TouchpointQuestionary>}

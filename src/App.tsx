@@ -76,9 +76,9 @@ function App() {
   const [mouseDownFunction, setMouseDownFunction] = useState("");
   const [journeyIndex, setJourneyIndex] = useState(1);
   const [showSettings, setShowSettings] = useState(false);
-  const [ImageChange, setImageChange] = useState<ImageChange| undefined>(undefined);
+  const [ImageChange, setImageChange] = useState<ImageChange | undefined>(undefined);
   const [openStatistics, setOpenStatistics] = useState(false);
-  const [TaskId, setTaskID]= useState(0);
+  const [TaskId, setTaskID] = useState(0);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -101,9 +101,9 @@ function App() {
 
   React.useEffect(() => {
     document.addEventListener("keyup", deleteElement);
-    
+
     return () => {
-      
+
       document.removeEventListener('keyup', deleteElement)
     }
   }, [circles, actions, Arrows, ActorsCJML])
@@ -115,109 +115,105 @@ function App() {
           <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML Analyzer</h2>
 
         </div>
-{ TaskId>0 &&       <Rnd
-  initial={{
-    x: window.innerWidth / 2 - 200,
-    y: window.innerHeight / 2 - 80,
-    width: 400,
-    height: 160,
-  }}
-style={{zIndex:"9999", background:"	#BEBEBE"}}
-  minWidth={700}
-  minHeight={500}
-  maxWidth={1200}
-  maxHeight={600}
-  bounds={'parent'}
->
-  <div style={{background:"	#BEBEBE", maxHeight:"600px"}}>
-    { TaskId==1 && <div style={{textAlign:"left"}}>
-      <h2>Welcome to the study</h2>
-      <h4>The test consists of three tasks.</h4>
-      <h4>1. Draw a journey using the canvas, add 3 touchpoints</h4>
-      <h4>2. Add an actor and 3 more touchpoints, but this time using form</h4>
-      <h4>3. Add 2 more touchpoints, but this times as devations and change one touchpoint status to failing</h4>
+        {TaskId > 0 && <Rnd
+          initial={{
+            x: window.innerWidth / 2 - 200,
+            y: window.innerHeight / 2 - 80,
+            width: 400,
+            height: 160,
+          }}
+          style={{ zIndex: "9999", background: "	#BEBEBE", borderColor: "black", borderStyle: "black", boxShadow: " 5px 5px #5d5d5d" }}
+          minWidth={700}
+          minHeight={600}
 
-      </div>}
-      { TaskId==2 && <div style={{textAlign:"left"}}>
-      <h2>Task 1 context</h2>
-      <h4>The journey will include two actors: "Customer" and "Mobile provider".</h4>
-      <img src="Actors.png" ></img>
-      <h4>The customer notices that he has ran out of mobile data. To ask how much costs additional data, he calls his mobile provider. </h4>
+          maxWidth={1200}
+          maxHeight={600}
+          bounds={'parent'}
+        >
+          <div style={{ background: "	#BEBEBE", maxHeight: "600px", paddingLeft: "10px" }}>
+            {TaskId == 1 && <div style={{ textAlign: "left" }}>
+              <h2>Welcome to the Study</h2>
+              <p>This test comprises three tasks:</p>
+              <ol>
+                <li>
+                  <h4>Task 1: Create a journey using the canvas and add three touchpoints.</h4>
+                </li>
+                <li>
+                  <h4>Task 2: Introduce an actor and incorporate three additional touchpoints, this time using a form.</h4>
+                </li>
+                <li>
+                  <h4>Task 3: Incorporate two more touchpoints, this time as deviations, and change the status of one touchpoint to "failing."</h4>
+                </li>
+              </ol>
+            </div>}
+            {TaskId == 2 && <div style={{ textAlign: "left" }}>
+              <h2>Task 1 context</h2>
+              <h4>The journey will involve two primary actors: 'Customer' and 'Mobile Provider.</h4>
+              <img src="Actors.png" ></img>
+              <h4>The customer notices that he has run out of mobile data. To inquire about the cost of additional data, he calls his mobile provider.</h4>
+              <h4>After the company answers the call, they provide prices for additional data.</h4>
+              <h4>The customer decides not to choose a plan and considers other options.</h4>
+              <h4>You need to recreate the first three touchpoints from the story using the canvas.</h4>
+              <h3>Click "Next" to view an image of what you need to recreate.</h3>
+            </div>}
+            {TaskId == 3 && <GlassMagnifier style={{ maxHeight: "100%", maxWidth: "100%", paddingTop: "5%" }}
+              imageSrc="Task 1.png"
+              imageAlt="Example"
+            />
+            }
+            {TaskId == 4 &&
+              <div style={{ textAlign: "left" }}>
+                <h2>Task 2 Context</h2>
+                <h4>After considering his options, the customer decides to visit another provider. He goes to the physical store of "Mobile Provider 2" and talks with the service desk to inquire about their pricing.</h4>
+                <img src="actors_task2.png"></img>
+                <h4>After hearing the competing service provider's pricing, the customer decides that the current provider offers better prices.</h4>
+                <h4>So, he calls "Mobile Provider" again to accept their offer.</h4>
+                <h4>Following the call, "Mobile Provider" sends an email to the customer with new contract details. The customer reviews the email for any mistakes.</h4>
+                <h4>Now, you need to add three additional touchpoints and introduce a new actor, but this time you have to use a form.</h4>
+                <h3>Click "Next" to view an image of what you need to recreate.</h3>
 
-      <h4>After company picks up the call, they provide prices for additional data. </h4>
-      <h4>The customer does not choose the plan and thinks about other options.</h4>
-      </div>}
-      { TaskId==3 && <div style={{textAlign:"left"}}>
-      <h2>Task 1</h2>
-      <h4>You have to recreate the first three touchpoints from the story using the canvas.</h4>
-      <h3>Click next to see image of what you need to recreate.</h3>
-      </div>}
-    { TaskId==4 &&   <GlassMagnifier style={{maxHeight:"100%", maxWidth:"100%", }}
-   imageSrc="Task 1.png"
-   imageAlt="Example"
- />
- }
- { TaskId==5 &&
-  <div style={{textAlign:"left"}}>
-     <h2>Task 2 context</h2>
-      <h4>After thinking about his options, the customer decides to visit other provider. So he goes to "Mobile provider 2" physical store and talks with service desk to find out their pricing.</h4>
-      <img src="actors_task2.png" ></img>
-      <h4> After the hearing the competing service provider pricing, customer decides that current provider has better prices.</h4>
-      <h4> So, he calls again the "Mobile provider" to accept their offer. </h4>
-      <h4>After the call "Mobile provider" send out an email to the customer with new contract details. The customer reviews the email for mistakes.
-      </h4>
-    </div>
+              </div>
 
- }
-    { TaskId==6 && <div style={{textAlign:"left"}}>
-      <h2>Task 2</h2>
-      <h4>You have to add 3 additional touchpoints and an actor.</h4>
-      <h3> But this time you have to use form. Click next to see image of what you need to recreate.</h3>
-      </div>}
-    { TaskId==7 &&   <GlassMagnifier style={{maxHeight:"100%", maxWidth:"100%", }}
-   imageSrc="Task 2.png"
-   imageAlt="Example"
- />}
-  { TaskId== 8 &&
-  <div style={{textAlign:"left"}}>
-     <h2>Task 3 context</h2>
-      <h4>Turns out there was a mistake in the touchpoint and the offer is considered failing due to that. </h4>
-      <h4>It was soon noticed by the "Mobile provider", which soon after called the customer.</h4> 
-      <h4> In the call, the "Mobile provider" apologized for 
-        the mistake to which customer asked to send correct confirmation.</h4>
-        <h4> After the call finished, the "Mobile provider" sent out an email with the correct details, which user checked and confirmed to be correct.
-      </h4>
-    </div>
+            }
+            {TaskId == 5 && <GlassMagnifier style={{ maxHeight: "100%", maxWidth: "100%", paddingTop: "5%" }}
+              imageSrc="Task 2.png"
+              imageAlt="Example"
+            />}
+            {TaskId == 6 &&
+              <div style={{ textAlign: "left" }}>
+                <h2>Task 3 Context</h2>
+                <h4>As it turns out, there was a mistake in one of the touchpoints, causing the offer to be considered failing.</h4>
+                <h4>The mistake was quickly identified by "Mobile Provider," who promptly called the customer.</h4>
+                <h4>During the call, "Mobile Provider" apologized for the error, and the customer requested that they send the correct confirmation.</h4>
+                <h4>After concluding the call, "Mobile Provider" sent an email with the correct details, which the user checked and confirmed as accurate.</h4>
+                <h4>Modify current journey. Add two new touchpoints and change touchpoint status.
+                </h4>
+                <h3>Click next to see what you need to recreate.</h3>
+              </div>
 
- }
-    { TaskId== 9 && <div style={{textAlign:"left"}}>
-      <h2>Task 3</h2>
-      <h4>Modify current journey. Add two new touchpoints and change touchpoint status. 
-      </h4> 
-      <h3>Click next to see what you need to recreate.</h3>
-      </div>}
-    { TaskId==10 &&  <GlassMagnifier style={{maxHeight:"100%", maxWidth:"100%", }}
-   imageSrc="Task 3.png"
-   imageAlt="Example"
- />}
-    { TaskId==11 && <h1>Thank you for completing the tasks and participating!</h1>}
-   { TaskId>1 && <Button style={{position:"absolute", left:0, bottom:0, display:'flex', justifyContent:"center", right:0, padding:"10px",maxWidth:"50%"}} variant="contained" onClick={()=>setTaskID(TaskId-1)}>Previous</Button>}
-    { TaskId<11 && <Button  style={{position:"absolute", left:"50%", bottom:0, display:'flex', justifyContent:"center", right:0, padding:"10px",maxWidth:"50%"}}variant="contained" onClick={()=>setTaskID(TaskId+1)}>Next</Button>}
-  </div>
-</Rnd>}
-{TaskId==11 && <Confetti
-      width={ window.innerWidth}
-      height={ window.innerHeight}
-      numberOfPieces={500}
+            }
+            {TaskId == 7 && <GlassMagnifier style={{ maxHeight: "100%", maxWidth: "100%", paddingTop: "5%" }}
+              imageSrc="Task 3.png"
+              imageAlt="Example"
+            />}
+            {TaskId == 8 && <h1>Thank you for completing the tasks and participating!</h1>}
+            {TaskId > 1 && <Button style={{ position: "absolute", left: 0, bottom: 0, display: 'flex', justifyContent: "center", right: 0, padding: "10px", maxWidth: "50%" }} variant="contained" onClick={() => setTaskID(TaskId - 1)}>Previous</Button>}
+            {TaskId < 8 && <Button style={{ position: "absolute", left: "50%", bottom: 0, display: 'flex', justifyContent: "center", right: 0, padding: "10px", maxWidth: "50%" }} variant="contained" onClick={() => setTaskID(TaskId + 1)}>{TaskId == 1 ? "Start study" : "Next"}</Button>}
+          </div>
+        </Rnd>}
+        {TaskId == 8 && <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          numberOfPieces={500}
 
-    />}
+        />}
         <ToastContainer />
         <Ribbon SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles}
           setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
           actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage} updateCurrentJourney={updateCurrentJourney}
           showModal={setShowModal} images={CJMLImageList} currentObject={currentObject} currentJourney={currentJourney}
-          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome} 
+          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome}
         />
 
         <Stage width={window.innerWidth} height={(window.innerHeight - 175)}
@@ -269,24 +265,24 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
               setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
             }}
           >
-               {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
-           <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
+            {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
+            <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
             {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
             {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
-            {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned)  && 
-            <ActorPoint 
-            currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} remove={remove} 
-            setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
-              actions={actions} circles={circles} setActions={setActions} updateCircles={setCircles}
-            />}
-               
+            {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned) &&
+              <ActorPoint
+                currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} remove={remove}
+                setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
+                actions={actions} circles={circles} setActions={setActions} updateCircles={setCircles}
+              />}
+
             {Journey.length > 0 && <TouchPoint remove={remove} Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
               drawingArrow={drawingArrow} currentObject={currentObject} setCurrentObjectID={setCurrentObjectReference} setClickFunction={setClickFunction} Images={CJMLImageList} actions={actions}
               setActions={setActions} actors={ActorsCJML} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow}
               addNewArrow={addNewArrow} finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder}
               SwimlineMode={SwimlineMode} resetTouchpoints={resetTouchpoints} devationMode={Journey[currentJourney].isPlanned} getImageObject={getImageObject}
               isPlanned={Journey[currentJourney].isPlanned}
-              makeBiggerActors={makeBiggerActors} 
+              makeBiggerActors={makeBiggerActors}
               findFurthestPoint={findFurthestPoint}
             ></TouchPoint>}
             <ActionPoints swimlaneMode={SwimlineMode} setActions={setActions}
@@ -307,10 +303,10 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
               findFurthestPoint={findFurthestPoint}
               checkIfCloseToActorsBorder={makeBiggerActors}
             ></ActionPoints>
-         
-         
-            {Journey.length > 0 && ImageChange!= undefined && !openHome && <KonvaImage x={ImageChange?.x-15} y={ImageChange?.y-15} height={30} width={30} image={getImageObject(ImageChange.Image)}></KonvaImage>}
-            {ActorsCJML.length > 0 && SwimlineMode && <ColorCoding actors={ActorsCJML}/>}
+
+
+            {Journey.length > 0 && ImageChange != undefined && !openHome && <KonvaImage x={ImageChange?.x - 15} y={ImageChange?.y - 15} height={30} width={30} image={getImageObject(ImageChange.Image)}></KonvaImage>}
+            {ActorsCJML.length > 0 && SwimlineMode && <ColorCoding actors={ActorsCJML} />}
           </Layer>}
           {openHome &&
             <Layer ref={layerEl} draggable onDragEnd={(e) => {
@@ -320,23 +316,23 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
               <Home CloseHomeWindow={ChangeOpenHome} setJourney={changeJourney} journeys={Journey} getImageObject={getImageObject}></Home>
             </Layer>
           }
-        
-          <LeftMeniu  mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
+
+          <LeftMeniu mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
             updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
             mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
             SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
             showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
             updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
             setActions={setActions} openModal={setShowModal} setShowSettings={setShowSettings} setImageChange={setImageChange}
-            addNewActorDragAndDrop = {addNewActorDragAndDrop} setOpenStatistics={setOpenStatistics}
+            addNewActorDragAndDrop={addNewActorDragAndDrop} setOpenStatistics={setOpenStatistics}
           />
-            {SwimlineMode && <Legend actors={ActorsCJML} setActors={setActors}/>}
+          {SwimlineMode && <Legend actors={ActorsCJML} setActors={setActors} />}
         </Stage>
-        {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney}/>}
-        {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary} 
-        showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles} 
-        isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}
-        arrowsId={initialArrowId} setInitialArrowID={setNewArrowId} 
+        {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
+        {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary}
+          showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles}
+          isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}
+          arrowsId={initialArrowId} setInitialArrowID={setNewArrowId}
         />}
         {showIntroduction && <IntroductionWindow showIntro={showIntroduction} closeIntro={setshowIntroduction} showSelection={setshowAddJourney} />}
         {showAddJourney && <JourneySelection showJourney={showAddJourney} closeJourney={setshowAddJourney} addJourney={addJourney} JourneyList={Journey} showModal={setShowModal} />}
@@ -345,8 +341,8 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings={setShowSettings}
           currentJurney={currentJourney} setJourneys={setJouney}
         ></Settings>}
-       
-        {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney}  handleClose={setOpenStatistics} show={openStatistics}/>}
+
+        {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} handleClose={setOpenStatistics} show={openStatistics} />}
       </div>
       <div className='JourneyBar'>
         <JourneyBar ChangeOpenHome={ChangeOpenHome} Journey={Journey} changeJourney={changeJourney} currentJourney={currentJourney} journeyChange={journeyChange}
@@ -362,23 +358,23 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     setJouney(journeys);
   }
 
-  function addJourney(isPlanned: boolean, addId: any) { 
+  function addJourney(isPlanned: boolean, addId: any) {
 
     if (Journey.length == 0) {
     }
     if (Journey.length == 1) {
       updateCurrentJourney();
     }
-    if (((addId != undefined || addId != null )&& addId != -1)) {
-        updateCurrentJourney();
-        setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
-        setJourneyIndex(journeyIndex + 1);
+    if (((addId != undefined || addId != null) && addId != -1)) {
+      updateCurrentJourney();
+      setJouney((Journey) => [...Journey, { Toucpoint: JSON.parse(JSON.stringify(Journey[addId].Toucpoint)), Actions: JSON.parse(JSON.stringify(Journey[addId].Actions)), Actors: JSON.parse(JSON.stringify(Journey[addId].Actors)), JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: Journey[addId].JourneyName }])
+      setJourneyIndex(journeyIndex + 1);
     }
     else {
       setJouney((Journey) => [...Journey, { Toucpoint: [], Actions: [], Actors: [{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 130, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 130, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }], JourneyName: isPlanned ? "Planned Journey " + journeyIndex : "Actual Journey " + journeyIndex, isPlanned: isPlanned, Arrow: [], Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: '1', Reference: null }])
       setJourneyIndex(journeyIndex + 1);
     }
-    setTaskID(TaskId+1)
+    setTaskID(TaskId + 1)
   }
 
 
@@ -430,7 +426,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     });
   }
 
-  function addNewActorDragAndDrop(pathImage:any){
+  function addNewActorDragAndDrop(pathImage: any) {
     console.log(pathImage)
     var actor = ActorsCJML;
     var actorAfterInsert = ActorsCJML.sort((x, y) => {
@@ -481,17 +477,17 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     setActions((prevActions) => [...prevActions, newAction]);
   }
 
-  function addNewCircle(image: string = "", upsideDown: boolean = false, initiator?:Actors) {
+  function addNewCircle(image: string = "", upsideDown: boolean = false, initiator?: Actors) {
     if (image == "") {
       image = "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg"
     }
-    let newCircle:CJMLCircle;
+    let newCircle: CJMLCircle;
 
-    if(upsideDown){
-      newCircle= new CJMLCircle(initialId, -9999, -10999, false, false, ActorsCJML[0], ActorsCJML[1], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
+    if (upsideDown) {
+      newCircle = new CJMLCircle(initialId, -9999, -10999, false, false, ActorsCJML[0], ActorsCJML[1], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -9999, Date.now(), TouchPointStatus.Completed);
     }
-    else{
-    newCircle= new CJMLCircle(initialId, -9999, -9999, false, false, initiator != undefined? ActorsCJML[0]:ActorsCJML[1], initiator != undefined? initiator: ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
+    else {
+      newCircle = new CJMLCircle(initialId, -9999, -9999, false, false, initiator != undefined ? ActorsCJML[0] : ActorsCJML[1], initiator != undefined ? initiator : ActorsCJML[0], image, "Enter text", "Enter text", swimlaneXInitial, -9999, -10999, Date.now(), TouchPointStatus.Completed);
     }
     setCircles((prevCircles) => [
       ...prevCircles,
@@ -508,27 +504,27 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-        
-          if (result.isConfirmed) {
-            const tempCircle = circles;
-            tempCircle.splice(index, 1);
-            setCircles(tempCircle);
-            removeArrows(CurrentObjectReference);
-            toast.success('Touchpoint has been removed', {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: false,
-              progress: undefined,
-              theme: "light",
-            })
-          }
-          else if (result.isDenied) {
-            Swal.fire('Communication point was not removed', '', 'info')
-          }
-        
+
+        if (result.isConfirmed) {
+          const tempCircle = circles;
+          tempCircle.splice(index, 1);
+          setCircles(tempCircle);
+          removeArrows(CurrentObjectReference);
+          toast.success('Touchpoint has been removed', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+          })
+        }
+        else if (result.isDenied) {
+          Swal.fire('Communication point was not removed', '', 'info')
+        }
+
       })
     }
 
@@ -541,21 +537,22 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-       if(result.isConfirmed)
-        { const tempCircle = actions;
-        tempCircle.splice(actionIndex, 1);
-        setActions(tempCircle);
-        removeArrows(CurrentObjectReference);
-        toast.success('Action has been removed', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        });}
+        if (result.isConfirmed) {
+          const tempCircle = actions;
+          tempCircle.splice(actionIndex, 1);
+          setActions(tempCircle);
+          removeArrows(CurrentObjectReference);
+          toast.success('Action has been removed', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+          });
+        }
         else if (result.isDenied) {
           Swal.fire('Action was not removed', '', 'info')
         }
@@ -572,19 +569,21 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
       }).then((result) => {
-       if(result.isConfirmed){ const tempArrows = Arrows;
-        tempArrows.splice(arrowId, 1);
-        setArrows(tempArrows);
-        toast.success('Arrow has been removed', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        });}
+        if (result.isConfirmed) {
+          const tempArrows = Arrows;
+          tempArrows.splice(arrowId, 1);
+          setArrows(tempArrows);
+          toast.success('Arrow has been removed', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+          });
+        }
         else if (result.isDenied) {
           Swal.fire('Arrow was not removed', '', 'info')
         }
@@ -722,7 +721,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
       changeCircle(e);
       findFurthestPoint(e)
     }
-    else if(mouseDownFunction == "ImageChange"){
+    else if (mouseDownFunction == "ImageChange") {
       ChangeImage(e);
       findFurthestPoint()
     }
@@ -730,41 +729,41 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
       changeAction(e);
       findFurthestPoint(e)
     }
-    else if( mouseDownFunction == "DragActor"){
+    else if (mouseDownFunction == "DragActor") {
       changeActor(e);
     }
 
   }
 
-  function changeActor(e:any){
-    let workingActor = initialId-1;
+  function changeActor(e: any) {
+    let workingActor = initialId - 1;
     let acotrsCopy = _.cloneDeep(ActorsCJML);
-    
+
     let touchpoints = _.cloneDeep(circles);
     let actionscopy = _.cloneDeep(actions);
 
-    acotrsCopy = acotrsCopy.sort((x:Actors,y:Actors)=>{
-      return x.y-y.y;
-    }).map((value:Actors, index:number)=>{
-      if(value.id != workingActor.toString()){
-        value.y = (index+1) *200
+    acotrsCopy = acotrsCopy.sort((x: Actors, y: Actors) => {
+      return x.y - y.y;
+    }).map((value: Actors, index: number) => {
+      if (value.id != workingActor.toString()) {
+        value.y = (index + 1) * 200
       }
-      else{
+      else {
         value.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
         value.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
       }
-      touchpoints = touchpoints.map((x)=>{
-        if(x.initiator.id == value.id){
-          x.swimlaneY = value.y +20
+      touchpoints = touchpoints.map((x) => {
+        if (x.initiator.id == value.id) {
+          x.swimlaneY = value.y + 20
         }
-        else if(x.receiver.id == value.id){
-          x.swimlaneReceiverY = value.y +20
+        else if (x.receiver.id == value.id) {
+          x.swimlaneReceiverY = value.y + 20
         }
         return x;
       })
-      actionscopy = actionscopy.map((x)=>{
-        if(x.initiator.id == value.id){
-          x.y = value.y +20; 
+      actionscopy = actionscopy.map((x) => {
+        if (x.initiator.id == value.id) {
+          x.y = value.y + 20;
         }
         return x
       })
@@ -775,13 +774,13 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     setCircles(touchpoints)
   }
 
-  function setActorLocations(){
+  function setActorLocations() {
     let acotrsCopy = _.cloneDeep(ActorsCJML);
-    acotrsCopy = acotrsCopy.sort((x:Actors,y:Actors)=>{
-      return x.y-y.y;
-    }).map((value:Actors, index:number)=>{
-        value.y = (index+1) *200
-        value.x = 150;
+    acotrsCopy = acotrsCopy.sort((x: Actors, y: Actors) => {
+      return x.y - y.y;
+    }).map((value: Actors, index: number) => {
+      value.y = (index + 1) * 200
+      value.x = 150;
       return value;
     })
     setActors(acotrsCopy);
@@ -821,11 +820,11 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
         x.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
         x.y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
         x.swimlaneX = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
-        if(x.receiver.y < x.initiator.y){
-          x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) +200;
-          x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) ;
+        if (x.receiver.y < x.initiator.y) {
+          x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) + 200;
+          x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
         }
-        else{
+        else {
           x.swimlaneY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
           x.swimlaneReceiverY = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0) + 200;
         }
@@ -839,14 +838,14 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     setCircles(JSON.parse(JSON.stringify(newCircle)));
   }
 
-  function ChangeImage(e:any){
+  function ChangeImage(e: any) {
     let x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
     let y = e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0);
     let copy = _.cloneDeep(ImageChange);
-    if(copy !== undefined){
-    copy!.x = x;
-    copy!.y = y
-  }
+    if (copy !== undefined) {
+      copy!.x = x;
+      copy!.y = y
+    }
     setImageChange(copy);
   }
 
@@ -892,8 +891,8 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     let copyobject = _.cloneDeep(changingObj);
     const newArrows = Arrows.map(x => {
       if (x.fromPoint.id == obj || x.toPoint.id == obj) {
-        if(changingObj.receiver == undefined){
-          copyobject.y = copyobject.y -14
+        if (changingObj.receiver == undefined) {
+          copyobject.y = copyobject.y - 14
         }
         x.redraw(copyobject);
         return x;
@@ -908,7 +907,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
   function addNewArrow(obj: any, e: any) {
     console.log(e) // cia taisyti
     const arrowRes = Arrows;
-    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1', e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0), e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0), 0, 0,false)));
+    arrowRes.push(new CJMLArrow(initialArrowId, (JSON.parse(JSON.stringify(obj))), new Connectable('-1', e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0), e.evt.layerY - (layerEl.current.attrs.y != undefined ? layerEl.current.attrs.y : 0), 0, 0, false)));
     setArrows(arrowRes);
   }
 
@@ -918,9 +917,9 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     arrowRes.map((x: CJMLArrow) => {
       if (x.id == initialArrowId) {
         const rest: CJMLArrow = x as CJMLArrow;
-        let objCopy= _.cloneDeep(obj);
-        if(obj.receiver == undefined){
-          objCopy.y = objCopy.y-12;
+        let objCopy = _.cloneDeep(obj);
+        if (obj.receiver == undefined) {
+          objCopy.y = objCopy.y - 12;
         }
         rest.toPoint = (JSON.parse(JSON.stringify(objCopy)));
         rest.redraw(JSON.parse(JSON.stringify(objCopy)))
@@ -1103,7 +1102,7 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
         findFurthestPoint(e)
 
       }
-      
+
         break;
       case "DrawAction": {
         const actionToWork = actions.filter((x) => {
@@ -1114,13 +1113,13 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
         setNewID(initialId + 1)
         findFurthestPoint(e)
       }
-      break;
-      case "ImageChange":{
+        break;
+      case "ImageChange": {
         setImageToTouchpoint(e);
         setImageChange(undefined);
       }
-      break;
-      case "DragActor":{
+        break;
+      case "DragActor": {
         setActorLocations();
       }
     }
@@ -1128,30 +1127,31 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     setMouseDownFunction("")
   }
 
-  function findFurthestPoint(e?:any){
-    let furhterPoint:number =200;
+  function findFurthestPoint(e?: any) {
+    let furhterPoint: number = 200;
     if (e != undefined) {
-    if(e.target.attrs.x > furhterPoint){
-      furhterPoint = e.target.attrs.x+200;
+      if (e.target.attrs.x > furhterPoint) {
+        furhterPoint = e.target.attrs.x + 200;
+      }
     }
-    }
-     circles.forEach((value) => {
-      if(furhterPoint < value.swimlaneX){
+    circles.forEach((value) => {
+      if (furhterPoint < value.swimlaneX) {
         furhterPoint = value.swimlaneX;
       }
     });
-    actions.forEach((value)=>{
-      if(furhterPoint < value.swimlaneX){
-        furhterPoint = value.swimlaneX}
+    actions.forEach((value) => {
+      if (furhterPoint < value.swimlaneX) {
+        furhterPoint = value.swimlaneX
+      }
     });
-    if(furhterPoint%200 != 0){
-      
-      furhterPoint = 200 *( (furhterPoint/200)+1)
+    if (furhterPoint % 200 != 0) {
+
+      furhterPoint = 200 * ((furhterPoint / 200) + 1)
     }
     let actors = _.cloneDeep(ActorsCJML);
-    actors = actors.map((x)=>{
-      if(furhterPoint - x.x > x.width){
-        x.width =furhterPoint - x.x +280;
+    actors = actors.map((x) => {
+      if (furhterPoint - x.x > x.width) {
+        x.width = furhterPoint - x.x + 280;
       }
       return x;
     })
@@ -1159,11 +1159,11 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
     console.log(circles);
     setActors(actors);
   }
-  
 
-  function setImageToTouchpoint(e:any){
-    let yPosOfMouse:number;
-    let xPosOfMouse:number;
+
+  function setImageToTouchpoint(e: any) {
+    let yPosOfMouse: number;
+    let xPosOfMouse: number;
     if (e.target.attrs.y != null) {
       yPosOfMouse = e.target.attrs.y;
       xPosOfMouse = e.target.attrs.x;
@@ -1172,22 +1172,22 @@ style={{zIndex:"9999", background:"	#BEBEBE"}}
       yPosOfMouse = e.target.getStage().getPointerPosition().y;
       xPosOfMouse = e.target.getStage().getPointerPosition().x;
     }
-   
+
     let copyOfCirlces = _.cloneDeep(circles);
-    copyOfCirlces = copyOfCirlces.map((x:CJMLCircle)=>{
-      if(!SwimlineMode){
-        if(x.swimlaneX-15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse ){
-          if(x.swimlaneY-15 <= yPosOfMouse && x.swimlaneY +195 >= yPosOfMouse){
+    copyOfCirlces = copyOfCirlces.map((x: CJMLCircle) => {
+      if (!SwimlineMode) {
+        if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
+          if (x.swimlaneY - 15 <= yPosOfMouse && x.swimlaneY + 195 >= yPosOfMouse) {
             x.imageName = ImageChange?.Image;
           }
-          else if(x.swimlaneReceiverY-15  <= yPosOfMouse && x.swimlaneReceiverY +195 >= yPosOfMouse){
+          else if (x.swimlaneReceiverY - 15 <= yPosOfMouse && x.swimlaneReceiverY + 195 >= yPosOfMouse) {
             x.imageNameReceiver = ImageChange?.Image;
           }
         }
       }
-      else{
-        if(x.x-35 <= xPosOfMouse && x.x + 35 >= xPosOfMouse ){
-          if(x.y-35 <= yPosOfMouse && x.y +35 >= yPosOfMouse){
+      else {
+        if (x.x - 35 <= xPosOfMouse && x.x + 35 >= xPosOfMouse) {
+          if (x.y - 35 <= yPosOfMouse && x.y + 35 >= yPosOfMouse) {
             x.imageName = ImageChange?.Image;
             x.imageNameReceiver = ImageChange?.Image;
           }

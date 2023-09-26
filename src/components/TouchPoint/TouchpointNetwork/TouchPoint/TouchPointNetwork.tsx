@@ -355,7 +355,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         {!props.isPlanned && <RibbonChangeBarTypeChange x={props.touchPoint.swimlaneX + 420} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 88} TouchPoints={props.Circle} currenctObj={props.currentObject} updateCurentObj={props.setCurrentObject} updateTouhcPoints={props.updateCircles}></RibbonChangeBarTypeChange>}
         {!props.isPlanned && <Html groupProps={{ x: (props.touchPoint.swimlaneX + 320), y:(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 80 }}>
           <FormGroup>
-            <FormControlLabel control={<Checkbox onChange={() => (props.ChangeDevation(props.touchPoint))} defaultChecked={props.touchPoint.devation} />} label="Devation" />
+            <FormControlLabel control={<Checkbox onChange={() => (props.ChangeDevation(props.touchPoint))} defaultChecked={props.touchPoint.devation} />} label="Deviation" />
           </FormGroup>
         </Html>
         }

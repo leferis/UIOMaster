@@ -75,7 +75,7 @@ function Ribbon(props: RibbonProps) {
           setHowerSecond(false);
         }}
         onClick={() =>{props.showQuestionary(true); props.setCurrentObject(-1 )}}>
-          <span style={{textAlign:"center", fontWeight:"500"}}> Open Form</span>
+          <span style={{textAlign:"center", fontWeight:"500"}}> Edit in Form</span>
           </div>
           
       }

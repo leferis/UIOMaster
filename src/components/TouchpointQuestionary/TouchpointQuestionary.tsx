@@ -108,7 +108,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                   >
                     {props.CJMLImageList.Images[1].Images.map((y: CJMLImage) => {
                       if(y.Default){
-                      return (<MenuItem value={y.Location}> <ListItemIcon><img style={{width:"20px", height:"20px"}} src={y.Location}/><ListItemText primary={y.Name} /></ListItemIcon> </MenuItem>)
+                      return (<MenuItem value={y.Location}> <ListItemIcon><img style={{width:"20px", height:"20px",paddingRight:"8px"}} src={y.Location}/><ListItemText primary={y.Name} style={{color:"black"}}/></ListItemIcon> </MenuItem>)
                       }
                     })}
 
@@ -190,18 +190,20 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
           </div>)
 
       })}
-          <h5 style={{position:"absolute", left:"60px"}}>Communication points' representations can be changed to alternatives in settings</h5>
-    <br></br>
-    <br></br>
+         
+
     <br></br>
      <Button style={{position:"absolute",left:"50px"}} variant="outlined" onClick={() => {
-            props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "Touchpoint", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: undefined, receiverText: "" }])
+            props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: undefined, receiverText: "" }])
           }}>Add new Action</Button>
           <Button style={{position:"absolute",left:"220px"}} variant="outlined" onClick={() => {
-            props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "Touchpoint", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: -1, receiverText: "" }])
-          }} >Add new Touchpoint</Button>
+            props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: -1, receiverText: "" }])
+          }} >Add new Communication point</Button>
+          <br></br>
+          <h5 style={{position:"absolute", left:"60px"}}>Communication points' channels can be changed to alternatives in settings</h5>
           <br></br>
           <br></br>
+    <br></br>
     </div>
 
   );
