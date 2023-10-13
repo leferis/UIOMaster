@@ -115,98 +115,6 @@ function App() {
           <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML Analyzer</h2>
 
         </div>
-        {TaskId > 0 && <Rnd
-          initial={{
-            x: window.innerWidth / 2 - 200,
-            y: window.innerHeight / 2 - 80,
-            width: 400,
-            height: 160,
-          }}
-          style={{ zIndex: "9999", background: "	#BEBEBE", borderColor: "black", borderStyle: "black", boxShadow: " 5px 5px #5d5d5d" }}
-          minWidth={700}
-          minHeight={600}
-
-          maxWidth={1200}
-          maxHeight={600}
-          bounds={'parent'}
-        >
-          <div style={{ background: "	#BEBEBE", maxHeight: "600px", paddingLeft: "10px" }}>
-            {TaskId == 1 && <div style={{ textAlign: "left" }}>
-              <h2>Welcome to the Study</h2>
-              <p>This test comprises three tasks:</p>
-              <ol>
-                <li>
-                  <h4>Task 1: Create a journey using the canvas and add three touchpoints.</h4>
-                </li>
-                <li>
-                  <h4>Task 2: Introduce an actor and incorporate three additional touchpoints, this time using a form.</h4>
-                </li>
-                <li>
-                  <h4>Task 3: Incorporate two more touchpoints, this time as deviations, and change the status of one touchpoint to "failing."</h4>
-                </li>
-              </ol>
-            </div>}
-            {TaskId == 2 && <div style={{ textAlign: "left" }}>
-              <h2>Task 1 context</h2>
-              <h4>The journey will involve two primary actors: 'Customer' and 'Mobile Provider.</h4>
-              <img src="Actors.png" ></img>
-              <h4>The customer notices that he has run out of mobile data. To inquire about the cost of additional data, he calls his mobile provider.</h4>
-              <h4>After the company answers the call, they provide prices for additional data.</h4>
-              <h4>The customer decides not to choose a plan and considers other options.</h4>
-              <h4>You need to recreate the first three touchpoints from the story using the canvas.</h4>
-              <h3>Click "Next" to view an image of what you need to recreate.</h3>
-            </div>}
-            {TaskId == 3 && <GlassMagnifier style={{ maxHeight: "100%", maxWidth: "100%", paddingTop: "5%" }}
-              imageSrc="Task 1.png"
-              imageAlt="Example"
-            />
-            }
-            {TaskId == 4 &&
-              <div style={{ textAlign: "left" }}>
-                <h2>Task 2 Context</h2>
-                <h4>After considering his options, the customer decides to visit another provider. He goes to the physical store of "Mobile Provider 2" and talks with the service desk to inquire about their pricing.</h4>
-                <img src="actors_task2.png"></img>
-                <h4>After hearing the competing service provider's pricing, the customer decides that the current provider offers better prices.</h4>
-                <h4>So, he calls "Mobile Provider" again to accept their offer.</h4>
-                <h4>Following the call, "Mobile Provider" sends an email to the customer with new contract details. The customer reviews the email for any mistakes.</h4>
-                <h4>Now, you need to add three additional touchpoints and introduce a new actor, but this time you have to use a form.</h4>
-                <h3>Click "Next" to view an image of what you need to recreate.</h3>
-
-              </div>
-
-            }
-            {TaskId == 5 && <GlassMagnifier style={{ maxHeight: "100%", maxWidth: "100%", paddingTop: "5%" }}
-              imageSrc="Task 2.png"
-              imageAlt="Example"
-            />}
-            {TaskId == 6 &&
-              <div style={{ textAlign: "left" }}>
-                <h2>Task 3 Context</h2>
-                <h4>As it turns out, there was a mistake in one of the touchpoints, causing the offer to be considered failing.</h4>
-                <h4>The mistake was quickly identified by "Mobile Provider," who promptly called the customer.</h4>
-                <h4>During the call, "Mobile Provider" apologized for the error, and the customer requested that they send the correct confirmation.</h4>
-                <h4>After concluding the call, "Mobile Provider" sent an email with the correct details, which the user checked and confirmed as accurate.</h4>
-                <h4>Modify current journey. Add two new touchpoints and change touchpoint status.
-                </h4>
-                <h3>Click next to see what you need to recreate.</h3>
-              </div>
-
-            }
-            {TaskId == 7 && <GlassMagnifier style={{ maxHeight: "100%", maxWidth: "100%", paddingTop: "5%" }}
-              imageSrc="Task 3.png"
-              imageAlt="Example"
-            />}
-            {TaskId == 8 && <h1>Thank you for completing the tasks and participating!</h1>}
-            {TaskId > 1 && <Button style={{ position: "absolute", left: 0, bottom: 0, display: 'flex', justifyContent: "center", right: 0, padding: "10px", maxWidth: "50%" }} variant="contained" onClick={() => setTaskID(TaskId - 1)}>Previous</Button>}
-            {TaskId < 8 && <Button style={{ position: "absolute", left: "50%", bottom: 0, display: 'flex', justifyContent: "center", right: 0, padding: "10px", maxWidth: "50%" }} variant="contained" onClick={() => setTaskID(TaskId + 1)}>{TaskId == 1 ? "Start study" : "Next"}</Button>}
-          </div>
-        </Rnd>}
-        {TaskId == 8 && <Confetti
-          width={window.innerWidth}
-          height={window.innerHeight}
-          numberOfPieces={500}
-
-        />}
         <ToastContainer />
         <Ribbon SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} circles={circles}
@@ -1341,6 +1249,5 @@ function App() {
 
 
 }
-
 
 export default App;
