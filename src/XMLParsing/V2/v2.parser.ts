@@ -24,7 +24,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         timestamp = getID(touchpoint.getElementsByTagName('timestamps')[0], 'timeConsumed');
         return new CJMLCircle(id, x, 0, false, id[0] == 'D' ? true : false, receiver.value, init.value, channel, receiverLabel, initLabel, swimlaneXInitial, 0, 0, timestamp, compliance);
     }
-    function getAction(action: Element, x: number) {
+    function getAction(action: Element, x: number, actors:Actors[]) {
         var id, init, label, timestamp;
         id = getID(action, 'touchpointID');
         init = getActorsattributeName(action.getElementsByTagName('initiator')[0].getElementsByTagName('refersTo')[0]);
@@ -79,7 +79,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         nodeTemp.initiator = actors.find(x => {
             return x.id == node.initiator
         });
-        nodeTemp.y = nodeTemp.initiator.y + nodeTemp.initiator.height / 2 + 20;
+        nodeTemp.y = nodeTemp.initiator.y +  20;
         return nodeTemp;
     }
 
@@ -92,7 +92,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         let firstDevation = false;
         for (var i = 0; i < journey.length; i++) {
             if (journey[i].tagName == 'actualAction') {
-                let action = getAction(journey[i], x - 180);
+                let action = getAction(journey[i], x - 180, actors);
                 swimlaneXInitial += 225;
                 action = setActionMetadata(actors, action);
                 action.imageName = GetImage(action.imageName, "Other");
@@ -163,7 +163,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         let previousInteraction = null;
         for (var i = 0; i < journey.length; i++) {
             if (journey[i].tagName == 'plannedAction') {
-                let action = getAction(journey[i], x);
+                let action = getAction(journey[i], x, actors);
                 swimlaneXInitial += 250;
                 action = setActionMetadata(actors, action);
                 action.imageName = GetImage(action.imageName, "Other");
