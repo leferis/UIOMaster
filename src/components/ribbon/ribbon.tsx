@@ -9,6 +9,7 @@ import RibbonRibbonButton from './ribbonButton/ribbon/ribbonButton';
 import RibbonDropDownButton from './dropDownButton/ribbon/dropDownButton';
 import ChangeBar from './ChangeBar/ribbon/ChangeBar';
 import StatusBar from '../statusBar/statusBar';
+import  { save } from '../../saving/localMemory';
 
 interface RibbonProps {
   SwimlineMode: any,
@@ -34,6 +35,7 @@ interface RibbonProps {
   currentJourney: any;
   setCurrentObject: any;
   openHome: any;
+  setSavesList:any;
 }
 
 
@@ -82,6 +84,33 @@ function Ribbon(props: RibbonProps) {
      {
         !props.openHome &&  <div style={{float:'left',borderLeft:"1px solid black", height:"57px", marginLeft:"5px", marginTop:"10px"}}></div>
       }
+        <div className={false ? 'BarElementSelected' : 'BarElement'} style={{userSelect:"none",verticalAlign:"middle", cursor:"pointer", maxWidth:"100px",textAlign:"center",marginLeft:"20px", float: "left", paddingBottom: "5px", paddingTop: "10px", paddingLeft:"10px", height:"57px", background:onHower?"#e6e6e6":"#f5f5f5", borderRadius:"10px" }} onMouseEnter={()=>{
+          setHower(true);
+        }} 
+        onMouseLeave={()=> {
+          setHower(false);
+        }}
+        onClick={() => {
+          props.updateCurrentJourney();
+
+          save(props.Journeys)
+        }}>
+          <span style={{textAlign:"center", fontWeight:"500"}}> Save</span>
+          
+          </div>
+
+          <div className={false ? 'BarElementSelected' : 'BarElement'} style={{userSelect:"none",verticalAlign:"middle", cursor:"pointer", maxWidth:"100px",textAlign:"center",marginLeft:"20px", float: "left", paddingBottom: "5px", paddingTop: "10px", paddingLeft:"10px", height:"57px", background:onHower?"#e6e6e6":"#f5f5f5", borderRadius:"10px" }} onMouseEnter={()=>{
+          setHower(true);
+        }} 
+        onMouseLeave={()=> {
+          setHower(false);
+        }}
+        onClick={() => {
+         props.setSavesList(true);
+        }}>
+          <span style={{textAlign:"center", fontWeight:"500"}}> Load</span>
+          
+          </div>
     </div>
 
   </div>)

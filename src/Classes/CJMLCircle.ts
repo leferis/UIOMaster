@@ -23,6 +23,8 @@ export class CJMLCircle implements CJMLConnectionUnit {
     timestamp:any;
     isEditing:any;
     isEditingReceiver:any;
+    comment:string;
+    rating:any;
     constructor(id: string, x: number, y: number, Capacity: boolean, devation:boolean, receiver:any, initiator:any, img:any, receiverText:string, initiatorText:string, initialSwimlaneX:number, initialSwimlaneY:number, swimlaneReceiverY:number, timestamp:any, Status:any) {
         this.x = x;
         this.y = y;
@@ -47,6 +49,8 @@ export class CJMLCircle implements CJMLConnectionUnit {
         this.isEditing = false;
         this.imageNameReceiver = this.imageName;
         this.isEditingReceiver = false;
+        this.comment = ""
+        this.rating = 0;
     }
     receiver:any;
     receiverText:any;

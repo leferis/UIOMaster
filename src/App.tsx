@@ -47,6 +47,7 @@ import {
 } from "@igorgraziano/react-image-magnifier";
 import Confetti from 'react-confetti'
 import ColorCoding from './components/colorCoding/colorCoding';
+import SaveList from './components/SaveList/SaveList';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -79,6 +80,7 @@ function App() {
   const [ImageChange, setImageChange] = useState<ImageChange | undefined>(undefined);
   const [openStatistics, setOpenStatistics] = useState(false);
   const [TaskId, setTaskID] = useState(0);
+  const [showSaveList, setSavesList] = useState(0);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -121,7 +123,7 @@ function App() {
           setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
           actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage} updateCurrentJourney={updateCurrentJourney}
           showModal={setShowModal} images={CJMLImageList} currentObject={currentObject} currentJourney={currentJourney}
-          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome}
+          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome} setSavesList={setSavesList}
         />
 
         <Stage width={window.innerWidth} height={(window.innerHeight - 175)}
@@ -242,6 +244,7 @@ function App() {
           isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}
           arrowsId={initialArrowId} setInitialArrowID={setNewArrowId}
         />}
+        
         {showIntroduction && <IntroductionWindow showIntro={showIntroduction} closeIntro={setshowIntroduction} showSelection={setshowAddJourney} />}
         {showAddJourney && <JourneySelection showJourney={showAddJourney} closeJourney={setshowAddJourney} addJourney={addJourney} JourneyList={Journey} showModal={setShowModal} />}
         {showSettings && <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
@@ -251,6 +254,7 @@ function App() {
         ></Settings>}
 
         {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} handleClose={setOpenStatistics} show={openStatistics} />}
+        {showSaveList && <SaveList showSaveList={showSaveList} closeSaveList={setSavesList} setJourneys={setJouney} switchJourneys={changeJourneyCurrent}></SaveList>}
       </div>
       <div className='JourneyBar'>
         <JourneyBar ChangeOpenHome={ChangeOpenHome} Journey={Journey} changeJourney={changeJourney} currentJourney={currentJourney} journeyChange={journeyChange}
