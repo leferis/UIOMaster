@@ -47,6 +47,8 @@ import {
 } from "@igorgraziano/react-image-magnifier";
 import Confetti from 'react-confetti'
 import ColorCoding from './components/colorCoding/colorCoding';
+import SaveList from './components/SaveList/SaveList';
+import Comments from './components/Comments/Comments';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -79,6 +81,7 @@ function App() {
   const [ImageChange, setImageChange] = useState<ImageChange | undefined>(undefined);
   const [openStatistics, setOpenStatistics] = useState(false);
   const [TaskId, setTaskID] = useState(0);
+  const [showSaveList, setSavesList] = useState(0);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -121,7 +124,7 @@ function App() {
           setCircles={setCircles} setSwimlineMode={setSwimlineMode} showQuestionary={setshowQuestionary}
           actors={ActorsCJML} layerHeight={layerEl} Journeys={Journey} getImages={GetImage} updateCurrentJourney={updateCurrentJourney}
           showModal={setShowModal} images={CJMLImageList} currentObject={currentObject} currentJourney={currentJourney}
-          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome}
+          setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome} setSavesList={setSavesList}
         />
 
         <Stage width={window.innerWidth} height={(window.innerHeight - 175)}
@@ -212,7 +215,7 @@ function App() {
               checkIfCloseToActorsBorder={makeBiggerActors}
             ></ActionPoints>
 
-
+            {!SwimlineMode && <Comments  actions={actions} actors={ActorsCJML} setActions={setActions} setTouchpoints={setCircles} touchpoints={circles}/>}
             {Journey.length > 0 && ImageChange != undefined && !openHome && <KonvaImage x={ImageChange?.x - 15} y={ImageChange?.y - 15} height={30} width={30} image={getImageObject(ImageChange.Image)}></KonvaImage>}
             {ActorsCJML.length > 0 && SwimlineMode && <ColorCoding actors={ActorsCJML} />}
           </Layer>}
@@ -235,6 +238,7 @@ function App() {
             addNewActorDragAndDrop={addNewActorDragAndDrop} setOpenStatistics={setOpenStatistics}
           />
           {SwimlineMode && <Legend actors={ActorsCJML} setActors={setActors} />}
+         
         </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
         {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary}
@@ -249,7 +253,7 @@ function App() {
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings={setShowSettings}
           currentJurney={currentJourney} setJourneys={setJouney}
         ></Settings>}
-
+        {showSaveList && <SaveList showSaveList={showSaveList} closeSaveList={setSavesList} setJourneys={setJouney} switchJourneys={changeJourneyCurrent} setNewID={setNewID}></SaveList>}
         {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} handleClose={setOpenStatistics} show={openStatistics} />}
       </div>
       <div className='JourneyBar'>

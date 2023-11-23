@@ -47,7 +47,11 @@ export class CJMLCircle implements CJMLConnectionUnit {
         this.isEditing = false;
         this.imageNameReceiver = this.imageName;
         this.isEditingReceiver = false;
+        this.Comment = null;
+        this.CommentEdit = false;
     }
+    Comment:any;
+    CommentEdit:any;
     receiver:any;
     receiverText:any;
     id: string ;
