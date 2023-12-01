@@ -49,7 +49,6 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
   const images = props.Images.Images[1].Images.filter((x: any) => {
     return x.Default;
   })
-  console.log(props.isPlanned)
   return (
     <div>
 

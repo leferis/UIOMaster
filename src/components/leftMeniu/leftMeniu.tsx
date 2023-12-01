@@ -40,7 +40,6 @@ interface LeftMeniuProps {
         GetImageFullName: any;
         setCurrentObject: any;
         setActors: any;
-        updateCirlces: any;
         currentJourney: any;
         addNewActor: any;
         setActions: any;

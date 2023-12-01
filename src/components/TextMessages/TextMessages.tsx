@@ -1,23 +1,23 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { Html } from 'react-konva-utils';
-import { Text  } from "react-konva";
+import { Text } from "react-konva";
 import styles from './TextMessages.module.css';
 
 interface TextMessagesProps {
-  x:number;
-  y:number;
-  width:number;
-  height:number;
-  ChangeFunction:any;
-  value:any;
-  fontSize:any;
-  modifyObject:any;
-  isEditing:any;
-  changeEditable:any;
-  ChangeBack:any;
-  default:any;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  ChangeFunction: any;
+  value: any;
+  fontSize: any;
+  modifyObject: any;
+  isEditing: any;
+  changeEditable: any;
+  ChangeBack: any;
+  default: any;
 }
-function getStyle(width:number, height:number, fontSize:number) {
+function getStyle(width: number, height: number, fontSize: number) {
   const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
   const baseStyle = {
     width: `${width}px`,
@@ -39,31 +39,33 @@ function getStyle(width:number, height:number, fontSize:number) {
     margintop: "-4px"
   };
 }
-const changeMouse= (e:any, style:any) =>{
+
+const changeMouse = (e: any, style: any) => {
   const container = e.target.getStage().container();
   container.style.cursor = style;
 }
 
 
-function TextMessages(props: TextMessagesProps){
+function TextMessages(props: TextMessagesProps) {
 
-  const style:any = getStyle(props.width,props.height+30, props.fontSize);
-  if(props.isEditing){
-  return(
-    <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1} } }>
-    <textarea 
-          value={props.value == props.default?"":props.value }
+  const style: any = getStyle(props.width, props.height + 30, props.fontSize);
+  if (props.isEditing) {
+    return (
+      <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1 } }}>
+        <textarea
+          value={props.value == props.default ? "" : props.value}
           autoFocus
-          onChange={(e)=>props.ChangeFunction(e.target.value,props.modifyObject)}
+          onChange={(e) => props.ChangeFunction(e.target.value, props.modifyObject)}
           style={style}
-          onBlur={()=>{props.ChangeBack(props.modifyObject)}}
+          onBlur={() => { props.ChangeBack(props.modifyObject) }}
         />
-    </Html>
-  )}
-  else{
+      </Html>
+    )
+  }
+  else {
     return (<>
-    <Text
-   
+      <Text
+
         x={props.x}
         y={props.y}
         text={props.value}
@@ -73,11 +75,11 @@ function TextMessages(props: TextMessagesProps){
         perfectDrawEnabled={false}
         width={props.width}
         height={props.height * 2}
-        onClick={(e)=>{
+        onClick={(e) => {
           props.changeEditable(props.modifyObject);
         }}
-        onMouseEnter={(e)=>changeMouse(e,"pointer")}
-        onMouseLeave={(e)=>changeMouse(e,"default")}
+        onMouseEnter={(e) => changeMouse(e, "pointer")}
+        onMouseLeave={(e) => changeMouse(e, "default")}
       /></>)
   }
 }

@@ -23,8 +23,6 @@ function ActorLegend(props: ActorLegendProps) {
   function handleOnExit(e: any) {
     e.currentTarget.style.backgroundColor = "white";
   }
-  // mark them somehow as in color
-  // Allign them in center 
 
   function makeList() {
     resultFinal = [];
@@ -38,8 +36,7 @@ function ActorLegend(props: ActorLegendProps) {
         }}>
           <div style={{ textAlign: "left", margin: "auto", paddingLeft: "10px", height: "25px", width: "130px", overflow: "hidden", display: "inline-block" }}
           >
-            <span onClick={(message) => {
-              console.log("Removed");
+            <span onClick={() => {
               props.setCurrentObjectID(x);
               props.actorRemove();
             }}> X </span>
@@ -56,7 +53,6 @@ function ActorLegend(props: ActorLegendProps) {
       }}>
         <div style={{ textAlign: "left", margin: "auto", paddingLeft: "10px", height: "25px", width: "130px", overflow: "hidden", display: "inline-block" }}
         >
-
           <a className={styles.unselectable} onClick={(e) => {
             props.addActor(props.actors[props.actors.length - 1]);
           }}>Add User</a>

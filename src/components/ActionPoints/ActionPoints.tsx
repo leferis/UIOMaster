@@ -38,9 +38,9 @@ interface ActionPointsProps {
   swimlaneMode: any;
   updateCircles: any;
   circles: any
-  checkIfCloseToActorsBorder:any;
-  remove:any;
-  findFurthestPoint:any;
+  checkIfCloseToActorsBorder: any;
+  remove: any;
+  findFurthestPoint: any;
 }
 
 function ActionPoints(props: ActionPointsProps) {
@@ -49,14 +49,11 @@ function ActionPoints(props: ActionPointsProps) {
       {props.actions.map((x: CJMLAction, index: number) => {
         return (
           <div>
-                  {x.id == props.currentObject.id && <ElementChangeBar x={x.swimlaneX + 30} y={x.y - 90}>
-
-        <Html  groupProps= {{x:x.swimlaneX + 50,y:x.y - 78}}>
-        <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />}/>
-              
-        </Html>
-        {/* <RibbonChangeBarTypeChange  x={x.x + 310} y={x.y-88} images={props.Images.Images[0]} text={"Type"} currentObject={props.currentObject} changeImage={()=>{console.log("Test")}} ></RibbonChangeBarTypeChange> */}
-      </ElementChangeBar>}
+            {x.id == props.currentObject.id && <ElementChangeBar x={x.swimlaneX + 30} y={x.y - 90}>
+              <Html groupProps={{ x: x.swimlaneX + 50, y: x.y - 78 }}>
+                <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />} />
+              </Html>
+            </ElementChangeBar>}
             {props.swimlaneMode && props.currentObject.id == x.id && <div>
               <Rect x={x.x - 15}
                 y={x.y - 15}
@@ -126,10 +123,10 @@ function ActionPoints(props: ActionPointsProps) {
               strokeWidth={3}
 
             />
-                        <TextMessages x={ props.swimlaneMode ? x.x +3 : x.swimlaneX + 10} y={x.y + 10} 
-            height={props.swimlaneMode ? 20 : 40} 
-            width={props.swimlaneMode ? 80 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={14} isEditing={x.isEditing} changeEditable={(x: any) => {
-            }}
+            <TextMessages x={props.swimlaneMode ? x.x + 3 : x.swimlaneX + 10} y={x.y + 10}
+              height={props.swimlaneMode ? 20 : 40}
+              width={props.swimlaneMode ? 80 : 160} ChangeFunction={ChangeObject} modifyObject={x} value={x.text} fontSize={14} isEditing={x.isEditing} changeEditable={(x: any) => {
+              }}
               ChangeBack={(x: any) => {
                 const circles = props.actions.map((action: CJMLAction) => {
                   if (action.id == x.id) {
@@ -141,16 +138,16 @@ function ActionPoints(props: ActionPointsProps) {
               }}
               default={"Enter text"}
             ></TextMessages>
-            {!x.isEditing && <Rect       x={props.swimlaneMode ? x.x : x.swimlaneX}
+            {!x.isEditing && <Rect x={props.swimlaneMode ? x.x : x.swimlaneX}
               y={x.y}
               height={props.swimlaneMode ? 60 : 80}
               width={props.swimlaneMode ? 90 : 180}
               id={x.id.toString()}
-              draggable    
+              draggable
               onClick={(e) => {
                 checkClickFunction(x, e);
               }}
-              onDblClick={()=>{
+              onDblClick={() => {
                 const circles = props.actions.map((action: CJMLAction) => {
                   props.setCurrentObjectID(-1);
                   if (action.id == x.id) {
@@ -167,11 +164,11 @@ function ActionPoints(props: ActionPointsProps) {
               }}
               onDragEnd={
                 (e) => {
-                  onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true,props.arrowId, props.setArrowId, props.setArrows);
+                  onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true, props.arrowId, props.setArrowId, props.setArrows);
                   props.findFurthestPoint()
                 }
               }
-/>
+            />
             }
 
           </div>
@@ -228,8 +225,6 @@ function ActionPoints(props: ActionPointsProps) {
     checkClickFunction(clickedObject, e);
   }
 
-
 }
-
 
 export default ActionPoints;

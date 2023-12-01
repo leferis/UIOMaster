@@ -1,21 +1,14 @@
 import React, { useRef, useState } from 'react';
 import './App.css';
-import { Stage, Layer, Star, Text, Circle, Image as KonvaImage, Arrow, Rect } from 'react-konva';
-import LeftMeniu from './components/leftMeniu/leftMeniu';
 import { CJMLCircle } from './Classes/CJMLCircle';
-import TouchPoint from './components/TouchPoint/TouchPoint';
 import { CJMLArrow } from './Classes/CJMLArrow';
 import { Actors } from './Classes/Actors';
-import ActorPoint from './components/ActorPoint/ActorPoint';
 import Settings from './components/settings/settings';
 import CJMLImages from './assets/CJMLImages.json'
 import { TouchPointStatus } from './enumerator/TouchPointStatus';
 import { CJMLAction } from './Classes/CJMLAction';
-import ActionPoints from './components/ActionPoints/ActionPoints';
 import { Connectable } from './Interface/Connectable';
-import ArrowComponent from './components/ArrowComponent/ArrowComponent';
 import { ExternalEnumerator } from './enumerator/ExternalEnumerator';
-import Deviation from './components/deviation/deviation';
 import ModaWindow from './components/ModaWindow/ModaWindow';
 import { Journey } from './Classes/Journey';
 import Questionary from './components/Questionary/Questionary';
@@ -26,29 +19,15 @@ import { randomColor } from 'accessible-colors';
 import IntroductionWindow from './components/IntroductionWindow/IntroductionWindow';
 import JourneySelection from './components/JourneySelection/JourneySelection';
 import Statistics from './components/Statistics/Statistics';
-import Home from './components/Home/Home';
 import JourneyBar from './components/JourneyBar/JourneyBar';
 import { onDragEnd, onDragMove } from './Functions/Movement';
 import { setCirlceAtEnd } from './Functions/creation';
 import { onActionDragEnd, onActionDragMove } from './Functions/actionMovement';
-import SwimlaneInitialValues from './components/swimlaneInitialValues/swimlaneInitialValues';
-import _, { values } from 'lodash';
+import _ from 'lodash';
 import Ribbon from './components/ribbon/ribbon';
-import StatusBar from './components/statusBar/statusBar';
 import { ImageChange } from './Classes/ImageChange';
-import Legend from './components/Legend/Legend';
-import { Rnd } from "react-rnd";
-import zIndex from '@mui/material/styles/zIndex';
-import { Button } from '@mui/material';
-import {
-
-  GlassMagnifier
-
-} from "@igorgraziano/react-image-magnifier";
-import Confetti from 'react-confetti'
-import ColorCoding from './components/colorCoding/colorCoding';
 import SaveList from './components/SaveList/SaveList';
-import Comments from './components/Comments/Comments';
+import Canvas from './components/canvas/canvas';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -127,119 +106,15 @@ function App() {
           setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome} setSavesList={setSavesList}
         />
 
-        <Stage width={window.innerWidth} height={(window.innerHeight - 175)}
-          onMouseUp={(e) => {
-            if (ClickFunction != "")
-              onClickDoes(e);
-            else if (mouseDownFunction != "") {
+      <Canvas ActorsCJML={ActorsCJML} initialArrowId={initialArrowId} circles={circles} setNewArrowId={setNewArrowId} setArrows={setArrows} currentObject={currentObject} setCurrentObjectReference={setCurrentObjectReference} Arrows={Arrows} dragBoxLocation={dragBoxLocation} resetTouchpoints={resetTouchpoints} currentJourney={currentJourney}
+       getImageObject={getImageObject} CJMLImageList={CJMLImageList} remove={remove} setActors={setActors} setPosY={setPosY} initialActorPosY={initialActorPosY} addNewActor={addNewActor} setActions={setActions} 
+       setCircles={setCircles} setDrawingArrowMode={setDrawingArrowMode} drawingArrow={drawingArrow} setClickFunction={setClickFunction} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow} addNewArrow={addNewArrow} 
+       finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder} makeBiggerActors={makeBiggerActors} findFurthestPoint={findFurthestPoint} ChangeOpenHome={ChangeOpenHome} changeJourney={changeJourney} 
+       GetImageFullName={GetImageFullName} setImage={setImage} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setMouseDownFunction={setMouseDownFunction} setDevationMode={setDevationMode} 
+       setShowModal={setShowModal} setshowQuestionary={setshowQuestionary} GetImage={GetImage} addNewActorinTheEnd={addNewActorinTheEnd} setShowSettings={setShowSettings} setImageChange={setImageChange} addNewActorDragAndDrop={addNewActorDragAndDrop} 
+       setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID} 
+       onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange}/>
 
-              onReleaseDoes(e);
-            }
-            else {
-              setCurrentObjectID(-1)
-            }
-          }}
-          onTouchEnd={(e) => {
-            if (ClickFunction != "")
-              onClickDoes(e);
-            else if (mouseDownFunction != "") {
-
-              onReleaseDoes(e);
-            }
-            else {
-              setCurrentObjectID(-1)
-            }
-          }}
-          onDragEnd={(e) => {
-            if (ClickFunction != "")
-              onClickDoes(e);
-            else if (mouseDownFunction != "") {
-
-              onReleaseDoes(e);
-            }
-            else {
-              setCurrentObjectID(-1)
-            }
-          }}
-          onMouseMove={(e) => {
-            onMouseMovement(e);
-          }}
-          onTouchMove={(e) => {
-            onMouseMovement(e);
-          }}
-          onDragMove={(e) => {
-            onMouseMovement(e);
-          }}
-        >
-          {!openHome && <Layer id='test' ref={layerEl} draggable x={100} y={-100}
-            onDragEnd={(e) => {
-              setLocation([layerEl.current.attrs.x != undefined ? -layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
-            }}
-          >
-            {SwimlineMode && <SwimlaneInitialValues actions={actions} actors={ActorsCJML} arrowID={initialArrowId} circles={circles} setArrowID={setNewArrowId} setArrows={setArrows} />}
-            <ArrowComponent currentObject={currentObject} setCurrentObject={setCurrentObjectReference} Arrows={Arrows} setArrows={setArrows} SwimlineMode={SwimlineMode} />
-            {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
-            {Journey.length > 0 && Journey[currentJourney].isPlanned != true && SwimlineMode && <Deviation Actors={ActorsCJML} />}
-            {Journey.length > 0 && (!SwimlineMode || !Journey[currentJourney].isPlanned) &&
-              <ActorPoint
-                currentObject={currentObject} getImageObject={getImageObject} Images={CJMLImageList} remove={remove}
-                setActors={setActors} actors={ActorsCJML} setPosY={setPosY} posY={initialActorPosY} setCurrentObjectID={setCurrentObjectReference} addNewActor={addNewActor} SwimlineMode={SwimlineMode}
-                actions={actions} circles={circles} setActions={setActions} updateCircles={setCircles}
-              />}
-
-            {Journey.length > 0 && <TouchPoint remove={remove} Circle={circles} Arrows={Arrows} setArrows={setArrows} updateCircles={setCircles} arrowId={initialArrowId} setArrowId={setNewArrowId} ClickFunction={ClickFunction} setDrawingArrowMode={setDrawingArrowMode}
-              drawingArrow={drawingArrow} currentObject={currentObject} setCurrentObjectID={setCurrentObjectReference} setClickFunction={setClickFunction} Images={CJMLImageList} actions={actions}
-              setActions={setActions} actors={ActorsCJML} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow}
-              addNewArrow={addNewArrow} finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder}
-              SwimlineMode={SwimlineMode} resetTouchpoints={resetTouchpoints} devationMode={Journey[currentJourney].isPlanned} getImageObject={getImageObject}
-              isPlanned={Journey[currentJourney].isPlanned}
-              makeBiggerActors={makeBiggerActors}
-              findFurthestPoint={findFurthestPoint}
-            ></TouchPoint>}
-            <ActionPoints swimlaneMode={SwimlineMode} setActions={setActions}
-              remove={remove}
-              actions={actions}
-              setClickFunction={setClickFunction}
-              ClickFunction={ClickFunction}
-              drawingArrow={drawingArrow}
-              setDrawingArrowMode={setDrawingArrowMode}
-              setCurrentObjectID={setCurrentObjectReference}
-              currentObject={currentObject}
-              arrowId={initialArrowId}
-              Arrows={Arrows} setArrows={setArrows}
-              setArrowId={setNewArrowId} actors={ActorsCJML} setDrawingObject={setDrawingObject}
-              addNewArrow={addNewArrow} finishArrow={finishArrow} changeArrow={changeArrow}
-              updateCircles={setCircles}
-              circles={circles}
-              findFurthestPoint={findFurthestPoint}
-              checkIfCloseToActorsBorder={makeBiggerActors}
-            ></ActionPoints>
-
-            {!SwimlineMode && <Comments  actions={actions} actors={ActorsCJML} setActions={setActions} setTouchpoints={setCircles} touchpoints={circles}/>}
-            {Journey.length > 0 && ImageChange != undefined && !openHome && <KonvaImage x={ImageChange?.x - 15} y={ImageChange?.y - 15} height={30} width={30} image={getImageObject(ImageChange.Image)}></KonvaImage>}
-            {ActorsCJML.length > 0 && SwimlineMode && <ColorCoding actors={ActorsCJML} />}
-          </Layer>}
-          {openHome &&
-            <Layer ref={layerEl} draggable onDragEnd={(e) => {
-              setLocation([layerEl.current.attrs.x != undefined ? - layerEl.current.attrs.x : 0, layerEl.current.attrs.y != undefined ? -layerEl.current.attrs.y : 0]);
-            }}>
-              {Journey.length > 0 && <Rect x={dragBoxLocation[0]} y={dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { resetTouchpoints(); }}></Rect>}
-              <Home CloseHomeWindow={ChangeOpenHome} setJourney={changeJourney} journeys={Journey} getImageObject={getImageObject}></Home>
-            </Layer>
-          }
-
-          <LeftMeniu mainLayer={layerEl} setActors={setActors} setCurrentObject={setCurrentObjectID} GetImageFullName={GetImageFullName} Images={CJMLImageList} setImage={setImage} currentObject={currentObject}
-            updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setCircles={setCircles}
-            mouseDownFunction={mouseDownFunction} setMouseDownFunction={setMouseDownFunction} circles={circles} actions={actions} actors={ActorsCJML}
-            SwimlineMode={SwimlineMode} setClickFunction={setClickFunction} layerHeight={layerEl} enableDevationMode={setDevationMode}
-            showModal={setShowModal} showQuestionary={setshowQuestionary} Journeys={Journey} getImages={GetImage} getImageObject={getImageObject}
-            updateCirlces={updateTouchPointsForChange} currentJourney={currentJourney} addNewActor={addNewActorinTheEnd}
-            setActions={setActions} openModal={setShowModal} setShowSettings={setShowSettings} setImageChange={setImageChange}
-            addNewActorDragAndDrop={addNewActorDragAndDrop} setOpenStatistics={setOpenStatistics}
-          />
-          {SwimlineMode && <Legend actors={ActorsCJML} setActors={setActors} />}
-         
-        </Stage>
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
         {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary}
           showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles}
@@ -1235,22 +1110,6 @@ function App() {
     image.src = imgName;
     return image;
   }
-
-  function updateTouchPointsForChange(actor: any) {
-    const circleNew = circles.map(circle => {
-      if (circle.initiator.id == actor.id) {
-        circle.initiator = actor;
-        return circle;
-      }
-      else if (circle.receiver.id == actor.id) {
-        circle.receiver = actor;
-        return circle;
-      }
-      return circle;
-    })
-    setCircles(circleNew);
-  }
-
 
 }
 
