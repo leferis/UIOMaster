@@ -43,6 +43,7 @@ interface TouchPointNetworkProps {
   remove: any;
   findFurthestPoint: any;
   ChangeDevation: any;
+  setActors: any;
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps) {
@@ -140,13 +141,13 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         onDragMove={(e) => {
           onDragMove(e, props.Circle, props.touchPoint, props.updateCircles, props.changeArrow, props.index, props.elementCheckCloseToBorder, props.actions, props.setActions, props.actors, props.SwimlineMode,
             props.isPlanned, props.arrowId, props.setArrowId, props.setArrows, props.makeBiggerActors)
-            props.findFurthestPoint();
+          props.findFurthestPoint(props.Circle, props.actions, props.actors, props.setActors);
         }}
         onDragEnd={
 
           (e) => {
             onDragEnd(e, props.touchPoint, props.actors, props.Circle, props.SwimlineMode, props.updateCircles, props.changeArrow, props.actions, props.setActions, props.index, props.isPlanned, props.arrowId, props.setArrowId, props.setArrows)
-            props.findFurthestPoint();
+            props.findFurthestPoint(props.Circle, props.actions, props.actors, props.setActors);
           }
 
         }
@@ -255,7 +256,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
             }
             return circle;
           })
-          var actorIn: Actors | undefined = collisionSwim(e.target.attrs.y, props.touchPoint, props.actors); // fix colision
+          var actorIn: Actors | undefined = collisionSwim(e.target.attrs.y, props.touchPoint, props.actors); 
           if (actorIn != undefined) {
             const circles = props.Circle.map(circle => {
               if (circle.id == props.touchPoint.id) {
@@ -271,12 +272,12 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.updateCircles(circles);
 
           props.elementCheckCloseToBorder(e.target.getPosition().x);
-          props.findFurthestPoint()
+          props.findFurthestPoint(props.Circle, props.actions, props.actors, props.setActors)
         }}
         onDragEnd={
 
           (e) => {
-            var actorIn: Actors | undefined = collisionSwim(e.target.attrs.y, props.touchPoint, props.actors); // fix colision
+            var actorIn: Actors | undefined = collisionSwim(e.target.attrs.y, props.touchPoint, props.actors); 
 
 
             if (actorIn != undefined) {
@@ -284,7 +285,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
               const circles = props.Circle.map(circle => {
                 let tempActor, tempy;
                 let swap = true;
-                if((circle.swimlaneY > circle.swimlaneReceiverY -100 && circle.swimlaneY < circle.swimlaneReceiverY+ 100) ||  circle.swimlaneY == circle.swimlaneReceiverY ){
+                if ((circle.swimlaneY > circle.swimlaneReceiverY - 100 && circle.swimlaneY < circle.swimlaneReceiverY + 100) || circle.swimlaneY == circle.swimlaneReceiverY) {
                   swap = false;
                 }
                 if (circle.id == props.touchPoint.id) {
@@ -294,37 +295,37 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
                     tempy = circle.receiver.y + 20;
                     return { ...circle, receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200, initiatorColor: tempActor != undefined ? tempActor.color : "#fff" };
                   }
-                  if(!swap){
+                  if (!swap) {
                     tempActor = JSON.parse(JSON.stringify(circle.receiver));
                     tempy = circle.receiver.y + 20;
-                    return { ...circle, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200 , initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver:actorIn , swimlaneReceiverY:actorIn != undefined ? actorIn.y + 20 : 200 };
+                    return { ...circle, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
                   }
-                  else{
+                  else {
                     tempActor = JSON.parse(JSON.stringify(circle.initiator));
                     tempy = tempActor.y + 20;
-                  return { ...circle, initiator: tempActor, swimlaneY:tempActor != undefined ? tempy : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: actorIn, swimlaneReceiverY:  actorIn != undefined ? actorIn.y + 20 : 200};
+                    return { ...circle, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200 };
                   }
                 }
-               return circle
+                return circle
               })
 
               props.updateCircles(circles);
               props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
-              props.findFurthestPoint();
+              props.findFurthestPoint(props.Circle, props.actions, props.actors, props.setActors);
               moveElement(circles, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions, props.arrowId, props.setArrowId, props.setArrows);
             } else {
               moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions, props.arrowId, props.setArrowId, props.setArrows);
             }
 
-            props.findFurthestPoint();
+            props.findFurthestPoint(props.Circle, props.actions, props.actors, props.setActors);
           }
 
         }
         opacity={0}
 
       />}
-      {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.swimlaneX + 30} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 90}>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 88} images={{ Name: "Touchpoint", Images: images }} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+      {props.touchPoint.id == props.currentObject.id && <ElementChangeBar x={props.touchPoint.swimlaneX + 30} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneReceiverY) - 90}>
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 30} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneReceiverY) - 88} images={{ Name: "Touchpoint", Images: images }} text={"Initator's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
@@ -338,7 +339,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.setCurrentObject(copyOfCurrentObject);
 
         }} ></RibbonChangeBarImageChange>
-        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) -88} alternative={true} images={{ Name: "Touchpoint", Images: images }} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
+        <RibbonChangeBarImageChange x={props.touchPoint.swimlaneX + 170} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneReceiverY) - 88} alternative={true} images={{ Name: "Touchpoint", Images: images }} text={"Receiver's channel"} currentObject={props.currentObject} changeImage={(e: any) => {
           let copyOfCircles = _.cloneDeep(props.Circle);
           let copyOfCurrentObject;
           copyOfCircles = copyOfCircles.map(x => {
@@ -351,14 +352,14 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
           props.updateCircles(copyOfCircles);
           props.setCurrentObject(copyOfCurrentObject);
         }} ></RibbonChangeBarImageChange>
-        {!props.isPlanned && <RibbonChangeBarTypeChange x={props.touchPoint.swimlaneX + 420} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 88} TouchPoints={props.Circle} currenctObj={props.currentObject} updateCurentObj={props.setCurrentObject} updateTouhcPoints={props.updateCircles}></RibbonChangeBarTypeChange>}
-        {!props.isPlanned && <Html groupProps={{ x: (props.touchPoint.swimlaneX + 320), y:(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 80 }}>
+        {!props.isPlanned && <RibbonChangeBarTypeChange x={props.touchPoint.swimlaneX + 420} y={(props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneReceiverY) - 88} TouchPoints={props.Circle} currenctObj={props.currentObject} updateCurentObj={props.setCurrentObject} updateTouhcPoints={props.updateCircles}></RibbonChangeBarTypeChange>}
+        {!props.isPlanned && <Html groupProps={{ x: (props.touchPoint.swimlaneX + 320), y: (props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneReceiverY) - 80 }}>
           <FormGroup>
             <FormControlLabel control={<Checkbox onChange={() => (props.ChangeDevation(props.touchPoint))} defaultChecked={props.touchPoint.devation} />} label="Deviation" />
           </FormGroup>
         </Html>
         }
-        <Html groupProps={{ x: (props.isPlanned ? props.touchPoint.swimlaneX + 330 : props.touchPoint.swimlaneX + 580), y: (props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY?props.touchPoint.swimlaneY: props.touchPoint.swimlaneReceiverY) - 75 }}>
+        <Html groupProps={{ x: (props.isPlanned ? props.touchPoint.swimlaneX + 330 : props.touchPoint.swimlaneX + 580), y: (props.touchPoint.swimlaneY < props.touchPoint.swimlaneReceiverY ? props.touchPoint.swimlaneY : props.touchPoint.swimlaneReceiverY) - 75 }}>
           <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />} />
 
         </Html>

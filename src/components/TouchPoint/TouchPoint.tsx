@@ -51,6 +51,7 @@ interface TouchPointProps {
   makeBiggerActors:any;
   remove:any;
   findFurthestPoint:any;
+  setActors:any;
 }
 
 function TouchPoint(props: TouchPointProps) {
@@ -89,7 +90,7 @@ function TouchPoint(props: TouchPointProps) {
               elementCheckCloseToBorder={props.elementCheckCloseToBorder} elementsAreFarFromBorder={props.elementsAreFarFromBorder} getImage={getImage} getImageReceiver={getImageReceiver} index={index}
               resetTouchpoints={props.resetTouchpoints} setActions={props.setActions} setArrowId={props.setArrowId} setArrows={props.setArrows} touchPoint={x} updateCircles={props.updateCircles} isPlanned={props.isPlanned}
               makeBiggerActors = {props.makeBiggerActors} setCurrentObject={props.setCurrentObjectID} Images={props.Images} currentObject={props.currentObject}
-              findFurthestPoint={props.findFurthestPoint} ChangeDevation={changeDevation}
+              findFurthestPoint={props.findFurthestPoint} ChangeDevation={changeDevation} setActors={props.setActors}
               />
           )
         }

@@ -88,9 +88,11 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
     props.setCurrentObject(_.cloneDeep(touchpointData[indexTouchpoint]))
     props.updateCircles(touchpointData)
   }
+
   const images = props.Images.Images[1].Images.filter((x: any) => {
     return x.Default;
   })
+  
   return (
     <div>
       <Group >

@@ -136,6 +136,7 @@ function Questionary(props: QuestionaryProps) {
         touchPoints.push(elementCopy);
       }
     });
+    
     props.setActions(actions);
     props.setCircles(touchPoints);
     props.setArrows([]);

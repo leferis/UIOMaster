@@ -17,17 +17,14 @@ function ModaWindow(props: ModaWindow) {
   function upload(e: any) {
     Array.from(e.target.files).forEach((file: any) => {
 
-      // Define a new file reader
       let reader = new FileReader();
 
-      // Function to execute after loading the file
       reader.onload = () => {
         var journey = V2parse(reader.result, props.getImage);
         props.setJourneys(journey);
         props.updateCurrentJourney(journey);
       };
       
-      // Read the file as a text
       reader.readAsText(file);
       
       props.handleClose(false);

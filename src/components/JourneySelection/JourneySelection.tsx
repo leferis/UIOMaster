@@ -108,8 +108,7 @@ function JourneySelection(props: JourneySelectionProps) {
             <Grid item xs={4}></Grid>
             <Grid item xs={12}></Grid>
             <Grid item xs={12}></Grid>
-            {/* <Grid item xs={5} style={{paddingRight:"50px"}}><Button variant="contained" disabled >Open example journey</Button>
-            <FormHelperText style={{    paddingLeft: "20px"}}>Load an example journey that you can edit</FormHelperText></Grid> */}
+
             <Grid item xs={1}></Grid>
             {    props.JourneyList.length<1 && <>    
             
@@ -119,7 +118,6 @@ function JourneySelection(props: JourneySelectionProps) {
           </Grid>
 
         </>}
-      {/* Add logic to not give any selection if there is no Planned journey */}
       {showSelection && getSelectionWindow()}
     </section>
 

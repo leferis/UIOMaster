@@ -123,7 +123,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         stroke={'black'}
                                         strokeWidth={1}
                                         onMouseUp={() => {
-                                                props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)
+                                                props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors)
                                         }}
                                 />}
 
@@ -242,11 +242,11 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 {props.Images != undefined && <LeftMeniuSelector xpos={100} ypos={120} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); 
                                 props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
                                         onMouseUp={(img: any) => { props.addNewCircle(img); 
-                                        props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={true}/>}
+                                        props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={true}/>}
 
                                 {props.Images != undefined && showMoreOptions && <LeftMeniuSelector xpos={100} ypos={560} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); setEnableScroll(false) }}
-                                        onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={false}/>}
-                                <Group onMouseEnter={(e:any) => e.currentTarget.children[0].fill("#cad2de")} onMouseLeave={(e:any) => e.currentTarget.children[0].fill("")} onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction(); setEnableScroll(false) }} onMouseUp={() => setActionAtEnd(props.actions, props.setActions, props.actors)}>
+                                        onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={false}/>}
+                                <Group onMouseEnter={(e:any) => e.currentTarget.children[0].fill("#cad2de")} onMouseLeave={(e:any) => e.currentTarget.children[0].fill("")} onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction(); setEnableScroll(false) }} onMouseUp={() => setActionAtEnd(props.circles, props.actions, props.setActions, props.actors)}>
                                         <Rect
                                                 x={205}
                                                 y={107}
@@ -272,7 +272,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 { !props.SwimlineMode && 
                                 <div><Group onMouseEnter={(e:any) => e.currentTarget.children[0].fill("#cad2de")} onMouseLeave={(e:any) => e.currentTarget.children[0].fill("")}  onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
                                 props.addNewCircle(); setEnableScroll(false) }}
-                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)}>
+                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors)}>
                                                  <Rect
                                                 x={95}
                                                 y={88}
@@ -303,7 +303,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 </Group>
                                 <Group onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
                                 props.addNewCircle("", true, undefined); setEnableScroll(false) }}
-                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)} onMouseEnter={(e:any) => e.currentTarget.children[0].fill("#cad2de")} onMouseLeave={(e:any) => e.currentTarget.children[0].fill("")} >
+                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors)} onMouseEnter={(e:any) => e.currentTarget.children[0].fill("#cad2de")} onMouseLeave={(e:any) => e.currentTarget.children[0].fill("")} >
                                                                <Rect
                                                 x={145}
                                                 y={88}
@@ -340,7 +340,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                                         if(index <7)
                                                         return (<CircleSelect onMouseDown={() => { props.setMouseDownFunction('DrawCircle'); 
                                                         props.addNewCircle("",false,x); setEnableScroll(false) }}
-                                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.setCircles, props.actors)}
+                                                        onMouseUp={() => props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors)}
                                                         index={index}
                                                         x={x}
                                                         ></CircleSelect>)

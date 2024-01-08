@@ -28,6 +28,7 @@ import Ribbon from './components/ribbon/ribbon';
 import { ImageChange } from './Classes/ImageChange';
 import SaveList from './components/SaveList/SaveList';
 import Canvas from './components/canvas/canvas';
+import { findFurthestPoint } from './Functions/Positioning/CalculatePositions';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -61,6 +62,8 @@ function App() {
   const [openStatistics, setOpenStatistics] = useState(false);
   const [TaskId, setTaskID] = useState(0);
   const [showSaveList, setSavesList] = useState(0);
+  const [showComments, setShowComments] = useState(true);
+  const [showCustomerExperience, setShowCustomerExperiece] = useState(true);
 
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
@@ -106,14 +109,14 @@ function App() {
           setAcotrs={setActors} setCurrentObject={setCurrentObjectID} openHome={openHome} setSavesList={setSavesList}
         />
 
-      <Canvas ActorsCJML={ActorsCJML} initialArrowId={initialArrowId} circles={circles} setNewArrowId={setNewArrowId} setArrows={setArrows} currentObject={currentObject} setCurrentObjectReference={setCurrentObjectReference} Arrows={Arrows} dragBoxLocation={dragBoxLocation} resetTouchpoints={resetTouchpoints} currentJourney={currentJourney}
-       getImageObject={getImageObject} CJMLImageList={CJMLImageList} remove={remove} setActors={setActors} setPosY={setPosY} initialActorPosY={initialActorPosY} addNewActor={addNewActor} setActions={setActions} 
-       setCircles={setCircles} setDrawingArrowMode={setDrawingArrowMode} drawingArrow={drawingArrow} setClickFunction={setClickFunction} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow} addNewArrow={addNewArrow} 
-       finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder} makeBiggerActors={makeBiggerActors} findFurthestPoint={findFurthestPoint} ChangeOpenHome={ChangeOpenHome} changeJourney={changeJourney} 
-       GetImageFullName={GetImageFullName} setImage={setImage} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setMouseDownFunction={setMouseDownFunction} setDevationMode={setDevationMode} 
-       setShowModal={setShowModal} setshowQuestionary={setshowQuestionary} GetImage={GetImage} addNewActorinTheEnd={addNewActorinTheEnd} setShowSettings={setShowSettings} setImageChange={setImageChange} addNewActorDragAndDrop={addNewActorDragAndDrop} 
-       setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID} 
-       onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange}/>
+        <Canvas ActorsCJML={ActorsCJML} initialArrowId={initialArrowId} circles={circles} setNewArrowId={setNewArrowId} setArrows={setArrows} currentObject={currentObject} setCurrentObjectReference={setCurrentObjectReference} Arrows={Arrows} dragBoxLocation={dragBoxLocation} resetTouchpoints={resetTouchpoints} currentJourney={currentJourney}
+          getImageObject={getImageObject} CJMLImageList={CJMLImageList} remove={remove} setActors={setActors} setPosY={setPosY} initialActorPosY={initialActorPosY} addNewActor={addNewActor} setActions={setActions}
+          setCircles={setCircles} setDrawingArrowMode={setDrawingArrowMode} drawingArrow={drawingArrow} setClickFunction={setClickFunction} setDrawingObject={setDrawingObject} DrawingObject={DrawingObject} changeArrow={changeArrow} addNewArrow={addNewArrow}
+          finishArrow={finishArrow} elementCheckCloseToBorder={elementCheckCloseToBorder} elementsAreFarFromBorder={elementsAreFarFromBorder} makeBiggerActors={makeBiggerActors} findFurthestPoint={findFurthestPoint} ChangeOpenHome={ChangeOpenHome} changeJourney={changeJourney}
+          GetImageFullName={GetImageFullName} setImage={setImage} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setMouseDownFunction={setMouseDownFunction} setDevationMode={setDevationMode}
+          setShowModal={setShowModal} setshowQuestionary={setshowQuestionary} GetImage={GetImage} addNewActorinTheEnd={addNewActorinTheEnd} setShowSettings={setShowSettings} setImageChange={setImageChange} addNewActorDragAndDrop={addNewActorDragAndDrop}
+          setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID}
+          onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} />
 
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
         {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary}
@@ -128,7 +131,7 @@ function App() {
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings={setShowSettings}
           currentJurney={currentJourney} setJourneys={setJouney}
         ></Settings>}
-        {showSaveList && <SaveList showSaveList={showSaveList} closeSaveList={setSavesList} setJourneys={setJouney} switchJourneys={changeJourneyCurrent} setNewID={setNewID}></SaveList>}
+        {/* {showSaveList && <SaveList showSaveList={showSaveList} closeSaveList={setSavesList} setJourneys={setJouney} switchJourneys={changeJourneyCurrent} setNewID={setNewID}></SaveList>} */}
         {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} handleClose={setOpenStatistics} show={openStatistics} />}
       </div>
       <div className='JourneyBar'>
@@ -214,7 +217,6 @@ function App() {
   }
 
   function addNewActorDragAndDrop(pathImage: any) {
-    console.log(pathImage)
     var actor = ActorsCJML;
     var actorAfterInsert = ActorsCJML.sort((x, y) => {
       return x.y - y.y;
@@ -234,29 +236,6 @@ function App() {
     setNewID(initialId + 1);
   }
 
-  function deleteCJMLObject(element: any) {
-    const index = circles.findIndex((x: CJMLCircle) => { return element.id == x.id });
-    if (index > -1) {
-      const tempCircle = circles;
-      tempCircle.splice(index, 1);
-      setCircles(tempCircle);
-      removeArrows(currentObject);
-    }
-    const actionIndex = actions.findIndex((x: CJMLAction) => { return element.id == x.id });
-    if (actionIndex > -1) {
-      const tempCircle = actions;
-      tempCircle.splice(actionIndex, 1);
-      setActions(tempCircle);
-      removeArrows(currentObject);
-    }
-
-  }
-
-  function deleteElement(e: any) {
-    if (e.code == 'Delete' /*|| e.code == 'Backspace'*/) {
-      remove();
-    }
-  }
 
 
   function addNewAction() {
@@ -280,6 +259,53 @@ function App() {
       ...prevCircles,
       newCircle
     ]);
+  }
+
+  function updateNodesAndConnections(actor: Actors) {
+    var tempCirlce = circles;
+    tempCirlce.forEach(x => {
+      if (x.initiator.id == actor.id) {
+        x.swimlaneY += actor.height;
+        changeArrow(null, x.id, x);
+      } else if (x.receiver.id == actor.id) {
+        x.swimlaneReceiverY += actor.height + 30;
+        changeArrow(null, x.id, x);
+      }
+    });
+    setCircles(tempCirlce);
+    var tempActions = actions;
+    tempActions.forEach(x => {
+      if (x.initiator.id == actor.id) {
+        x.y += actor.height;
+        changeArrow(null, x.id, x);
+      }
+    });
+    setActions(tempActions);
+  }
+
+
+  function deleteCJMLObject(element: any) {
+    const index = circles.findIndex((x: CJMLCircle) => { return element.id == x.id });
+    if (index > -1) {
+      const tempCircle = circles;
+      tempCircle.splice(index, 1);
+      setCircles(tempCircle);
+      removeArrows(currentObject);
+    }
+    const actionIndex = actions.findIndex((x: CJMLAction) => { return element.id == x.id });
+    if (actionIndex > -1) {
+      const tempCircle = actions;
+      tempCircle.splice(actionIndex, 1);
+      setActions(tempCircle);
+      removeArrows(currentObject);
+    }
+
+  }
+
+  function deleteElement(e: any) {
+    if (e.code == 'Delete' /*|| e.code == 'Backspace'*/) {
+      remove();
+    }
   }
 
   function remove() {
@@ -444,28 +470,7 @@ function App() {
     setArrows(result);
   }
 
-  function updateNodesAndConnections(actor: Actors) {
-    var tempCirlce = circles;
-    tempCirlce.forEach(x => {
-      if (x.initiator.id == actor.id) {
-        x.swimlaneY += actor.height;
-        changeArrow(null, x.id, x);
-      } else if (x.receiver.id == actor.id) {
-        x.swimlaneReceiverY += actor.height + 30;
-        changeArrow(null, x.id, x);
-      }
-    });
-    setCircles(tempCirlce);
-    var tempActions = actions;
-    tempActions.forEach(x => {
-      if (x.initiator.id == actor.id) {
-        x.y += actor.height;
-        changeArrow(null, x.id, x);
-      }
-    });
-    setActions(tempActions);
-  }
-
+ 
   function changeJourneyCurrent(journey: Journey[]) {
     if (currentJourney > -1) {
       setActions(journey[currentJourney].Actions);
@@ -499,29 +504,7 @@ function App() {
     }
   }
 
-  function onMouseMovement(e: any) {
-    if (drawingArrow == true) {
-      changeArrowOnDraw(e);
-      findFurthestPoint()
-    }
-    if (mouseDownFunction == "DrawCircle") {
-      changeCircle(e);
-      findFurthestPoint(e)
-    }
-    else if (mouseDownFunction == "ImageChange") {
-      ChangeImage(e);
-      findFurthestPoint()
-    }
-    else if (mouseDownFunction == "DrawAction") {
-      changeAction(e);
-      findFurthestPoint(e)
-    }
-    else if (mouseDownFunction == "DragActor") {
-      changeActor(e);
-    }
-
-  }
-
+  
   function changeActor(e: any) {
     let workingActor = initialId - 1;
     let acotrsCopy = _.cloneDeep(ActorsCJML);
@@ -559,6 +542,29 @@ function App() {
     setActors(acotrsCopy);
     setActions(actionscopy);
     setCircles(touchpoints)
+  }
+  
+  function onMouseMovement(e: any) {
+    if (drawingArrow == true) {
+      changeArrowOnDraw(e);
+      findFurthestPoint(circles, actions, ActorsCJML, setActors)
+    }
+    if (mouseDownFunction == "DrawCircle") {
+      changeCircle(e);
+      findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
+    }
+    else if (mouseDownFunction == "ImageChange") {
+      ChangeImage(e);
+      findFurthestPoint(circles, actions, ActorsCJML, setActors)
+    }
+    else if (mouseDownFunction == "DrawAction") {
+      changeAction(e);
+      findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
+    }
+    else if (mouseDownFunction == "DragActor") {
+      changeActor(e);
+    }
+
   }
 
   function setActorLocations() {
@@ -650,29 +656,10 @@ function App() {
       }
     });
     setArrows(newArrows);
-    findFurthestPoint()
+    findFurthestPoint(circles, actions, ActorsCJML, setActors)
   }
 
-  function setImage(name: string) {
-    const newValues = circles.map(x => {
-      if (x.id == currentObject.id) {
-        x.imageName = name;
-        setCurrentObjectID(x);
-        return x;
-      }
-      return x;
-    })
-    setCircles(newValues);
-    const newActor = ActorsCJML.map(x => {
-      if (x.id == currentObject.id) {
-        x.img = name;
-        setCurrentObjectID(x);
-        return x;
-      }
-      return x;
-    })
-    setActors(newActor);
-  }
+
 
   function changeArrow(e: any, obj: any, changingObj: any) {
     let copyobject = _.cloneDeep(changingObj);
@@ -813,6 +800,27 @@ function App() {
     setActors(actorsTemp);
   }
 
+  function setImage(name: string) {
+    const newValues = circles.map(x => {
+      if (x.id == currentObject.id) {
+        x.imageName = name;
+        setCurrentObjectID(x);
+        return x;
+      }
+      return x;
+    })
+    setCircles(newValues);
+    const newActor = ActorsCJML.map(x => {
+      if (x.id == currentObject.id) {
+        x.img = name;
+        setCurrentObjectID(x);
+        return x;
+      }
+      return x;
+    })
+    setActors(newActor);
+  }
+
   function includeInLine(e: any, currentId: any, element: any) {
 
     const id = Arrows.findIndex((x) => {
@@ -886,7 +894,7 @@ function App() {
         const index = circles.indexOf(circleToWork[0]);
         onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, actions, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows);
         setNewID(initialId + 1)
-        findFurthestPoint(e)
+        findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
 
       }
 
@@ -898,7 +906,7 @@ function App() {
         const index = actions.indexOf(actionToWork[0]);
         onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows);
         setNewID(initialId + 1)
-        findFurthestPoint(e)
+        findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
       }
         break;
       case "ImageChange": {
@@ -914,76 +922,8 @@ function App() {
     setMouseDownFunction("")
   }
 
-  function findFurthestPoint(e?: any) {
-    let furhterPoint: number = 200;
-    if (e != undefined) {
-      if (e.target.attrs.x > furhterPoint) {
-        furhterPoint = e.target.attrs.x + 200;
-      }
-    }
-    circles.forEach((value) => {
-      if (furhterPoint < value.swimlaneX) {
-        furhterPoint = value.swimlaneX;
-      }
-    });
-    actions.forEach((value) => {
-      if (furhterPoint < value.swimlaneX) {
-        furhterPoint = value.swimlaneX
-      }
-    });
-    if (furhterPoint % 200 != 0) {
-
-      furhterPoint = 200 * ((furhterPoint / 200) + 1)
-    }
-    let actors = _.cloneDeep(ActorsCJML);
-    actors = actors.map((x) => {
-      if (furhterPoint - x.x > x.width) {
-        x.width = furhterPoint - x.x + 280;
-      }
-      return x;
-    })
-    console.log(furhterPoint);
-    console.log(circles);
-    setActors(actors);
-  }
 
 
-  function setImageToTouchpoint(e: any) {
-    let yPosOfMouse: number;
-    let xPosOfMouse: number;
-    if (e.target.attrs.y != null) {
-      yPosOfMouse = e.target.attrs.y;
-      xPosOfMouse = e.target.attrs.x;
-    }
-    else {
-      yPosOfMouse = e.target.getStage().getPointerPosition().y;
-      xPosOfMouse = e.target.getStage().getPointerPosition().x;
-    }
-
-    let copyOfCirlces = _.cloneDeep(circles);
-    copyOfCirlces = copyOfCirlces.map((x: CJMLCircle) => {
-      if (!SwimlineMode) {
-        if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
-          if (x.swimlaneY - 15 <= yPosOfMouse && x.swimlaneY + 195 >= yPosOfMouse) {
-            x.imageName = ImageChange?.Image;
-          }
-          else if (x.swimlaneReceiverY - 15 <= yPosOfMouse && x.swimlaneReceiverY + 195 >= yPosOfMouse) {
-            x.imageNameReceiver = ImageChange?.Image;
-          }
-        }
-      }
-      else {
-        if (x.x - 35 <= xPosOfMouse && x.x + 35 >= xPosOfMouse) {
-          if (x.y - 35 <= yPosOfMouse && x.y + 35 >= yPosOfMouse) {
-            x.imageName = ImageChange?.Image;
-            x.imageNameReceiver = ImageChange?.Image;
-          }
-        }
-      }
-      return x;
-    });
-    setCircles(copyOfCirlces);
-  }
   function onClickDoes(e: any) {
     let isOnActor = findActor(e);
 
@@ -1110,7 +1050,42 @@ function App() {
     image.src = imgName;
     return image;
   }
+  function setImageToTouchpoint(e: any) {
+    let yPosOfMouse: number;
+    let xPosOfMouse: number;
+    if (e.target.attrs.y != null) {
+      yPosOfMouse = e.target.attrs.y;
+      xPosOfMouse = e.target.attrs.x;
+    }
+    else {
+      yPosOfMouse = e.target.getStage().getPointerPosition().y;
+      xPosOfMouse = e.target.getStage().getPointerPosition().x;
+    }
 
+    let copyOfCirlces = _.cloneDeep(circles);
+    copyOfCirlces = copyOfCirlces.map((x: CJMLCircle) => {
+      if (!SwimlineMode) {
+        if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
+          if (x.swimlaneY - 15 <= yPosOfMouse && x.swimlaneY + 195 >= yPosOfMouse) {
+            x.imageName = ImageChange?.Image;
+          }
+          else if (x.swimlaneReceiverY - 15 <= yPosOfMouse && x.swimlaneReceiverY + 195 >= yPosOfMouse) {
+            x.imageNameReceiver = ImageChange?.Image;
+          }
+        }
+      }
+      else {
+        if (x.x - 35 <= xPosOfMouse && x.x + 35 >= xPosOfMouse) {
+          if (x.y - 35 <= yPosOfMouse && x.y + 35 >= yPosOfMouse) {
+            x.imageName = ImageChange?.Image;
+            x.imageNameReceiver = ImageChange?.Image;
+          }
+        }
+      }
+      return x;
+    });
+    setCircles(copyOfCirlces);
+  }
 }
 
 export default App;

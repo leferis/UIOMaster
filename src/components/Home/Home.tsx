@@ -36,7 +36,7 @@ function Home(props: HomeProps) {
     {props.journeys.filter((x) => {
       return !x.isPlanned
     }).map((journey, index) => {
-      return (<JourneyVisualization CloseHomeWindow={props.CloseHomeWindow} setJourney={props.setJourney} journeyID={getJourneyIndex(journey)} IncludeActor={true} ActorImage={getMainActor(journey.Actors)} Toucpoint={journey.Toucpoint} journeyIndex={index} getImageObject={props.getImageObject} XINITIALPOSITION={maxXPlanned }></JourneyVisualization>)
+      return (<JourneyVisualization CloseHomeWindow={props.CloseHomeWindow} setJourney={props.setJourney} journeyID={getJourneyIndex(journey)} IncludeActor={true} ActorImage={getMainActor(journey.Actors)} Toucpoint={journey.Toucpoint} journeyIndex={index} getImageObject={props.getImageObject} XINITIALPOSITION={maxXPlanned+200 }></JourneyVisualization>)
     })}
   </Group>)
 }

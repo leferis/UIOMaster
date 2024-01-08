@@ -84,6 +84,7 @@ interface CanvasProps {
    SwimlineMode:any;
    Journey:any;
    ImageChange:any;
+   showComments:any;
 }
 
 function Canvas(props: CanvasProps) {
@@ -155,7 +156,7 @@ function Canvas(props: CanvasProps) {
             SwimlineMode={props.SwimlineMode} resetTouchpoints={props.resetTouchpoints} devationMode={props.Journey[props.currentJourney].isPlanned} getImageObject={props.getImageObject}
             isPlanned={props.Journey[props.currentJourney].isPlanned}
             makeBiggerActors={props.makeBiggerActors}
-            findFurthestPoint={props.findFurthestPoint}
+            findFurthestPoint={props.findFurthestPoint} setActors={props.setActors}
          ></TouchPoint>}
          <ActionPoints swimlaneMode={props.SwimlineMode} setActions={props.setActions}
             remove={props.remove}
@@ -173,11 +174,11 @@ function Canvas(props: CanvasProps) {
             updateCircles={props.setCircles}
             circles={props.circles}
             findFurthestPoint={props.findFurthestPoint}
-            checkIfCloseToActorsBorder={props.makeBiggerActors}
+            checkIfCloseToActorsBorder={props.makeBiggerActors} setActors={props.setActors}
          ></ActionPoints>
 
-         {<Comments actions={props.actions} actors={props.ActorsCJML} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} diagramType={props.SwimlineMode} />}
-         {props.Journey.length > 0 && props.ImageChange != undefined && !props.openHome && <KonvaImage x={props.ImageChange?.x - 15} y={props.ImageChange?.y - 15} height={30} width={30} image={props.getImageObject(props.ImageChange.Image)}></KonvaImage>}
+         {/* {props.showComments && <Comments actions={props.actions} actors={props.ActorsCJML} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} diagramType={props.SwimlineMode} />}
+         {props.Journey.length > 0 && props.ImageChange != undefined && !props.openHome && <KonvaImage x={props.ImageChange?.x - 15} y={props.ImageChange?.y - 15} height={30} width={30} image={props.getImageObject(props.ImageChange.Image)}></KonvaImage>} */}
          {props.ActorsCJML.length > 0 && props.SwimlineMode && <ColorCoding actors={props.ActorsCJML} />}
       </Layer>}
       {props.openHome &&

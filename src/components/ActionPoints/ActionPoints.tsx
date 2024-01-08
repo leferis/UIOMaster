@@ -41,6 +41,7 @@ interface ActionPointsProps {
   checkIfCloseToActorsBorder: any;
   remove: any;
   findFurthestPoint: any;
+  setActors:any;
 }
 
 function ActionPoints(props: ActionPointsProps) {
@@ -160,12 +161,12 @@ function ActionPoints(props: ActionPointsProps) {
               onDragStart={() => x.Capacity = false}
               onDragMove={(e) => {
                 onActionDragMove(e, props.circles, x, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, index, props.checkIfCloseToActorsBorder, props.actions, props.setActions, props.actors, props.swimlaneMode, true, props.arrowId, props.setArrowId, props.setArrows)
-                props.findFurthestPoint()
+                props.findFurthestPoint(props.circles, props.actions, props.actors, props.setActors)
               }}
               onDragEnd={
                 (e) => {
                   onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true, props.arrowId, props.setArrowId, props.setArrows);
-                  props.findFurthestPoint()
+                  props.findFurthestPoint(props.circles, props.actions, props.actors, props.setActors)
                 }
               }
             />
