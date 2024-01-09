@@ -79,16 +79,15 @@ interface CanvasProps {
    onReleaseDoes: any;
    setCurrentObjectID: any;
    onMouseMovement: any;
-   openHome:any;
+   openHome: any;
    setLocation: any;
-   SwimlineMode:any;
-   Journey:any;
-   ImageChange:any;
-   showComments:any;
+   SwimlineMode: any;
+   Journey: any;
+   ImageChange: any;
+   showComments: any;
 }
 
 function Canvas(props: CanvasProps) {
-   console.log(props.CJMLImageList)
    return (<Stage width={window.innerWidth} height={(window.innerHeight - 175)}
       onMouseUp={(e) => {
          if (props.ClickFunction != "")
@@ -103,7 +102,7 @@ function Canvas(props: CanvasProps) {
       }}
       onTouchEnd={(e) => {
          if (props.ClickFunction != "")
-         props.onClickDoes(e);
+            props.onClickDoes(e);
          else if (props.mouseDownFunction != "") {
 
             props.onReleaseDoes(e);
@@ -114,7 +113,7 @@ function Canvas(props: CanvasProps) {
       }}
       onDragEnd={(e) => {
          if (props.ClickFunction != "")
-         props.onClickDoes(e);
+            props.onClickDoes(e);
          else if (props.mouseDownFunction != "") {
 
             props.onReleaseDoes(e);
@@ -132,8 +131,18 @@ function Canvas(props: CanvasProps) {
       onDragMove={(e) => {
          props.onMouseMovement(e);
       }}
+
    >
       {!props.openHome && <Layer id='test' ref={props.layerEl} draggable x={100} y={-100}
+
+         onWheel={(e) => {
+            const deltax = e.evt.deltaX;
+            const deltaY = e.evt.deltaY;
+            props.layerEl.current.setX(props.layerEl.current.attrs.x + deltax);
+            props.layerEl.current.setY(props.layerEl.current.attrs.y + deltaY);
+            props.setLocation([props.layerEl.current.attrs.x != undefined ? -props.layerEl.current.attrs.x + deltax : 0, props.layerEl.current.attrs.y != undefined ? -props.layerEl.current.attrs.y + deltaY : 0]);
+
+         }}
          onDragEnd={(e) => {
             props.setLocation([props.layerEl.current.attrs.x != undefined ? - props.layerEl.current.attrs.x : 0, props.layerEl.current.attrs.y != undefined ? -props.layerEl.current.attrs.y : 0]);
          }}
@@ -178,7 +187,7 @@ function Canvas(props: CanvasProps) {
          ></ActionPoints>
 
          {/* {props.showComments && <Comments actions={props.actions} actors={props.ActorsCJML} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} diagramType={props.SwimlineMode} />}*/}
-         {props.Journey.length > 0 && props.ImageChange != undefined && !props.openHome && <KonvaImage x={props.ImageChange?.x - 15} y={props.ImageChange?.y - 15} height={30} width={30} image={props.getImageObject(props.ImageChange.Image)}></KonvaImage>} 
+         {props.Journey.length > 0 && props.ImageChange != undefined && !props.openHome && <KonvaImage x={props.ImageChange?.x - 15} y={props.ImageChange?.y - 15} height={30} width={30} image={props.getImageObject(props.ImageChange.Image)}></KonvaImage>}
          {props.ActorsCJML.length > 0 && props.SwimlineMode && <ColorCoding actors={props.ActorsCJML} />}
       </Layer>}
       {props.openHome &&

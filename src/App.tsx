@@ -72,8 +72,6 @@ function App() {
     setCurrentObjectID(data);
   };
 
-
-
   React.useEffect(() => {
     setCJMLImageList(CJMLImages);
     if (ActorsCJML.length <= 1) {
