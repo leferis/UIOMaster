@@ -73,11 +73,15 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
 
     </Group>
 
+    <Group onClick={() => { changeOption("Rating")  }}  onTap={() => { changeOption("Rating") }}>
+      <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={175} height={59} width={45} option={"Rating"} currentOption={props.option} represenation='Image' text='Rating' swimLaneMode={props.swimLaneMode} img={"\\HelpingImages\\satisfied.png"} />
+      <Text x={-5} y={218} align='center' text='Add Rating' width={100}fontSize={14} fontVariant='bold'></Text>
+    </Group>
 
-    {props.swimLaneMode && <Group onClick={() => {  changeOption("Arrow") }} onTap={() => { changeOption("Arrow") }}> 
-      <LeftMeniuLeftSubMeniuBackgroundAndElement x={27} y={180} height={45} width={45} option={"Arrow"} currentOption={props.option} represenation='Arrow' text='Arrows' />
-      <Text x={18} y={215} text='Arrows' fontSize={14} fontVariant='bold'></Text>
-    </Group>}
+    {/* {props.swimLaneMode && <Group onClick={() => {  changeOption("Arrow") }} onTap={() => { changeOption("Arrow") }}> 
+      <LeftMeniuLeftSubMeniuBackgroundAndElement x={27} y={250} height={45} width={45} option={"Arrow"} currentOption={props.option} represenation='Arrow' text='Arrows' />
+      <Text x={18} y={285} text='Arrows' fontSize={14} fontVariant='bold'></Text>
+    </Group>} */}
 
     <Group onClick={() => { props.setStatisticsOn(true); }} onTap={() => {props.setStatisticsOn(true); }}>
     {props.statisticsMode && <Rect x={5} y={props.swimLaneMode ? 314 : 250} height={45+6} width={45+35} cornerRadius={4}  fill={props.statisticsMode? '#d4dbe4':""}  /> }

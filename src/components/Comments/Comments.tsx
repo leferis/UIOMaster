@@ -57,17 +57,10 @@ function Comments(props: CommentsProps) {
           if (!props.diagramType) {
             return (<CommentsComentElement touchpoint={x} yPostion={referenceNode.y + 220} setTouchpoint={(element: any) => { updateTouchpoint(element) }} index={index} ></CommentsComentElement>)
           }
-          else if(props.diagramType)  {
-            return(<CommentsCommentElementNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x}/>)
-          }
         })}
         {props.actions.map((x: CJMLCircle, index: any) => {
           if (!props.diagramType) {
             return (<CommentsComentElement touchpoint={x} yPostion={referenceNode.y + 220} setTouchpoint={(element: any) => { updateActions(element) }} index={index} ></CommentsComentElement>)
-          }
-          else if(props.diagramType) {
-            
-            return(<CommentsCommentElementNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x}/>)
           }
         })}
       </Group>

@@ -16,17 +16,17 @@ function CommentsComentElement(props: CommentsComentElementProps) {
 
   function createComments() {
     let element = props.touchpoint;
-    element.Comment = ""
+    element.Comment = new Comment("Enter comment");
     props.setTouchpoint(element);
   }
   function changeComments(value: any) {
     let element = props.touchpoint;
-    element.Comment = value
+    element.Comment.text = value;
     props.setTouchpoint(element);
   }
   function setCommentsEditing(value: boolean) {
     let element = props.touchpoint;
-    element.CommentEdit = value
+    element.Comment.isEditing = value;
     props.setTouchpoint(element);
   }
 
@@ -48,8 +48,8 @@ function CommentsComentElement(props: CommentsComentElementProps) {
     {props.touchpoint.Comment != null &&
       <Group>
         <Rect x={props.touchpoint.swimlaneX } y={props.yPostion} stroke={"black"} height={80} width={180} fill='white' />
-        <TextMessages x={props.touchpoint.swimlaneX + 4 } y={props.yPostion + 3} width={180} height={50} ChangeFunction={(value: any) => { changeComments(value) }} value={props.touchpoint.Comment}
-          fontSize={14} modifyObject={props.touchpoint} isEditing={props.touchpoint.CommentEdit}
+        <TextMessages x={props.touchpoint.swimlaneX + 4 } y={props.yPostion + 3} width={180} height={50} ChangeFunction={(value: any) => { changeComments(value) }} value={props.touchpoint.Comment.text}
+          fontSize={14} modifyObject={props.touchpoint} isEditing={props.touchpoint.Comment.isEditing}
           changeEditable={() => { setCommentsEditing(true) }} ChangeBack={() => { setCommentsEditing(false) }} default={"Enter comment"}></TextMessages>
       </Group>
     }

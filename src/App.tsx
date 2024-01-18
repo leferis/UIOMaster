@@ -64,7 +64,7 @@ function App() {
   const [showSaveList, setSavesList] = useState(0);
   const [showComments, setShowComments] = useState(true);
   const [showCustomerExperience, setShowCustomerExperiece] = useState(true);
-
+  const [openHelp, setOpenHelp]= useState(false);
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
   const setCurrentObjectReference = (data: any) => {
@@ -114,7 +114,7 @@ function App() {
           GetImageFullName={GetImageFullName} setImage={setImage} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setMouseDownFunction={setMouseDownFunction} setDevationMode={setDevationMode}
           setShowModal={setShowModal} setshowQuestionary={setshowQuestionary} GetImage={GetImage} addNewActorinTheEnd={addNewActorinTheEnd} setShowSettings={setShowSettings} setImageChange={setImageChange} addNewActorDragAndDrop={addNewActorDragAndDrop}
           setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID}
-          onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} />
+          onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} showCustomerExperience={showCustomerExperience}/>
 
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
         {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary}
@@ -551,7 +551,7 @@ function App() {
       changeCircle(e);
       findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
     }
-    else if (mouseDownFunction == "ImageChange") {
+    else if (mouseDownFunction == "ImageChange" || mouseDownFunction== "RatingImageChange") {
       ChangeImage(e);
       findFurthestPoint(circles, actions, ActorsCJML, setActors)
     }
@@ -912,9 +912,15 @@ function App() {
         setImageChange(undefined);
       }
         break;
+      case "RatingImageChange": {
+          setImageToRating(e);
+          setImageChange(undefined);
+        }
+          break;
       case "DragActor": {
         setActorLocations();
       }
+      break;
     }
 
     setMouseDownFunction("")
@@ -1069,6 +1075,40 @@ function App() {
           }
           else if (x.swimlaneReceiverY - 15 <= yPosOfMouse && x.swimlaneReceiverY + 195 >= yPosOfMouse) {
             x.imageNameReceiver = ImageChange?.Image;
+          }
+        }
+      }
+      else {
+        if (x.x - 35 <= xPosOfMouse && x.x + 35 >= xPosOfMouse) {
+          if (x.y - 35 <= yPosOfMouse && x.y + 35 >= yPosOfMouse) {
+            x.imageName = ImageChange?.Image;
+            x.imageNameReceiver = ImageChange?.Image;
+          }
+        }
+      }
+      return x;
+    });
+    setCircles(copyOfCirlces);
+  }
+
+  function setImageToRating(e: any) {
+    let yPosOfMouse: number;
+    let xPosOfMouse: number;
+    if (e.target.attrs.y != null) {
+      yPosOfMouse = e.target.attrs.y;
+      xPosOfMouse = e.target.attrs.x;
+    }
+    else {
+      yPosOfMouse = e.target.getStage().getPointerPosition().y;
+      xPosOfMouse = e.target.getStage().getPointerPosition().x;
+    }
+
+    let copyOfCirlces = _.cloneDeep(circles);
+    copyOfCirlces = copyOfCirlces.map((x: CJMLCircle) => {
+      if (!SwimlineMode) {
+        if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
+          if(yPosOfMouse > ActorsCJML[ActorsCJML.length -1].y +400 && yPosOfMouse < ActorsCJML[ActorsCJML.length -1].y +550){
+            x.Experience.experienceImage = ImageChange?.Image
           }
         }
       }

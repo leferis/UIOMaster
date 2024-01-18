@@ -20,7 +20,7 @@ interface JourneyBarProps {
 function JourneyBar(props:JourneyBarProps){
   const [onHower,setOnHower] = useState(false);
   return (       <div >
-    <div style={{ display: "inline-block", minWidth: '96%' }} >
+    <div style={{ display: "inline-block", minWidth: '96%', maxWidth: '100%' }} >
     <div className={ props.currentJourney == -1 || onHower ? 'BarElementSelected' : 'BarElement'} onMouseEnter={()=>setOnHower(true)} onMouseLeave={()=>setOnHower(false)} onClick={()=>{
     props.ChangeOpenHome(true);
     if(props.currentJourney != -1){

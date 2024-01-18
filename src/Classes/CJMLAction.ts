@@ -16,6 +16,8 @@ export class CJMLAction implements CJMLConnectionUnit{
     swimlaneX:number;
     timestamp:any;
     isEditing:any;
+    Experience:any;
+    Comment:any;
     constructor(id:string,x:number,y:number, Capacity:boolean, Text:String, devation:boolean,initiator:any, initialSwimlaneX:number,timestamp:any){   
         this.id = id;
         this.x = x;
@@ -31,6 +33,8 @@ export class CJMLAction implements CJMLConnectionUnit{
         this.swimlaneX = initialSwimlaneX;
         this.timestamp = timestamp;
         this.isEditing = false;
+        this.Experience = null;
+        this.Comment = null;
     }
     id: string;
     x: number;
