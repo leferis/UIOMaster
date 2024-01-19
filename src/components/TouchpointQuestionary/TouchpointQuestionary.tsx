@@ -50,6 +50,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
 
   return (
     <div className={styles.TouchpointQuestionary} style={{ paddingTop: "20px" }}>
+      <div style={{overflowY:"scroll", minHeight:"100px", maxHeight:"600px"}}>
       {props.TouchPoints.map((x: any, index: number) => {
         return (
           <div style={{ paddingBottom: index == props.TouchPoints.length - 1 ? "0px" : "30px" }}>
@@ -199,7 +200,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
 
       })}
 
-
+</div>
       <br></br>
       <Button style={{ position: "absolute", left: "50px" }} variant="outlined" onClick={() => {
         props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: undefined, receiverText: "" }])

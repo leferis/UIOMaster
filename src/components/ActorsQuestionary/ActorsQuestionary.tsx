@@ -39,12 +39,13 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
           }>
             <Grid container style={{ background: "#f1f2f4", paddingBottom: "30px", borderRadius: "20px" }} spacing={2} justifyContent="center"
               alignItems="center" rowSpacing={2}>
-              <Grid item xs={2}><h2>{x.isEndUser ? "End User " + (index + 1) : "Actor " + (index + 1)}</h2></Grid>
+              <Grid item xs={3}></Grid>
               <Grid item xs={7}></Grid>
               <Grid item xs={2}> {!props.tempActors[index].isEndUser && <Button  color="error" variant="outlined" onClick={() => props.removeActor(index)} startIcon={<DeleteIcon />}>
                 Delete
               </Button>}</Grid>
-              <Grid item xs={6}>
+              <Grid item xs={1}><h3>{x.isEndUser ? "End User " + (index + 1) : "Actor " + (index + 1)}</h3></Grid>
+              <Grid item xs={5}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">{x.isEndUser ? "End user type" : "Actor role"}</InputLabel>
                   <Select

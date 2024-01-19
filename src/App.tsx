@@ -29,6 +29,8 @@ import { ImageChange } from './Classes/ImageChange';
 import SaveList from './components/SaveList/SaveList';
 import Canvas from './components/canvas/canvas';
 import { findFurthestPoint } from './Functions/Positioning/CalculatePositions';
+import Help from './components/Help/Help';
+import { Experience } from './Classes/Experience';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -65,8 +67,10 @@ function App() {
   const [showComments, setShowComments] = useState(true);
   const [showCustomerExperience, setShowCustomerExperiece] = useState(true);
   const [openHelp, setOpenHelp]= useState(false);
+  const [colourList, setColourList] =useState(["#77933C","#B3A2C7"])
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
+
   const setCurrentObjectReference = (data: any) => {
     CurrentObjectReference.current = data;
     setCurrentObjectID(data);
@@ -114,9 +118,10 @@ function App() {
           GetImageFullName={GetImageFullName} setImage={setImage} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setMouseDownFunction={setMouseDownFunction} setDevationMode={setDevationMode}
           setShowModal={setShowModal} setshowQuestionary={setshowQuestionary} GetImage={GetImage} addNewActorinTheEnd={addNewActorinTheEnd} setShowSettings={setShowSettings} setImageChange={setImageChange} addNewActorDragAndDrop={addNewActorDragAndDrop}
           setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID}
-          onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} showCustomerExperience={showCustomerExperience}/>
+          onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} showCustomerExperience={showCustomerExperience} setOpenHelp={setOpenHelp}/>
 
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
+        {openHelp && <Help closeHelp={(change:boolean)=>(setOpenHelp(false))} showHelp={openHelp} />}
         {showQuestionary && <Questionary swimlaneMode={SwimlineMode} setArrows={setArrows} GetImage={GetImageFullName} handleClose={setshowQuestionary}
           showQuestionary={setshowQuestionary} actors={ActorsCJML} CJMLImageList={CJMLImageList} actions={actions} circles={circles}
           isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}
@@ -170,6 +175,7 @@ function App() {
     var actor = ActorsCJML;
     var maxWidth = 900;
     var index = actor.findIndex(x => x.id == actorAfterInsert.id);
+    var color = randomColor();
     actor.forEach((x) => {
       if (x.y > actorAfterInsert.y) {
         updateNodesAndConnections(x);
@@ -177,7 +183,16 @@ function App() {
       }
       maxWidth = x.width;
     });
-    actor.splice(index, 0, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 130, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    if(colourList.length>0){
+      let popColour = colourList[0];
+      let elements = colourList;
+      elements.shift();
+      setColourList(elements)
+      if(popColour != undefined){
+        color = popColour;
+      }
+    }
+    actor.splice(index, 0, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 130, width: maxWidth, color: color, isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
   }
@@ -188,7 +203,6 @@ function App() {
     var actorAfterInsert = ActorsCJML.sort((x, y) => {
       return x.y - y.y;
     })[ActorsCJML.length - 1];
-    console.log(actorAfterInsert)
     var maxWidth = 900;
     var index = actor.findIndex(x => x.id == actorAfterInsert.id);
     actor.forEach((x) => {
@@ -198,8 +212,17 @@ function App() {
       }
       maxWidth = x.width;
     });
-
-    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 130, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+    var color = randomColor();
+    if(colourList.length>0){
+      let popColour = colourList[0];
+      let elements = colourList;
+      elements.shift();
+      setColourList(elements)
+      if(popColour != undefined){
+        color = popColour;
+      }
+    }
+    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 200, y: actorAfterInsert.y + actorAfterInsert.height + 50, id: initialId, height: 130, width: maxWidth, color: color, isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
     toast.success('Actor has been added', {
@@ -228,8 +251,17 @@ function App() {
       }
       maxWidth = x.width;
     });
+    var color = randomColor();
+    if(colourList.length>0){
+      let popColour = colourList[0];
+      let elements = colourList;
+      elements.shift();
 
-    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 9999, y: 9999, id: initialId, height: 130, width: maxWidth, color: randomColor(), isEndUser: false, isEditing: false });
+      if(popColour != undefined){
+        color = popColour;
+      }
+    }
+    actor.splice(index, 0, { Title: "Enter actor's name", img: pathImage, x: 9999, y: 9999, id: initialId, height: 130, width: maxWidth, color: color, isEndUser: false, isEditing: false });
     setActors(actor);
     setNewID(initialId + 1);
   }
@@ -1113,10 +1145,12 @@ function App() {
         }
       }
       else {
-        if (x.x - 35 <= xPosOfMouse && x.x + 35 >= xPosOfMouse) {
-          if (x.y - 35 <= yPosOfMouse && x.y + 35 >= yPosOfMouse) {
-            x.imageName = ImageChange?.Image;
-            x.imageNameReceiver = ImageChange?.Image;
+        if (x.x - 35 <= xPosOfMouse && x.x + 105 >= xPosOfMouse) {
+          if (x.y - 35 <= yPosOfMouse && x.y + 150 >= yPosOfMouse) {
+            if(x.Experience == null){
+              x.Experience = new Experience("Enter experience description")
+            }
+            x.Experience.experienceImage = ImageChange?.Image
           }
         }
       }

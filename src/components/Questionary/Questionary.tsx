@@ -1,4 +1,4 @@
-import { AppBar, Button, IconButton, Tab, Tabs } from '@mui/material';
+import { AppBar, Button, IconButton, Tab, Tabs, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Actors } from '../../Classes/Actors';
@@ -267,13 +267,13 @@ function Questionary(props: QuestionaryProps) {
       <Tabs
         value={activeTab}
         variant="fullWidth"
-        indicatorColor="primary"
+        indicatorColor="secondary"
         textColor="inherit"
         aria-label="full width tabs example"
         onChange={(event: React.SyntheticEvent, newValue: number) => setActiveTab(newValue)}
       >
-        <Tab onClick={() => { setActorSelect(true); setTouchpointSelect(false); }} label="Actors"></Tab>
-        <Tab onClick={() => { setTouchpointSelect(true); setActorSelect(false); }} label="Touchpoints"></Tab>
+        <Tab onClick={() => { setActorSelect(true); setTouchpointSelect(false); }} label={(<Typography variant="h6">Actors</Typography>)}></Tab>
+        <Tab onClick={() => { setTouchpointSelect(true); setActorSelect(false); }} label={(<Typography variant="h6">Touchpoints</Typography>)}></Tab>
       </Tabs>
       </AppBar>
       {ActorSelect && <ActorsQuestionary tempActors={tempActors} setTempActors={setTempActors} CJMLImageList={props.CJMLImageList} GetImage={props.GetImage} removeActor={removeActors}></ActorsQuestionary>}

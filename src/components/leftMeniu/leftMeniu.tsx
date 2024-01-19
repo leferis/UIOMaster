@@ -51,6 +51,7 @@ interface LeftMeniuProps {
         setImageChange: any;
         addNewActorDragAndDrop: any;
         setOpenStatistics: any;
+        setOpenHelp:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -275,7 +276,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 setRenderMeniu={setRenderMeniu} setOption={setSubMeniuOption} layer={layerEl}
                                 swimLaneMode={props.SwimlineMode} setStatisticsOn={props.setOpenStatistics} statisticsMode={enableStatistics}
                                 getImageObject={getImageObject} Journeys={props.Journeys} getImages={props.getImages} updateCurrentJourney={props.updateCurrentJourney}
-                                setShowSettings={props.setShowSettings}
+                                setShowSettings={props.setShowSettings} setOpenHelp={props.setOpenHelp}
                         ></LeftMeniuLeftSubMeniu>
 
                 </Layer>

@@ -23,6 +23,7 @@ interface LeftMeniuLeftSubMeniuProps {
   getImages:any;
   openModal:any;
   setShowSettings:any;
+  setOpenHelp:any;
 }
 function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
 
@@ -116,7 +117,7 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
       y={height - 28} text={"Export"} align={"center"} fontSize={14} fontVariant='bold'/>
       </Group>
 
-      <Group>
+      <Group onClick={()=>{props.setOpenHelp(true)}}>
     <LeftMeniuLeftSubMeniuBackgroundAndElement x={28} y={height - 250} height={45} width={45} option={"Help"} currentOption={props.option} represenation='Image' img={"\\HelpingImages\\help.png"} text='Help' />
 
     <Text x={30}

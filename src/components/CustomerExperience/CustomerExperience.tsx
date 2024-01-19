@@ -57,7 +57,7 @@ function CustomerExperience(props:CustomerExperienceProps){
         cornerRadius={10}
         fill='white'
         strokeWidth={3} />
-      <Text x={referenceNode.x + 25} y={referenceNode.y + 480} text={ endUserNode[0].Title + ' Experience'} fontSize={14} width={75} />
+      <Text x={referenceNode.x + 25} y={referenceNode.y + 465} text={ endUserNode[0].Title + ' Experience'} fontSize={14} width={75} />
       <Images x={referenceNode.x + 45} y={referenceNode.y + 430} image={getImageObject(endUserNode[0].img)} height={30} width={25} /></>}
       <Group>
         {props.touchpoints.map((x: CJMLCircle, index: any) => {
