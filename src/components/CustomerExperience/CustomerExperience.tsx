@@ -53,16 +53,16 @@ function CustomerExperience(props:CustomerExperienceProps){
    })
    console.log(endUserNode)
    return (<>
-      {!props.diagramType && <><Rect x={referenceNode.x} y={referenceNode.y + 400} height={120} width={referenceNode.width} stroke='#d9d9d9'
+      {!props.diagramType && <><Rect x={referenceNode.x} y={referenceNode.y + 380} height={120} width={referenceNode.width} stroke='#d9d9d9'
         cornerRadius={10}
         fill='white'
         strokeWidth={3} />
-      <Text x={referenceNode.x + 25} y={referenceNode.y + 465} text={ endUserNode[0].Title + ' Experience'} fontSize={14} width={75} />
-      <Images x={referenceNode.x + 45} y={referenceNode.y + 430} image={getImageObject(endUserNode[0].img)} height={30} width={25} /></>}
+      <Text x={referenceNode.x + 25} y={referenceNode.y + 445} text={ endUserNode[0].Title + ' Experience'} fontSize={14} width={75} />
+      <Images x={referenceNode.x + 45} y={referenceNode.y + 410} image={getImageObject(endUserNode[0].img)} height={30} width={25} /></>}
       <Group>
         {props.touchpoints.map((x: CJMLCircle, index: any) => {
           if (!props.diagramType) {
-            return (<CustomerExperienceCustomerExperienceJourney touchpoint={x} yPostion={referenceNode.y + 420} setTouchpoint={(element: any) => { updateTouchpoint(element) }} index={index} />)
+            return (<CustomerExperienceCustomerExperienceJourney touchpoint={x} yPostion={referenceNode.y + 400} setTouchpoint={(element: any) => { updateTouchpoint(element) }} index={index} />)
           }
           else if(props.diagramType && x.Experience != null)  {
             return(<CustomerExperienceCustomerExperienceNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x}/>)
@@ -70,7 +70,7 @@ function CustomerExperience(props:CustomerExperienceProps){
         })}
         {props.actions.map((x: CJMLCircle, index: any) => {
           if (!props.diagramType) {
-            return (<CustomerExperienceCustomerExperienceJourney touchpoint={x} yPostion={referenceNode.y + 420} setTouchpoint={(element: any) => { updateActions(element) }} index={index} />)
+            return (<CustomerExperienceCustomerExperienceJourney touchpoint={x} yPostion={referenceNode.y + 400} setTouchpoint={(element: any) => { updateActions(element) }} index={index} />)
           }
           else if(props.diagramType  && x.Experience != null) {
             return(<CustomerExperienceCustomerExperienceNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x}/>)

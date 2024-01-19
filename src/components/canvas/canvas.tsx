@@ -94,7 +94,7 @@ function Canvas(props: CanvasProps) {
 
    const [procentage,setProcentage] = useState(100)
 
-   return (<Stage width={window.innerWidth} height={(window.innerHeight - 192)}
+   return (<Stage width={window.innerWidth} height={(window.innerHeight - 175)}
       onMouseUp={(e) => {
          if (props.ClickFunction != "")
             props.onClickDoes(e);
