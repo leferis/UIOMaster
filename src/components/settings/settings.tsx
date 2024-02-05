@@ -44,6 +44,10 @@ interface SettingsProps {
   currentJurney:any;
   setShowSettings:any;
   setJourneys:any;
+  showComments:any;
+  showExperience:any;
+  setComments:any;
+  setExperience:any;
 }
 
 
@@ -92,7 +96,9 @@ function Settings(props: SettingsProps) {
           <Tab onClick={() => { setJourneyPart(false); setActorPart(true); setToucpointpart(false)  }} label="Actor"></Tab>
           <Tab onClick={() => { setJourneyPart(false); setActorPart(false); setToucpointpart(true) }} label="Toucpoints"></Tab>
         </Tabs>
-        {JourneyPart && <SettingsJourneySettings currentJourney={journeyClone} journeys={props.journeys} setTempJourney={setJourneyClone}/>}
+        {JourneyPart && <SettingsJourneySettings currentJourney={journeyClone} journeys={props.journeys} 
+        setTempJourney={setJourneyClone} setComments={props.setComments} setExperience={props.setExperience}
+        showComments={props.showComments} showExperience={props.showExperience} />}
         {ActorPart && <SettingsActorSettings actors={actorClone} setTempActors={setActorClone} Images={props.Images}/>}
         {TouchpointPart &&  <SettingsTouchpointSettings updateCircles={setTouchpointClone} Images={props.Images} circles={touchpointClone} />}
         <Button  style={{top:"15px"}} variant="contained" color="success" onClick={()=>{

@@ -48,8 +48,7 @@ function App() {
   const [DrawingObject, setDrawingObject] = useState<any>("");
   const [DevationMode, setDevationMode] = useState<boolean>(false);
   const [ShowModal, setShowModal] = useState<boolean>(false);
-  const [showIntroduction, setshowIntroduction] = useState<boolean>(true);
-  const [showAddJourney, setshowAddJourney] = useState<boolean>(false);
+  const [showAddJourney, setshowAddJourney] = useState<boolean>(true);
   const [currentJourney, setCurrentJourney] = useState<number>(0);
   const [showQuestionary, setshowQuestionary] = useState<boolean>(false);
   const [dragBoxLocation, setLocation] = useState<any[]>([0, 0]);
@@ -64,8 +63,8 @@ function App() {
   const [openStatistics, setOpenStatistics] = useState(false);
   const [TaskId, setTaskID] = useState(0);
   const [showSaveList, setSavesList] = useState(0);
-  const [showComments, setShowComments] = useState(true);
-  const [showCustomerExperience, setShowCustomerExperiece] = useState(true);
+  const [showComments, setShowComments] = useState(false);
+  const [showCustomerExperience, setShowCustomerExperiece] = useState(false);
   const [openHelp, setOpenHelp]= useState(false);
   const [colourList, setColourList] =useState(["#77933C","#B3A2C7"])
   const layerEl: any = useRef();
@@ -127,12 +126,14 @@ function App() {
           isPlanned={Journey[currentJourney].isPlanned} setActions={setActions} setCircles={setCircles} setActors={setActors}
           arrowsId={initialArrowId} setInitialArrowID={setNewArrowId}
         />}
-        {showIntroduction && <IntroductionWindow showIntro={showIntroduction} closeIntro={setshowIntroduction} showSelection={setshowAddJourney} />}
         {showAddJourney && <JourneySelection showJourney={showAddJourney} closeJourney={setshowAddJourney} addJourney={addJourney} JourneyList={Journey} showModal={setShowModal} />}
-        {showSettings && <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
+        {showSettings && <Settings getImageObject={getImageObject} Images={CJMLImageList} currentObject={currentObject} circles={circles} setCircles={setCircles} setCurrentObjectID={setCurrentObjectReference} 
+          changeStatus={changeExternal} setImage={setImage} Actors={ActorsCJML}
           setActors={setActors} GetImageFullName={GetImage} Layer={layerEl} setSwimlineMode={setSwimlineMode} SwimlineMode={SwimlineMode} actions={actions} setActions={setActions}
           initialArrowId={initialArrowId} setInitialArrowID={setNewArrowId} setArrows={setArrows} makeBiggerActors={makeBiggerActors} showSettings={showSettings} journeys={Journey} setShowSettings={setShowSettings}
           currentJurney={currentJourney} setJourneys={setJouney}
+          setComments={setShowComments} setExperience={setShowCustomerExperiece}
+          showComments={showComments} showExperience={showCustomerExperience}
         ></Settings>}
         {/* {showSaveList && <SaveList showSaveList={showSaveList} closeSaveList={setSavesList} setJourneys={setJouney} switchJourneys={changeJourneyCurrent} setNewID={setNewID}></SaveList>} */}
         {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} handleClose={setOpenStatistics} show={openStatistics} />}
@@ -1157,6 +1158,29 @@ function App() {
       return x;
     });
     setCircles(copyOfCirlces);
+
+    let copyOfActions = _.cloneDeep(actions);
+    copyOfActions = copyOfActions.map((x:CJMLAction) =>{
+      if (!SwimlineMode) {
+        if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
+          if(yPosOfMouse > ActorsCJML[ActorsCJML.length -1].y +400 && yPosOfMouse < ActorsCJML[ActorsCJML.length -1].y +550){
+            x.Experience.experienceImage = ImageChange?.Image
+          }
+        }
+      }
+      else {
+        if (x.x - 35 <= xPosOfMouse && x.x + 105 >= xPosOfMouse) {
+          if (x.y - 35 <= yPosOfMouse && x.y + 150 >= yPosOfMouse) {
+            if(x.Experience == null){
+              x.Experience = new Experience("Enter experience description")
+            }
+            x.Experience.experienceImage = ImageChange?.Image
+          }
+        }
+      }
+      return x;
+    });
+    setActions(copyOfActions);
   }
 }
 

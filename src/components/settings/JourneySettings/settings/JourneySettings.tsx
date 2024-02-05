@@ -6,8 +6,12 @@ import _ from 'lodash';
 
 interface SettingsJourneySettingsProps {
   journeys: any;
-  currentJourney:Journey;
-  setTempJourney:any;
+  currentJourney: Journey;
+  setTempJourney: any;
+  setComments:any;
+  setExperience:any;
+  showExperience:any;
+  showComments:any;
 }
 
 
@@ -16,26 +20,26 @@ function SettingsJourneySettings(props: SettingsJourneySettingsProps) {
     <Grid style={{
       background: "#f1f2f4",
       borderRadius: "20px",
-    }} container spacing={1}    justifyContent="center"
-    alignItems="center" >
+    }} container spacing={1} justifyContent="center"
+      alignItems="center" >
       <Grid item xs={"auto"}><h2>Journey metadata</h2></Grid>
       <Grid item xs={9} />
-      <Grid item xs={3}><TextField fullWidth label="Journey's name" defaultValue={props.currentJourney.JourneyName} onInput={(e:any) => {
+      <Grid item xs={3}><TextField fullWidth label="Journey's name" defaultValue={props.currentJourney.JourneyName} onInput={(e: any) => {
         let temp = _.cloneDeep(props.currentJourney);
-        temp.JourneyName = e.target.value;  
+        temp.JourneyName = e.target.value;
         props.setTempJourney(temp);
-       }} /></Grid>
+      }} /></Grid>
       <Grid item xs={3}>
         <FormGroup>
           <FormControlLabel labelPlacement="top" control={<Checkbox
             defaultChecked={props.currentJourney.isPlanned}
             onChange={(e: any) => {
               let temp = _.cloneDeep(props.currentJourney);
-              if(e.target.checked){
+              if (e.target.checked) {
                 temp.isPlanned = true;
                 temp.Reference = undefined;
               }
-              else{
+              else {
                 temp.isPlanned = false;
               }
               props.setTempJourney(temp);
@@ -52,22 +56,41 @@ function SettingsJourneySettings(props: SettingsJourneySettingsProps) {
               if (e.eventPhase == 0) {
                 let temp = _.cloneDeep(props.currentJourney);
                 temp.Reference = props.journeys.find((x: Journey) => { return x.JourneyName == e.target.value });
-                if(temp.Reference != undefined){
-                  temp.Reference=temp.Reference.JourneyName;
+                if (temp.Reference != undefined) {
+                  temp.Reference = temp.Reference.JourneyName;
                 }
                 props.setTempJourney(temp);
               }
             }}
           >
             <MenuItem value={"asd"}>None</MenuItem>
-            {props.journeys.filter((x:Journey)=>{return x.isPlanned}).map((y: Journey) => {
+            {props.journeys.filter((x: Journey) => { return x.isPlanned }).map((y: Journey) => {
               return (<MenuItem value={y.JourneyName}>{y.JourneyName}</MenuItem>)
             })}
-            
+
           </Select>
         </FormControl>}
       </Grid>
-      <Grid item xs={1}/>
+
+      <Grid item xs={1} />
+      <Grid item xs={4}>
+        <FormGroup>
+          <FormControlLabel labelPlacement="top" control={<Checkbox
+            defaultChecked={props.showComments}
+            onChange={(e: any) => {
+              props.setComments(!props.showComments)
+            }} />} label={"Show Comments"} />
+        </FormGroup>
+      </Grid>
+      <Grid item xs={4}>
+        <FormGroup>
+          <FormControlLabel labelPlacement="top" control={<Checkbox
+            defaultChecked={props.showExperience}
+            onChange={(e: any) => {
+              props.setExperience(!props.showExperience)
+            }} />} label={"Show user experience"} />
+        </FormGroup>
+      </Grid>
     </Grid>
   </div>)
 };
