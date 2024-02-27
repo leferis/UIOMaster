@@ -11,6 +11,7 @@ interface HomeProps {
   getImageObject: any;
   setJourney:any;
   CloseHomeWindow:any;
+  layerEl:any;
 }
 
 function getMainActor(Actors: Actors[]) {
@@ -27,7 +28,7 @@ function Home(props: HomeProps) {
   
   let maxXPlanned = 250;
   return (<Group>
-    {props.journeys.filter((x) => {
+    { props.journeys.filter((x) => {
       return x.isPlanned
     }).map((journey, index) => {
       if (maxXPlanned < journey.Toucpoint.length * 180) { maxXPlanned = journey.Toucpoint.length * 180; }

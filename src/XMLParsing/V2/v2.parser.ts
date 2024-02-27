@@ -14,6 +14,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
     var swimlaneXInitial = 400;
     function getTouchPoint(touchpoint: Element, x: number) {
         var id, init, initLabel, timestamp, receiver, receiverLabel, channel, compliance;
+        console.log(touchpoint)
         id = getID(touchpoint, 'touchpointID');
         init = getActorsattributeName(touchpoint.getElementsByTagName('initiator')[0].getElementsByTagName('refersTo')[0]);
         receiver = getActorsattributeName(touchpoint.getElementsByTagName('receiver')[0].getElementsByTagName('refersTo')[0]);
@@ -62,12 +63,10 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         nodeTemp.receiver = actors.find(x => {
             return x.id == node.receiver
         });
-
         nodeTemp.initiator = actors.find(x => {
             return x.id == node.initiator
         });
         let yValue = nodeTemp.initiator.isEndUser ? nodeTemp.initiator : nodeTemp.receiver;
-        console.log(nodeTemp);
         nodeTemp.y = yValue.y + yValue.height / 2 ;
         nodeTemp.swimlaneY = nodeTemp.initiator.y + 20;
         nodeTemp.swimlaneReceiverY = nodeTemp.receiver.y + 20;
@@ -122,7 +121,8 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
                 swimlaneXInitial += 225;
                 touchpoint = setTouchPointMetadata(actors, touchpoint);
                 touchpoint.imageName = GetImage(touchpoint.imageName, "Other");
-                touchpoint.imageNameReceiver = GetImage(touchpoint.imageName, "Other");
+                touchpoint.imageNameReceiver = touchpoint.imageName;;
+                console.log(touchpoint);
                 if (!touchpoint.devation) {
                     x += 150;
                     devationMove = 170;
@@ -182,7 +182,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
                 swimlaneXInitial += 225;
                 touchpoint = setTouchPointMetadata(actors, touchpoint);
                 touchpoint.imageName = GetImage(touchpoint.imageName, "Other");
-                touchpoint.imageNameReceiver = GetImage(touchpoint.imageName, "Other");
+                touchpoint.imageNameReceiver = touchpoint.imageName;
                 if (!touchpoint.devation) x += 150;
                 journeyNew.Toucpoint.push(touchpoint);
                 if (previousInteraction != null) {

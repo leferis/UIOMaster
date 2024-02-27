@@ -50,7 +50,7 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
       }).map(((circle: CJMLCircle, index:any) => {
         let previousPoint = XPOSITION;
         XPOSITION += XMOVEMENTGAP;
-        return (<div>
+        return (<Group>
           <Circle x={XPOSITION}
             y={YINITIALPOSITION * props.journeyIndex+100}
             radius={RADIUS}
@@ -68,7 +68,7 @@ function JourneyVisualization(props: JourneyVisualizationProps) {
           {getImage(circle.imageName, XPOSITION, YINITIALPOSITION * props.journeyIndex+100)}
           { index> 0 && <Arrow        pointerWidth={7}
           pointerLength={7} points={[previousPoint + RADIUS, YINITIALPOSITION * props.journeyIndex+100, XPOSITION - RADIUS - 3, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3} fill='black'></Arrow>}
-        </div>)
+        </Group>)
       }))}
       <Line points={[XPOSITION + RADIUS, YINITIALPOSITION * props.journeyIndex+100, XPOSITION + XMOVEMENTGAP, YINITIALPOSITION * props.journeyIndex+100]} stroke={"black"} strokeWidth={3}  ></Line>
       <Circle x={XPOSITION + XMOVEMENTGAP} y={YINITIALPOSITION * props.journeyIndex+100} fill={"black"} stroke={"black"} radius={6}></Circle>

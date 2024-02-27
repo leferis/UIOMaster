@@ -145,7 +145,6 @@ function Canvas(props: CanvasProps) {
             
             const deltax = -(e.evt.deltaX / props.layerEl.current.attrs.scaleX);
             const deltaY = -(e.evt.deltaY / props.layerEl.current.attrs.scaleY);
-            console.log(props.layerEl.current.attrs.scaleX);
             const tempY = props.layerEl.current.attrs.y + deltaY
             props.layerEl.current.setX(props.layerEl.current.attrs.x + deltax);
             props.layerEl.current.setY(props.layerEl.current.attrs.y + deltaY);
@@ -237,7 +236,7 @@ function Canvas(props: CanvasProps) {
             props.setLocation([props.layerEl.current.attrs.x != undefined ? - props.layerEl.current.attrs.x : 0, props.layerEl.current.attrs.y != undefined ? -props.layerEl.current.attrs.y : 0]);
          }}>
             {props.Journey.length > 0 && <Rect x={props.dragBoxLocation[0]} y={props.dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth} onClick={() => { props.resetTouchpoints(); }}></Rect>}
-            <Home CloseHomeWindow={props.ChangeOpenHome} setJourney={props.changeJourney} journeys={props.Journey} getImageObject={props.getImageObject}></Home>
+            <Home CloseHomeWindow={props.ChangeOpenHome} setJourney={props.changeJourney} journeys={props.Journey} getImageObject={props.getImageObject} layerEl={props.layerEl}></Home>
          </Layer>
       }
 
