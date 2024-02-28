@@ -5,6 +5,8 @@ import { CJMLCircle } from './../../Classes/CJMLCircle';
 import { Actors } from "../../Classes/Actors";
 import { Journey } from "../../Classes/Journey";
 import { randomColor } from 'accessible-colors';
+import { Comments } from '../../Classes/Comment';
+import { Experience } from '../../Classes/Experience';
 
 function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
     function parseJourney(journey: HTMLCollection) {
@@ -23,7 +25,10 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         compliance = getStatus(getID(touchpoint, 'compliance'));
         channel = getID(touchpoint.getElementsByTagName('channel')[0], 'channelName');
         timestamp = getID(touchpoint.getElementsByTagName('timestamps')[0], 'timeConsumed');
-        return new CJMLCircle(id, x, 0, false, id[0] == 'D' ? true : false, receiver.value, init.value, channel, receiverLabel, initLabel, swimlaneXInitial, 0, 0, timestamp, compliance);
+        let circle = new CJMLCircle(id, x, 0, false, id[0] == 'D' ? true : false, receiver.value, init.value, channel, receiverLabel, initLabel, swimlaneXInitial, 0, 0, timestamp, compliance);
+        circle.Comment = new Comments( getID(touchpoint, 'comment'), false)
+        circle.Experience = new Experience(getID(touchpoint.getElementsByTagName('touchpointExperience')[0], 'experienceDescription'))
+        return circle
     }
     function getAction(action: Element, x: number, actors:Actors[]) {
         var id, init, label, timestamp;
@@ -31,7 +36,10 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         init = getActorsattributeName(action.getElementsByTagName('initiator')[0].getElementsByTagName('refersTo')[0]);
         label = getID(action.getElementsByTagName('initiator')[0], 'initiatorLabel');
         timestamp = getID(action.getElementsByTagName('timestamps')[0], 'timeCompleted');
-        return new CJMLAction(id, x, 0, false, label, id[0] == 'D' ? true : false, init.value, swimlaneXInitial, timestamp);
+        var actions = new CJMLAction(id, x, 0, false, label, id[0] == 'D' ? true : false, init.value, swimlaneXInitial, timestamp);
+        actions.Comment = new Comments( getID(action, 'comment'), false)
+        actions.Experience = new Experience(getID(action.getElementsByTagName('touchpointExperience')[0], 'experienceDescription'))
+        return actions
     }
 
     function getStatus(status: string) {
