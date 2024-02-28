@@ -1064,7 +1064,7 @@ function App() {
   function getImageByName(Name: string, type: string) {
     if (type == "Actor") {
       if (Name != null) {
-        let img = CJMLImageList.Images[0].Images.find((x: any) => { return x.Name == Name })
+        let img = CJMLImageList.Images[0].Images.find((x: any) => { return x.Name == Name && x.Default})
         if (img == undefined) {
           img = CJMLImageList.Images[0].Images.find((x: any) => { return x.Name.toLowerCase().replaceAll(' ', '') == Name.toLowerCase() + '1' })
         }
@@ -1073,9 +1073,9 @@ function App() {
     }
     if (type == "Other") {
       if (Name != null) {
-        let img = CJMLImageList.Images[1].Images.find((x: any) => { return x.Name.replaceAll(' ', '').toLowerCase() == Name.replaceAll(' ', '').toLowerCase() })
+        let img = CJMLImageList.Images[1].Images.find((x: any) => { return x.Name.replaceAll(' ', '').toLowerCase() == Name.replaceAll(' ', '').toLowerCase() && x.Default })
         if (img == undefined) {
-          img = CJMLImageList.Images[1].Images.find((x: any) => { return x.Name.toLowerCase().replaceAll(' ', '') == Name.toLowerCase() + '1' })
+          img = CJMLImageList.Images[1].Images.find((x: any) => { return x.Name.toLowerCase().replaceAll(' ', '') == Name.toLowerCase() + '1' && x.Default})
         }
         return img == undefined ? "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg" : img.Location;
       }
