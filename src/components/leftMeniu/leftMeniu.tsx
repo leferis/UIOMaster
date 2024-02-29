@@ -52,6 +52,10 @@ interface LeftMeniuProps {
         addNewActorDragAndDrop: any;
         setOpenStatistics: any;
         setOpenHelp:any;
+        showExperience:any;
+        setExperience:any;
+        showComments:any;
+        setShowComments:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -139,7 +143,6 @@ function LeftMeniu(props: LeftMeniuProps) {
                         draggable={(subMeniuOption == "Actor" || subMeniuOption == "Touchpoint") && enableScroll}
                         dragBoundFunc={(pos) => {
                                 if (pos.y > 0) {
-
                                         return {
                                                 x: 0,
                                                 y: 0
@@ -152,8 +155,6 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         }
                                 }
                                 else {
-
-
                                         return {
                                                 x: 0,
                                                 y: pos.y
@@ -181,8 +182,6 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 else {
                                         setXScrollbarreal(-790)
                                 }
-
-
                                 if (xpos > 0) {
                                         xpos = 0
                                 }
@@ -200,7 +199,6 @@ function LeftMeniu(props: LeftMeniuProps) {
                                 }} draggable={(subMeniuOption == "Actor" || subMeniuOption == "Touchpoint") && enableScroll}
                                 dragBoundFunc={(pos) => {
                                         if (pos.y > 0) {
-
                                                 return {
                                                         x: 0,
                                                         y: 0
@@ -232,7 +230,7 @@ function LeftMeniu(props: LeftMeniuProps) {
                         {subMeniuOption == "Touchpoint" && <LeftMeniuTouchpointSelector Images={props.Images} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} addNewAction={props.addNewAction} addNewCircle={props.addNewCircle} circles={props.circles}
                          setActions={props.setActions} setCircles={props.setCircles} setCirlceAtEnd={props.setCirlceAtEnd} setEnableScroll={setEnableScroll}  setImageChange={props.setImageChange} setMouseDownFunction={props.setMouseDownFunction}
                          setShowMoreOptions={setShowMoreOptions} showMoreOptions={showMoreOptions} xScrollbarreal={xScrollbarreal}/>}
-                        {subMeniuOption == "Rating" && <LeftMeniuExperienceSelector setImageChange={props.setImageChange} setMouseDownFunction={props.setMouseDownFunction} />}
+                        {subMeniuOption == "Rating" && <LeftMeniuExperienceSelector setImageChange={props.setImageChange} setMouseDownFunction={props.setMouseDownFunction}  setExperience={props.setExperience} showExperience={props.showExperience} setShowComments={props.setShowComments} showComments={props.showComments}/>}
                         {subMeniuOption == "Arrow" && props.SwimlineMode && <div>
                                 <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
                                 <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Arrow' />
@@ -255,7 +253,6 @@ function LeftMeniu(props: LeftMeniuProps) {
                                         strokeWidth={3}
                                         fill={'Black'}
                                         onClick={() => props.setClickFunction('DrawArrow')}
-
                                 />
                                 <Text x={100}
                                         y={105} text={"Arrow"} align={"center"} fontSize={14} />

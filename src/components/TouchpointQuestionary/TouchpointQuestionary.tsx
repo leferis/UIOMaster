@@ -50,7 +50,7 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
 
   return (
     <div className={styles.TouchpointQuestionary} style={{ paddingTop: "20px" }}>
-      <div style={{overflowY:"scroll", minHeight:"100px", maxHeight:"600px"}}>
+      <div style={{overflowY:"auto", minHeight:"100px", maxHeight:"900px"}}>
       {props.TouchPoints.map((x: any, index: number) => {
         return (
           <div style={{ paddingBottom: index == props.TouchPoints.length - 1 ? "0px" : "30px" }}>

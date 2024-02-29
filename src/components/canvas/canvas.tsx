@@ -88,6 +88,8 @@ interface CanvasProps {
    showComments: any;
    showCustomerExperience:any;
    setOpenHelp:any;
+   setExperience:any;
+   setShowComments:any;
 }
 
 function Canvas(props: CanvasProps) {
@@ -247,7 +249,7 @@ function Canvas(props: CanvasProps) {
          showModal={props.setShowModal} showQuestionary={props.setshowQuestionary} Journeys={props.Journey} getImages={props.GetImage} getImageObject={props.getImageObject}
          currentJourney={props.currentJourney} addNewActor={props.addNewActorinTheEnd}
          setActions={props.setActions} openModal={props.setShowModal} setShowSettings={props.setShowSettings} setImageChange={props.setImageChange}
-         addNewActorDragAndDrop={props.addNewActorDragAndDrop} setOpenStatistics={props.setOpenStatistics} setOpenHelp={props.setOpenHelp}
+         addNewActorDragAndDrop={props.addNewActorDragAndDrop} setOpenStatistics={props.setOpenStatistics} setOpenHelp={props.setOpenHelp} showExperience={props.showCustomerExperience} setExperience={props.setExperience} setShowComments={props.setShowComments} showComments={props.showComments}
       />
       {props.SwimlineMode && <Legend actors={props.ActorsCJML} setActors={props.setActors} />}
 

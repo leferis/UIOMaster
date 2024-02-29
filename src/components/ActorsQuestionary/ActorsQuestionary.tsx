@@ -29,6 +29,7 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
   }
 
   return (<div className={styles.ActorsQuestionary}>
+     <div style={{overflowY:"auto", minHeight:"100px", maxHeight:"900px"}}>
     <form>
       {props.tempActors.map((x: Actors, index: number) => {
 
@@ -37,6 +38,7 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
             paddingTop: "20px"
           }
           }>
+            
             <Grid container style={{ background: "#f1f2f4", paddingBottom: "30px", borderRadius: "20px" }} spacing={2} justifyContent="center"
               alignItems="center" rowSpacing={2}>
               <Grid item xs={3}></Grid>
@@ -76,7 +78,7 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
       })}
 
     </form>
-   
+   </div>
     <br></br>
 
     <Button style={{position:"absolute", left:"50px"}} variant="outlined" onClick={() => {

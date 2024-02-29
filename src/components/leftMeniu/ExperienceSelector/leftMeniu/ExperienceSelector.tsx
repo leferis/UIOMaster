@@ -1,9 +1,15 @@
+import { Checkbox } from '@mui/material';
 import React, { FC } from 'react';
 import { Rect, Text, Image as Images, Group } from 'react-konva';
+import { Html } from 'react-konva-utils';
 
 interface LeftMeniuExperienceSelectorProps {
    setMouseDownFunction:any;
    setImageChange:any;
+   setExperience:any;
+   showExperience:any;
+   showComments:any;
+   setShowComments:any;
 }
 
 function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
@@ -19,10 +25,41 @@ function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
       return image;
   }
   let xPos = 40;
-  let yPos =120;
+  let yPos = 290;
    return(<>
     <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
-      <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Rating' />
+    <Text x={100} y={15} fontSize={20} fontStyle='Bold' text='Miscellaneous' />
+
+      <Html divProps={{
+              style: {
+                position: 'absolute',
+                top: '6%',
+                left: '3.5%',
+              },
+            }}>
+      <span>Show UX</span>
+
+      <br></br>
+      <Checkbox
+            defaultChecked={props.showExperience}
+            onChange={(e: any) => {
+              props.setExperience(!props.showExperience)
+            }} 
+            />
+             <br></br>
+               <span>Show Comments</span>
+               <br/>
+               <Checkbox
+            defaultChecked={props.showComments}
+            onChange={(e: any) => {
+              props.setExperience(!props.setShowComments)
+            }} 
+            />
+      </Html>
+
+
+    
+      <Text x={100} y={205} fontSize={20} fontStyle='Bold' text='Rating' />
       {ratings.map((x:any) =>{ 
          xPos+=60
          if(xPos>260){

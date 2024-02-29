@@ -79,11 +79,6 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
       <Text x={-5} y={218} align='center' text='Add UX' width={100}fontSize={14} fontVariant='bold'></Text>
     </Group>
 
-    {/* {props.swimLaneMode && <Group onClick={() => {  changeOption("Arrow") }} onTap={() => { changeOption("Arrow") }}> 
-      <LeftMeniuLeftSubMeniuBackgroundAndElement x={27} y={250} height={45} width={45} option={"Arrow"} currentOption={props.option} represenation='Arrow' text='Arrows' />
-      <Text x={18} y={285} text='Arrows' fontSize={14} fontVariant='bold'></Text>
-    </Group>} */}
-
     <Group onClick={() => { props.setStatisticsOn(true); }} onTap={() => {props.setStatisticsOn(true); }}>
     {props.statisticsMode && <Rect x={5} y={props.swimLaneMode ? 314 : 250} height={45+6} width={45+35} cornerRadius={4}  fill={props.statisticsMode? '#d4dbe4':""}  /> }
       <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={props.swimLaneMode ? 314 : 250} height={45} width={45} option={"Statistics"} currentOption={props.option} represenation='Image' img={"\\HelpingImages\\statistics.png"} text='Statistics' />

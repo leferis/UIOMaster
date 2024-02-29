@@ -16,7 +16,6 @@ import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { randomColor } from 'accessible-colors';
-import IntroductionWindow from './components/IntroductionWindow/IntroductionWindow';
 import JourneySelection from './components/JourneySelection/JourneySelection';
 import Statistics from './components/Statistics/Statistics';
 import JourneyBar from './components/JourneyBar/JourneyBar';
@@ -117,7 +116,9 @@ function App() {
           GetImageFullName={GetImageFullName} setImage={setImage} updateCurrentJourney={updateCurrentJourney} addNewAction={addNewAction} setCirlceAtEnd={setCirlceAtEnd} addNewCircle={addNewCircle} setMouseDownFunction={setMouseDownFunction} setDevationMode={setDevationMode}
           setShowModal={setShowModal} setshowQuestionary={setshowQuestionary} GetImage={GetImage} addNewActorinTheEnd={addNewActorinTheEnd} setShowSettings={setShowSettings} setImageChange={setImageChange} addNewActorDragAndDrop={addNewActorDragAndDrop}
           setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID}
-          onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} showCustomerExperience={showCustomerExperience} setOpenHelp={setOpenHelp}/>
+          onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} showCustomerExperience={showCustomerExperience}
+          setOpenHelp={setOpenHelp} setExperience={setShowCustomerExperiece}
+          setShowComments={setShowComments}/>
 
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
         {openHelp && <Help closeHelp={(change:boolean)=>(setOpenHelp(false))} showHelp={openHelp} />}
