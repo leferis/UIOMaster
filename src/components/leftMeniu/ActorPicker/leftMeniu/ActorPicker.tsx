@@ -66,7 +66,7 @@ function LeftMeniuActorPicker(props: LeftMeniuActorPickerProps) {
 
   return (
     <Group>
-      <Html groupProps={{ x: 92, y: 50}} divProps={{ style: { opacity: 1, zindex:"-99", position:"inline" } }}>
+      <Html groupProps={{ x: 92, y: 50}} divProps={{ style: { opacity: 1, zIndex:-99 } }}>
         <Group>
           <b>Actors' sequence</b>
           <DragDropContext onDragEnd={(result) => changeActors(result)} >
