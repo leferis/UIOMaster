@@ -276,13 +276,123 @@
                 }
                 ,
                 {
+                    "Name": "Hospital Computer System",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\hospital-computer-system.svg"
+                }
+                ,
+                {
+                    "Name": "Hospital post office",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\hospital-post-office.svg"
+                }
+                ,
+                {
+                    "Name": "Patient medical record",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\patient-medical-record-1.svg"
+                }
+                ,
+                {
+                    "Name": "Doctor 2",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\doctor-2.svg"
+                },
+                {
+                    "Name": "Doctor 3",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\doctor-3.svg"
+                },
+                {
+                    "Name": "Doctor 4",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\doctor-4.svg"
+                },
+                {
+                    "Name": "Patient medical record 2",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\patient-medical-record-2.svg"
+                }
+                ,
+                {
+                    "Name": "Patient medical record 3",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\patient-medical-record-3.svg"
+                }
+                ,
+                {
+                    "Name": "Hospital 2",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\hospital-2.svg"
+                },
+                {
+                    "Name": "Hospital 3",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\hospital-3.svg"
+                },
+                {
+                    "Name": "Hospital 4",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\hospital-4.svg"
+                },
+                {
                     "Name": "Nurse 2",
                     "Default":true,
                     "GroupPriority":4,
                     "Group":"Health",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\nurse-2.svg"
-                }             
-               
+                },
+                {
+                    "Name": "Nurse 3",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\nurse-3.svg"
+                },
+                {
+                    "Name": "Nurse 4",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\nurse-4.svg"
+                },
+                {
+                    "Name": "Health secretary 1",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\health-secretary-1.svg"
+                },
+                {
+                    "Name": "Health secretary 2",
+                    "Default":true,
+                    "GroupPriority":4,
+                    "Group":"Health",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\health-secretary-2.svg"
+                }
+                
             ]
         },
         {
