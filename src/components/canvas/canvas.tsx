@@ -19,6 +19,7 @@ import { Actors } from '../../Classes/Actors';
 import { CJMLArrow } from '../../Classes/CJMLArrow';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import CustomerExperience from '../CustomerExperience/CustomerExperience';
+import TouchpointPhase from '../TouchpointPhase/TouchpointPhase';
 
 
 interface CanvasProps {
@@ -171,7 +172,7 @@ function Canvas(props: CanvasProps) {
                setActors={props.setActors} actors={props.ActorsCJML} setPosY={props.setPosY} posY={props.initialActorPosY} setCurrentObjectID={props.setCurrentObjectReference} addNewActor={props.addNewActor} SwimlineMode={props.SwimlineMode}
                actions={props.actions} circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
             />}
-
+         {props.Journey.length > 0 && <TouchpointPhase actions={props.actions} touchpoints={props.circles}/>}
          {props.Journey.length > 0 && <TouchPoint remove={props.remove} Circle={props.circles} Arrows={props.Arrows} setArrows={props.setArrows} updateCircles={props.setCircles} arrowId={props.initialArrowId} setArrowId={props.setNewArrowId} ClickFunction={props.ClickFunction} setDrawingArrowMode={props.setDrawingArrowMode}
             drawingArrow={props.drawingArrow} currentObject={props.currentObject} setCurrentObjectID={props.setCurrentObjectReference} setClickFunction={props.setClickFunction} Images={props.CJMLImageList} actions={props.actions}
             setActions={props.setActions} actors={props.ActorsCJML} setDrawingObject={props.setDrawingObject} DrawingObject={props.DrawingObject} changeArrow={props.changeArrow}

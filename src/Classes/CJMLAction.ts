@@ -19,7 +19,7 @@ export class CJMLAction implements CJMLConnectionUnit{
     Experience:any;
     Comment:any;
     phase:any;
-    constructor(id:string,x:number,y:number, Capacity:boolean, Text:String, devation:boolean,initiator:any, initialSwimlaneX:number,timestamp:any){   
+    constructor(id:string,x:number,y:number, Capacity:boolean, Text:String, devation:boolean,initiator:any, initialSwimlaneX:number,timestamp:any, phase?:any){   
         this.id = id;
         this.x = x;
         this.y = y;
@@ -36,7 +36,7 @@ export class CJMLAction implements CJMLConnectionUnit{
         this.isEditing = false;
         this.Experience = null;
         this.Comment = null;
-        this.phase = null;
+        this.phase = phase?phase:null;
     }
     id: string;
     x: number;

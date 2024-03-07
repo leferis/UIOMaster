@@ -15,7 +15,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
     var arrowId = 0;
     var swimlaneXInitial = 400;
     function getTouchPoint(touchpoint: Element, x: number) {
-        var id, init, initLabel, timestamp, receiver, receiverLabel, channel, compliance;
+        var id, init, initLabel, timestamp, receiver, receiverLabel, channel, compliance, phase;
         console.log(touchpoint)
         id = getID(touchpoint, 'touchpointID');
         init = getActorsattributeName(touchpoint.getElementsByTagName('initiator')[0].getElementsByTagName('refersTo')[0]);
@@ -25,18 +25,31 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         compliance = getStatus(getID(touchpoint, 'compliance'));
         channel = getID(touchpoint.getElementsByTagName('channel')[0], 'channelName');
         timestamp = getID(touchpoint.getElementsByTagName('timestamps')[0], 'timeConsumed');
-        let circle = new CJMLCircle(id, x, 0, false, id[0] == 'D' ? true : false, receiver.value, init.value, channel, receiverLabel, initLabel, swimlaneXInitial, 0, 0, timestamp, compliance);
+        phase = getAttributes(touchpoint.getElementsByTagName('belongsTo'));
+        let circle = new CJMLCircle(id, x, 0, false, id[0] == 'D' ? true : false, receiver.value, init.value, channel, receiverLabel, initLabel, swimlaneXInitial, 0, 0, timestamp, compliance,phase);
         circle.Comment = new Comments( getID(touchpoint, 'comment'), false)
         circle.Experience = new Experience(getID(touchpoint.getElementsByTagName('touchpointExperience')[0], 'experienceDescription'))
         return circle
     }
+
+    function getAttributes(element:any){
+        console.log(element[0])
+        try{
+        return element[0].getAttribute("phaseIDref") 
+        }
+        catch{
+            return null
+        }
+    }
+
     function getAction(action: Element, x: number, actors:Actors[]) {
-        var id, init, label, timestamp;
+        var id, init, label, timestamp, phase;
         id = getID(action, 'touchpointID');
         init = getActorsattributeName(action.getElementsByTagName('initiator')[0].getElementsByTagName('refersTo')[0]);
         label = getID(action.getElementsByTagName('initiator')[0], 'initiatorLabel');
         timestamp = getID(action.getElementsByTagName('timestamps')[0], 'timeCompleted');
-        var actions = new CJMLAction(id, x, 0, false, label, id[0] == 'D' ? true : false, init.value, swimlaneXInitial, timestamp);
+        phase = getAttributes(action.getElementsByTagName('belongsTo'));
+        var actions = new CJMLAction(id, x, 0, false, label, id[0] == 'D' ? true : false, init.value, swimlaneXInitial, timestamp, phase);
         actions.Comment = new Comments( getID(action, 'comment'), false)
         actions.Experience = new Experience(getID(action.getElementsByTagName('touchpointExperience')[0], 'experienceDescription'))
         return actions
