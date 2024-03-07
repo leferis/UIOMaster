@@ -214,15 +214,36 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         }
         return name;
     }
+
+    function getColorFromTheList(defaultColors:any, actorType:string){
+        if(actorType != "endUser"){
+             if(defaultColors["other"].length>0)
+                return defaultColors["other"].shift();
+            else 
+                return randomColor();
+        } 
+        else if(actorType == "endUser"){
+            if(defaultColors["endUser"].length>0)
+            return defaultColors["endUser"].shift();
+        else 
+            return randomColor();
+        }
+    }
+
     function parseActors(actors: HTMLCollection) {
         var actorsList: any[] = [];
+        var defaultColors = {"endUser" :["#E46C0A"],
+        "other" : ["#3BA0BB", "#77933C", "#B3A2C7"],
+        "doctor": ["#B7DEE8"],
+        "patient": ["#31859C"]
+    }
         let yLocation = 200;
         for (var i = 0; i < actors.length; i++) {
             var name = getActorsattributeName(actors[i]).nodeValue;
             var Title = getActorsName(actors[i]);
             var image = GetImage(getImageOfActor(actors[i]), "Actor");
             image = image == undefined ? "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg" : image;
-            var color = randomColor();
+            var color = getColorFromTheList(defaultColors, actors[i].nodeName);
             const actorEntrie = new Actors(Title == null ? name : Title, name, image, yLocation, 200, 700, 130, actors[i].nodeName == 'endUser' ? true : false);
             actorEntrie.color = color;
             yLocation += 200;

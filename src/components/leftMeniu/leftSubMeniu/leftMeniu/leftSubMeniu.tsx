@@ -76,7 +76,7 @@ function LeftMeniuLeftSubMeniu(props: LeftMeniuLeftSubMeniuProps) {
 
     <Group onClick={() => { changeOption("Rating")  }}  onTap={() => { changeOption("Rating") }}>
       <LeftMeniuLeftSubMeniuBackgroundAndElement x={26} y={175} height={59} width={45} option={"Rating"} currentOption={props.option} represenation='Image' text='Rating' swimLaneMode={props.swimLaneMode} img={"\\HelpingImages\\satisfied.png"} />
-      <Text x={-5} y={218} align='center' text='Add UX' width={100}fontSize={14} fontVariant='bold'></Text>
+      <Text x={-5} y={212} align='center' text='Advanced Features' width={100}fontSize={14} fontVariant='bold'></Text>
     </Group>
 
     <Group onClick={() => { props.setStatisticsOn(true); }} onTap={() => {props.setStatisticsOn(true); }}>

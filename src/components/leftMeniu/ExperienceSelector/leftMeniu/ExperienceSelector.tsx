@@ -33,8 +33,8 @@ function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
       <Html divProps={{
               style: {
                 position: 'absolute',
-                top: '6%',
-                left: '3.5%',
+                top: '60px',
+                left: '120px',
               },
             }}>
       <span>Show UX</span>
@@ -52,7 +52,7 @@ function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
                <Checkbox
             defaultChecked={props.showComments}
             onChange={(e: any) => {
-              props.setExperience(!props.setShowComments)
+              props.setShowComments(!props.showComments)
             }} 
             />
       </Html>
