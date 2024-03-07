@@ -16,7 +16,6 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
     var swimlaneXInitial = 400;
     function getTouchPoint(touchpoint: Element, x: number) {
         var id, init, initLabel, timestamp, receiver, receiverLabel, channel, compliance, phase;
-        console.log(touchpoint)
         id = getID(touchpoint, 'touchpointID');
         init = getActorsattributeName(touchpoint.getElementsByTagName('initiator')[0].getElementsByTagName('refersTo')[0]);
         receiver = getActorsattributeName(touchpoint.getElementsByTagName('receiver')[0].getElementsByTagName('refersTo')[0]);
