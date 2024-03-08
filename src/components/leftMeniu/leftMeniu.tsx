@@ -56,6 +56,8 @@ interface LeftMeniuProps {
         setExperience:any;
         showComments:any;
         setShowComments:any;
+        showPhase:any;
+        setShowPhase:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -230,7 +232,12 @@ function LeftMeniu(props: LeftMeniuProps) {
                         {subMeniuOption == "Touchpoint" && <LeftMeniuTouchpointSelector Images={props.Images} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} addNewAction={props.addNewAction} addNewCircle={props.addNewCircle} circles={props.circles}
                          setActions={props.setActions} setCircles={props.setCircles} setCirlceAtEnd={props.setCirlceAtEnd} setEnableScroll={setEnableScroll}  setImageChange={props.setImageChange} setMouseDownFunction={props.setMouseDownFunction}
                          setShowMoreOptions={setShowMoreOptions} showMoreOptions={showMoreOptions} xScrollbarreal={xScrollbarreal}/>}
-                        {subMeniuOption == "Rating" && <LeftMeniuExperienceSelector setImageChange={props.setImageChange} setMouseDownFunction={props.setMouseDownFunction}  setExperience={props.setExperience} showExperience={props.showExperience} setShowComments={props.setShowComments} showComments={props.showComments}/>}
+                        {subMeniuOption == "Rating" && <LeftMeniuExperienceSelector setImageChange={props.setImageChange} setMouseDownFunction={props.setMouseDownFunction}  
+                        setExperience={props.setExperience} showExperience={props.showExperience} setShowComments={props.setShowComments}
+                         showComments={props.showComments}
+                         setShowPhase={props.setShowPhase}
+                         showPhase={props.showPhase}
+                         />}
                         {subMeniuOption == "Arrow" && props.SwimlineMode && <div>
                                 <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
                                 <Text x={110} y={15} fontSize={20} fontStyle='Bold' text='Arrow' />

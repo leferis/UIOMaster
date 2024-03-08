@@ -3,7 +3,7 @@ import { CJMLAction } from "../Classes/CJMLAction";
 import { CJMLCircle } from "../Classes/CJMLCircle";
 import {collisionSwim, moveElement} from "../Functions/Movement"
 export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Action: CJMLAction[], SwimlineMode: boolean, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, circles: CJMLCircle[], setActions: any, index: any, isPlanned: boolean,
-   arrowId:any, setArrowId:any, setArrows:any) {
+   arrowId:any, setArrowId:any, setArrows:any, phase?:any) {
    
       let yPosOfMouse
       let xPosOfMouse
@@ -25,7 +25,7 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
                 actorIn = circle.initiator
               }}
               let differnce = SwimlineMode?36:20
-              return { ...circle, initiator: actorIn, y: actorIn != undefined ? actorIn.y + differnce : 200};
+              return { ...circle, initiator: actorIn, y: actorIn != undefined ? actorIn.y + differnce : 200, phase:phase};
           }
           return circle;
         })

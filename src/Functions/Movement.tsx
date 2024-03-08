@@ -56,7 +56,7 @@ function onDragMoveJourney(e: any, Circle: CJMLCircle[], touchPoint: any, update
   elementCheckCloseToBorder(e.target.getPosition().x);
 }
 
-function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any,  actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean,arrowId:any, setArrowId:any, setArrows:any) {
+function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any,  actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean,arrowId:any, setArrowId:any, setArrows:any, phase?:any) {
   let yPosOfMouse
   let xPosOfMouse
   var max = 0;
@@ -90,7 +90,7 @@ function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJM
           if( actorIn != undefined && !actorIn.isEndUser){
             actorIn = circle.initiator
           }}
-        return { ...circle,  swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", swimlaneReceiverY: circle.receiver.y + 20, y:actorIn != undefined? actorIn.y+ actorIn.height/2: 200, devation: isDevation };
+        return { ...circle,  swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", swimlaneReceiverY: circle.receiver.y + 20, y:actorIn != undefined? actorIn.y+ actorIn.height/2: 200, devation: isDevation, phase:phase };
       }
       return circle;
     })
@@ -266,13 +266,14 @@ export function collisionSwim(positionY: any, elements: CJMLCircle | CJMLAction,
 }
 
 export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJMLCircle[], SwimlineMode: boolean, updateCircles: any, changeArrow: any, actions: CJMLAction[], setActions: any, index: any, isPlanned: boolean,
-  arrowId:any, setArrowId:any, setArrows:any) {
+  arrowId:any, setArrowId:any, setArrows:any, phase?:any) {
   if (SwimlineMode) {
-    onDragEndJourney(e, touchPoint, actors, Circle, SwimlineMode, updateCircles, changeArrow, actions, setActions, index, isPlanned, arrowId, setArrowId, setArrows)
+    onDragEndJourney(e, touchPoint, actors, Circle, SwimlineMode, updateCircles, changeArrow, actions, setActions, index, isPlanned, arrowId, setArrowId, setArrows, phase)
   }
   else {
     let yPosOfMouse
     let xPosOfMouse
+    let phaseOption:string;
     if (e.target.attrs.y != null) {
       yPosOfMouse = e.target.attrs.y;
       xPosOfMouse = e.target.attrs.x;
@@ -283,6 +284,12 @@ export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJM
     }
     var actorIn: Actors | undefined = collisionSwim(yPosOfMouse, touchPoint, actors);
 
+    if(phase==undefined || phase == null){
+      phaseOption= touchPoint.phase
+    }
+    else{
+      phaseOption = phase
+    }
     if (actorIn != undefined) {
       const circles2 = Circle.map(circle => {
         if (circle.id == touchPoint.id) {
@@ -298,22 +305,22 @@ export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJM
                   
                   tempActor = JSON.parse(JSON.stringify(circle.initiator));
                   tempy = circle.initiator.y + 20;
-                  return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200 };
+                  return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200, phase:phaseOption };
                 }}
               if(!swap){
               
                 tempActor = JSON.parse(JSON.stringify(circle.initiator));
                 tempy = circle.initiator.y + 20;
-                return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200 };
+                return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200, phase:phaseOption };
               }
               else{
                 tempActor = JSON.parse(JSON.stringify(circle.receiver));
                 tempy = tempActor.y + 20;
                 if(actorIn?.id != tempActor?.id){
-              return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200 };
+              return { ...circle, initiator: actorIn, swimlaneY: actorIn != undefined ? actorIn.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: tempActor, swimlaneReceiverY: tempActor != undefined ? tempy : 200, phase:phaseOption };
                 }
                 else{
-                  return { ...circle, initiator: circle.initiator, swimlaneY: circle.initiator != undefined ? circle.initiator.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: circle.receiver, swimlaneReceiverY: circle.receiver != undefined ? circle.receiver.y + 20 : 200 };
+                  return { ...circle, initiator: circle.initiator, swimlaneY: circle.initiator != undefined ? circle.initiator.y + 20 : 200, initiatorColor: actorIn != undefined ? actorIn.color : "#fff", receiver: circle.receiver, swimlaneReceiverY: circle.receiver != undefined ? circle.receiver.y + 20 : 200, phase:phaseOption };
                 }
               }
         }

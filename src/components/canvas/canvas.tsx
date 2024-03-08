@@ -96,6 +96,7 @@ interface CanvasProps {
 function Canvas(props: CanvasProps) {
 
    const [procentage,setProcentage] = useState(100)
+   const [showPhase, setShowPhase] = useState(true)
 
    return (<Stage width={window.innerWidth} height={(window.innerHeight - 175)}
       onMouseUp={(e) => {
@@ -172,7 +173,12 @@ function Canvas(props: CanvasProps) {
                setActors={props.setActors} actors={props.ActorsCJML} setPosY={props.setPosY} posY={props.initialActorPosY} setCurrentObjectID={props.setCurrentObjectReference} addNewActor={props.addNewActor} SwimlineMode={props.SwimlineMode}
                actions={props.actions} circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
             />}
-         {props.Journey.length > 0 && !props.SwimlineMode  && <TouchpointPhase actions={props.actions} touchpoints={props.circles}/>}
+
+         {props.Journey.length > 0 && !props.SwimlineMode  && <TouchpointPhase actions={props.actions} 
+         touchpoints={props.circles} updateActions={props.setActions} updateCircles={props.setCircles}
+         showPhase={showPhase}
+         />}
+
          {props.Journey.length > 0 && <TouchPoint remove={props.remove} Circle={props.circles} Arrows={props.Arrows} setArrows={props.setArrows} updateCircles={props.setCircles} arrowId={props.initialArrowId} setArrowId={props.setNewArrowId} ClickFunction={props.ClickFunction} setDrawingArrowMode={props.setDrawingArrowMode}
             drawingArrow={props.drawingArrow} currentObject={props.currentObject} setCurrentObjectID={props.setCurrentObjectReference} setClickFunction={props.setClickFunction} Images={props.CJMLImageList} actions={props.actions}
             setActions={props.setActions} actors={props.ActorsCJML} setDrawingObject={props.setDrawingObject} DrawingObject={props.DrawingObject} changeArrow={props.changeArrow}
@@ -251,6 +257,7 @@ function Canvas(props: CanvasProps) {
          currentJourney={props.currentJourney} addNewActor={props.addNewActorinTheEnd}
          setActions={props.setActions} openModal={props.setShowModal} setShowSettings={props.setShowSettings} setImageChange={props.setImageChange}
          addNewActorDragAndDrop={props.addNewActorDragAndDrop} setOpenStatistics={props.setOpenStatistics} setOpenHelp={props.setOpenHelp} showExperience={props.showCustomerExperience} setExperience={props.setExperience} setShowComments={props.setShowComments} showComments={props.showComments}
+         showPhase={showPhase} setShowPhase={setShowPhase}
       />
       {props.SwimlineMode && <Legend actors={props.ActorsCJML} setActors={props.setActors} />}
 

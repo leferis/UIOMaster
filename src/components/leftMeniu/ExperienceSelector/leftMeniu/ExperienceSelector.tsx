@@ -10,6 +10,8 @@ interface LeftMeniuExperienceSelectorProps {
    showExperience:any;
    showComments:any;
    setShowComments:any;
+   showPhase:any;
+   setShowPhase:any;
 }
 
 function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
@@ -25,7 +27,7 @@ function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
       return image;
   }
   let xPos = 40;
-  let yPos = 290;
+  let yPos = 320;
    return(<>
     <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
     <Text x={100} y={15} fontSize={20} fontStyle='Bold' text='Miscellaneous' />
@@ -55,11 +57,21 @@ function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
               props.setShowComments(!props.showComments)
             }} 
             />
+             <br/>
+             
+             <span>Show Phases</span>
+               <br/>
+               <Checkbox
+            defaultChecked={props.showPhase}
+            onChange={(e: any) => {
+              props.setShowPhase(!props.showPhase)
+            }} 
+            />
       </Html>
 
 
     
-      <Text x={100} y={205} fontSize={20} fontStyle='Bold' text='Rating' />
+      <Text x={100} y={245} fontSize={20} fontStyle='Bold' text='Rating' />
       {ratings.map((x:any) =>{ 
          xPos+=60
          if(xPos>260){

@@ -923,8 +923,19 @@ function App() {
         const circleToWork = circles.filter((x) => {
           return x.id == initialId
         })
+        let diff = 99999, phase = null;
+         circles.concat(actions as any).forEach(element => {
+          if(diff > Math.abs(element.swimlaneX-circleToWork[0].swimlaneX)  && Math.abs(element.swimlaneX-circleToWork[0].swimlaneX)!= 0){
+            diff = Math.abs(element.swimlaneX-circleToWork[0].swimlaneX);
+            phase = element.phase
+          }
+        });
         const index = circles.indexOf(circleToWork[0]);
-        onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, actions, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows);
+        if(circles[index].phase != undefined){
+          console.log(circles[index])
+          phase = circles[index].phase
+        }
+        onDragEnd(e, circleToWork[0], ActorsCJML, circles, SwimlineMode, setCircles, changeArrow, actions, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows, phase);
         setNewID(initialId + 1)
         findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
 
@@ -935,8 +946,15 @@ function App() {
         const actionToWork = actions.filter((x) => {
           return x.id == initialId
         })
+        let diff = 99999, phase = null;
+        circles.concat(actions as any).forEach(element => {
+         if(diff > Math.abs(element.swimlaneX-actionToWork[0].swimlaneX) && Math.abs(element.swimlaneX-actionToWork[0].swimlaneX)!= 0){
+           diff = Math.abs(element.swimlaneX-actionToWork[0].swimlaneX);
+           phase = element.phase
+         }
+       });
         const index = actions.indexOf(actionToWork[0]);
-        onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows);
+        onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows, phase);
         setNewID(initialId + 1)
         findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
       }
@@ -972,10 +990,13 @@ function App() {
           if (circles.length > 0 || actions.length > 0) {
             let maxLengthAction = Math.max.apply(Math, actions.map(x => x.x));
             let maxLengthCircles = Math.max.apply(Math, circles.map(x => x.x));
-            positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 200 : maxLengthCircles + 200;
+            positionX = maxLengthAction > maxLengthCircles ? maxLengthAction + 50 : maxLengthCircles + 50;
           }
         }
-        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.layerY - (layerEl.current.attrs.y), false, DevationMode, ActorsCJML[1], ActorsCJML[0], "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter text", "Enter text", swimlaneXInitial, isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
+        
+        let newCircle = new CJMLCircle(initialId, SwimlineMode ? e.evt.layerX - (layerEl.current.attrs.x) : positionX, isOnActor != undefined ? isOnActor.y + isOnActor.height / 2 : e.evt.layerY - (layerEl.current.attrs.y), false, DevationMode, ActorsCJML[1], ActorsCJML[0],
+         "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - communication point\\unknown-channel.svg", "Enter text", "Enter text", swimlaneXInitial, 
+         isOnActor != undefined ? isOnActor.y : e.evt.layerY - (layerEl.current.attrs.y), ActorsCJML[1].y, Date.now(), TouchPointStatus.Completed);
         setCircles((prevCircles) => [
           ...prevCircles,
           newCircle
