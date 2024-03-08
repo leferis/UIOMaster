@@ -39,14 +39,14 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
          height={3}
          ChangeFunction={(val: any, x: any) => {
             const circles = props.touchPoints.map((circle: any) => {
-               if (circle.swimlaneX  >= props.phase.start && circle.swimlaneX  <= props.phase.start) {
+               if (circle.swimlaneX  >= props.phase.start && circle.swimlaneX  < props.phase.end) {
                   return { ...circle, phase: val };
                }
                return circle;
             })
             props.updateCircles(circles);
             const actions = props.actions.map((action: any) => {
-               if (action.swimlaneX  >= props.phase.start && action.swimlaneX  <= props.phase.start) {
+               if (action.swimlaneX  >= props.phase.start && action.swimlaneX  < props.phase.end) {
                   return { ...action, phase: val };
                }
                return action;
@@ -57,14 +57,15 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
          modifyObject={props.phase.phaseName}
          changeEditable={(val: any, x: any) => {
             const circles = props.touchPoints.map((circle: any) => {
-               if (circle.swimlaneX  >= props.phase.start && circle.swimlaneX  <= props.phase.start) {
+               if (circle.swimlaneX  >= props.phase.start && circle.swimlaneX  < props.phase.end) {
+                  console.log(circle)
                   return { ...circle, phase: val };
                }
                return circle;
             })
             props.updateCircles(circles);
             const actions = props.actions.map((action: any) => {
-               if (action.swimlaneX  >= props.phase.start && action.swimlaneX  <= props.phase.start) {
+               if (action.swimlaneX  >= props.phase.start && action.swimlaneX  < props.phase.end) {
                   return { ...action, phase: val };
                }
                return action;
@@ -75,14 +76,14 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
          }}
          ChangeBack={(val: any, x: any) => {
             const circles = props.touchPoints.map((circle: any) => {
-               if (circle.swimlaneX >= props.phase.start && circle.swimlaneX  <= props.phase.start) {
+               if (circle.swimlaneX >= props.phase.start && circle.swimlaneX  < props.phase.end) {
                   return { ...circle, phase: val };
                }
                return circle;
             })
             props.updateCircles(circles);
             const actions = props.actions.map((action: any) => {
-               if (action.swimlaneX  >= props.phase.start && action.swimlaneX  <= props.phase.start) {
+               if (action.swimlaneX  >= props.phase.start && action.swimlaneX  < props.phase.end) {
                   return { ...action, phase: val };
                }
                return action;
