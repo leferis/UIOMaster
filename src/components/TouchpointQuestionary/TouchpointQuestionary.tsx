@@ -10,8 +10,10 @@ import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { createFilterOptions } from '@mui/material/Autocomplete';
+import { Autocomplete, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, IconButton, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, TextField, Tooltip } from '@mui/material';
 
-import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, IconButton, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, TextField, Tooltip } from '@mui/material';
+
 interface TouchpointQuestionaryProps {
   CJMLImageList: any;
   TouchPoints: any;
@@ -47,6 +49,14 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
       return false;
     }
   }
+
+  const filter = createFilterOptions<string>();
+  let unique: any = []
+  props.TouchPoints.forEach((element:any) => {
+    if (!unique.includes(element.phase)){
+    unique.push(element.phase)}
+  });
+  
 
   return (
     <div className={styles.TouchpointQuestionary} style={{ paddingTop: "20px" }}>
@@ -190,8 +200,44 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
                 </Grid>
               }
 
+              <Grid item xs={6}>
+                <Autocomplete 
+                value={x.phase == null?"":x.phase}
+                selectOnFocus
+                clearOnBlur
+                handleHomeEndKeys
+                options={unique}
+                onChange={(event, newValue) => {
+                  console.log(newValue);
+                  let tempt = props.TouchPoints;
+                  tempt[index].phase = newValue.inputValue;
+                  props.updateTouhcPoints(JSON.parse(JSON.stringify(tempt)));
+                }}
+                filterOptions={(options, params) => {
+                  const filtered = filter(options, params);
+          
+                  const { inputValue } = params;
+                  // Suggest the creation of a new value
+                  const isExisting = options.some((option) => inputValue === option);
+                  if (inputValue !== '' && !isExisting) {
+                    filtered.push(inputValue
+                    );
+                  }
 
-              <Grid item xs={12}>
+                  return filtered;
+                }}
+                getOptionLabel={(option) => {
+                  return option;
+                }}
+                renderOption={(props, option) => <li {...props}>{option}</li>}
+                sx={{ width: 300 }}
+                freeSolo
+                renderInput={(params) => (
+                  <TextField {...params} label="Phase" />
+                )}
+                />
+              </Grid>
+              <Grid item xs={6}>
                 <TextField label="Time Consumed" type="datetime-local" value={x.timestamp} />
               </Grid>
             </Grid>

@@ -35,7 +35,10 @@ function TouchpointPhase(props: TouchpointPhaseProps) {
    if ((currentPhase != "" || currentPhase != undefined ) && mergedPoints.length > 0) {
       phaseObjects.push({ phaseName: mergedPoints[mergedPoints.length - 1].phase, start: currentPhaseStart, end: mergedPoints[mergedPoints.length - 1].swimlaneX +200})
    }
-   if((phaseObjects.length <= 1 && (phaseObjects[0].phaseName == ""  || phaseObjects[0].phaseName == null || phaseObjects[0].phaseName == undefined ))|| !props.showPhase){
+   if(phaseObjects.length == 0){
+      return (<></>);
+   }
+   else if((phaseObjects.length == 1 && (phaseObjects[0].phaseName == ""  || phaseObjects[0].phaseName == null || phaseObjects[0].phaseName == undefined ))|| !props.showPhase){
       return (<></>);
    }
    return (<Group>
