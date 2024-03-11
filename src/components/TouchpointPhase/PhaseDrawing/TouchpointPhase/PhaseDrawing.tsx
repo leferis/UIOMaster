@@ -34,7 +34,7 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
          value={props.phase.phaseName}
          fontSize={16}
          default={""}
-         width={80}
+         width={props.phase.end - (props.phase.start + (props.phase.end - props.phase.start) / 2 - 35)}
          isEditing={isEditing}
          height={3}
          ChangeFunction={(val: any, x: any) => {
