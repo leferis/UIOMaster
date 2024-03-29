@@ -51,7 +51,7 @@ function Comments(props: CommentsProps) {
         fill='white'
         strokeWidth={3} />
       <Text x={referenceNode.x + 25} y={referenceNode.y + 280} text='Comments' fontSize={14} />
-      <Images x={referenceNode.x + 40} y={referenceNode.y + 230} image={getImageObject("\\HelpingImages\\help.png")} height={40} width={40} /></>}
+      <Images x={referenceNode.x + 40} y={referenceNode.y + 230} image={getImageObject("\\HelpingImages\\information.png")} height={40} width={40} /></>}
       <Group>
         {props.touchpoints.map((x: CJMLCircle, index: any) => {
           if (!props.diagramType) {

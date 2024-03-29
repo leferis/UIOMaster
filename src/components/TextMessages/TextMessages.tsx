@@ -16,8 +16,9 @@ interface TextMessagesProps {
   changeEditable: any;
   ChangeBack: any;
   default: any;
+  allignMiddle?:any;
 }
-function getStyle(width: number, height: number, fontSize: number) {
+function getStyle(width: number, height: number, fontSize: number,middle:any) {
   const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
   const baseStyle = {
     width: `${width}px`,
@@ -29,7 +30,9 @@ function getStyle(width: number, height: number, fontSize: number) {
     resize: "none",
     colour: "black",
     fontSize: `${fontSize}px`,
-    fontFamily: "sans-serif"
+    textAlign: `${middle}`,
+    fontFamily: "sans-serif",
+   
   };
   if (isFirefox) {
     return baseStyle;
@@ -48,7 +51,7 @@ const changeMouse = (e: any, style: any) => {
 
 function TextMessages(props: TextMessagesProps) {
 
-  const style: any = getStyle(props.width, props.height + 30, props.fontSize);
+  const style: any = getStyle(props.width, props.height + 30, props.fontSize, props.allignMiddle == true? "center":"start");
   if (props.isEditing) {
     return (
       <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1 } }}>
@@ -75,6 +78,7 @@ function TextMessages(props: TextMessagesProps) {
         perfectDrawEnabled={false}
         width={props.width}
         height={props.height * 2}
+        align={props.allignMiddle==true?"center":"left"}
         onClick={(e) => {
           props.changeEditable(props.modifyObject);
         }}

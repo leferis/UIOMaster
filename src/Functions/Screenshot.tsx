@@ -1,3 +1,4 @@
+import { AnyMxRecord } from "dns";
 import { Actors } from "../Classes/Actors";
 import { CJMLAction } from "../Classes/CJMLAction";
 import { CJMLCircle } from "../Classes/CJMLCircle";
@@ -8,12 +9,23 @@ function SortActorsByY(actors: Actors[]) {
     })
     return result;
   }
+
+function calculateShift(commentsEnabled:boolean, experienceEnabled:boolean){
+  if(experienceEnabled){
+    return 400;
+  }
+  if( commentsEnabled){
+    return 200;
+  }
+  return 0;
+}
   
-export function findImagePoints(actors: Actors[], swimLaneMode: boolean, cirlces: CJMLCircle[], actions: CJMLAction[]) {
+export function findImagePoints(actors: Actors[], swimLaneMode: boolean, cirlces: CJMLCircle[], actions: CJMLAction[], commentsEnabled:boolean, experienceEnabled:boolean) {
+    let shiftOfScreenshot = calculateShift(commentsEnabled,experienceEnabled);
+    
     let result = SortActorsByY(actors,);
     if (!swimLaneMode) {
-  
-      return { y: result[0].y, height: result[result.length - 1].y + result[result.length - 1].height, width: result[0].width + 200 };
+      return { y: result[0].y, height: result[result.length - 1].y + result[result.length - 1].height + shiftOfScreenshot, width: result[0].width + 200 };
     }
     else {
       let communicationOrderByY = cirlces.sort((x, y) => {

@@ -275,7 +275,7 @@ function LeftMeniu(props: LeftMeniuProps) {
 
                 </Layer>}
                 <Layer ref={layerStat}>
-                        <LeftMeniuLeftSubMeniu openModal={props.openModal} imagespoints={() => { return findImagePoints(props.actors, props.SwimlineMode, props.circles, props.actions) }}
+                        <LeftMeniuLeftSubMeniu openModal={props.openModal} imagespoints={() => { return findImagePoints(props.actors, props.SwimlineMode, props.circles, props.actions, props.showComments, props.showExperience) }}
                                 mainLayer={props.mainLayer} openForm={props.showQuestionary} option={subMeniuOption}
                                 setRenderMeniu={setRenderMeniu} setOption={setSubMeniuOption} layer={layerEl}
                                 swimLaneMode={props.SwimlineMode} setStatisticsOn={props.setOpenStatistics} statisticsMode={enableStatistics}

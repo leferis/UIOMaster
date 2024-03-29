@@ -30,11 +30,11 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
          stroke="black"
          strokeWidth={1}
       />
-      <TextMessages x={props.phase.start + (props.phase.end - props.phase.start) / 2 - 35} y={144}
+      <TextMessages x={props.phase.start} y={144}
          value={props.phase.phaseName}
          fontSize={16}
          default={""}
-         width={props.phase.end - (props.phase.start + (props.phase.end - props.phase.start) / 2 - 35)}
+         width={props.phase.end-props.phase.start}
          isEditing={isEditing}
          height={3}
          ChangeFunction={(val: any, x: any) => {
@@ -91,7 +91,9 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
 
             props.updateActions(actions);
             setEditing(false);
-         }} />
+         }}
+         allignMiddle={true}
+         />
 
    </Group>)
 }
