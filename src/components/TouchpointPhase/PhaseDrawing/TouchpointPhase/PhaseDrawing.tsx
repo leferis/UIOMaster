@@ -30,13 +30,13 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
          stroke="black"
          strokeWidth={1}
       />
-      <TextMessages x={props.phase.start} y={144}
+      <TextMessages x={props.phase.start} y={142}
          value={props.phase.phaseName}
          fontSize={16}
          default={""}
          width={props.phase.end-props.phase.start}
          isEditing={isEditing}
-         height={3}
+         height={13}
          ChangeFunction={(val: any, x: any) => {
             const circles = props.touchPoints.map((circle: any) => {
                if (circle.swimlaneX  >= props.phase.start && circle.swimlaneX  < props.phase.end) {

@@ -31,6 +31,7 @@ function getStyle(width: number, height: number, fontSize: number,middle:any) {
     colour: "black",
     fontSize: `${fontSize}px`,
     textAlign: `${middle}`,
+    
     fontFamily: "sans-serif",
    
   };
@@ -77,8 +78,9 @@ function TextMessages(props: TextMessagesProps) {
         fontSize={props.fontSize}
         perfectDrawEnabled={false}
         width={props.width}
-        height={props.height * 2}
+        height={props.height * 2 }
         align={props.allignMiddle==true?"center":"left"}
+        verticalAlign="middle"
         onClick={(e) => {
           props.changeEditable(props.modifyObject);
         }}
