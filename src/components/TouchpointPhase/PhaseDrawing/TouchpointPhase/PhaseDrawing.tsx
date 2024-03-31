@@ -93,6 +93,7 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
             setEditing(false);
          }}
          allignMiddle={true}
+         verticalMiddle={true}
          />
 
    </Group>)

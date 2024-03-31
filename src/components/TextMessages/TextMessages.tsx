@@ -17,6 +17,7 @@ interface TextMessagesProps {
   ChangeBack: any;
   default: any;
   allignMiddle?:any;
+  verticalMiddle?:any;
 }
 function getStyle(width: number, height: number, fontSize: number,middle:any) {
   const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
@@ -80,7 +81,7 @@ function TextMessages(props: TextMessagesProps) {
         width={props.width}
         height={props.height * 2 }
         align={props.allignMiddle==true?"center":"left"}
-        verticalAlign="middle"
+        verticalAlign={props.allignMiddle==true?"middle":""}
         onClick={(e) => {
           props.changeEditable(props.modifyObject);
         }}
