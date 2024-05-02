@@ -68,6 +68,7 @@ function App() {
   const [colourList, setColourList] =useState(["#77933C","#B3A2C7"])
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
+  const [showId, setShowId] = useState(false);
 
   const setCurrentObjectReference = (data: any) => {
     CurrentObjectReference.current = data;
@@ -118,7 +119,7 @@ function App() {
           setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID}
           onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} showCustomerExperience={showCustomerExperience}
           setOpenHelp={setOpenHelp} setExperience={setShowCustomerExperiece}
-          setShowComments={setShowComments}/>
+          setShowComments={setShowComments} showId ={showId} setShowId={setShowId}/>
 
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
         {openHelp && <Help closeHelp={(change:boolean)=>(setOpenHelp(false))} showHelp={openHelp} />}
@@ -135,6 +136,7 @@ function App() {
           currentJurney={currentJourney} setJourneys={setJouney}
           setComments={setShowComments} setExperience={setShowCustomerExperiece}
           showComments={showComments} showExperience={showCustomerExperience}
+          setShowId={setShowId} showId={showId}
         ></Settings>}
         {/* {showSaveList && <SaveList showSaveList={showSaveList} closeSaveList={setSavesList} setJourneys={setJouney} switchJourneys={changeJourneyCurrent} setNewID={setNewID}></SaveList>} */}
         {openStatistics && <Statistics Journeys={Journey} actions={actions} circles={circles} currentJourney={currentJourney} handleClose={setOpenStatistics} show={openStatistics} />}

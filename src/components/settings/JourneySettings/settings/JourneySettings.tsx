@@ -12,6 +12,8 @@ interface SettingsJourneySettingsProps {
   setExperience:any;
   showExperience:any;
   showComments:any;
+  showId:any;
+  setShowId:any;
 }
 
 
@@ -89,6 +91,15 @@ function SettingsJourneySettings(props: SettingsJourneySettingsProps) {
             onChange={(e: any) => {
               props.setExperience(!props.showExperience)
             }} />} label={"Show user experience"} />
+        </FormGroup>
+      </Grid>
+      <Grid item xs={4}>
+        <FormGroup>
+          <FormControlLabel labelPlacement="top" control={<Checkbox
+            defaultChecked={props.showId}
+            onChange={(e: any) => {
+              props.setShowId(!props.showId)
+            }} />} label={"Show touchpointIds"} />
         </FormGroup>
       </Grid>
     </Grid>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './TouchPoint/TouchPointSwimlane.module.css';
-import { Arrow, Circle, Group, Line, Rect } from 'react-konva';
+import { Arrow, Circle, Group, Line, Rect, Text } from 'react-konva';
 import TextMessages from '../../../TextMessages/TextMessages';
 import { CJMLCircle } from '../../../../Classes/CJMLCircle';
 import { TouchPointStatus } from '../../../../enumerator/TouchPointStatus';
@@ -42,6 +42,7 @@ interface TouchPointSwimlaneProps {
   setArrows: any;
   arrowId: any;
   setArrowId: any;
+  showId:any;
 }
 
 
@@ -307,6 +308,15 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
             <Button color="error" variant="outlined" onClick={() => (props.remove())} startIcon={<DeleteIcon />} />
           </Html>
         </ElementChangeBar>}
+        {props.showId && 
+        <Text x={props.touchPoint.devation ? props.touchPoint.x - 10 : props.touchPoint.x - 10 }
+        y={props.touchPoint.devation ? props.touchPoint.y + 40 : props.touchPoint.y + 40} 
+        height={20}
+        fontSize={15}
+        width={100}
+        text={props.touchPoint.id}
+        />
+        }
       </Group>
     </div>
   )

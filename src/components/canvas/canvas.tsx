@@ -91,6 +91,8 @@ interface CanvasProps {
    setOpenHelp:any;
    setExperience:any;
    setShowComments:any;
+   showId:any;
+   setShowId:any;
 }
 
 function Canvas(props: CanvasProps) {
@@ -187,6 +189,7 @@ function Canvas(props: CanvasProps) {
             isPlanned={props.Journey[props.currentJourney].isPlanned}
             makeBiggerActors={props.makeBiggerActors}
             findFurthestPoint={props.findFurthestPoint} setActors={props.setActors}
+            showId={props.showId}
          ></TouchPoint>}
          <ActionPoints swimlaneMode={props.SwimlineMode} setActions={props.setActions}
             remove={props.remove}
@@ -205,9 +208,10 @@ function Canvas(props: CanvasProps) {
             circles={props.circles}
             findFurthestPoint={props.findFurthestPoint}
             checkIfCloseToActorsBorder={props.makeBiggerActors} setActors={props.setActors}
+            showId={props.showId}
          ></ActionPoints>
-         {props.showCustomerExperience && <CustomerExperience actions={props.actions} actors={props.ActorsCJML} circles={props.circles} diagramType={props.SwimlineMode} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} />}
-         {props.showComments && <Comments actions={props.actions} actors={props.ActorsCJML} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} diagramType={props.SwimlineMode} />}
+         {props.showCustomerExperience && <CustomerExperience actions={props.actions} actors={props.ActorsCJML} circles={props.circles} diagramType={props.SwimlineMode} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles}  showComments = {props.showComments}/>}
+         {props.showComments && <Comments actions={props.actions} actors={props.ActorsCJML} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} diagramType={props.SwimlineMode} showCustomerExperience = {props.showCustomerExperience} />}
          {props.Journey.length > 0 && props.ImageChange != undefined && !props.openHome && <KonvaImage x={props.ImageChange?.x - 15} y={props.ImageChange?.y - 15} height={30} width={30} image={props.getImageObject(props.ImageChange.Image)}></KonvaImage>}
          {props.ActorsCJML.length > 0 && props.SwimlineMode && <ColorCoding actors={props.ActorsCJML} />}
       </Layer>}

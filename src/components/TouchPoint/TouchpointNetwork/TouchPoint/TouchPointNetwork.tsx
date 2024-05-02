@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Arrow, Circle, Group, Line, Rect } from 'react-konva';
+import { Arrow, Circle, Group, Line, Rect, Text } from 'react-konva';
 import styles from './TouchPoint/TouchPointNetwork.module.css';
 import { CJMLCircle } from '../../../../Classes/CJMLCircle';
 import { Actors } from '../../../../Classes/Actors';
@@ -44,6 +44,7 @@ interface TouchPointNetworkProps {
   findFurthestPoint: any;
   ChangeDevation: any;
   setActors: any;
+  showId: any;
 }
 
 function TouchPointNetwork(props: TouchPointNetworkProps) {
@@ -117,6 +118,25 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
       <Line points={[props.touchPoint.swimlaneX, props.touchPoint.swimlaneY + 80, props.touchPoint.swimlaneX + 180, props.touchPoint.swimlaneY]} stroke={'black'}
         strokeWidth={2} opacity={TouchPointStatus[props.touchPoint.Status] == "Failing" ? 1 : 0}></Line>
+
+        {props.showId && 
+        <Text x={props.touchPoint.devation ? props.touchPoint.swimlaneX +50 : props.touchPoint.swimlaneX + 70 }
+        y={props.touchPoint.devation ? props.touchPoint.swimlaneY - 40 : props.touchPoint.swimlaneY - 40} 
+        height={20}
+        fontSize={15}
+        width={100}
+        text={props.touchPoint.id}
+        />
+        }
+         {props.showId && 
+        <Text x={props.touchPoint.devation ? props.touchPoint.swimlaneX +50 : props.touchPoint.swimlaneX + 70 }
+        y={props.touchPoint.devation ? props.touchPoint.swimlaneReceiverY - 40 : props.touchPoint.swimlaneReceiverY - 40} 
+        height={20}
+        fontSize={15}
+        width={100}
+        text={props.touchPoint.id}
+        />
+        }
 
       {!props.touchPoint.isEditing && <Rect x={props.touchPoint.swimlaneX}
         y={props.touchPoint.swimlaneY}

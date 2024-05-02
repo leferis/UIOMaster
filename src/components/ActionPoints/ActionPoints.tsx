@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Arrow, Circle, Group, Rect } from 'react-konva';
+import { Arrow, Circle, Group, Rect, Text } from 'react-konva';
 import { Actors } from '../../Classes/Actors';
 import { CJMLAction } from '../../Classes/CJMLAction';
 import { CJMLArrow } from '../../Classes/CJMLArrow';
@@ -42,6 +42,7 @@ interface ActionPointsProps {
   remove: any;
   findFurthestPoint: any;
   setActors:any;
+  showId:any;
 }
 
 function ActionPoints(props: ActionPointsProps) {
@@ -65,6 +66,7 @@ function ActionPoints(props: ActionPointsProps) {
                 opacity={x.Capacity ? 1 : 0}
               >
               </Rect>
+         
               <Arrow
                 points={[x.x + 45, x.y + 30, x.x + 140, x.y + 30]}
                 stroke={'black'}
@@ -171,11 +173,19 @@ function ActionPoints(props: ActionPointsProps) {
               }
             />
             }
-
+              {props.showId && 
+        <Text x={props.swimlaneMode ? x.x +40 : x.x +120 }
+        y={props.swimlaneMode ? x.y + 70  : x.y - 40} 
+        height={20}
+        fontSize={16}
+        width={100}
+        text={x.id}
+        />
+        }   
           </div>
         );
       })}
-
+        
     </div>
   );
 

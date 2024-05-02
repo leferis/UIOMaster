@@ -13,6 +13,7 @@ interface CommentsProps {
   setActions: any;
   setTouchpoints: any;
   diagramType: any;
+  showCustomerExperience:any;
 }
 
 function Comments(props: CommentsProps) {

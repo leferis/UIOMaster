@@ -48,6 +48,8 @@ interface SettingsProps {
   showExperience:any;
   setComments:any;
   setExperience:any;
+  setShowId:any;
+  showId:any;
 }
 
 
@@ -98,7 +100,7 @@ function Settings(props: SettingsProps) {
         </Tabs>
         {JourneyPart && <SettingsJourneySettings currentJourney={journeyClone} journeys={props.journeys} 
         setTempJourney={setJourneyClone} setComments={props.setComments} setExperience={props.setExperience}
-        showComments={props.showComments} showExperience={props.showExperience} />}
+        showComments={props.showComments} showExperience={props.showExperience} setShowId={props.setShowId}  showId = {props.showId} />}
         {ActorPart && <SettingsActorSettings actors={actorClone} setTempActors={setActorClone} Images={props.Images}/>}
         {TouchpointPart &&  <SettingsTouchpointSettings updateCircles={setTouchpointClone} Images={props.Images} circles={touchpointClone} />}
         <Button  style={{top:"15px"}} variant="contained" color="success" onClick={()=>{
