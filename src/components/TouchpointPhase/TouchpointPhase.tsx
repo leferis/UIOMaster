@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Group, Label, Tag, Text, Shape } from 'react-konva';
 import TextMessages from '../TextMessages/TextMessages';
 import TouchpointPhasePhaseDrawing from './PhaseDrawing/TouchpointPhase/PhaseDrawing';
+import { last } from 'lodash';
 
 
 interface TouchpointPhaseProps {
@@ -16,9 +17,9 @@ interface TouchpointPhaseProps {
 function TouchpointPhase(props: TouchpointPhaseProps) {
    let mergedPoints = props.touchpoints.concat(...props.actions);
    mergedPoints.sort((x: any, y: any) => {
-      return x.x - y.x
+      return x.swimlaneX - y.swimlaneX
    });
-  
+  console.log(mergedPoints)
    let phaseObjects = [], currentPhase = "", currentPhaseStart = 0;
    mergedPoints.forEach((element: any) => {
       if (currentPhase == "") {
@@ -30,15 +31,15 @@ function TouchpointPhase(props: TouchpointPhaseProps) {
          currentPhase = element.phase
          currentPhaseStart = element.swimlaneX
       }
-
    });
+  
    mergedPoints.sort((x,y)=>{
       return x.swimlaneX - y.swimlaneX
    })
-   if ((currentPhase != "" || currentPhase != undefined ) && mergedPoints.length > 0) {
+   if ((currentPhase != "" || currentPhase != undefined ) && mergedPoints.length > 0 ) {
       phaseObjects.push({ phaseName: mergedPoints[mergedPoints.length - 1].phase, start: currentPhaseStart, end: mergedPoints[mergedPoints.length - 1].swimlaneX +200})
    }
-
+   console.log(phaseObjects)
    if(phaseObjects.length == 0){
       return (<></>);
    }
