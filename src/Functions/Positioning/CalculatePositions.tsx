@@ -27,7 +27,7 @@ export function findFurthestPoint(circles: CJMLCircle[], actions: CJMLAction[], 
     let actors = _.cloneDeep(ActorsCJML);
     actors = actors.map((x) => {
         if (furhterPoint - x.x > x.width) {
-            x.width = furhterPoint - x.x + 280;
+            x.width = furhterPoint - x.x + 150;
         }
         return x;
     })

@@ -58,7 +58,6 @@ function TouchpointPhasePhaseDrawing(props: TouchpointPhasePhaseDrawingProps) {
          changeEditable={(val: any, x: any) => {
             const circles = props.touchPoints.map((circle: any) => {
                if (circle.swimlaneX  >= props.phase.start && circle.swimlaneX  < props.phase.end) {
-                  console.log(circle)
                   return { ...circle, phase: val };
                }
                return circle;

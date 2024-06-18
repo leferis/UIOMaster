@@ -19,7 +19,7 @@ function TouchpointPhase(props: TouchpointPhaseProps) {
    mergedPoints.sort((x: any, y: any) => {
       return x.swimlaneX - y.swimlaneX
    });
-  console.log(mergedPoints)
+
    let phaseObjects = [], currentPhase = "", currentPhaseStart = 0;
    mergedPoints.forEach((element: any) => {
       if (currentPhase == "") {
@@ -39,7 +39,6 @@ function TouchpointPhase(props: TouchpointPhaseProps) {
    if ((currentPhase != "" || currentPhase != undefined ) && mergedPoints.length > 0 ) {
       phaseObjects.push({ phaseName: mergedPoints[mergedPoints.length - 1].phase, start: currentPhaseStart, end: mergedPoints[mergedPoints.length - 1].swimlaneX +200})
    }
-   console.log(phaseObjects)
    if(phaseObjects.length == 0){
       return (<></>);
    }

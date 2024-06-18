@@ -310,7 +310,6 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
                 }
                 if (circle.id == props.touchPoint.id) {
                   if (!props.SwimlineMode && circle.initiator == actorIn) {
-                    console.log(circle)
                     tempActor = JSON.parse(JSON.stringify(circle.receiver));
                     tempy = circle.receiver.y + 20;
                     return { ...circle, receiver: actorIn, swimlaneReceiverY: actorIn != undefined ? actorIn.y + 20 : 200, initiator: tempActor, swimlaneY: tempActor != undefined ? tempy : 200, initiatorColor: tempActor != undefined ? tempActor.color : "#fff" };
@@ -331,7 +330,7 @@ function TouchPointNetwork(props: TouchPointNetworkProps) {
 
               props.updateCircles(circles);
               props.changeArrow(e, props.touchPoint.id, circles.filter(y => y.id == props.touchPoint.id)[0]);
-              props.findFurthestPoint(props.Circle, props.actions, props.actors, props.setActors);
+            
               moveElement(circles, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions, props.arrowId, props.setArrowId, props.setArrows);
             } else {
               moveElement(props.Circle, props.index, e.target.attrs.x, props.actions, props.updateCircles, props.setActions, props.arrowId, props.setArrowId, props.setArrows);

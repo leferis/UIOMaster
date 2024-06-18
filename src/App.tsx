@@ -794,7 +794,7 @@ function App() {
       const actorsTemp = ActorsCJML;
       const overalMax = maxXAction > maxXCircles ? maxXAction : maxXCircles;
       actorsTemp.forEach(x => {
-        let temp = (overalMax) - (x.x + x.width) + 200;
+        let temp = (overalMax) - (x.x + x.width);
         if (x.width + temp > 700) {
           x.width += temp;
         }
@@ -817,12 +817,12 @@ function App() {
   function makeActorsBigger(position: number) {
     let maxValue = -999;
     circles.forEach(x => {
-      if (x.x > maxValue)
-        maxValue = x.x;
+      if (x.swimlaneX + x.width> maxValue)
+        maxValue = x.swimlaneX+ x.width;
     })
     actions.forEach(x => {
-      if (x.x > maxValue) {
-        maxValue = x.x;
+      if (x.swimlaneX+ x.width > maxValue) {
+        maxValue = x.swimlaneX + x.width;
       }
     })
     if (maxValue < position) {
@@ -830,8 +830,10 @@ function App() {
     }
     const actorsTemp = ActorsCJML;
     actorsTemp.forEach(x => {
-      x.width = maxValue + 200;
+      x.width = maxValue;
     })
+    console.log("works")
+    console.log(maxValue)
     setActors(actorsTemp);
   }
 
@@ -1112,6 +1114,7 @@ function App() {
     image.src = imgName;
     return image;
   }
+
   function setImageToTouchpoint(e: any) {
     let yPosOfMouse: number;
     let xPosOfMouse: number;
