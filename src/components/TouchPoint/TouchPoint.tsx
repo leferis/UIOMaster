@@ -88,10 +88,6 @@ function TouchPoint(props: TouchPointProps) {
           </>)
         }
         else {
-          console.log(x);
-          console.log(props.layerEl);
-          console.log(props.layerEl.current._lastPos.x * -1 + props.layerEl.current.attrs.width);
-
           if(render(x)){
           return (
             <TouchPointNetwork remove={props.remove} Circle={props.Circle} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} arrowId={props.arrowId} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction}
@@ -109,6 +105,8 @@ function TouchPoint(props: TouchPointProps) {
   );
 
   function render(x:any){
+    if(props.layerEl.current._lastPos == null)
+      return true;
     if(props.layerEl.current._lastPos.x * -1 > props.actors[0].x + 5 -50  && props.layerEl.current._lastPos.x * -1 < props.actors[0].width  ){
       if(props.layerEl.current._lastPos.x * -1 + 300 < x.swimlaneX && props.layerEl.current._lastPos.x * -1 + props.layerEl.current.canvas.width > x.swimlaneX){
         console.log(x);

@@ -242,6 +242,8 @@ function ActionPoints(props: ActionPointsProps) {
 
 
   function render(x:any){
+    if(props.layerEl.current._lastPos == null)
+      return true;
     if(props.layerEl.current._lastPos.x * -1 > props.actors[0].x + 5 -50  && props.layerEl.current._lastPos.x * -1 < props.actors[0].width  ){
       if(props.layerEl.current._lastPos.x * -1 + 300 < x.swimlaneX && props.layerEl.current._lastPos.x * -1 + props.layerEl.current.canvas.width > x.swimlaneX){
         console.log(x);
