@@ -173,7 +173,7 @@ function Canvas(props: CanvasProps) {
             <ActorPoint
                currentObject={props.currentObject} getImageObject={props.getImageObject} Images={props.CJMLImageList} remove={props.remove}
                setActors={props.setActors} actors={props.ActorsCJML} setPosY={props.setPosY} posY={props.initialActorPosY} setCurrentObjectID={props.setCurrentObjectReference} addNewActor={props.addNewActor} SwimlineMode={props.SwimlineMode}
-               actions={props.actions} circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles}
+               actions={props.actions} circles={props.circles} setActions={props.setActions} updateCircles={props.setCircles} layer={props.layerEl}
             />}
 
          {props.Journey.length > 0 && !props.SwimlineMode  && <TouchpointPhase actions={props.actions} 
@@ -189,7 +189,7 @@ function Canvas(props: CanvasProps) {
             isPlanned={props.Journey[props.currentJourney].isPlanned}
             makeBiggerActors={props.makeBiggerActors}
             findFurthestPoint={props.findFurthestPoint} setActors={props.setActors}
-            showId={props.showId}
+            showId={props.showId} layerEl={props.layerEl}
          ></TouchPoint>}
          <ActionPoints swimlaneMode={props.SwimlineMode} setActions={props.setActions}
             remove={props.remove}
@@ -208,7 +208,7 @@ function Canvas(props: CanvasProps) {
             circles={props.circles}
             findFurthestPoint={props.findFurthestPoint}
             checkIfCloseToActorsBorder={props.makeBiggerActors} setActors={props.setActors}
-            showId={props.showId}
+            showId={props.showId} layerEl={props.layerEl}
          ></ActionPoints>
          {props.showCustomerExperience && <CustomerExperience actions={props.actions} actors={props.ActorsCJML} circles={props.circles} diagramType={props.SwimlineMode} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles}  showComments = {props.showComments}/>}
          {props.showComments && <Comments actions={props.actions} actors={props.ActorsCJML} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} diagramType={props.SwimlineMode} showCustomerExperience = {props.showCustomerExperience} />}

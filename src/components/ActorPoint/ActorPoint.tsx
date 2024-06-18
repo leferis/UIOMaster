@@ -28,6 +28,7 @@ interface ActorPointProps {
   setActions: any;
   updateCircles: any;
   remove: any;
+  layer: any;
 }
 
 
@@ -38,7 +39,7 @@ function ActorPoint(props: ActorPointProps) {
 
   function getImage(x: any) {
     let img = props.getImageObject(x.img);
-    return (<Images x={x.x + 45} y={x.y + 35} image={img} />)
+    return (<Images x={getPosition(x.x , x.width)+ 45} y={x.y + 35} image={img} />)
   }
 
   const changeMouse = (e: any, style: any) => {
@@ -76,6 +77,16 @@ function ActorPoint(props: ActorPointProps) {
       return false;
     }
   });
+
+  function getPosition(element: any, maxSize:any){
+    if(props.layer.current._lastPos == null){
+      return element
+    }
+    if(props.layer.current._lastPos.x * -1 > element -50  && props.layer.current._lastPos.x * -1 < maxSize - 500 ){
+      return props.layer.current._lastPos.x * -1 + 200
+    }
+    return element;
+  }
 
 
   return (<div>
@@ -132,7 +143,7 @@ function ActorPoint(props: ActorPointProps) {
           y={act.y}
         />
 
-        <TextMessages x={act.x + 5} y={act.y + 75} height={32} width={105} fontSize={18} value={act.Title} modifyObject={act} isEditing={act.isEditing} default={"Enter actor's name"}  verticalMiddle={false} allignMiddle={true}
+        <TextMessages x={getPosition(act.x + 5, act.width)} y={act.y + 75} height={32} width={105} fontSize={18} value={act.Title} modifyObject={act} isEditing={act.isEditing} default={"Enter actor's name"}  verticalMiddle={false} allignMiddle={true}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObjectID(-1);
             const circles = props.actors.map(act => {

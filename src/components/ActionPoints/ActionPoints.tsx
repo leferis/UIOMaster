@@ -43,12 +43,16 @@ interface ActionPointsProps {
   findFurthestPoint: any;
   setActors:any;
   showId:any;
+  layerEl:any;
 }
 
 function ActionPoints(props: ActionPointsProps) {
   return (
     <div>
       {props.actions.map((x: CJMLAction, index: number) => {
+        if(!props.swimlaneMode && !render(x)){
+          return(<></>)
+        }
         return (
           <div>
             {x.id == props.currentObject.id && <ElementChangeBar x={x.swimlaneX + 30} y={x.y - 90}>
@@ -236,6 +240,23 @@ function ActionPoints(props: ActionPointsProps) {
     checkClickFunction(clickedObject, e);
   }
 
+
+  function render(x:any){
+    if(props.layerEl.current._lastPos.x * -1 > props.actors[0].x + 5 -50  && props.layerEl.current._lastPos.x * -1 < props.actors[0].width  ){
+      if(props.layerEl.current._lastPos.x * -1 + 300 < x.swimlaneX && props.layerEl.current._lastPos.x * -1 + props.layerEl.current.canvas.width > x.swimlaneX){
+        console.log(x);
+        console.log("cbb");
+        return true;
+      }
+      if(props.layerEl.current._lastPos.x * -1 > props.actors[0].width-400 && props.actors[0].width-400  <=  x.swimlaneX-200 ){
+        console.log(x);
+        return true
+      }
+      else return false;
+    }
+
+    return true;
+  }
 }
 
 export default ActionPoints;
