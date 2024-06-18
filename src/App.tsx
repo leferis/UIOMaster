@@ -76,11 +76,12 @@ function App() {
   };
 
   React.useEffect(() => {
-    setCJMLImageList(CJMLImages);
+    // fetch('https://cjmlanalyzerbackend.onrender.com/images/read').then(response => response.json())
+    // .then(data => {setCJMLImageList(data); console.log(data.Images[0].Images)}).catch(() => setCJMLImageList(CJMLImages))
+    setCJMLImageList(CJMLImages)
     if (ActorsCJML.length <= 1) {
       setActors((actorss) => [...actorss,]);
       setNewID(initialId + 2);
-      console.log(ActorsCJML);
       setPosY(initialActorPosY + 300);
     }
   }, [])

@@ -19,7 +19,7 @@ interface TextMessagesProps {
   allignMiddle?:any;
   verticalMiddle?:any;
 }
-function getStyle(width: number, height: number, fontSize: number,middle:any) {
+function getStyle(width: number, height: number, fontSize: number,middle:any, verticalMiddle:any) {
   const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
   const baseStyle = {
     width: `${width}px`,
@@ -32,7 +32,7 @@ function getStyle(width: number, height: number, fontSize: number,middle:any) {
     colour: "black",
     fontSize: `${fontSize}px`,
     textAlign: `${middle}`,
-    
+    textAlignVertical: `${verticalMiddle}`,
     fontFamily: "sans-serif",
    
   };
@@ -53,7 +53,7 @@ const changeMouse = (e: any, style: any) => {
 
 function TextMessages(props: TextMessagesProps) {
 
-  const style: any = getStyle(props.width, props.height + 30, props.fontSize, props.allignMiddle == true? "center":"start");
+  const style: any = getStyle(props.width, props.height + 30, props.fontSize, props.allignMiddle == true? "center":"start", props.verticalMiddle == true? "center":"top");
   if (props.isEditing) {
     return (
       <Html groupProps={{ x: props.x, y: props.y }} divProps={{ style: { opacity: 1 } }}>
@@ -81,7 +81,7 @@ function TextMessages(props: TextMessagesProps) {
         width={props.width}
         height={props.height * 2 }
         align={props.allignMiddle==true?"center":"left"}
-        verticalAlign={props.allignMiddle==true?"middle":""}
+        verticalAlign={props.verticalMiddle==true?"middle":"top"}
         onClick={(e) => {
           props.changeEditable(props.modifyObject);
         }}

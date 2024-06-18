@@ -59,7 +59,6 @@ function ActorPoint(props: ActorPointProps) {
     updateByActors(props.circles, props.actions, props.setActions, props.updateCircles, copyOfActors)
   }
 
-
   const endUserImages = props.Images.Images[0].Images.filter((x: any) => {
     if (x.GroupPriority == 1 && x.Default) {
       return true;
@@ -133,7 +132,7 @@ function ActorPoint(props: ActorPointProps) {
           y={act.y}
         />
 
-        <TextMessages x={act.x + 20} y={act.y + 80} height={25} width={80} fontSize={15} value={act.Title} modifyObject={act} isEditing={act.isEditing} default={"Enter actor's name"}
+        <TextMessages x={act.x + 5} y={act.y + 75} height={32} width={105} fontSize={18} value={act.Title} modifyObject={act} isEditing={act.isEditing} default={"Enter actor's name"}  verticalMiddle={false} allignMiddle={true}
           ChangeFunction={((val: any, x: any) => {
             props.setCurrentObjectID(-1);
             const circles = props.actors.map(act => {
