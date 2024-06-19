@@ -17,6 +17,7 @@ import _ from 'lodash';
 import { Journey } from '../../Classes/Journey';
 import SettingsActorSettings from './ActorSettings/settings/ActorSettings';
 import SettingsTouchpointSettings from './TouchpointSettings/settings/TouchpointSettings';
+import SettingsImageUpload from './imageUpload/settings/imageUpload';
 
 interface SettingsProps {
   Images: any;
@@ -63,7 +64,7 @@ function Settings(props: SettingsProps) {
   const [journeyClone, setJourneyClone] = React.useState(_.cloneDeep(props.journeys[props.currentJurney]));
   const [actorClone, setActorClone] = React.useState(_.cloneDeep(props.Actors));
   const [touchpointClone, setTouchpointClone] = React.useState(_.cloneDeep(props.circles));
-
+  const [SettingsImageUploadstate, setSettingsImageUpload] = React.useState(false);
   return (
     <div className={showHideClassName} style={{
       position: 'fixed',
@@ -94,15 +95,17 @@ function Settings(props: SettingsProps) {
           value={activeTab}
           onChange={(event: React.SyntheticEvent, newValue: number) => setActiveTab(newValue)}
         >
-          <Tab onClick={() => { setJourneyPart(true); setActorPart(false); setToucpointpart(false) }} label="Journey"></Tab>
-          <Tab onClick={() => { setJourneyPart(false); setActorPart(true); setToucpointpart(false)  }} label="Actor"></Tab>
-          <Tab onClick={() => { setJourneyPart(false); setActorPart(false); setToucpointpart(true) }} label="Toucpoints"></Tab>
+          <Tab onClick={() => { setJourneyPart(true); setActorPart(false); setToucpointpart(false); setSettingsImageUpload(false) }} label="Journey"></Tab>
+          <Tab onClick={() => { setJourneyPart(false); setActorPart(true); setToucpointpart(false); setSettingsImageUpload(false)  }} label="Actor"></Tab>
+          <Tab onClick={() => { setJourneyPart(false); setActorPart(false); setToucpointpart(true); setSettingsImageUpload(false) }} label="Toucpoints"></Tab>
+          <Tab onClick={() => { setJourneyPart(false); setActorPart(false); setToucpointpart(false); setSettingsImageUpload(true) }} label="Image upload"></Tab>
         </Tabs>
         {JourneyPart && <SettingsJourneySettings currentJourney={journeyClone} journeys={props.journeys} 
         setTempJourney={setJourneyClone} setComments={props.setComments} setExperience={props.setExperience}
         showComments={props.showComments} showExperience={props.showExperience} setShowId={props.setShowId}  showId = {props.showId} />}
         {ActorPart && <SettingsActorSettings actors={actorClone} setTempActors={setActorClone} Images={props.Images}/>}
         {TouchpointPart &&  <SettingsTouchpointSettings updateCircles={setTouchpointClone} Images={props.Images} circles={touchpointClone} />}
+        {SettingsImageUploadstate && <SettingsImageUpload images={props.Images}  setImages={props.setImage}/>}
         <Button  style={{top:"15px"}} variant="contained" color="success" onClick={()=>{
           props.setShowSettings(false);
           let tempJourneys = _.cloneDeep(props.journeys);

@@ -30,6 +30,7 @@ import Canvas from './components/canvas/canvas';
 import { findFurthestPoint } from './Functions/Positioning/CalculatePositions';
 import Help from './components/Help/Help';
 import { Experience } from './Classes/Experience';
+import { DeserlizeFireBaseResponse } from './Functions/Deserielize';
 
 function App() {
   const [Journey, setJouney] = useState<Journey[]>([]);
@@ -76,8 +77,8 @@ function App() {
   };
 
   React.useEffect(() => {
-    // fetch('https://cjmlanalyzerbackend.onrender.com/images/read').then(response => response.json())
-    // .then(data => {setCJMLImageList(data); console.log(data.Images[0].Images)}).catch(() => setCJMLImageList(CJMLImages))
+     fetch('https://cjmlanalyzerbackend.onrender.com/images/read').then(response => response.json())
+    .then(data => {setCJMLImageList(data); DeserlizeFireBaseResponse(data, setCJMLImageList)}).catch(() => setCJMLImageList(CJMLImages))
     setCJMLImageList(CJMLImages)
     if (ActorsCJML.length <= 1) {
       setActors((actorss) => [...actorss,]);
@@ -1100,6 +1101,7 @@ function App() {
     }
     if (type == "Other") {
       if (Name != null) {
+        console.log(CJMLImageList.Images[1].Images)
         let img = CJMLImageList.Images[1].Images.find((x: any) => { return x.Name.replaceAll(' ', '').toLowerCase() == Name.replaceAll(' ', '').toLowerCase() && x.Default })
         if (img == undefined) {
           img = CJMLImageList.Images[1].Images.find((x: any) => { return x.Name.toLowerCase().replaceAll(' ', '') == Name.toLowerCase() + '1' && x.Default})
