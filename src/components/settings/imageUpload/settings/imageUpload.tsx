@@ -3,6 +3,7 @@ import { Autocomplete, Button, Checkbox, FormControl, FormControlLabel, FormGrou
 import { MuiFileInput } from 'mui-file-input'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
 import { ImageReuqest } from '../../../../Classes/ImageRequest';
+import { toast } from 'react-toastify';
 
 interface SettingsImageUploadProps {
    images: any;
@@ -36,7 +37,8 @@ function SettingsImageUpload(props: SettingsImageUploadProps) {
          let copy = props.images;
          copy.Images[newImage.elementType-1].Images.push(elemets);
          props.setImages(copy);
-      }).finally(()=> {setUpload(false)})
+         toast.success("Image was added")
+      }).catch(()=>{toast.error("The image was not uploaded")}).finally(()=> {setUpload(false); })
    }
    const listOfGroups = Array.from(new Set<string>(props.images.Images[0].Images.map((item:any) => item.Group)))
    return (<Grid style={{
