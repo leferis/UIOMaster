@@ -38,7 +38,7 @@ function App() {
   const [actions, setActions] = useState<CJMLAction[]>([]);
   const [ClickFunction, setClickFunction] = useState<any>('');
   const [Arrows, setArrows] = useState<CJMLArrow[]>([]);
-  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 130, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 400, id: "2", height: 130, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
+  const [ActorsCJML, setActors] = useState<Actors[]>([{ Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg", x: 200, y: 200, id: "1", height: 130, width: 700, color: "#e46c0a", isEndUser: true, isEditing: false }, { Title: "Enter actor's name", img: "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg", x: 200, y: 360, id: "2", height: 130, width: 700, color: "#3b9fbb", isEndUser: false, isEditing: false }]);
   const [initialActorPosY, setPosY] = useState<any>(600);
   const [initialId, setNewID] = useState<any>(3);
   const [initialArrowId, setNewArrowId] = useState<any>(-9999999);
@@ -204,7 +204,6 @@ function App() {
   }
 
   function addNewActorinTheEnd(pathImage: string) {
-    console.log(pathImage)
     var actor = ActorsCJML;
     var actorAfterInsert = ActorsCJML.sort((x, y) => {
       return x.y - y.y;
@@ -552,7 +551,7 @@ function App() {
       return x.y - y.y;
     }).map((value: Actors, index: number) => {
       if (value.id != workingActor.toString()) {
-        value.y = (index + 1) * 200
+        value.y =  (index + 1) * 160 + 40
       }
       else {
         value.x = e.evt.layerX - (layerEl.current.attrs.x != undefined ? layerEl.current.attrs.x : 0);
@@ -608,8 +607,8 @@ function App() {
     acotrsCopy = acotrsCopy.sort((x: Actors, y: Actors) => {
       return x.y - y.y;
     }).map((value: Actors, index: number) => {
-      value.y = (index + 1) * 200
-      value.x = 150;
+      value.y = (index + 1) * 160 + 40
+      value.x = 200;
       return value;
     })
     setActors(acotrsCopy);

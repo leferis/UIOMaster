@@ -93,7 +93,8 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
   const images = props.Images.Images[1].Images.filter((x: any) => {
     return x.Default;
   })
-  
+
+  if(props.touchPoint.receiver.isEndUser || props.touchPoint.initiator.isEndUser )
   return (
     <div>
       <Group >
@@ -320,7 +321,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
       </Group>
     </div>
   )
-
+  else return(<></>)
 
 }
 

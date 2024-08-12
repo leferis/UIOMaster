@@ -57,10 +57,13 @@ interface TouchPointProps {
 }
 
 function TouchPoint(props: TouchPointProps) {
+
   return (
     <div>
       {props.Circle.map((x, index) => {
+
         if (props.SwimlineMode) {
+          if(render(x) ){
           return (
           <>
           <TouchPointSwimlane remove={props.remove} SwimlaneMode={props.SwimlineMode} actors={props.actors} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction} deviationMode={props.devationMode} elementCheckCloseToBorder={props.elementCheckCloseToBorder}
@@ -86,9 +89,10 @@ function TouchPoint(props: TouchPointProps) {
             showId={props.showId}
           ></TouchPointSwimlane>
           </>)
+          }
         }
         else {
-          if(render(x)){
+          if(render(x) ){
           return (
             <TouchPointNetwork remove={props.remove} Circle={props.Circle} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} arrowId={props.arrowId} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction}
               elementCheckCloseToBorder={props.elementCheckCloseToBorder} elementsAreFarFromBorder={props.elementsAreFarFromBorder} getImage={getImage} getImageReceiver={getImageReceiver} index={index}
@@ -105,16 +109,14 @@ function TouchPoint(props: TouchPointProps) {
   );
 
   function render(x:any){
+    let xPos = props.SwimlineMode? x.x: x.swimlaneX;
     if(props.layerEl.current._lastPos == null)
       return true;
     if(props.layerEl.current._lastPos.x * -1 > props.actors[0].x + 5 -50  && props.layerEl.current._lastPos.x * -1 < props.actors[0].width  ){
-      if(props.layerEl.current._lastPos.x * -1 + 300 < x.swimlaneX && props.layerEl.current._lastPos.x * -1 + props.layerEl.current.canvas.width > x.swimlaneX){
-        console.log(x);
-        console.log("cbb");
+      if(props.layerEl.current._lastPos.x * -1 + 300 <xPos && props.layerEl.current._lastPos.x * -1 + props.layerEl.current.canvas.width > xPos){
         return true;
       }
-      if(props.layerEl.current._lastPos.x * -1 > props.actors[0].width-400 && props.actors[0].width-400  <=  x.swimlaneX-200 ){
-        console.log(x);
+      if(props.layerEl.current._lastPos.x * -1 > props.actors[0].width-400 && props.actors[0].width-400  <=  xPos-200 ){
         return true
       }
       else return false;

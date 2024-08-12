@@ -9,6 +9,8 @@ interface ArrowComponentProps {
   setArrows: any;
   setCurrentObject: any;
   SwimlineMode: any;
+  layerEl:any;
+  actors:any;
 }
 
 function ArrowComponent(props: ArrowComponentProps) {
@@ -22,8 +24,23 @@ function ArrowComponent(props: ArrowComponentProps) {
     }
   }
 
+  function render(arrow:CJMLArrow){
+    if(props.layerEl.current._lastPos == null)
+      return true;
+      if(props.layerEl.current._lastPos.x * -1 + 300 <arrow.fromPoint.x && props.layerEl.current._lastPos.x * -1 + props.layerEl.current.canvas.width > arrow.fromPoint.x){
+        return true;
+      }
+      if(props.layerEl.current._lastPos.x * -1 > props.actors[0].width-400 && props.actors[0].width-400  <=  arrow.toPoint.x-200 ){
+        return true
+      }
+      else return false;
+
+  }
+
+
   return (<div>
     {props.SwimlineMode && props.Arrows.map(arrow => {
+      if(render(arrow))
       return (
         <Arrow points={getPoints(arrow)}
           stroke={props.currentObject.id == arrow.id ? 'Red' : '#7F7F7F'}

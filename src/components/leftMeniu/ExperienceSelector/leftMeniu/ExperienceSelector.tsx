@@ -27,51 +27,12 @@ function LeftMeniuExperienceSelector(props:LeftMeniuExperienceSelectorProps){
       return image;
   }
   let xPos = 40;
-  let yPos = 320;
+  let yPos = 150;
    return(<>
     <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
     <Text x={100} y={15} fontSize={20} fontStyle='Bold' text='Miscellaneous' />
 
-      <Html divProps={{
-              style: {
-                position: 'absolute',
-                top: '60px',
-                left: '120px',
-              },
-            }}>
-      <span>Show UX</span>
-
-      <br></br>
-      <Checkbox
-            defaultChecked={props.showExperience}
-            onChange={(e: any) => {
-              props.setExperience(!props.showExperience)
-            }} 
-            />
-             <br></br>
-               <span>Show Comments</span>
-               <br/>
-               <Checkbox
-            defaultChecked={props.showComments}
-            onChange={(e: any) => {
-              props.setShowComments(!props.showComments)
-            }} 
-            />
-             <br/>
-             
-             <span>Show Phases</span>
-               <br/>
-               <Checkbox
-            defaultChecked={props.showPhase}
-            onChange={(e: any) => {
-              props.setShowPhase(!props.showPhase)
-            }} 
-            />
-      </Html>
-
-
-    
-      <Text x={100} y={245} fontSize={20} fontStyle='Bold' text='Rating' />
+      <Text x={100} y={70} fontSize={20} fontStyle='Bold' text='Rating' />
       {ratings.map((x:any) =>{ 
          xPos+=60
          if(xPos>260){

@@ -163,7 +163,8 @@ function Canvas(props: CanvasProps) {
          }}
       >
          {props.SwimlineMode && <SwimlaneInitialValues actions={props.actions} actors={props.ActorsCJML} arrowID={props.initialArrowId} circles={props.circles} setArrowID={props.setNewArrowId} setArrows={props.setArrows} />}
-         <ArrowComponent currentObject={props.currentObject} setCurrentObject={props.setCurrentObjectReference} Arrows={props.Arrows} setArrows={props.setArrows} SwimlineMode={props.SwimlineMode} />
+         <ArrowComponent currentObject={props.currentObject} setCurrentObject={props.setCurrentObjectReference} Arrows={props.Arrows} setArrows={props.setArrows} SwimlineMode={props.SwimlineMode}
+         layerEl={props.layerEl} actors={props.ActorsCJML} />
 
          {/* This square is invisible hitbox to scroll and drag.*/}
          {props.Journey.length > 0 && <Rect x={props.dragBoxLocation[0]} y={props.dragBoxLocation[1]} height={window.innerHeight} width={window.innerWidth}  onClick={() => { props.resetTouchpoints(); }}></Rect>}
