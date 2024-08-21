@@ -70,6 +70,8 @@ function App() {
   const layerEl: any = useRef();
   const CurrentObjectReference = React.useRef(currentObject);
   const [showId, setShowId] = useState(false);
+  const [ctrlPressed, setctrlPressed] = useState(false);
+
 
   const setCurrentObjectReference = (data: any) => {
     CurrentObjectReference.current = data;
@@ -89,9 +91,9 @@ function App() {
 
   React.useEffect(() => {
     document.addEventListener("keyup", deleteElement);
-
+    document.addEventListener("keydown", onKeyUpChange)
     return () => {
-
+      document.removeEventListener("keydown", onKeyUpChange)
       document.removeEventListener('keyup', deleteElement)
     }
   }, [circles, actions, Arrows, ActorsCJML])
@@ -121,7 +123,9 @@ function App() {
           setOpenStatistics={setOpenStatistics} actions={actions} layerEl={layerEl} ClickFunction={ClickFunction} onClickDoes={onClickDoes} mouseDownFunction={mouseDownFunction} onReleaseDoes={onReleaseDoes} setCurrentObjectID={setCurrentObjectID}
           onMouseMovement={onMouseMovement} openHome={openHome} setLocation={setLocation} SwimlineMode={SwimlineMode} Journey={Journey} ImageChange={ImageChange} showComments={showComments} showCustomerExperience={showCustomerExperience}
           setOpenHelp={setOpenHelp} setExperience={setShowCustomerExperiece}
-          setShowComments={setShowComments} showId ={showId} setShowId={setShowId}/>
+          setShowComments={setShowComments} showId ={showId} setShowId={setShowId}
+          ctrlPressed = {ctrlPressed}
+          />
 
         {ShowModal && <ModaWindow handleClose={setShowModal} show={ShowModal} setJourneys={setJouney} getImage={getImageByName} updateCurrentJourney={changeJourneyCurrent} Journeys={Journey} ShowSelectionWindow={setshowAddJourney} />}
         {openHelp && <Help closeHelp={(change:boolean)=>(setOpenHelp(false))} showHelp={openHelp} />}
@@ -341,6 +345,14 @@ function App() {
     if (e.code == 'Delete' /*|| e.code == 'Backspace'*/) {
       remove();
     }
+    console.log(e.code)
+    if (e.code == 'ControlLeft' || e.code == 'ControlRight'){
+      setctrlPressed(true);
+    }
+  }
+
+  function onKeyUpChange(e:any){
+    setctrlPressed(false);
   }
 
   function remove() {

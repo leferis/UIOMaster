@@ -20,6 +20,7 @@ import { CJMLArrow } from '../../Classes/CJMLArrow';
 import { CJMLCircle } from '../../Classes/CJMLCircle';
 import CustomerExperience from '../CustomerExperience/CustomerExperience';
 import TouchpointPhase from '../TouchpointPhase/TouchpointPhase';
+import Increase from '../Panning/Increase';
 
 
 interface CanvasProps {
@@ -93,11 +94,12 @@ interface CanvasProps {
    setShowComments:any;
    showId:any;
    setShowId:any;
+   ctrlPressed:any;
 }
 
 function Canvas(props: CanvasProps) {
 
-   const [procentage,setProcentage] = useState(100)
+   const [procentage,setProcentage] = useState(100);
    const [showPhase, setShowPhase] = useState(true)
 
    return (<Stage width={window.innerWidth} height={(window.innerHeight - 175)}
@@ -143,9 +145,12 @@ function Canvas(props: CanvasProps) {
       onDragMove={(e) => {
          props.onMouseMovement(e);
       }}
+      
+      onWheel = {(e) =>{
 
+      }}
    >
-      {!props.openHome && <Layer id='test' ref={props.layerEl} draggable x={100} y={-100} scaleX={procentage/100} scaleY={procentage/100}
+      {!props.openHome && <Layer id='test' ref={props.layerEl} draggable x={100} y={-100} scaleX={procentage/100} scaleY={procentage/100} onm
 
          onWheel={(e) => {
             
@@ -219,29 +224,7 @@ function Canvas(props: CanvasProps) {
 
             {/*Layer used to scale up and down the layer */}
       {props.layerEl.current != undefined && <Layer>
-         <Group onClick={(e)=>{
-             if(props.layerEl.current.attrs.scaleX>0.4){
-               setProcentage(procentage-10)
-            props.layerEl.current.setScaleX(props.layerEl.current.attrs.scaleX - 0.1)
-            props.layerEl.current.setScaleY(props.layerEl.current.attrs.scaleY - 0.1)
-
-             }
-         }}>
-         <Rect x={window.innerWidth-470} y={window.innerHeight-222} height={20} width={20} fill='gray' cornerRadius={100} 
-         />
-         <Text  x={window.innerWidth-465} y={window.innerHeight-228} text='-' fontSize={32}/>
-         </Group>
-
-         <Text x={window.innerWidth-450} y={window.innerHeight-220} text={((procentage).toFixed(0)).toString() + "%"} align='center' fontSize={18} width={50} />
-         <Group onClick={(e)=>{
-            if(props.layerEl.current.attrs.scaleX<2){
-               setProcentage(procentage+10)
-            props.layerEl.current.setScaleX(props.layerEl.current.attrs.scaleX + 0.1)
-            props.layerEl.current.setScaleY(props.layerEl.current.attrs.scaleY + 0.1)
-            }
-         }}>
-           <Rect x={window.innerWidth-400} y={window.innerHeight-222} height={20} width={20}  cornerRadius={100} fill='gray' />
-         <Text  x={window.innerWidth-399} y={window.innerHeight-224} text='+' fontSize={30}/></Group>
+         <Increase layer={props.layerEl}  procentage={procentage} setProcentage={setProcentage}/>
          </Layer>}
 
 
