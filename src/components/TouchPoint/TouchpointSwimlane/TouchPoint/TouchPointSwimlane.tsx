@@ -103,7 +103,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}
           height={20}
           isEditing={props.touchPoint.isEditing}
-          fontSize={12}
+          fontSize={14}
           value={props.touchPoint.text}
           width={100}
           default={"Enter text"}
@@ -143,7 +143,7 @@ function TouchPointSwimlane(props: TouchPointSwimlaneProps) {
           y={props.touchPoint.devation ? props.touchPoint.y - 20 : props.touchPoint.y - 60}
           height={20}
           isEditing={props.touchPoint.isEditing}
-          fontSize={12}
+          fontSize={14}
           value={props.touchPoint.receiverText}
           width={100}
           default={"Enter text"}

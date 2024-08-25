@@ -113,19 +113,19 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
     return a.x - b.x
   });
   let indexOfFirsChange = objects.findIndex((x: CJMLCircle) => {
-    return x.x + 180 > relativeX;
+    return x.x + 200 > relativeX;
   })
   if (indexOfFirsChange != -1) {
     if (indexOfFirsChange > index) {
       for (let j = 0; j <= indexOfFirsChange; j++) {
-        objects[j].swimlaneX = 400 + (225 * j);
+        objects[j].swimlaneX = 250 + (100 * j);
         if(!objects[j].devation){
           lefover=0
-        objects[j].x = 400 + (150 * (j-lefover)) 
+        objects[j].x = 250 + (100 * (j-lefover)) 
         }
         else{
           lefover++;
-          objects[j].x = 400 + (150 * (j-lefover)) 
+          objects[j].x = 250 + (100 * (j-lefover)) 
         }
       }
 
@@ -139,13 +139,13 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
     }
     else {
       for (let j = indexOfFirsChange; j < objects.length; j++) {
-        objects[j].swimlaneX = 400 + (225 * j);
+        objects[j].swimlaneX = 250 + (100 * j);
         if(!objects[j].devation){
-          objects[j].x = 400 + (150 * (j-lefover)) 
+          objects[j].x = 250 + (100 * (j-lefover)) 
           }
           else{
             lefover++;
-            objects[j].x = 400 + (150 * (j-lefover)) 
+            objects[j].x = 250 + (100 * (j-lefover)) 
           }
       }
 
@@ -188,7 +188,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
     if (indexOfFirsChange > index) {
       for (let j = 0; j <= indexOfFirsChange; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
-        objects[j].x = 400 + (150 * j)
+        objects[j].x = 200 + (100 * j)
       }
 
       for (let j = 0; j < objects.length; j++) {
@@ -203,7 +203,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
     else {
       for (let j = indexOfFirsChange; j < objects.length; j++) {
         objects[j].swimlaneX = 400 + (225 * j);
-        objects[j].x = 400 + (150 * j)
+        objects[j].x = 200 + (100 * j)
       }
 
       for (let j = 0; j < objects.length; j++) {

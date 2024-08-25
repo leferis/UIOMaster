@@ -78,11 +78,11 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
 
         if(objects[j].initiator.isEndUser || objects[j].receiver?.isEndUser){
         if (objects[j].devation == true) {
-            objects[j].x = prevX > 350 ? prevX - 200 : prevX;
+            objects[j].x = prevX > 200 ? prevX - 200 : prevX;
             objects[j].y = devationx;
-            devationx = devationx + 150;
+            devationx = devationx + 100;
             if (j == 0)
-                prevX += 200;
+                prevX += 100;
         }
         else {
             objects[j].x = prevX;
@@ -93,7 +93,7 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
                 objects[j].y = 236;
             }
             devationx = 500;
-            prevX += 200;
+            prevX += 100;
         }
     }
 
