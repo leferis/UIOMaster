@@ -105,28 +105,25 @@ function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJM
 export function moveJourneyElement(elementArray: any, index: any, relativeX: number, actions: any, updateCircles: any, setActions: any,arrowId:any, setArrowId:any, setArrows:any) {
   let objects = JSON.parse(JSON.stringify(elementArray)).concat(JSON.parse(JSON.stringify(actions)));
   let objects2 = elementArray.concat(actions);
-  let lefover = -1;
+  let moveIndex = 0;
   objects.sort((a: CJMLCircle, b: CJMLCircle) => {
     if(a.x == b.x){
-      return  b.y - a.y;
+      return  a.y - b.y;
     }
     return a.x - b.x
   });
-  let indexOfFirsChange = objects.findIndex((x: CJMLCircle) => {
-    return x.x +100 > relativeX;
-  });
-  console.log(indexOfFirsChange)
-  if (indexOfFirsChange != -1) {
-    if (indexOfFirsChange > index) {
 
       for (let j = 0; j < objects.length; j++) {
         objects[j].swimlaneX = 250 + (100 * j);
         if(!objects[j].devation){
-          objects[j].x = 250 + (100 * (j-lefover)) 
+          moveIndex++;
+          objects[j].x = 250 + (100 * moveIndex) 
           }
           else{
-            lefover++;
-            objects[j].x = 250 + (100 * (j-lefover)) 
+            if(moveIndex == 0){
+              moveIndex ++;
+            }
+            objects[j].x = 250 + (100 * moveIndex) 
           }
       }
 
@@ -138,29 +135,7 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
           }
         }
       }
-    }
-    else {
-      console.log("pataikiau uz indexo")
-      for (let j = 0; j < objects.length; j++) {
-        objects[j].swimlaneX = 250 + (100 * j);
-        if(!objects[j].devation){
-          objects[j].x = 250 + (100 * (j-lefover)) 
-          }
-          else{
-            lefover++;
-            objects[j].x = 250 + (100 * (j-lefover)) 
-          }
-      }
-
-      for (let j = 0; j < objects.length; j++) {
-        for (let k = 0; k < objects.length; k++) {
-          if (objects2[k].id == objects[j].id) {
-            objects2[k].swimlaneX = objects[j].swimlaneX;
-            objects2[k].x = objects[j].x;
-          }
-        }
-      }
-    }
+    
    
     var actionsTemp: CJMLAction[] = [];
     var touch: CJMLCircle[] = []
@@ -176,7 +151,7 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
     updateCircles(touch);
     remakeArrows(touch,actionsTemp, arrowId,setArrowId,setArrows)
   }
-}
+
 
 export function moveElement(elementArray: any, index: any, relativeX: number, actions: any, updateCircles: any, setActions: any,arrowId:any, setArrowId:any, setArrows:any) {
   let objects = JSON.parse(JSON.stringify(elementArray)).concat(JSON.parse(JSON.stringify(actions)));
@@ -245,6 +220,7 @@ export function remakeArrows(Circle: any, actions: any, arrowId: number, setArro
       return a.x - b.x ;
     }
   })
+  console.log(objects);
   for (let i = 0; i < objects.length - 1; i++) {
     let arrow = new CJMLArrow(arrowId, objects[i], objects[i + 1]);
     arrow.Draw();

@@ -42,8 +42,12 @@ function getPositions(objects: any) {
 function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
   let objects = _.cloneDeepWith<any>(props.circles)
   let objectsAction = _.cloneDeep<any>(props.actions)
-  objects = objects.concat(objectsAction).sort((x: any, y: any) => {
-    return x.x - y.x
+  objects = objects.concat(objectsAction).sort((a: any, b: any) => {
+    if (a.x == b.x) {
+      return a.y - b.y ;
+    } else {
+      return a.x - b.x ;
+    }
   });
 
   const endUser = props.actors.filter((x: Actors) => {

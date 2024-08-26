@@ -76,26 +76,29 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
 
     for (let j = 0; j < objects.length; j++) {
 
-        if(objects[j].initiator.isEndUser || objects[j].receiver?.isEndUser){
-        if (objects[j].devation == true) {
-            objects[j].x = prevX > 200 ? prevX - 200 : prevX;
-            objects[j].y = devationx;
-            devationx = devationx + 100;
-            if (j == 0)
-                prevX += 100;
-        }
-        else {
-            objects[j].x = prevX;
-            if (objects[j].receiver != undefined) {
-                objects[j].y = 265;
+        if (objects[j].initiator.isEndUser || objects[j].receiver?.isEndUser) {
+            if (objects[j].devation == true) {
+                objects[j].x = prevX;
+                objects[j].y = devationx;
+                devationx = devationx + 100;
             }
             else {
-                objects[j].y = 236;
+                if(prevX >= 350){
+                    prevX = prevX+100;
+                }
+                objects[j].x = prevX;
+                if (objects[j].receiver != undefined) {
+                    objects[j].y = 265;
+                }
+                else {
+                    objects[j].y = 236;
+                }
+                devationx = 500;
+                if(prevX == 350){
+                    prevX = prevX+1;
+                }
             }
-            devationx = 500;
-            prevX += 100;
         }
-    }
 
     }
     sortOutAndAssign(objects, setActions, updateCircles)
