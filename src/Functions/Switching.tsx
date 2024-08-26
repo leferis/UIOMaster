@@ -67,7 +67,7 @@ export function updateByActors(circles: any[], actions: CJMLAction[], setActions
 
 function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any, initialArrowId: any, setInitialArrowID: any, setArrows: any) {
     let devationx = 500;
-    let prevX = 350;
+    let prevX = 250;
 
     let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
@@ -83,7 +83,7 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
                 devationx = devationx + 100;
             }
             else {
-                if(prevX >= 350){
+                if(prevX >= 180){
                     prevX = prevX+100;
                 }
                 objects[j].x = prevX;
@@ -94,7 +94,7 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
                     objects[j].y = 236;
                 }
                 devationx = 500;
-                if(prevX == 350){
+                if(prevX == 250){
                     prevX = prevX+1;
                 }
             }
