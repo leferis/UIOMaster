@@ -113,32 +113,13 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
     return a.x - b.x
   });
   let indexOfFirsChange = objects.findIndex((x: CJMLCircle) => {
-    return x.x + 200 > relativeX;
-  })
+    return x.x +100 > relativeX;
+  });
+  console.log(indexOfFirsChange)
   if (indexOfFirsChange != -1) {
     if (indexOfFirsChange > index) {
-      for (let j = 0; j <= indexOfFirsChange; j++) {
-        objects[j].swimlaneX = 250 + (100 * j);
-        if(!objects[j].devation){
-          lefover=0
-        objects[j].x = 250 + (100 * (j-lefover)) 
-        }
-        else{
-          lefover++;
-          objects[j].x = 250 + (100 * (j-lefover)) 
-        }
-      }
 
       for (let j = 0; j < objects.length; j++) {
-        for (let k = 0; k < objects.length; k++) {
-          if (objects2[k].id == objects[j].id) {
-            objects2[k].swimlaneX = objects[j].swimlaneX;
-          }
-        }
-      }
-    }
-    else {
-      for (let j = indexOfFirsChange; j < objects.length; j++) {
         objects[j].swimlaneX = 250 + (100 * j);
         if(!objects[j].devation){
           objects[j].x = 250 + (100 * (j-lefover)) 
@@ -158,6 +139,29 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
         }
       }
     }
+    else {
+      console.log("pataikiau uz indexo")
+      for (let j = 0; j < objects.length; j++) {
+        objects[j].swimlaneX = 250 + (100 * j);
+        if(!objects[j].devation){
+          objects[j].x = 250 + (100 * (j-lefover)) 
+          }
+          else{
+            lefover++;
+            objects[j].x = 250 + (100 * (j-lefover)) 
+          }
+      }
+
+      for (let j = 0; j < objects.length; j++) {
+        for (let k = 0; k < objects.length; k++) {
+          if (objects2[k].id == objects[j].id) {
+            objects2[k].swimlaneX = objects[j].swimlaneX;
+            objects2[k].x = objects[j].x;
+          }
+        }
+      }
+    }
+   
     var actionsTemp: CJMLAction[] = [];
     var touch: CJMLCircle[] = []
     for (let j = 0; j < objects2.length; j++) {
@@ -186,11 +190,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
   if (indexOfFirsChange != -1) {
 
     if (indexOfFirsChange > index) {
-      for (let j = 0; j <= indexOfFirsChange; j++) {
-        objects[j].swimlaneX = 400 + (225 * j);
-        objects[j].x = 200 + (100 * j)
-      }
-
+      
       for (let j = 0; j < objects.length; j++) {
         for (let k = 0; k < objects.length; k++) {
           if (objects2[k].id == objects[j].id) {
@@ -215,6 +215,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
         }
       }
     }
+
     var actionsTemp: CJMLAction[] = [];
     var touch: CJMLCircle[] = []
     for (let j = 0; j < objects2.length; j++) {
