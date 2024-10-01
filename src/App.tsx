@@ -971,7 +971,7 @@ function App() {
          }
        });
         const index = actions.indexOf(actionToWork[0]);
-        onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows, phase);
+        onActionDragEnd(e, actionToWork[0], ActorsCJML, actions, SwimlineMode, setCircles, changeArrow, elementsAreFarFromBorder, circles, setActions, index, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows,SwimlineMode, phase);
         setNewID(initialId + 1)
         findFurthestPoint(circles, actions, ActorsCJML, setActors, e)
       }

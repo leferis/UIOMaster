@@ -171,7 +171,7 @@ function ActionPoints(props: ActionPointsProps) {
               }}
               onDragEnd={
                 (e) => {
-                  onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true, props.arrowId, props.setArrowId, props.setArrows);
+                  onActionDragEnd(e, x, props.actors, props.actions, props.swimlaneMode, props.updateCircles, props.changeArrow, props.checkIfCloseToActorsBorder, props.circles, props.setActions, index, true, props.arrowId, props.setArrowId, props.setArrows, props.swimlaneMode);
                   props.findFurthestPoint(props.circles, props.actions, props.actors, props.setActors)
                 }
               }

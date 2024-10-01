@@ -1,9 +1,9 @@
 import { Actors } from "../Classes/Actors";
 import { CJMLAction } from "../Classes/CJMLAction";
 import { CJMLCircle } from "../Classes/CJMLCircle";
-import {collisionSwim, moveElement} from "../Functions/Movement"
+import {collisionSwim, moveElement, moveJourneyElement} from "../Functions/Movement"
 export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Action: CJMLAction[], SwimlineMode: boolean, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, circles: CJMLCircle[], setActions: any, index: any, isPlanned: boolean,
-   arrowId:any, setArrowId:any, setArrows:any, phase?:any) {
+   arrowId:any, setArrowId:any, setArrows:any,typeOfJourney:boolean, phase?:any) {
    
       let yPosOfMouse
       let xPosOfMouse
@@ -31,9 +31,9 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
         })
         setActions(circles2);
         changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
-        moveElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows);
+        typeOfJourney?moveJourneyElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows) :moveElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows);
       } else {
-        moveElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows);
+        typeOfJourney?moveJourneyElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows) :moveElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows);
       }
   }
 
