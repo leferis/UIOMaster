@@ -100,9 +100,9 @@ function App() {
 
   return (
     <div>
-      <div className="App" >
+      <div className="CJML journey visualizer" >
         <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
-          <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML Analyzer</h2>
+          <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>CJML journey visualizer</h2>
 
         </div>
         <ToastContainer />
