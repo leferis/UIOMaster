@@ -68,12 +68,11 @@ export function updateByActors(circles: any[], actions: CJMLAction[], setActions
 function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions: any, updateCircles: any, initialArrowId: any, setInitialArrowID: any, setArrows: any) {
     let devationx = 500;
     let prevX = 250;
-
     let objects = JSON.parse(JSON.stringify(circles)).concat(JSON.parse(JSON.stringify(actions)));
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
         return a.swimlaneX - b.swimlaneX
     });
-
+    let realMoves = [];
     for (let j = 0; j < objects.length; j++) {
 
         if (objects[j].initiator.isEndUser || objects[j].receiver?.isEndUser) {
@@ -98,11 +97,12 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
                     prevX = prevX+1;
                 }
             }
+            realMoves.push(objects[j])
         }
 
     }
     sortOutAndAssign(objects, setActions, updateCircles)
-    createArrows(objects, initialArrowId, setInitialArrowID, setArrows);
+    createArrows(realMoves, initialArrowId, setInitialArrowID, setArrows);
 }
 
 export function createArrows(objects: any, initialArrowId: any, setInitialArrowID: any, setArrows: any) {

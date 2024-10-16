@@ -48,7 +48,7 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
     } else {
       return a.x - b.x ;
     }
-  });
+  }).filter((x: any) => x.initiator.isEndUser || x.receiver.isEndUser);
 
   const endUser = props.actors.filter((x: Actors) => {
     return x.isEndUser;
@@ -58,10 +58,9 @@ function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
     var { xPositionFirst = 0, yPositionFirst = 0, yPostionLast = 0 } = getPositions(objects)
   }
   if (objects.length > 0) {
-    return (
+      return (
 
       objects.map((x: any, index: any) => {
-
         return (<>
 
           {index == 0 && <><Circle x={endUser.x + 102} y={endUser.y + endUser.height / 2} radius={6} stroke={"#7F7F7F"} />

@@ -37,10 +37,14 @@ function ArrowComponent(props: ArrowComponentProps) {
 
   }
 
+  function connectsEndUser(arrow:CJMLArrow){
+    return ((arrow.toPoint as (any)).initiator.isEndUser || (arrow.toPoint as (any)).receiver.isEndUser )
+  } 
+
 
   return (<div>
     {props.SwimlineMode && props.Arrows.map(arrow => {
-      if(render(arrow))
+      if(render(arrow) && connectsEndUser(arrow))
       return (
         <Arrow points={getPoints(arrow)}
           stroke={props.currentObject.id == arrow.id ? 'Red' : '#7F7F7F'}
