@@ -2,13 +2,15 @@ import React, { FC } from 'react';
 import V2parse from '../../XMLParsing/V2/v2.parser';
 import './ModaWindow.module.css'
 
-interface ModaWindow { show: boolean, 
-  handleClose: any, 
-  setJourneys:any, 
-  getImage:any,
-  updateCurrentJourney:any,
-  Journeys:any,
-  ShowSelectionWindow:any; }
+interface ModaWindow {
+  show: boolean,
+  handleClose: any,
+  setJourneys: any,
+  getImage: any,
+  updateCurrentJourney: any,
+  Journeys: any,
+  ShowSelectionWindow: any;
+}
 
 function ModaWindow(props: ModaWindow) {
   const showHideClassName = props.show ? "modal display-block" : "modal display-none";
@@ -24,12 +26,12 @@ function ModaWindow(props: ModaWindow) {
         props.setJourneys(journey);
         props.updateCurrentJourney(journey);
       };
-      
+
       reader.readAsText(file);
-      
+
       props.handleClose(false);
     }
-    
+
     );
   }
   return (
@@ -41,28 +43,34 @@ function ModaWindow(props: ModaWindow) {
       height: '100%',
       background: 'rgba(0, 0, 0, 0.6)'
     }}>
-      <section className="modal-main" 
-      style={{ position:'fixed',
-        background: 'white',
-        width: '40%',
-        height: 'auto',
-        top:'50%',
-        left:'50%',
-        transform: 'translate(-50%,-50%)',
-        paddingBottom:'30px'
+      <section className="modal-main"
+        style={{
+          position: 'fixed',
+          background: 'white',
+          width: '40%',
+          height: 'auto',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%,-50%)',
+          paddingBottom: '30px'
         }}>
-           <h4>Upload File</h4>
-        <input type="file"
+
+        <h4 style={{ paddingLeft: "45%" }}>Upload File</h4>
+        <input style={{ paddingLeft: "40%" }} type="file"
           id="file1"
-          name="upload" onChange={upload}  accept=".xml, .xcjml"/>
+          name="upload" onChange={upload} accept=".xml, .xcjml" />
         <br></br>
-        <button type="button" onClick={() => {props.handleClose(false);
-        console.log(props.Journeys.length)
-        if(props.Journeys.length == 0 ){
-          props.ShowSelectionWindow(true);
-        }}}>
-          Close
-        </button>
+        <div style={{ paddingLeft: "50%", paddingTop:"2%"}}>
+          <button type="button" onClick={() => {
+            props.handleClose(false);
+            console.log(props.Journeys.length)
+            if (props.Journeys.length == 0) {
+              props.ShowSelectionWindow(true);
+            }
+          }}>
+            Close
+          </button>
+        </div>
       </section>
 
     </div>);
