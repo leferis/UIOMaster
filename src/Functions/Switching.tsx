@@ -72,35 +72,36 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
     objects.sort((a: CJMLCircle, b: CJMLCircle) => {
         return a.swimlaneX - b.swimlaneX
     });
+
     let realMoves = [];
     for (let j = 0; j < objects.length; j++) {
-
-        if (objects[j].initiator.isEndUser || objects[j].receiver?.isEndUser) {
-            if (objects[j].devation == true) {
-                objects[j].x = prevX;
-                objects[j].y = devationx;
-                devationx = devationx + 100;
+        if (objects[j].devation == true) {
+            objects[j].x = prevX;
+            objects[j].y = devationx;
+            devationx = devationx + 100;
+        }
+        else {
+            if(prevX >= 180){
+                prevX = prevX+100;
+            }
+            objects[j].x = prevX;
+            if (objects[j].receiver != undefined) {
+                objects[j].y = 265;
             }
             else {
-                if(prevX >= 180){
-                    prevX = prevX+100;
-                }
-                objects[j].x = prevX;
-                if (objects[j].receiver != undefined) {
-                    objects[j].y = 265;
-                }
-                else {
-                    objects[j].y = 236;
-                }
-                devationx = 500;
-                if(prevX == 250){
-                    prevX = prevX+1;
-                }
+                objects[j].y = 236;
             }
+            devationx = 500;
+            if(prevX == 250){
+                prevX = prevX+1;
+            }
+        }
+        if (objects[j].initiator.isEndUser || objects[j].receiver?.isEndUser) {
+            
             realMoves.push(objects[j])
         }
-
     }
+    console.log(realMoves);
     sortOutAndAssign(objects, setActions, updateCircles)
     createArrows(realMoves, initialArrowId, setInitialArrowID, setArrows);
 }
