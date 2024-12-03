@@ -18,6 +18,11 @@ import ImageSelection from '../ImageSelection/ImageSelection';
 import RibbonChangeBarImageChange from '../ribbon/ChangeBar/ImageChange/ribbon/ChangeBar/ImageChange';
 import RibbonChangeBarTypeChange from '../ribbon/ChangeBar/TypeChange/ribbon/ChangeBar/TypeChange';
 import _ from 'lodash';
+import SubFigure from './SubFigure/SubFigure';
+
+
+const height = 70;
+const width = 155;
 
 interface TouchPointProps {
   Circle: CJMLCircle[];
@@ -94,12 +99,16 @@ function TouchPoint(props: TouchPointProps) {
         else {
           if(render(x) ){
           return (
+            <>
             <TouchPointNetwork remove={props.remove} Circle={props.Circle} SwimlineMode={props.SwimlineMode} actions={props.actions} actors={props.actors} arrowId={props.arrowId} changeArrow={props.changeArrow} checkClickFunction={checkClickFunction}
               elementCheckCloseToBorder={props.elementCheckCloseToBorder} elementsAreFarFromBorder={props.elementsAreFarFromBorder} getImage={getImage} getImageReceiver={getImageReceiver} index={index}
               resetTouchpoints={props.resetTouchpoints} setActions={props.setActions} setArrowId={props.setArrowId} setArrows={props.setArrows} touchPoint={x} updateCircles={props.updateCircles} isPlanned={props.isPlanned}
               makeBiggerActors = {props.makeBiggerActors} setCurrentObject={props.setCurrentObjectID} Images={props.Images} currentObject={props.currentObject}
               findFurthestPoint={props.findFurthestPoint} ChangeDevation={changeDevation} setActors={props.setActors} showId={props.showId}
               />
+              <SubFigure Icons={x.SubFigures} InitialXPosition={x.swimlaneX} InitialYPosition={x.swimlaneY}
+               getImageObject={props.getImageObject} height = {height} width = {width} />
+              </> 
           )
         }
         }
@@ -178,6 +187,7 @@ function TouchPoint(props: TouchPointProps) {
 
   function getImageReceiver(x: any, index: any) {
     let img = props.getImageObject(x.imageNameReceiver)
+    console.log(img);
     return (<Image x={props.SwimlineMode ? x.x - 15 : x.swimlaneX + 15} y={props.SwimlineMode ? x.y - 15 : x.swimlaneReceiverY + 20} image={img} />)
   }
 }

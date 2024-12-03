@@ -24,6 +24,15 @@ export class CJMLCircle implements CJMLConnectionUnit {
     isEditing:any;
     isEditingReceiver:any;
     phase:any;
+    Comment:any;
+    Experience:any;
+    receiver:any;
+    receiverText:any;
+    id: string ;
+    x: number;
+    y: number;
+    SubFigures :Array<string>;
+
     constructor(id: string, x: number, y: number, Capacity: boolean, devation:boolean, receiver:any, initiator:any, img:any, receiverText:string, initiatorText:string, initialSwimlaneX:number, initialSwimlaneY:number, swimlaneReceiverY:number, timestamp:any, Status:any, phase?:any) {
         this.x = x;
         this.y = y;
@@ -51,14 +60,8 @@ export class CJMLCircle implements CJMLConnectionUnit {
         this.Comment = null;
         this.Experience = null;
         this.phase = phase?phase:null;
+        this.SubFigures = ["\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\patient-medical-record-1.svg"]
     }
-    Comment:any;
-    Experience:any;
-    receiver:any;
-    receiverText:any;
-    id: string ;
-    x: number;
-    y: number;
 
     public getConnectingPointCordinates(pointX:number,pointY:number) {
         return 0;
