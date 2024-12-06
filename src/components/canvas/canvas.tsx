@@ -246,6 +246,7 @@ function Canvas(props: CanvasProps) {
          setActions={props.setActions} openModal={props.setShowModal} setShowSettings={props.setShowSettings} setImageChange={props.setImageChange}
          addNewActorDragAndDrop={props.addNewActorDragAndDrop} setOpenStatistics={props.setOpenStatistics} setOpenHelp={props.setOpenHelp} showExperience={props.showCustomerExperience} setExperience={props.setExperience} setShowComments={props.setShowComments} showComments={props.showComments}
          showPhase={showPhase} setShowPhase={setShowPhase}
+         setShowId={props.setShowId} showId={props.showId}
       />
       {props.SwimlineMode && <Legend actors={props.ActorsCJML} setActors={props.setActors} />}
 

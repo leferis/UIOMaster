@@ -58,6 +58,8 @@ interface LeftMeniuProps {
         setShowComments:any;
         showPhase:any;
         setShowPhase:any;
+        showId:any;
+        setShowId:any;
 }
 
 function LeftMeniu(props: LeftMeniuProps) {
@@ -237,6 +239,9 @@ function LeftMeniu(props: LeftMeniuProps) {
                          showComments={props.showComments}
                          setShowPhase={props.setShowPhase}
                          showPhase={props.showPhase}
+                         setComments={ props.setShowComments}
+                         setShowId={props.setShowId}
+                         showId={props.showId}
                          />}
                         {subMeniuOption == "Arrow" && props.SwimlineMode && <div>
                                 <Rect x={90} y={0} height={50} width={185} fill='#f8f8f9' stroke={"#d0d2d5"} strokeWidth={1}></Rect>
