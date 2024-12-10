@@ -40,15 +40,15 @@ function getPositions(objects: any) {
 
 
 function SwimlaneInitialValues(props: SwimlaneInitialValuesProps) {
-  let objects = _.cloneDeepWith<any>(props.circles)
-  let objectsAction = _.cloneDeep<any>(props.actions)
+  let objects = _.cloneDeepWith<any>(props.circles).filter((x: any) => x.initiator.isEndUser || x.receiver.isEndUser)
+  let objectsAction = _.cloneDeep<any>(props.actions).filter((x: any) => x.initiator.isEndUser)
   objects = objects.concat(objectsAction).sort((a: any, b: any) => {
     if (a.x == b.x) {
       return a.y - b.y ;
     } else {
       return a.x - b.x ;
     }
-  }).filter((x: any) => x.initiator.isEndUser || x.receiver.isEndUser);
+  });
 
   const endUser = props.actors.filter((x: Actors) => {
     return x.isEndUser;

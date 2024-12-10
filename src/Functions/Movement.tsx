@@ -103,7 +103,7 @@ function onDragEndJourney(e: any, touchPoint: any, actors: Actors[], Circle: CJM
 }
 
 export function moveJourneyElement(elementArray: any, index: any, relativeX: number, actions: any, updateCircles: any, setActions: any,arrowId:any, setArrowId:any, setArrows:any) {
-  let objects = JSON.parse(JSON.stringify(elementArray)).concat(JSON.parse(JSON.stringify(actions)));
+  let objects = JSON.parse(JSON.stringify(elementArray.filter((x: any) => x.initiator.isEndUser || x.receiver.isEndUser))).concat(JSON.parse(JSON.stringify(actions.filter((x: any) => x.initiator.isEndUser))));
   let objects2 = elementArray.concat(actions);
   let actionMove= 0;
   let moveIndex = 0;
@@ -113,7 +113,7 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
     }
     return a.x - b.x
   });
-  objects = objects.filter((x: any) => x.initiator.isEndUser || x.receiver.isEndUser);
+  objects = objects;
       for (let j = 0; j < objects.length; j++) {
         objects[j].swimlaneX = 250 + (100 * j);
         if(!objects[j].devation){
@@ -190,8 +190,7 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
 
 
 export function remakeArrows(Circle: any, actions: any, arrowId: number, setArrowId: any, setArrows: any) {
-  let objects = JSON.parse(JSON.stringify(Circle)).concat(JSON.parse(JSON.stringify(actions)));
-  objects = objects.filter((x: any) => x.initiator.isEndUser || x.receiver.isEndUser);
+  let objects = JSON.parse(JSON.stringify(Circle.filter((x: any) => x.initiator.isEndUser || x.receiver.isEndUser))).concat(JSON.parse(JSON.stringify(actions.filter((x: any) => x.initiator.isEndUser))));
   let newArrows = [];
   objects.sort((a: any, b: any) => {
     if (a.x == b.x) {
