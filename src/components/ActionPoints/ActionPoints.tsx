@@ -53,6 +53,9 @@ function ActionPoints(props: ActionPointsProps) {
         if(!props.swimlaneMode && !render(x)){
           return(<></>)
         }
+        else if (props.swimlaneMode && (!x.initiator.isEndUser)){
+          return(<></>)
+        }
         return (
           <div>
             {x.id == props.currentObject.id && <ElementChangeBar x={x.swimlaneX + 30} y={x.y - 90}>

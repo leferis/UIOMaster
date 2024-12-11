@@ -115,16 +115,16 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
   });
   objects = objects;
       for (let j = 0; j < objects.length; j++) {
-        objects[j].swimlaneX = 250 + (100 * j);
+        objects[j].swimlaneX = 250 + (140 * j);
         if(!objects[j].devation){
           moveIndex++;
-          objects[j].x = 250 + (100 * moveIndex) 
+          objects[j].x = 250 + (140 * moveIndex) 
           }
           else{
             if(moveIndex == 0){
               moveIndex ++;
             }
-            objects[j].x = 250 + (100 * moveIndex) 
+            objects[j].x = 250 + (140 * moveIndex) 
           }
       }
 

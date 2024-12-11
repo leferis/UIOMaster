@@ -19,8 +19,6 @@ interface CustomerExperienceProps {
    showComments:any;
 }
 
-
-
 function CustomerExperience(props:CustomerExperienceProps){
    function getImageObject(imgName: any) {
       const image = new Image();
@@ -64,16 +62,16 @@ function CustomerExperience(props:CustomerExperienceProps){
           if (!props.diagramType) {
             return (<CustomerExperienceCustomerExperienceJourney touchpoint={x} yPostion={!props.showComments?referenceNode.y + 220:referenceNode.y + 400} setTouchpoint={(element: any) => { updateTouchpoint(element) }} index={index} />)
           }
-          else if(props.diagramType && x.Experience != null)  {
-            return(<CustomerExperienceCustomerExperienceNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x}/>)
+          else if(props.diagramType && x.Experience != null  && (x.initiator.isEndUser || x.receiver.isEndUser))  {
+            return(<CustomerExperienceCustomerExperienceNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x} downLine = {false}/>)
           }
         })}
         {props.actions.map((x: CJMLCircle, index: any) => {
           if (!props.diagramType) {
             return (<CustomerExperienceCustomerExperienceJourney touchpoint={x} yPostion={!props.showComments?referenceNode.y + 220:referenceNode.y + 400} setTouchpoint={(element: any) => { updateActions(element) }} index={index} />)
           }
-          else if(props.diagramType  && x.Experience != null) {
-            return(<CustomerExperienceCustomerExperienceNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x}/>)
+          else if(props.diagramType  && x.Experience != null && (x.initiator.isEndUser)) {
+            return(<CustomerExperienceCustomerExperienceNetwork setTouchpoint={(element: any) => { updateTouchpoint(element) }} touchpoint={x} downLine = {true}/>)
           }
         })}
       </Group>

@@ -81,8 +81,8 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
             devationx = devationx + 100;
         }
         else {
-            if(prevX >= 180){
-                prevX = prevX+100;
+            if(prevX >= 180 && (objects[j].initiator.isEndUser || (objects[j].receiver?.isEndUser))){
+                prevX = prevX+180;
             }
             objects[j].x = prevX;
             if (objects[j].receiver != undefined) {
@@ -97,11 +97,9 @@ function fromNetworkToSwimlane(circles: any[], actions: CJMLAction[], setActions
             }
         }
         if (objects[j].initiator.isEndUser || objects[j].receiver?.isEndUser) {
-            
             realMoves.push(objects[j])
         }
     }
-    console.log(realMoves);
     sortOutAndAssign(objects, setActions, updateCircles)
     createArrows(realMoves, initialArrowId, setInitialArrowID, setArrows);
 }
