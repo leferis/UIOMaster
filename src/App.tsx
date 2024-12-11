@@ -982,6 +982,7 @@ function App() {
       }
         break;
       case "RatingImageChange": {
+        console.log("Testuliukas")
           setImageToRating(e);
           setImageChange(undefined);
         }
@@ -1181,7 +1182,9 @@ function App() {
     copyOfCirlces = copyOfCirlces.map((x: CJMLCircle) => {
       if (!SwimlineMode) {
         if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
-          if(yPosOfMouse > ActorsCJML[ActorsCJML.length -1].y +400 && yPosOfMouse < ActorsCJML[ActorsCJML.length -1].y +550){
+          console.log(yPosOfMouse + " asd " + ActorsCJML[ActorsCJML.length -1].y + "ERGERG " + ActorsCJML[ActorsCJML.length -1].y +150 )
+          if(yPosOfMouse > ActorsCJML[ActorsCJML.length -1].y  && yPosOfMouse < ActorsCJML[ActorsCJML.length -1].y +450){
+         
             x.Experience.experienceImage = ImageChange?.Image
           }
         }
@@ -1204,7 +1207,7 @@ function App() {
     copyOfActions = copyOfActions.map((x:CJMLAction) =>{
       if (!SwimlineMode) {
         if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
-          if(yPosOfMouse > ActorsCJML[ActorsCJML.length -1].y +400 && yPosOfMouse < ActorsCJML[ActorsCJML.length -1].y +550){
+          if(yPosOfMouse > ActorsCJML[ActorsCJML.length -1].y  && yPosOfMouse < ActorsCJML[ActorsCJML.length -1].y + 450){
             x.Experience.experienceImage = ImageChange?.Image
           }
         }
