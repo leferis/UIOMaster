@@ -60,5 +60,5 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
     changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
     moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
     setActions(circles);
-    elementCheckCloseToBorder(e.target.getPosition().x);
+    //elementCheckCloseToBorder(e.target.getPosition().x);
   }

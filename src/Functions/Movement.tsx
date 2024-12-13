@@ -131,7 +131,7 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
       for (let j = 0; j < objects.length; j++) {
         objects[j].x += actionMove;
         if(objects[j].receiver == null){
-          actionMove += 60;
+          actionMove += 120;
         }
       }
 
@@ -169,7 +169,12 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
 
     for (let j = 0; j < objects2.length; j++) {
       objects2[j].swimlaneX = 400 + (225 * j);
-      objects2[j].x = 200 + (100 * j)
+      if(objects2[j].receiver != null){
+      objects2[j].x = 400 + (100 * j)
+      }
+      else{
+        objects2[j].x = 400 + (250 * j)
+      }
     }
 
     var actionsTemp: CJMLAction[] = [];
