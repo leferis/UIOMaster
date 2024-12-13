@@ -181,7 +181,7 @@ function ActionPoints(props: ActionPointsProps) {
             />
             }
               {props.showId && 
-        <Text x={props.swimlaneMode ? x.x +40 : x.x +120 }
+        <Text x={props.swimlaneMode ? x.x +40 : x.swimlaneX +70 }
         y={props.swimlaneMode ? x.y + 70  : x.y - 40} 
         height={20}
         fontSize={16}
