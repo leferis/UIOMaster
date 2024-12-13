@@ -25,7 +25,7 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
                 actorIn = circle.initiator
               }}
               let differnce = SwimlineMode?36:20
-              return { ...circle, initiator: actorIn, y: actorIn != undefined ? actorIn.y + differnce : 200, phase:phase};
+              return { ...circle, initiator: actorIn, y: actorIn != undefined ? actorIn.y + differnce : 200};
           }
           return circle;
         })
