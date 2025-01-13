@@ -27,7 +27,7 @@ export function onDragMove(e: any, Circle: CJMLCircle[], touchPoint: any, update
     updateCircles(circles);
     changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
   }
-  moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
+  moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows, SwimlineMode);
   makeBiggerActors(e.target.attrs.x);
   updateCircles(circles);
 }
@@ -51,7 +51,7 @@ function onDragMoveJourney(e: any, Circle: CJMLCircle[], touchPoint: any, update
     updateCircles(circles);
     changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
   }
-  moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
+  moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows, SwimlineMode);
   updateCircles(circles);
   elementCheckCloseToBorder(e.target.getPosition().x);
 }
@@ -115,16 +115,16 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
   });
   objects = objects;
       for (let j = 0; j < objects.length; j++) {
-        objects[j].swimlaneX = 250 + (140 * j);
+        objects[j].swimlaneX = 250 + (125 * j);
         if(!objects[j].devation){
           moveIndex++;
-          objects[j].x = 250 + (140 * moveIndex) 
+          objects[j].x = 250 + (125 * moveIndex) 
           }
           else{
             if(moveIndex == 0){
               moveIndex ++;
             }
-            objects[j].x = 250 + (140 * moveIndex) 
+            objects[j].x = 250 + (125 * moveIndex) 
           }
       }
 
@@ -161,12 +161,12 @@ export function moveJourneyElement(elementArray: any, index: any, relativeX: num
   }
 
 
-export function moveElement(elementArray: any, index: any, relativeX: number, actions: any, updateCircles: any, setActions: any,arrowId:any, setArrowId:any, setArrows:any) {
+export function moveElement(elementArray: any, index: any, relativeX: number, actions: any, updateCircles: any, setActions: any,arrowId:any, setArrowId:any, setArrows:any,SwimlineMode: boolean) {
   let objects2 = elementArray.concat(actions);
   objects2.sort((a: CJMLCircle, b: CJMLCircle) => {
     return a.swimlaneX - b.swimlaneX
   });
-
+  if(!SwimlineMode){
     for (let j = 0; j < objects2.length; j++) {
       objects2[j].swimlaneX = 400 + (225 * j);
       if(objects2[j].receiver != null){
@@ -176,7 +176,31 @@ export function moveElement(elementArray: any, index: any, relativeX: number, ac
         objects2[j].x = 400 + (250 * j)
       }
     }
+  }
+  else{
+    let actionMove = 0;
+    let moveIndex = 0;
+    for (let j = 0; j < objects2.length; j++) {
+      objects2[j].swimlaneX = 250 + (125 * j);
+      if(!objects2[j].devation){
+        moveIndex++;
+        objects2[j].x = 250 + (125 * moveIndex) 
+        }
+        else{
+          if(moveIndex == 0){
+            moveIndex ++;
+          }
+          objects2[j].x = 250 + (125 * moveIndex) 
+        }
+    }
 
+    for (let j = 0; j < objects2.length; j++) {
+      objects2[j].x += actionMove;
+      if(objects2[j].receiver == null){
+        actionMove += 120;
+      }
+    }
+  }
     var actionsTemp: CJMLAction[] = [];
     var touch: CJMLCircle[] = []
     for (let j = 0; j < objects2.length; j++) {
@@ -204,7 +228,7 @@ export function remakeArrows(Circle: any, actions: any, arrowId: number, setArro
       return a.x - b.x ;
     }
   })
-  console.log(objects);
+  
   for (let i = 0; i < objects.length - 1; i++) {
     let arrow = new CJMLArrow(arrowId, objects[i], objects[i + 1]);
     arrow.Draw();
@@ -290,9 +314,9 @@ export function onDragEnd(e: any, touchPoint: any, actors: Actors[], Circle: CJM
       })
       updateCircles(circles2);
       changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
-      moveElement(circles2, index, xPosOfMouse, actions, updateCircles, setActions,arrowId, setArrowId, setArrows);
+      moveElement(circles2, index, xPosOfMouse, actions, updateCircles, setActions,arrowId, setArrowId, setArrows, SwimlineMode);
     } else {
-      moveElement(Circle, index, xPosOfMouse, actions, updateCircles, setActions,arrowId, setArrowId, setArrows);
+      moveElement(Circle, index, xPosOfMouse, actions, updateCircles, setActions,arrowId, setArrowId, setArrows, SwimlineMode);
     }
   }
 }

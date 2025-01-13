@@ -214,7 +214,7 @@ function Canvas(props: CanvasProps) {
             circles={props.circles}
             findFurthestPoint={props.findFurthestPoint}
             checkIfCloseToActorsBorder={props.makeBiggerActors} setActors={props.setActors}
-            showId={props.showId} layerEl={props.layerEl}
+            showId={props.showId} layerEl={props.layerEl} SwimlineMode={props.SwimlineMode}
          ></ActionPoints>
          {props.showCustomerExperience && <CustomerExperience actions={props.actions} actors={props.ActorsCJML} circles={props.circles} diagramType={props.SwimlineMode} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles}  showComments = {props.showComments}/>}
          {props.showComments && <Comments actions={props.actions} actors={props.ActorsCJML} setActions={props.setActions} setTouchpoints={props.setCircles} touchpoints={props.circles} diagramType={props.SwimlineMode} showCustomerExperience = {props.showCustomerExperience} />}

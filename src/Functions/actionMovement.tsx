@@ -31,14 +31,14 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
         })
         setActions(circles2);
         changeArrow(e, touchPoint.id, circles2.filter(y => y.id == touchPoint.id)[0]);
-        typeOfJourney?moveJourneyElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows) :moveElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows);
+        typeOfJourney?moveJourneyElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows) :moveElement(circles, index, xPosOfMouse, circles2, updateCircles, setActions,arrowId, setArrowId, setArrows,typeOfJourney);
       } else {
-        typeOfJourney?moveJourneyElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows) :moveElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows);
+        typeOfJourney?moveJourneyElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows) :moveElement(circles, index, xPosOfMouse, Action, updateCircles, setActions,arrowId, setArrowId, setArrows,typeOfJourney);
       }
   }
 
   export function onActionDragMove(e: any, Circle: CJMLCircle[], touchPoint: any, updateCircles: any, changeArrow: any, elementsAreFarFromBorder: any, index: any,
-     elementCheckCloseToBorder: any, actions: CJMLAction[], setActions: any, actors: any,SwimlineMode: boolean, isPlanned:any, arrowId:any, setArrowId:any, setArrows:any) {
+     elementCheckCloseToBorder: any, actions: CJMLAction[], setActions: any, actors: any,SwimlineMode: boolean, isPlanned:any, arrowId:any, setArrowId:any, setArrows:any, typeOfJourney:any) {
 
     const circles = actions.map(circle => {
       if (circle.id == touchPoint.id) {
@@ -58,7 +58,7 @@ export function onActionDragEnd(e: any, touchPoint: any, actors: Actors[], Actio
       changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
     }
     changeArrow(e, touchPoint.id, circles.filter(y => y.id == touchPoint.id)[0]);
-    moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows);
+    moveElement(Circle, index, e.target.attrs.x, actions, updateCircles, setActions, arrowId, setArrowId, setArrows,typeOfJourney);
     setActions(circles);
     //elementCheckCloseToBorder(e.target.getPosition().x);
   }

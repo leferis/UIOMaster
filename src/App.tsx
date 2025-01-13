@@ -631,7 +631,7 @@ function App() {
       return x.id == initialId
     })
     const index = actions.indexOf(actionToWork[0]);
-    onActionDragMove(e, circles, actionToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows)
+    onActionDragMove(e, circles, actionToWork[0], setCircles, changeArrow, elementsAreFarFromBorder, index, elementCheckCloseToBorder, actions, setActions, ActorsCJML, SwimlineMode, Journey[currentJourney].isPlanned, initialArrowId, setNewArrowId, setArrows, SwimlineMode)
     const newCircle = actions.map(x => {
       if (x.id == initialId) {
         const arrowNew = x;
