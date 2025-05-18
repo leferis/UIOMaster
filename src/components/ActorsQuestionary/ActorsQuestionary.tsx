@@ -46,7 +46,7 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
               <Grid item xs={2}> {!props.tempActors[index].isEndUser && <Button  color="error" variant="outlined" onClick={() => props.removeActor(index)} startIcon={<DeleteIcon />}>
                 Delete
               </Button>}</Grid>
-              <Grid item xs={1}><h3>{x.isEndUser ? "End User " + (index + 1) : "Actor " + (index + 1)}</h3></Grid>
+              <Grid item xs={1}><h5>{x.isEndUser ? "End User " + (index + 1) : "Actor " + (index + 1)}</h5></Grid>
               <Grid item xs={5}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">{x.isEndUser ? "End user type" : "Actor role"}</InputLabel>
@@ -85,7 +85,8 @@ function ActorsQuestionary(props: ActorsQuestionaryProps) {
       props.setTempActors([...props.tempActors, { Title: "Enter actor's name", img: "", x: 200, y: 300, id: props.tempActors.length + 1 + 2000, height: 130, width: 700, color: "#fff" }]);
       ChangeOpenColorStatus([...OpenColor, false]);
     }} >Add new Actor</Button>
-        <br></br><h5 style={{position:"absolute", left:"60px"}}>Actors' colour representations can be changed in settings</h5>
+    <br></br>
+        <br></br><h6 style={{position:"absolute", left:"60px"}}>Actors' colour representations can be changed in settings</h6>
     <br></br>
     <br></br>
     

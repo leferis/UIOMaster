@@ -9,8 +9,7 @@ interface IntroductionWindowProps {
 }
 
 function IntroductionWindow(props: IntroductionWindowProps){
-  const showHideClassName = props.showIntro ? "modal display-block" : "modal display-none";
-return(<div className={showHideClassName} style={{
+return(<div style={{
     position: 'fixed',
     top: 0,
     left: 0,

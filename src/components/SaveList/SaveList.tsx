@@ -11,11 +11,11 @@ interface SaveListProps {
   setNewID:any;
 }
 function SaveList(props: SaveListProps) {
-  const showHideClassName = props.showSaveList ? "modal display-block" : "modal display-none";
+
   const [selected, setSelected] = useState("");
   let saves = getSaves();
   return (
-    <div className={showHideClassName} style={{
+    <div  style={{
       position: 'fixed',
       top: 0,
       left: 0,
