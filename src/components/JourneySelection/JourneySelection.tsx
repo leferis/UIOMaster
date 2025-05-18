@@ -3,6 +3,9 @@ import React, { FC, useState } from 'react';
 import { Journey } from '../../Classes/Journey';
 import styles from './JourneySelection.module.css';
 import { Actors } from '../../Classes/Actors';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 interface JourneySelectionProps {
   showJourney: any;
@@ -13,7 +16,7 @@ interface JourneySelectionProps {
 }
 
 function JourneySelection(props: JourneySelectionProps) {
-  const showHideClassName = props.showJourney ? "modal display-block" : "modal display-none";
+
   const [showSelection, setShowSelection] = useState<boolean>(false);
   const [selectedJourney, setSelectedJourney] = useState<any>(null);
   const [isPlannedJourney, setIsPlannedJourney] = useState(false);
@@ -21,7 +24,7 @@ function JourneySelection(props: JourneySelectionProps) {
   function getSelectionWindow() {
     return (<>
       <h4>Please select reference Journey:</h4>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} >
         <Grid item xs={4} />
         <Grid item xs={4}>
           <FormControl fullWidth>
@@ -58,7 +61,7 @@ function JourneySelection(props: JourneySelectionProps) {
       </Grid>
     </>)
   }
-  return (<div className={showHideClassName} style={{
+  return (<div style={{
     position: 'fixed',
     top: 0,
     left: 0,
@@ -71,7 +74,7 @@ function JourneySelection(props: JourneySelectionProps) {
       style={{
         position: 'fixed',
         background: 'white',
-        width: '30%',
+        width: '50%',
         height: 'auto',
         top: '50%',
         left: '50%',
@@ -81,11 +84,21 @@ function JourneySelection(props: JourneySelectionProps) {
         overflowY: "auto"
       }}>
       {!showSelection &&
-        <>
-          <h2> Do you want to add Planned Journey or Actual Journey</h2>
-          <Grid container spacing={2}   alignItems="center"   justifyContent="flex-start">
-            <Grid item xs={1}></Grid>
-            <Grid item xs={4} > <Button  onClick={() => {
+        <>    
+
+    <Container>
+      <Row>
+        <Col xs={12} lg={8} style={{ textAlign: 'left' }}> <h2>Welcome to the beta version of the CJML tool</h2></Col>
+      </Row>
+      <Row>
+        <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2025-05-18</h5></Col>
+      </Row>
+      <Row>
+        <Col xs={12} lg={6} style={{ textAlign: 'left' }}>  <h4>To get started, please select one of the option below.</h4></Col>
+      </Row>
+      <br></br>
+      <Row>
+        <Col xs={6} lg={2} style={{ textAlign: 'left' }}> <Button style={{width: "170px"}} onClick={() => {
               if (isPlannedJourney) {
                 props.addJourney(true, null);
                 props.closeJourney(false)
@@ -102,20 +115,22 @@ function JourneySelection(props: JourneySelectionProps) {
                 }
               }
 
-            }} variant="contained">Add Journey</Button>  <FormHelperText style={{    paddingLeft: "30%"}}>Draw your journey from scratch</FormHelperText></Grid>
-            <Grid item xs={3} >   <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned" /><br></br>
-            <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual" /></Grid>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={12}></Grid>
-            <Grid item xs={12}></Grid>
-
-            <Grid item xs={1}></Grid>
-            {    props.JourneyList.length<1 && <>    
-            
-            <Grid item xs={4} ><Button onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import XCJML file</Button>
-            <FormHelperText  style={{    paddingLeft: "30%"}}>Open xCJML file</FormHelperText></Grid>
-            <Grid item xs={3}></Grid></> }
-          </Grid>
+            }} variant="contained">Draw journey</Button>
+            <FormHelperText>Opens a blank canvas</FormHelperText>
+             </Col>
+            <Col xs={2} lg={2} style={{ textAlign: 'left' }}><FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned journey" /><br></br>
+            <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual journey" /></Col>
+            <Col xs={4} style={{ textAlign: 'left' }}> <FormHelperText>Use the graphical editor to draw your model. Actual journey is a good choice for new users</FormHelperText></Col>
+      </Row>
+      <br></br>
+      {    props.JourneyList.length<1 && <> 
+      <Row>
+        <Col xs={6} lg={2} style={{ textAlign: 'left' }}><Button style={{width: "170px"}}  onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import journey</Button>
+        <FormHelperText>Upload an xCJML file</FormHelperText></Col>
+        <Col xs= {3}><FormHelperText>The xCJML format is the standard file format for CJML models. It builds on XML and is used to save and load models</FormHelperText></Col>
+      </Row> </>}
+    </Container>
+    
 
         </>}
       {showSelection && getSelectionWindow()}
