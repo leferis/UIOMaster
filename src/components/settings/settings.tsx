@@ -56,7 +56,7 @@ interface SettingsProps {
 
 
 function Settings(props: SettingsProps) {
-  const showHideClassName = props.showSettings ? "modal display-block" : "modal display-none";
+
   const [activeTab, setActiveTab] = React.useState(0);
   const [JourneyPart, setJourneyPart] = React.useState(true);
   const [TouchpointPart, setToucpointpart] = React.useState(false);
@@ -66,7 +66,7 @@ function Settings(props: SettingsProps) {
   const [touchpointClone, setTouchpointClone] = React.useState(_.cloneDeep(props.circles));
   const [SettingsImageUploadstate, setSettingsImageUpload] = React.useState(false);
   return (
-    <div className={showHideClassName} style={{
+    <div style={{
       position: 'fixed',
       top: 0,
       left: 0,

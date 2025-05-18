@@ -87,7 +87,7 @@ function JourneySelection(props: JourneySelectionProps) {
         <>    
 
     <Container>
-      <Row>
+    {    props.JourneyList.length<1 && <>  <Row>
         <Col xs={12} lg={8} style={{ textAlign: 'left' }}> <h2>Welcome to the beta version of the CJML tool</h2></Col>
       </Row>
       <Row>
@@ -96,7 +96,8 @@ function JourneySelection(props: JourneySelectionProps) {
       <Row>
         <Col xs={12} lg={6} style={{ textAlign: 'left' }}>  <h4>To get started, please select one of the option below.</h4></Col>
       </Row>
-      <br></br>
+      </>}
+      <br></br> 
       <Row>
         <Col xs={6} lg={2} style={{ textAlign: 'left' }}> <Button style={{width: "170px"}} onClick={() => {
               if (isPlannedJourney) {

@@ -8,8 +8,8 @@ interface HelpProps {
 }
 
 function Help(props:HelpProps){
-   const showHideClassName = props.showHelp ? "modal display-block" : "modal display-none";
-   return (<div className={showHideClassName} style={{
+
+   return (<div style={{
       position: 'fixed',
       top: 0,
       left: 0,

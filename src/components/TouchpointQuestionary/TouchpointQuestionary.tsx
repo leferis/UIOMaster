@@ -255,7 +255,8 @@ function TouchpointQuestionary(props: TouchpointQuestionaryProps) {
         props.updateTouhcPoints([...props.TouchPoints, { id: -1, x: 0, y: 0, Capacity: true, Status: TouchPointStatus.Completed, width: 20, height: 0, text: "", external: ExternalEnumerator.Internal, imageName: "", initiator: -1, initiatorColor: "#000", devation: false, receiver: -1, receiverText: "" }])
       }} >Add new Communication point</Button>
       <br></br>
-      <h5 style={{ position: "absolute", left: "60px" }}>Communication points' channels can be changed to alternatives in settings</h5>
+      <br></br>
+      <h6 style={{ position: "absolute", left: "60px" }}>Communication points' channels can be changed to alternatives in settings</h6>
       <br></br>
       <br></br>
       <br></br>
