@@ -13,7 +13,7 @@ interface ModaWindow {
 }
 
 function ModaWindow(props: ModaWindow) {
-  const showHideClassName = props.show ? "modal display-block" : "modal display-none";
+
 
 
   function upload(e: any) {
@@ -35,7 +35,7 @@ function ModaWindow(props: ModaWindow) {
     );
   }
   return (
-    <div className={showHideClassName} style={{
+    <div style={{
       position: 'fixed',
       top: 0,
       left: 0,

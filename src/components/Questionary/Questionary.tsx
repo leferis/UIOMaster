@@ -37,7 +37,6 @@ function Questionary(props: QuestionaryProps) {
   const [TouchPointsTemp, setTouchPointTemp] = useState<any>(JSON.parse(JSON.stringify(props.circles)).concat(JSON.parse(JSON.stringify(props.actions))).sort((a: Connectable, b: Connectable) => { return a.x - b.x }));
   const [tempActors, setTempActors] = useState(JSON.parse(JSON.stringify(props.actors)));
   const [activeTab, setActiveTab] = React.useState(0);
-  const showHideClassName = props.showQuestionary ? "modal display-block" : "modal display-none";
 
   function ClosingValidation() {
 
@@ -238,7 +237,7 @@ function Questionary(props: QuestionaryProps) {
 
   }
 
-  return (<div className={showHideClassName} style={{
+  return (<div style={{
     position: 'fixed',
     top: 0,
     left: 0,

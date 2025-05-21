@@ -78,11 +78,10 @@ function Statistics(props: StatisticsProps) {
     }
     return text;
   }
-  const showHideClassName = props.show ? "modal display-block" : "modal display-none";
-
+ 
 
   return (
-    <div className={showHideClassName} style={{
+    <div  style={{
       position: 'fixed',
       top: 0,
       left: 0,

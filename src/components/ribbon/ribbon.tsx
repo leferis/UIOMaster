@@ -54,14 +54,14 @@ function Ribbon(props: RibbonProps) {
       {!props.openHome && <StatusBar currenJourneyId={props.currentJourney} journey={props.Journeys} type={props.SwimlineMode} layer={undefined} />}
       <div style={{float:'left',borderLeft:"1px solid black", height:"57px", marginLeft:"5px", marginTop:"10px"}}></div>
       {!props.openHome  &&
-        <div className={false ? 'BarElementSelected' : 'BarElement'} style={{userSelect:"none",verticalAlign:"middle", cursor:"pointer", maxWidth:"100px",textAlign:"center",marginLeft:"20px", float: "left", paddingBottom: "5px", paddingTop: "10px", paddingLeft:"10px", height:"57px", background:onHower?"#e6e6e6":"#f5f5f5", borderRadius:"10px" }} onMouseEnter={()=>{
+        <div className={false ? 'BarElementSelected' : 'BarElement'} style={{userSelect:"none",verticalAlign:"middle", cursor:"pointer", maxWidth:"100px",textAlign:"center",float: "left", paddingBottom: "5px", paddingTop: "10px", paddingLeft:"10px", height:"67px", background:onHower?"#e6e6e6":"#f5f5f5", borderRadius:"10px" }} onMouseEnter={()=>{
           setHower(true);
         }} 
         onMouseLeave={()=> {
           setHower(false);
         }}
         onClick={changeType}>
-          <span style={{textAlign:"center", fontWeight:"500"}}> Switch diagram type</span>
+          <span style={{textAlign:"center", fontWeight:"500", fontSize: "9pt"}}> Switch diagram type</span>
           
           </div>
           
@@ -69,7 +69,7 @@ function Ribbon(props: RibbonProps) {
         !props.openHome &&  <div style={{float:'left',borderLeft:"1px solid black", height:"57px", marginLeft:"5px", marginTop:"10px"}}></div>
       }
             {!props.openHome  &&
-        <div className={false ? 'BarElementSelected' : 'BarElement'} style={{userSelect:"none",cursor:"pointer", marginLeft:"10px", float: "left", paddingBottom: "5px", paddingTop: "10px", paddingLeft:"10px", height:"57px", background:onHowerSecond?"#e6e6e6":"#f5f5f5", borderRadius:"10px" }} 
+        <div className={false ? 'BarElementSelected' : 'BarElement'} style={{userSelect:"none",cursor:"pointer", marginLeft:"10px", float: "left", paddingBottom: "5px", paddingTop: "10px", paddingLeft:"10px", height:"67px", background:onHowerSecond?"#e6e6e6":"#f5f5f5", borderRadius:"10px" }} 
         onMouseEnter={()=>{
           setHowerSecond(true);
         }} 
@@ -77,7 +77,7 @@ function Ribbon(props: RibbonProps) {
           setHowerSecond(false);
         }}
         onClick={() =>{props.showQuestionary(true); props.setCurrentObject(-1 )}}>
-          <span style={{textAlign:"center", fontWeight:"500"}}> Edit in Form</span>
+          <span style={{textAlign:"center", fontWeight:"500", fontSize: "9pt"}}> Edit in Form</span>
           </div>
           
       }
