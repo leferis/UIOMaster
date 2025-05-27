@@ -99,7 +99,7 @@ function JourneySelection(props: JourneySelectionProps) {
       </>}
       <br></br> 
       <Row>
-        <Col xs={12} sm ={6} lg={4} md = {6} style={{ textAlign: 'left' }}> <Button style={{width: "170px"}} onClick={() => {
+        <Col xs={12} sm ={12} lg={5} md = {6} style={{ textAlign: 'left' }}> <Button style={{width: "170px"}} onClick={() => {
               if (isPlannedJourney) {
                 props.addJourney(true, null);
                 props.closeJourney(false)
@@ -119,14 +119,14 @@ function JourneySelection(props: JourneySelectionProps) {
             }} variant="contained">Draw journey</Button>
             <FormHelperText>Opens a blank canvas</FormHelperText>
              </Col>
-            <Col xs={12} lg={4} sm ={4}  md = {4}  style={{ textAlign: 'left' }}><FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned journey" /><br></br>
+            <Col xs={12} lg={4} sm ={5}  md = {4}  style={{ textAlign: 'left' }}><FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned journey" /><br></br>
             <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual journey" /></Col>
             <Col xs={12} sm ={4}  md = {4}  lg={4}  style={{ textAlign: 'left' }}> <FormHelperText>Use the graphical editor to draw your model. Actual journey is a good choice for new users</FormHelperText></Col>
       </Row>
       <br></br>
       {    props.JourneyList.length<1 && <> 
       <Row>
-        <Col xs={6} lg={4} sm ={7}  md = {6}  style={{ textAlign: 'left' }}><Button style={{width: "170px"}}  onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import journey</Button>
+        <Col xs={6} lg={4} sm ={12}  md = {6}  style={{ textAlign: 'left' }}><Button style={{width: "170px"}}  onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import journey</Button>
         <FormHelperText>Upload an xCJML file</FormHelperText></Col>
         <Col xs= {3} sm ={4} lg={4}  md = {4} ><FormHelperText>The xCJML format is the standard file format for CJML models. It builds on XML and is used to save and load models</FormHelperText></Col>
       </Row> </>}
