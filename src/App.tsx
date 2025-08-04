@@ -102,7 +102,7 @@ function App() {
     <div>
       <div className="CJML journey visualizer" >
         <div style={{ height: "40px", backgroundColor: '#3955A3', display: "flex", alignItems: "center" }}>
-          <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>Journey editor - CJML (Testing)</h2>
+          <h2 style={{ color: "white", textAlign: "left", paddingLeft: "15px" }}>Journey editor - CJML</h2>
 
         </div>
         <ToastContainer />
@@ -1144,11 +1144,11 @@ function App() {
     let copyOfCirlces = _.cloneDeep(circles);
     copyOfCirlces = copyOfCirlces.map((x: CJMLCircle) => {
       if (!SwimlineMode) {
-        if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 175 >= xPosOfMouse) {
-          if (x.swimlaneY - 15 <= yPosOfMouse && x.swimlaneY + 195 >= yPosOfMouse) {
+        if (x.swimlaneX - 15 <= xPosOfMouse && x.swimlaneX + 155 >= xPosOfMouse) {
+          if (x.swimlaneY - 15 <= yPosOfMouse && x.swimlaneY + 175 >= yPosOfMouse) {
             x.imageName = ImageChange?.Image;
           }
-          else if (x.swimlaneReceiverY - 15 <= yPosOfMouse && x.swimlaneReceiverY + 195 >= yPosOfMouse) {
+          else if (x.swimlaneReceiverY - 15 <= yPosOfMouse && x.swimlaneReceiverY + 175 >= yPosOfMouse) {
             x.imageNameReceiver = ImageChange?.Image;
           }
         }
