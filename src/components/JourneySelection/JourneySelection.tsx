@@ -88,10 +88,10 @@ function JourneySelection(props: JourneySelectionProps) {
 
     <Container>
     {    props.JourneyList.length<1 && <>  <Row>
-        <Col xs={12} lg={8} style={{ textAlign: 'left' }}> <h2>Welcome to the beta version of the CJML tool</h2></Col>
+        <Col xs={12} lg={12} style={{ textAlign: 'left' }}> <h2>Welcome to the beta version of the CJML tool</h2></Col>
       </Row>
       <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2025-05-18</h5></Col>
+        <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2025-08-04</h5></Col>
       </Row>
       <Row>
         <Col xs={12} lg={6} style={{ textAlign: 'left' }}>  <h4>To get started, please select one of the option below.</h4></Col>
@@ -129,7 +129,11 @@ function JourneySelection(props: JourneySelectionProps) {
         <Col xs={6} lg={4} sm ={12}  md = {6}  style={{ textAlign: 'left' }}><Button style={{width: "170px"}}  onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import journey</Button>
         <FormHelperText>Upload an xCJML file</FormHelperText></Col>
         <Col xs= {3} sm ={4} lg={4}  md = {4} ><FormHelperText>The xCJML format is the standard file format for CJML models. It builds on XML and is used to save and load models</FormHelperText></Col>
-      </Row> </>}
+      </Row>
+       <Row>
+        <Col xs={12} lg={6} style={{ textAlign: 'left',  color: 'red' }}>  <h6>This tool is actively developed; however, customer support is not available.</h6></Col>
+      </Row>
+       </>}
     </Container>
     
 
