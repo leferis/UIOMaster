@@ -39,7 +39,7 @@ function ActorPoint(props: ActorPointProps) {
 
   function getImage(x: any) {
     let img = props.getImageObject(x.img);
-    return (<Images x={getPosition(x.x , x.width)+ 43} y={x.y + 25} image={img}  />)
+    return (<Images x={getPosition(x.x , x.width)+ 38} y={x.y + 30} image={img}  height={40} width={35}  />)
   }
 
   const changeMouse = (e: any, style: any) => {
