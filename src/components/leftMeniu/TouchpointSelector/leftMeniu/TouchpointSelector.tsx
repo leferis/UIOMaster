@@ -43,14 +43,14 @@ function LeftMeniuTouchpointSelector(props: LeftMeniuTouchpointSelectorProps) {
       <Text x={208} y={65} fontSize={16} fontStyle='Bold' text='Action' />
       {props.Images != undefined && <LeftMeniuSelector xpos={100} ypos={120} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => {
          props.setMouseDownFunction('ImageChange');
-         props.setImageChange({ x: -999, y: -999, Image: img }); props.setEnableScroll(false)
+         props.setImageChange({ x: 0, y: 0, Image: img }); props.setEnableScroll(false)
       }}
          onMouseUp={(img: any) => {
             props.addNewCircle(img);
             props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors)
          }} mousetype={"grab"} additionalFiltering={true} />}
 
-      {props.Images != undefined && props.showMoreOptions && <LeftMeniuSelector xpos={100} ypos={560} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('RatingImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); props.setEnableScroll(false) }}
+      {props.Images != undefined && props.showMoreOptions && <LeftMeniuSelector xpos={100} ypos={560} elements={props.Images.Images[1].Images} onMouseDown={(img: any) => { props.setMouseDownFunction('ImageChange'); props.setImageChange({ x: -999, y: -999, Image: img }); props.setEnableScroll(false) }}
          onMouseUp={(img: any) => { props.addNewCircle(img); props.setCirlceAtEnd(props.circles, props.actions, props.setCircles, props.actors) }} mousetype={"grab"} additionalFiltering={false} />}
       <Group onMouseEnter={(e: any) => e.currentTarget.children[0].fill("#cad2de")} onMouseLeave={(e: any) => e.currentTarget.children[0].fill("")} onMouseDown={() => { props.setMouseDownFunction('DrawAction'); props.addNewAction(); props.setEnableScroll(false) }} onMouseUp={() => setActionAtEnd(props.circles, props.actions, props.setActions, props.actors)}>
          <Rect
