@@ -13,9 +13,6 @@ function XMLCreator(Journey:Journey[],images:any){
         Actors.forEach(Actor => {
             ActorPart+= "<endUser ";
             ActorPart+= previousActors.includes(Actor.id)?"actorIDref=\""+ Actor.id+ "\">":"actorID=\"" + Actor.id+ "\">";
-            if(Actor.Title){
-                ActorPart+= "<actorName>"+Actor.Title+"</actorName>"
-            }
             ActorPart+= "</endUser>";
             if(!previousActors.includes(Actor.id))
             previousActors.push(Actor.id);
@@ -29,22 +26,24 @@ function XMLCreator(Journey:Journey[],images:any){
         Actors.forEach(Actor => {  
         ActorPart+="<serviceProvider "
         ActorPart+=previousActors.includes(Actor.id)?"actorIDref=\"" + Actor.id+ "\">":"actorID=\"" + Actor.id+ "\">";
-        if(Actor.Title){
-            ActorPart+= "<companyName>"+Actor.Title+"</companyName>"
-           // ActorPart+= "<providerType>" + Actor.Type+ "</providerType>" Pakurti Enumeratoriu ir susiparsinti. Paklausti userio klausymine
-        }
         ActorPart+= "</serviceProvider>";
         if(!previousActors.includes(Actor.id))
         previousActors.push(Actor.id);})
       
         return ActorPart;
     }
+    function SanitizeTouchpointId(id:string){
+        return id.replace("D","").replace("T","");
+    }
 
     function formatTouchpoint(touhchPoint:CJMLCircle,isJourneyPlanned:any){
         let formated = "";
         formated+= isJourneyPlanned?"<plannedCommunicationPoint>":"<actualCommunicationPoint>";
         formated += "<touchpointID>";
-        formated+=  touhchPoint.devation?"D"+touhchPoint.id+"</touchpointID>":"T"+touhchPoint.id+"</touchpointID>";
+        formated+=  touhchPoint.devation?"D"+SanitizeTouchpointId(touhchPoint.id)+"</touchpointID>":"T"+SanitizeTouchpointId(touhchPoint.id)+"</touchpointID>";
+        if(touhchPoint.phase !== null && touhchPoint.phase !== undefined) {
+            formated += "<belongsTo phaseIDref=\"" + touhchPoint.phase + "\"></belongsTo>";
+        }
         if(!isJourneyPlanned){formated+= "<compliance>"+TouchPointStatus[touhchPoint.Status].toLowerCase().toString()+"</compliance>";}
         formated+= "<initiator>";
         formated+= "<refersTo actorIDref=\"" + touhchPoint.initiator.id +"\"/>";
@@ -64,7 +63,7 @@ function XMLCreator(Journey:Journey[],images:any){
     function formatAction(action:CJMLAction,isJourneyPlanned:any){
         let formated = "";
         formated+= isJourneyPlanned?"<plannedAction>":"<actualAction>";
-        formated+= "<touchpointID>"+action.id+"</touchpointID>";
+        formated+= "<touchpointID>"+SanitizeTouchpointId(action.id)+"</touchpointID>";
         formated+= "<initiator>";
         formated+= "<refersTo actorIDref=\"" + action.initiator.id +"\"/>";
         formated+= "<initiatorLabel>"+action.text+"</initiatorLabel>"
@@ -90,16 +89,39 @@ function XMLCreator(Journey:Journey[],images:any){
         return touchpoint;
     }
 
+    function getPhases(touchpoints:CJMLCircle[],actions:CJMLAction[]){
+        let phases:string[] = [];
+        touchpoints.forEach(touchpoint => {
+            if(touchpoint.phase !== null && touchpoint.phase !== undefined && !phases.includes(touchpoint.phase)){
+                phases.push(touchpoint.phase);
+            }
+        });
+        actions.forEach(action => {
+            if(action.phase !== null && action.phase !== undefined && !phases.includes(action.phase)){
+                phases.push(action.phase);
+            }
+        });
+        return phases;
+    }
     var data = "<CJML version=\"2.0\">";
     for(let i =0;i<Journey.length;i++){
         data+= Journey[i].isPlanned?"<plannedJourney>":"<actualJourney>";
             data+= "<journeyID>"+Journey[i].JourneyName+"</journeyID>"
-            if(Journey[i].JourneyName != null){
-                data+= "<journeyTitle>"+Journey[i].JourneyName+"</journeyTitle>" // Title suteikti
-            }
             if(Journey[i].Reference != undefined){
                 data+= "<plannedReference>"+Journey[i].Reference +"</plannedReference>"
             }
+            var phases = getPhases(Journey[i].Toucpoint,Journey[i].Actions);
+            console.log(phases);
+            data += "<journeyPhases>";
+            phases.forEach(phase => {
+                data += "<journeyPhase phaseID=\""+phase+"\">";
+                data += "<phaseName>"+phase+"</phaseName>";
+                data += "<phaseDescription></phaseDescription>";
+                data += "</journeyPhase>";
+            });
+            data += "</journeyPhases>";
+            data += "<journeyShortSummary>"+Journey[i].JourneyDescription+"</journeyShortSummary>";
+
             data+= "<actors>"
             data += getendUserActors(Journey[i].Actors.filter(x=> {return x.isEndUser}));    
             data += getUserActor(Journey[i].Actors.filter(x=> {return !x.isEndUser}));    

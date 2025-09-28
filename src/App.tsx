@@ -157,7 +157,7 @@ function App() {
 
   function updateCurrentJourney() {
     var journeys = Journey;
-    journeys[currentJourney] = { Toucpoint: circles, JourneyName: journeys[currentJourney].JourneyName, Actions: actions, Actors: ActorsCJML, isPlanned: journeys[currentJourney].isPlanned, Arrow: Arrows, Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: "", JourneyID: journeys[currentJourney].JourneyID, Reference: journeys[currentJourney].Reference };
+    journeys[currentJourney] = { Toucpoint: circles, JourneyName: journeys[currentJourney].JourneyName, Actions: actions, Actors: ActorsCJML, isPlanned: journeys[currentJourney].isPlanned, Arrow: Arrows, Comment: '', complianceContent: true, ComplianceSequence: true, JourneyAnalysis: '', JourneyDescription: journeys[currentJourney].JourneyDescription, JourneyID: journeys[currentJourney].JourneyID, Reference: journeys[currentJourney].Reference };
     setJouney(journeys);
   }
 

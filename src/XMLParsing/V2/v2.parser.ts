@@ -7,6 +7,7 @@ import { Journey } from "../../Classes/Journey";
 import { randomColor } from 'accessible-colors';
 import { Comments } from '../../Classes/Comment';
 import { Experience } from '../../Classes/Experience';
+import { get } from 'lodash';
 
 function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
     function parseJourney(journey: HTMLCollection) {
@@ -109,12 +110,16 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
         let x = 350;
         let devationMove = 170;
         let firstDevation = false;
+      
         for (var i = 0; i < journey.length; i++) {
+              console.log("Pradedu touch");
             if (journey[i].tagName == 'actualAction') {
+
                 let action = getAction(journey[i], x - 180, actors);
                 swimlaneXInitial += 225;
                 action = setActionMetadata(actors, action);
                 action.imageName = GetImage(action.imageName, "Other");
+                action.phase = getAttributes(journey[i].getElementsByTagName('belongsTo'));
                 if (!action.devation) {
                     x += 150;
                     devationMove = 170;
@@ -142,6 +147,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
                 touchpoint = setTouchPointMetadata(actors, touchpoint);
                 touchpoint.imageName = GetImage(touchpoint.imageName, "Other");
                 touchpoint.imageNameReceiver = touchpoint.imageName;;
+                touchpoint.phase = getAttributes(journey[i].getElementsByTagName('belongsTo'));
                 console.log(touchpoint);
                 if (!touchpoint.devation) {
                     x += 150;
@@ -165,7 +171,6 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
                 previousInteraction = touchpoint;
             }
         }
-        console.log(journeyNew);
         journeyNew.Actors.forEach((y: Actors) => {
             y.width = swimlaneXInitial;
         })
@@ -348,11 +353,18 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
             swimlaneXInitial = 400;
             let nameJourney = getJourneyName(journey[i].getElementsByTagName('journeyID')[0])
             let reference = "";
+            let description = "";
             try {
                 reference = getJourneyName(journey[i].getElementsByTagName('plannedReference')[0])
             }
             catch (ex) {
 
+            }
+            try{
+                description = getJourneyName(journey[i].getElementsByTagName('journeyShortSummary')[0])
+            }
+            catch(ex){
+                
             }
             let act;
             if (journeys.length > 0 && journeys.filter((x: Journey) => { return x.isPlanned == true }).length > 0) {
@@ -365,6 +377,7 @@ function V2parse(file: string | ArrayBuffer | null, GetImage: any) {
             journeysToAdd = actualJourney(journey[i].getElementsByTagName('touchpoints')[0].children, act);
             journeysToAdd.JourneyName = nameJourney;
             journeysToAdd.Reference = reference;
+            journeysToAdd.JourneyDescription = description;
             journeys.push(journeysToAdd);
         }
     }
