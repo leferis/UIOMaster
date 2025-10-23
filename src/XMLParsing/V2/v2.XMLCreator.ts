@@ -33,7 +33,9 @@ function XMLCreator(Journey:Journey[],images:any){
         return ActorPart;
     }
     function SanitizeTouchpointId(id:string){
-        return id.replace("D","").replace("T","");
+        console.log("mkayy")
+        console.log(typeof(id));
+        return id.toString().replace("D","").replace("T","");
     }
 
     function formatTouchpoint(touhchPoint:CJMLCircle,isJourneyPlanned:any){
