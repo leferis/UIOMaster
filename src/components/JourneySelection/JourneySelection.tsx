@@ -91,7 +91,7 @@ function JourneySelection(props: JourneySelectionProps) {
         <Col xs={12} lg={12} style={{ textAlign: 'left' }}> <h2>Welcome to the beta version of the CJML tool</h2></Col>
       </Row>
       <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2025-08-04</h5></Col>
+        <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2026-02-03</h5></Col>
       </Row>
       <Row>
         <Col xs={12} lg={6} style={{ textAlign: 'left' }}>  <h4>To get started, please select one of the option below.</h4></Col>

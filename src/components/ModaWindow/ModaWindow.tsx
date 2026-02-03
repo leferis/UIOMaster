@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import V2parse from '../../XMLParsing/V2/v2.parser';
 import './ModaWindow.module.css'
+import { FileUploader } from "react-drag-drop-files";
+import { Button } from '@mui/material';
+
 
 interface ModaWindow {
   show: boolean,
@@ -12,12 +15,14 @@ interface ModaWindow {
   ShowSelectionWindow: any;
 }
 
+const fileTypes = ["XCJML", "XML"];
+
+
 function ModaWindow(props: ModaWindow) {
 
-
-
   function upload(e: any) {
-    Array.from(e.target.files).forEach((file: any) => {
+    console.log(e);
+  
 
       let reader = new FileReader();
 
@@ -27,12 +32,10 @@ function ModaWindow(props: ModaWindow) {
         props.updateCurrentJourney(journey);
       };
 
-      reader.readAsText(file);
+      reader.readAsText(e);
 
       props.handleClose(false);
-    }
-
-    );
+    
   }
   return (
     <div style={{
@@ -55,21 +58,27 @@ function ModaWindow(props: ModaWindow) {
           paddingBottom: '30px'
         }}>
 
-        <h4 style={{ paddingLeft: "45%" }}>Upload File</h4>
-        <input style={{ paddingLeft: "40%" }} type="file"
-          id="file1"
-          name="upload" onChange={upload} accept=".xml, .xcjml" />
+        <h4 style={{  display: "flex",
+    justifyContent: "center",
+    alignItems: "center" }}>Upload File</h4>
+         
         <br></br>
-        <div style={{ paddingLeft: "50%", paddingTop:"2%"}}>
-          <button type="button" onClick={() => {
+        <div style={{   display: "flex",
+    justifyContent: "center",
+    alignItems: "center"}}>
+         <FileUploader handleChange={upload} name="file" types={fileTypes} multiple={false} />
+         </div>
+        <div style={{paddingTop:"2%", display: "flex",
+    justifyContent: "center",
+    alignItems: "center"}}>
+        <Button style={{width: "120px"}}  onClick={() => {
             props.handleClose(false);
             console.log(props.Journeys.length)
             if (props.Journeys.length == 0) {
               props.ShowSelectionWindow(true);
             }
-          }}>
-            Close
-          </button>
+          }} variant="contained">Close</Button>
+
         </div>
       </section>
 
