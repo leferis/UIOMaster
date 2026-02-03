@@ -33,7 +33,9 @@ function XMLCreator(Journey:Journey[],images:any){
         return ActorPart;
     }
     function SanitizeTouchpointId(id:string){
-        return id.replace("D","").replace("T","");
+        console.log("mkayy")
+        console.log(typeof(id));
+        return id.toString().replace("D","").replace("T","");
     }
 
     function formatTouchpoint(touhchPoint:CJMLCircle,isJourneyPlanned:any){
@@ -144,7 +146,8 @@ function XMLCreator(Journey:Journey[],images:any){
     const XmlBeautify = require('xml-beautify');
     const { DOMParser } = require('xmldom');// When used in a node.js environment, DOMParser is needed.
 
-    const xml = new XmlBeautify({ parser: DOMParser }).beautify(data);
+    var xml = new XmlBeautify({ parser: DOMParser }).beautify(data);
+    xml = "<!-- Date Of Creation:" + new Date().toString() + " Created by: CJML Analyzer -->" + xml;
     const blob = new Blob([xml], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
