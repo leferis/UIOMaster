@@ -71,11 +71,13 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                         initialPosX = 100;
                         counter=0;
                         initialPosY += 115;
+                        if(previousGroup!= null && previousGroup.length>18){
+                            initialPosY += 30;
+                        }
                         previousGroup = x.GroupPriority
                         change = true;
                     }
                 }
-                initialPosY += x.Group != null && x.Group.length > 18 ? 25: 0;
                 return (
                     <>
                     {change && <><Text x={initialPosX} y={initialPosY-25} text={x.Group} fontSize={18}/>
