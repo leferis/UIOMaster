@@ -15,17 +15,15 @@
                     "GroupPriority":2,
 					"Default":true,
                     "Group":"Service Provider",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-3.svg"
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-2.svg"
                 },
-                
                 {
                     "Name": "Service Provider 3",
                     "Default":true,
                     "GroupPriority":2,
                     "Group":"Service Provider",
-                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-2.svg"
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-3.svg"
                 },
-
                 {
                     "Name": "Service Provider 4",
                     "GroupPriority":2,
