@@ -190,8 +190,8 @@
                 },
                 {
                     "Name": "User 6",
-                     "Default":true,
-                    "GroupPriority":2,
+                    "Default":true,
+                    "GroupPriority":1,
                     "Group":"End user|Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-6.svg"
                 },

@@ -75,6 +75,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                         change = true;
                     }
                 }
+                initialPosY += x.Group != null && x.Group.length > 18 ? 25: 0;
                 return (
                     <>
                     {change && <><Text x={initialPosX} y={initialPosY-25} text={x.Group} fontSize={18}/>
@@ -82,7 +83,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                     </>}
                     <LeftMeniuSelectorRepresentatation image={getImageObject(x.Location)}   
                         width={props.width==undefined?30:props.width}
-                        initialPosX={initialPosX} initialPosY={x.Group != null && x.Group.length > 18 ? initialPosY +25:initialPosY} name={x.Name}
+                        initialPosX={initialPosX} initialPosY={initialPosY} name={x.Name}
                         onMouseUp={() => props.onMouseUp(x.Location)} onMouseDown={() => props.onMouseDown(x.Location)} mousetype={props.mousetype} />
                     </>
                 )
