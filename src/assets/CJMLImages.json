@@ -155,21 +155,21 @@
                     "Name": "User 1",
                     "Default":true,
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-1.svg"
                 },
                 {
                     "Name": "User 2",
                     "Default":true,
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-2.svg"
                 },
                 {
                     "Name": "User 3",
                     "Default":true,
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg"
                 }
                 ,
@@ -177,7 +177,7 @@
                     "Name": "User 4",
                     "Default":true,
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-4.svg"
                 }
                 ,
@@ -185,59 +185,59 @@
                     "Name": "User 5",
                     "Default":true,
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-5.svg"
                 },
                 {
                     "Name": "User 6",
                     "Default":true,
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-6.svg"
                 },
                 {
                     "Name": "User 7",
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-7.svg"
                 },
                 {
                     "Name": "User 8",
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-8.svg"
                 },
                 {
                     "Name": "User 9",
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-9.svg"
                 },
                 {
                     "Name": "User 10",
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-10.svg"
                 }
                 ,
                 {
                     "Name": "User 11",
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-11.svg"
                 }
                 ,
                 {
                     "Name": "User 12",
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-12.svg"
                 },
                 {
                     "Name": "Patient",
                     "Default":true,
                     "GroupPriority":1,
-                    "Group":"End user|Customers\n | Citizens",
+                    "Group":"User | Customers\n | Citizens",
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\patient-1.svg"
                 }
                 ,
