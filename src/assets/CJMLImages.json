@@ -226,7 +226,7 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-12.svg"
                 },
                 {
-                    "Name": "Patient 1",
+                    "Name": "Patient 2",
                     "Default":true,
                     "GroupPriority":1,
                     "Group":"User | Customer |\nCitizen | Patient",
@@ -234,7 +234,7 @@
                 }
                 ,
                                 {
-                    "Name": "Patient 2",
+                    "Name": "Patient 1",
                     "Default":true,
                     "GroupPriority":1,
                     "Group":"User | Customer |\nCitizen | Patient",
