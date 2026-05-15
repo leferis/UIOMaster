@@ -71,7 +71,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                         initialPosX = 100;
                         counter=0;
                         initialPosY += 115;
-                        if(previousGroup!= null && previousGroup.length>18){
+                        if(previousGroup!= null && x.Group != null && previousGroup == "1"){
                             initialPosY += 100;
                         }
                         previousGroup = x.GroupPriority
