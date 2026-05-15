@@ -72,7 +72,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                         counter=0;
                         initialPosY += 115;
                         if(previousGroup!= null && previousGroup.length>18){
-                            initialPosY += 30;
+                            initialPosY += 50;
                         }
                         previousGroup = x.GroupPriority
                         change = true;
@@ -85,7 +85,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                     </>}
                     <LeftMeniuSelectorRepresentatation image={getImageObject(x.Location)}   
                         width={props.width==undefined?30:props.width}
-                        initialPosX={initialPosX} initialPosY={initialPosY} name={x.Name}
+                        initialPosX={initialPosX} initialPosY={x.Group != null && x.Group.length > 18 ? initialPosY +25:initialPosY} name={x.Name}
                         onMouseUp={() => props.onMouseUp(x.Location)} onMouseDown={() => props.onMouseDown(x.Location)} mousetype={props.mousetype} />
                     </>
                 )
