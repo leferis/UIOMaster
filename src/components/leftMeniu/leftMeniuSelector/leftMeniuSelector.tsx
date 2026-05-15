@@ -82,7 +82,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                     </>}
                     <LeftMeniuSelectorRepresentatation image={getImageObject(x.Location)}   
                         width={props.width==undefined?30:props.width}
-                        initialPosX={initialPosX} initialPosY={x.Group.length > 18 ? initialPosY +10:initialPosY} name={x.Name}
+                        initialPosX={initialPosX} initialPosY={x.Group.length > 18 ? initialPosY +25:initialPosY} name={x.Name}
                         onMouseUp={() => props.onMouseUp(x.Location)} onMouseDown={() => props.onMouseDown(x.Location)} mousetype={props.mousetype} />
                     </>
                 )
