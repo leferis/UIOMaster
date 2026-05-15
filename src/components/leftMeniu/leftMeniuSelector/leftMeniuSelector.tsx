@@ -77,7 +77,7 @@ function LeftMeniuSelector(props: leftMeniuSelectorProps) {
                 }
                 return (
                     <>
-                    {change && <><Text x={initialPosX} y={initialPosY-25} text={x.Group} fontSize={18}/>
+                    {change && <><Text x={initialPosX} y={initialPosY-25} text={x.Group} fontSize={x.Group.length > 18 ? 14 : 18}/>
                     <Line points={[90, initialPosY-30, 270, initialPosY-30]} stroke={"#d0d2d5"} fill='#d0d2d5' />
                     </>}
                     <LeftMeniuSelectorRepresentatation image={getImageObject(x.Location)}
