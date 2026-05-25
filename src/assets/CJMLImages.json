@@ -241,6 +241,22 @@
                     "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - actors\\patient-2.svg"
                 }
                 ,
+                                                {
+                    "Name": "Patient 3",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"User | Customer |\nCitizen | Patient",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - actors\\patient-3.svg"
+                }
+                ,
+                                                {
+                    "Name": "Patient 4",
+                    "Default":true,
+                    "GroupPriority":1,
+                    "Group":"User | Customer |\nCitizen | Patient",
+                    "Location": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - actors\\patient-4.svg"
+                }
+                ,
                 {
                     "Name": "Doctor",
                     "Default":true,
