@@ -79,8 +79,8 @@ function App() {
   };
 
   React.useEffect(() => {
-     fetch('https://cjmlanalyzerbackend.onrender.com/images/read').then(response => response.json())
-    .then(data => {setCJMLImageList(data); DeserlizeFireBaseResponse(data, setCJMLImageList)}).catch(() => setCJMLImageList(CJMLImages))
+    //  fetch('https://cjmlanalyzerbackend.onrender.com/images/read').then(response => response.json())
+    // .then(data => {setCJMLImageList(data); DeserlizeFireBaseResponse(data, setCJMLImageList)}).catch(() => setCJMLImageList(CJMLImages))
     setCJMLImageList(CJMLImages)
     if (ActorsCJML.length <= 1) {
       setActors((actorss) => [...actorss,]);
