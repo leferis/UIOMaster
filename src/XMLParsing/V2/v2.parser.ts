@@ -139,7 +139,8 @@ function V2parse(file: Blob | string | ArrayBuffer | null, GetImage: any) {
                 let action = getAction(journey[i], x - 180, actors);
                 swimlaneXInitial += 225;
                 action = setActionMetadata(actors, action);
-                action.imageName = GetImage(action.imageName, "Other");
+                const resolvedActionImage = GetImage(action.imageName, "Other");
+                action.imageName = resolvedActionImage && resolvedActionImage.toLowerCase().includes('.svg') ? resolvedActionImage : action.imageName;
                 action.phase = getAttributes(journey[i].getElementsByTagName('belongsTo'));
                 if (!action.devation) {
                     x += 150;
@@ -166,8 +167,9 @@ function V2parse(file: Blob | string | ArrayBuffer | null, GetImage: any) {
                 let touchpoint = getTouchPoint(journey[i], x);
                 swimlaneXInitial += 225;
                 touchpoint = setTouchPointMetadata(actors, touchpoint);
-                touchpoint.imageName = GetImage(touchpoint.imageName, "Other");
-                touchpoint.imageNameReceiver = touchpoint.imageName;;
+                const resolvedTouchpointImage = GetImage(touchpoint.imageName, "Other");
+                touchpoint.imageName = resolvedTouchpointImage && resolvedTouchpointImage.toLowerCase().includes('.svg') ? resolvedTouchpointImage : touchpoint.imageName;
+                touchpoint.imageNameReceiver = touchpoint.imageName;
                 touchpoint.phase = getAttributes(journey[i].getElementsByTagName('belongsTo'));
                 console.log(touchpoint);
                 if (!touchpoint.devation) {
@@ -212,7 +214,8 @@ function V2parse(file: Blob | string | ArrayBuffer | null, GetImage: any) {
                 let action = getAction(journey[i], x, actors);
                 swimlaneXInitial += 250;
                 action = setActionMetadata(actors, action);
-                action.imageName = GetImage(action.imageName, "Other");
+                const resolvedPlannedActionImage = GetImage(action.imageName, "Other");
+                action.imageName = resolvedPlannedActionImage && resolvedPlannedActionImage.toLowerCase().includes('.svg') ? resolvedPlannedActionImage : action.imageName;
                 if (!action.devation) x += 150;
                 journeyNew.Actions.push(action);
                 if (previousInteraction != null) {
@@ -227,7 +230,8 @@ function V2parse(file: Blob | string | ArrayBuffer | null, GetImage: any) {
                 let touchpoint = getTouchPoint(journey[i], x);
                 swimlaneXInitial += 225;
                 touchpoint = setTouchPointMetadata(actors, touchpoint);
-                touchpoint.imageName = GetImage(touchpoint.imageName, "Other");
+                const resolvedPlannedTouchpointImage = GetImage(touchpoint.imageName, "Other");
+                touchpoint.imageName = resolvedPlannedTouchpointImage && resolvedPlannedTouchpointImage.toLowerCase().includes('.svg') ? resolvedPlannedTouchpointImage : touchpoint.imageName;
                 touchpoint.imageNameReceiver = touchpoint.imageName;
                 if (!touchpoint.devation) x += 150;
                 journeyNew.Toucpoint.push(touchpoint);
@@ -268,6 +272,23 @@ function V2parse(file: Blob | string | ArrayBuffer | null, GetImage: any) {
         }
     }
 
+    function getIconByNodeName(nodeName: string): string {
+        const iconMap: { [key: string]: string } = {
+            "endUser": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg",
+            "enduser": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg",
+            "customer": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg",
+            "citizen": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg",
+            "user": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg",
+            "serviceProvider": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-1.svg",
+            "HealthCareServiceProvider": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - health care\\doctor-1.svg",
+            "patient": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJMl symbols - actors\\patient-1.svg",
+            "employee": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\employee-1.svg",
+            "external": "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\service-provider-5.svg"
+        };
+
+        return iconMap[nodeName] || "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg";
+    }
+
     function parseActors(actors: HTMLCollection, comment: string[]) {
         var actorsList: any[] = [];
         var defaultColors = {
@@ -280,13 +301,11 @@ function V2parse(file: Blob | string | ArrayBuffer | null, GetImage: any) {
         for (var i = 0; i < actors.length; i++) {
             var name = getActorsattributeName(actors[i]).nodeValue;
             var Title = getActorsName(actors[i]);
-            if(comment.length > 0) {
-                var image = GetImage(getImageOfActor(actors[i]), comment[i]);
+            var iconPath = getIconByNodeName(actors[i].nodeName);
+            var image = GetImage(iconPath, comment.length > 0 ? comment[i] : "Actor");
+            if (!image || !image.toLowerCase().includes('.svg')) {
+                image = iconPath;
             }
-            else{
-                var image = GetImage(getImageOfActor(actors[i]), "Actor");
-            }
-            image = image == undefined ? "\\CJML v1.1 - Graphical elements - PNG SVG\\Symbols - SVG\\CJML symbols - actors\\user-3.svg" : image;
             var color = getColorFromTheList(defaultColors, actors[i].nodeName);
             const actorEntrie = new Actors(Title == null ? name : Title, name, image, yLocation, 200, 700, 130, actors[i].nodeName == 'endUser' ? true : false);
             actorEntrie.color = color;
@@ -401,6 +420,8 @@ function V2parse(file: Blob | string | ArrayBuffer | null, GetImage: any) {
                 act = realJourneyPaserActors(journey[i].getElementsByTagName('actors')[0].children, journeys[0].Actors, comment);
             }
             if (journeys.length == 0 || journeys.filter((x: Journey) => { return x.isPlanned == true }).length == 0) {
+                console.log(journey[i].getElementsByTagName('actors'))
+                console.log(journey[i].getElementsByTagName('actors')[0].children)
                 act = parseActors(journey[i].getElementsByTagName('actors')[0].children, comment);
             }
             // merge actors with planned to get images, and use them from Planned 
