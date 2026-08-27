@@ -32,14 +32,11 @@ function Help(props:HelpProps){
         }}>
              
   
-             <h2>CJML Analyzer</h2>
-             <h3> Video to check how to use</h3>
-             <iframe width="560" height="315" src="https://www.youtube.com/embed/f2Mrq8v2X0s?controls=0&amp;controls=0" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
-            <br></br>
-            <br></br>
-            <h4><a href='https://cjml.no/cjml-guiding-principles/'>Here you can read more about principles of CJML</a></h4>
-            <h4><a href='https://cjml.no/diagram-types/'>Here you can read more about diagram types</a></h4>
-            <h4><a href='https://cjml.no/cjml/'>Here you can read more about CJML 2.0</a></h4>
+             <h2>CJML Editor</h2>
+             <h3>About the CJML Analyzer</h3>
+             <p>The CJML Analyzer is used to create, edit, and analyze customer journey diagrams. To begin, users can either import an existing CJML file or create a new diagram. The interface allows users to add and organize actors and touchpoints that represent the different interactions within a customer journey. Touchpoints can be created by clicking or dragging elements into the diagram and can represent actions, communication points, or other interactions. Each touchpoint can then be edited by changing its description, initiator, receiver, communication channel, and other relevant details.</p>
+             <p>The tool also allows users to define and manage different journeys within a diagram. Information can be entered directly into the visual diagram or through a form, providing a convenient alternative for adding and editing data. Users can mark deviations or issues in a journey and use the analysis features to review statistics and identify important patterns. Different diagram and journey views can be selected to examine the information from various perspectives. Once the work is complete, the diagram can be saved as a CJML file for future editing or exported as a PNG image for sharing and presentation purposes. Overall, the CJML Analyzer provides a structured way to build, modify, analyze, and document customer journeys.</p>
+            <h6><a href='https://cjml.no'> You can find additional information, documentation, and updates on www.cjml.no, especially in the CJML Tools and Introduction modules.</a></h6>
              <Button variant="contained" onClick={() => {
               {props.closeHelp(false);}
              }}>Close</Button>

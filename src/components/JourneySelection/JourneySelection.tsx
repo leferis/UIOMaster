@@ -88,13 +88,16 @@ function JourneySelection(props: JourneySelectionProps) {
 
     <Container>
     {    props.JourneyList.length<1 && <>  <Row>
-        <Col xs={12} lg={12} style={{ textAlign: 'left' }}> <h2>Welcome to the beta version of the CJML tool</h2></Col>
+        <Col xs={12} lg={12} style={{ textAlign: 'left' }}> <h2>Welcome to the CJML Editor</h2></Col>
+      </Row>
+        <Row>
+        <Col xs={12} lg={6} style={{ textAlign: 'left',  color: 'red' }}>  <h6>This tool is in beta version and currently actively developed</h6></Col>
       </Row>
       <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2026-02-03</h5></Col>
+        <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2026-08-27</h5></Col>
       </Row>
       <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left' }}>  <h4>To get started, please select one of the option below.</h4></Col>
+        <Col xs={12} lg={6} style={{ textAlign: 'left' }}>  <h4>To get started, select one of the options.</h4></Col>
       </Row>
       </>}
       <br></br> 
@@ -121,17 +124,15 @@ function JourneySelection(props: JourneySelectionProps) {
              </Col>
             <Col xs={12} lg={4} sm ={5}  md = {4}  style={{ textAlign: 'left' }}><FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={isPlannedJourney} />} label="Planned journey" /><br></br>
             <FormControlLabel control={<Checkbox onChange={() => { setIsPlannedJourney(!isPlannedJourney) }} checked={!isPlannedJourney} />} label="Actual journey" /></Col>
-            <Col xs={12} sm ={4}  md = {4}  lg={4}  style={{ textAlign: 'left' }}> <FormHelperText>Use the graphical editor to draw your model. Actual journey is a good choice for new users</FormHelperText></Col>
       </Row>
       <br></br>
       {    props.JourneyList.length<1 && <> 
       <Row>
         <Col xs={6} lg={4} sm ={12}  md = {6}  style={{ textAlign: 'left' }}><Button style={{width: "170px"}}  onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import journey</Button>
-        <FormHelperText>Upload an xCJML file</FormHelperText></Col>
-        <Col xs= {3} sm ={4} lg={4}  md = {4} ><FormHelperText>The xCJML format is the standard file format for CJML models. It builds on XML and is used to save and load models</FormHelperText></Col>
+        <FormHelperText>Upload an xCJML file (standard file format for CJML models) </FormHelperText></Col>
       </Row>
        <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left',  color: 'red' }}>  <h6>This tool is actively developed; however, customer support is not available.</h6></Col>
+        <Col xs={12} lg={6} style={{ textAlign: 'left', fontSize:"14px", color: 'gray' }}>  <span>To find help, click Help after uploading an xCJML file or creating a blank journey.</span></Col>
       </Row>
        </>}
     </Container>
