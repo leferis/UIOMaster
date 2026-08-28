@@ -91,13 +91,13 @@ function JourneySelection(props: JourneySelectionProps) {
         <Col xs={12} lg={12} style={{ textAlign: 'left' }}> <h2>Welcome to the CJML Editor</h2></Col>
       </Row>
         <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left',  color: 'red' }}>  <h6>This tool is in beta version and currently actively developed</h6></Col>
+        <Col xs={12} lg={12} style={{ textAlign: 'left',  color: 'red' }}>  <h6>This tool is in beta version and currently actively developed</h6></Col>
       </Row>
       <Row>
         <Col xs={12} lg={6} style={{ textAlign: 'left' }}> <h5>Version: 2026-08-27</h5></Col>
       </Row>
       <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left' }}>  <h4>To get started, select one of the options.</h4></Col>
+        <Col xs={12} lg={12} style={{ textAlign: 'left' }}>  <h4>To get started, select one of the options.</h4></Col>
       </Row>
       </>}
       <br></br> 
@@ -129,10 +129,11 @@ function JourneySelection(props: JourneySelectionProps) {
       {    props.JourneyList.length<1 && <> 
       <Row>
         <Col xs={6} lg={4} sm ={12}  md = {6}  style={{ textAlign: 'left' }}><Button style={{width: "170px"}}  onClick={() => { props.showModal(true); props.closeJourney(false) }} variant="contained">Import journey</Button>
-        <FormHelperText>Upload an xCJML file (standard file format for CJML models) </FormHelperText></Col>
+        <FormHelperText>Upload an xCJML file</FormHelperText></Col>
       </Row>
+      <br></br>
        <Row>
-        <Col xs={12} lg={6} style={{ textAlign: 'left', fontSize:"14px", color: 'gray' }}>  <span>To find help, click Help after uploading an xCJML file or creating a blank journey.</span></Col>
+        <Col xs={12} lg={12} style={{ textAlign: 'left' }}>  <h4>Use the Help button in the application for support</h4></Col>
       </Row>
        </>}
     </Container>
